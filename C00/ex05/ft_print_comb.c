@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_numbers.c                                 :+:      :+:    :+:   */
+/*   ft_print_comb.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 05:09:17 by jseo              #+#    #+#             */
-/*   Updated: 2021/02/20 18:47:37 by seonkim          ###   ########.fr       */
+/*   Created: 2021/02/20 18:52:56 by seonkim           #+#    #+#             */
+/*   Updated: 2021/02/20 20:01:04 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_print_numbers(void)
+void	ft_print_comb(void)
 {
-	char a;
+	char	a[5];
 
-	a = '0';
-	while(a <= '9')
+	a[0] = '0' - 1;
+	a[3] = ',';
+	a[4] = ' ';
+	while (++a[0] <= '6')
 	{
-		write(1, &a, 1);
-		a++;
+		a[1] = a[0];
+		while (++a[1] <= '8')
+		{
+			a[2] = a[1];
+			while (++a[2] <= '9')
+			{
+				write(1, a, 5);
+			}
+		}
 	}
-	return (0);
+	write(1, "789", 3);
 }
