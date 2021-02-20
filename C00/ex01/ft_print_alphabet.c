@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_alphabet.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jseo <jseo@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 04:24:07 by jseo              #+#    #+#             */
-/*   Updated: 2021/02/19 04:40:59 by jseo             ###   ########.fr       */
+/*   Created: 2021/02/21 01:39:24 by seonkim           #+#    #+#             */
+/*   Updated: 2021/02/21 01:39:26 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void ft_print_alphabet(void)
+void	ft_print_alphabet(void)
 {
-	char a;
+	char	a;
 
 	a = 'a' - 1;
 	while (++a <= 'z')
 	{
 		write(1, &a, 1);
 	}
-	return (0);
 }
