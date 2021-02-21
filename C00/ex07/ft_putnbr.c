@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 01:42:00 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/21 13:15:15 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/21 17:52:01 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,10 @@ void	ft_putnbr(int nb)
 {
 	if (nb < 0)
 		write(1, "-", 1);
+	else if (nb == 0)
+	{
+		write(1, "0", 1);
+		return ;
+	}
 	itoa(nb);
 }
