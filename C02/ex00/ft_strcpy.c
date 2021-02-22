@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seongsu <seongsu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 12:20:57 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/22 12:42:44 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/22 18:41:20 by seongsu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@ char	*ft_strcpy(char *dest, char *src)
 	int i;
 
 	i = 0;
-	while ((dest[i] = str[i]) != '\0')
+	while ((dest[i] = src[i]) != '\0')
 		i++;
 }
