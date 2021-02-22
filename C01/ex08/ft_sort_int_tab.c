@@ -6,17 +6,17 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 23:32:03 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/22 00:47:00 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/22 11:20:38 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-void ft_sort_int_tab(int *tab, int size)
+void	ft_sort_int_tab(int *tab, int size)
 {
-	int temp;
-	int i;
-	int j;
+	int	temp;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < size)
