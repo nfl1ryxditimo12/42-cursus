@@ -6,11 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:01:38 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/24 04:14:57 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/23 22:37:57 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strncpy(char *dest, char *src, unsigned int n)
+char    *ft_strncpy(char *dest, char *src, unsigned int n)
 {
 	while (n && (*dest++ = *src++))
 		n--;

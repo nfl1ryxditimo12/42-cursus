@@ -6,13 +6,13 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:53:14 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/24 04:17:15 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 02:06:27 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	hex_to_char(char str)
+void    hex_to_char(char str)
 {
 	int hex1;
 	int hex2;
@@ -27,7 +27,7 @@ void	hex_to_char(char str)
 	write(1, &hex2, 1);
 }
 
-void	ft_putstr_non_printable(char *str)
+void    ft_putstr_non_printable(char *str)
 {
 	int	i;
 

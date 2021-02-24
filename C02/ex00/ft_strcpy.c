@@ -6,11 +6,11 @@
 /*   By: seongsu <seongsu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 12:20:57 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/24 04:14:44 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/23 20:37:45 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char *src)
+char    *ft_strcpy(char *dest, char *src)
 {
 	int i;
 
