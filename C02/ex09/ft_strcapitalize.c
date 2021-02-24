@@ -6,26 +6,37 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 14:08:09 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/22 14:34:57 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 04:16:28 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char *ft_strcapitalize(char *str)
+#include <stdio.h>
+
+char	*ft_strcapitalize(char *str)
 {
-	int i;
-	
-	i = 0;
+	int		i;
+	char	s;
+
+	i = 1;
+	if ('a' <= str[0] && str[0] <= 'z')
+		str[0] = str[0] - 32;
 	while (str[i] != '\0')
 	{
-		if('A' <= str[i] && str[i] <= 'Z')
-			str[i] += 32;
-		if ((str[i] == 32) || (str[i] == 45) || (str[i] == 43))
+		s = str[i - 1];
+		if (!(('a' <= s && s <= 'z') || ('A' <= s && s <= 'Z')))
 		{
-			if ('a' <= str[i + 1] && str[i + 1] <= 'z')
-				str[i + 1] -= 32;
+			if ('a' <= str[i] && str[i] <= 'z')
+				if (!('0' <= s && s <= '9'))
+					str[i] -= 32;
 		}
+		if ('A' <= str[i] && str[i] <= 'Z')
+			if ('0' <= s && s <= '9')
+				str[i] += 32;
+		if (('A' <= s && s <= 'Z') && ('A' <= str[i] && str[i] <= 'Z'))
+			str[i] = str[i] + 32;
+		if (('a' <= s && s <= 'z') && ('A' <= str[i] && str[i] <= 'Z'))
+			str[i] += 32;
 		i++;
 	}
-	str[0] -= 32;
 	return (str);
 }

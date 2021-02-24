@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:45:23 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/22 13:55:36 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 04:15:30 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_str_is_lowercase(char *str)
 	{
 		if (('a' <= str[i] && str[i] <= 'z') == 0)
 			return (0);
+		i++;
 	}
 	return (1);
 }

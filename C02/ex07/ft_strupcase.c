@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 14:00:12 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/22 14:02:53 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 04:15:49 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*ft_strupcase(char *str)
 	{
 		if ('a' <= str[i] && str[i] <= 'z')
 			str[i] -= 32;
+		i++;
 	}
 	return (str);
 }

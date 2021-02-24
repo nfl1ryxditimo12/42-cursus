@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 14:00:12 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/22 14:04:04 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 04:15:57 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*ft_strlowcase(char *str)
 	while (str[i] != '\0')
 	{
 		if ('A' <= str[i] && str[i] <= 'Z')
-			str[i] -= 32;
+			str[i] += 32;
+		i++;
 	}
 	return (str);
 }

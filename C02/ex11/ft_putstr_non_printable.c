@@ -6,34 +6,25 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:53:14 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/22 17:08:32 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 04:17:15 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	itoa_hex(char nb)
+void	hex_to_char(char str)
 {
-	int		dex;
-	char	ch_nb;
+	int hex1;
+	int hex2;
 
-	dex = nb;
-	if (nb == 0)
-	{
-		write(1, "0", 1);
-		return ;
-	}
-	itoa_HEX(dex / 16);
-	if (dex % 16 > 9)
-	{
-		ch_nb = (dex % 16) + 87;
-		write(1, &ch_nb, 1);
-	}
-	else if (dex % 16 <= 9)
-	{
-		ch_nb = (dex % 16) + '0';
-		write(1, &ch_nb, 1);
-	}
+	hex1 = (str / 16) + '0';
+	hex2 = str % 16;
+	write(1, &hex1, 1);
+	if (str > 9)
+		hex2 += 87;
+	else if (str <= 9)
+		hex2 += '0';
+	write(1, &hex2, 1);
 }
 
 void	ft_putstr_non_printable(char *str)
@@ -43,10 +34,10 @@ void	ft_putstr_non_printable(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] < 32 || str[i] > 127)
+		if (str[i] < 32)
 		{
 			write(1, "\\", 1);
-			itoa_HEX(str[i]);
+			hex_to_char(str[i]);
 		}
 		else
 		{

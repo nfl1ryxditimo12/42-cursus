@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 19:21:45 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/22 20:15:06 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 03:04:21 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strncmp(char *s1, char *s2, unisigned int n)
 		if (s1[i] != s2[i])
 		{
 			compare = s1[i] - s2[i];
-			return (compare);
+			retu
 		}
 		i++;
 	}

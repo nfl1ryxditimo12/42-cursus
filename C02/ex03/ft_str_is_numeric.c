@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:34:35 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/22 13:47:41 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 04:15:22 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ int	ft_str_is_numeric(char *str)
 
 	i = 0;
 	j = 0;
+	check_numeric = 0;
 	while (str[i] != '\0')
 		i++;
 	while (j <= i)
 	{
 		if ('0' <= str[j] && str[j] <= '9')
 			check_numeric++;
+		j++;
 	}
 	if (check_numeric == i)
 		return (1);

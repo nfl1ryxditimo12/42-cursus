@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:45:23 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/22 13:59:20 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 05:16:16 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int	ft_str_is_printable(char *str)
 		return (1);
 	while (str[i] != '\0')
 	{
-		if ((32 <= str[i] && str[i] <= 127) == 0)
+		if (32 > str[i] || str[i] > 127)
 			return (0);
+		i++;
 	}
 	return (1);
 }
