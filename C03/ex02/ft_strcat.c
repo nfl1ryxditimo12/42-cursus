@@ -6,26 +6,32 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 20:24:10 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/22 20:34:38 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 16:38:44 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 char *ft_strcat(char *dest, char *src)
 {
-	int i;
-	int j;
+	char *temp;
 
-	i = 0;
-	j = 0;
-	while (dest[i] != '\0')
-		i++;
-	while (src[j] != '\0')
+	temp = dest;
+	while (1)
 	{
-		dest[i] = src[j];
-		i++;
-		j++;
+		if (*dest == '\0')
+		{
+			if (*src != '\0')
+			{
+				*dest = *src;
+				src++;
+			}
+			else
+			{
+				dest++;
+				*dest = '\0';
+				break ;
+			}
+		}
+		dest++;
 	}
-	return (dest);
+	return (temp);
 }

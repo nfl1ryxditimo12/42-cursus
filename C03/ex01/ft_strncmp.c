@@ -6,27 +6,27 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 19:21:45 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/24 03:04:21 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 15:27:56 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-int	ft_strncmp(char *s1, char *s2, unisigned int n)
+int	ft_strncmp(char *s1, char *s2, unsigned int n)
 {
-	int i;
-	int compare;
+	unsigned int i;
 
 	i = 0;
-	compare = 0;
-	while ((s1[i] || s2[i]) && i < n)
+	while ((*s1 && *s2) && i < n)
 	{
-		if (s1[i] != s2[i])
-		{
-			compare = s1[i] - s2[i];
-			retu
-		}
-		i++;
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		++s1;
+		++s2;
+		++i;
 	}
-	return (compare);
+	if (i == n)
+	{
+		--s1;
+		--s2;
+	}
+	return (*s1 - *s2);
 }

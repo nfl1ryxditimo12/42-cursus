@@ -3,38 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seongsu <seongsu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 14:39:55 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/24 01:06:04 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 15:01:26 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-unsigned int    ft_strlcpy(char *dest, char *src, unsigned int size)
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
 	unsigned int i;
+	unsigned int idx;
 
 	i = 0;
-	while (i < size)
-	{
-		dest[i] = src[i];
+	idx = 0;
+	while (src[i])
 		i++;
+	if (size != 0)
+	{
+		while (src[idx] != '\0' && idx < (size - 1))
+		{
+			dest[idx] = src[idx];
+			idx++;
+		}
+		dest[idx] = '\0';
 	}
-	dest[size - 1] = '\0';
-	return (size - 1);
-}
-
-int main()
-{
-	char dest[20];
-	char src[6] = "12345";
-	int a;
-	ft_strlcpy(dest, src, 4);
-	a = ft_strlcpy(dest, src, 4);
-
-	for(int i = 0; dest[i]; i++)
-		printf("%c", dest[i]);
-	printf("\n%d\n", a);
+	return (i);
 }

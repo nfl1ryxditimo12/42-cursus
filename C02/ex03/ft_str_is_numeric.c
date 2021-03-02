@@ -6,11 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:34:35 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/23 22:04:05 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:57:55 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_str_is_numeric(char *str)
+int	ft_str_is_numeric(char *str)
 {
 	int i;
 	int j;

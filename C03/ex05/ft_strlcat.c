@@ -6,12 +6,13 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 21:54:53 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/23 00:24:51 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 18:45:05 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 
 unsigned int	str_len(char *arr)
 {
@@ -27,36 +28,27 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {
 	unsigned int i;
 	unsigned int j;
-	unsigned int d_len;
-	unsigned int s_len;
-	int k = 0;
-
+	
 	i = 0;
 	j = 0;
-	d_len = str_len(dest);
-	s_len = str_len(src);
-	while (i < size && dest[i])
+	while (dest[i])
 		i++;
-	while (j < s_len && d_len + j + 1 < size)
+	while (i + j + 1 < size && src[j] != '\0')
 	{
-		dest[d_len + j] = src[j];
+		dest[i + j] = src[j];
 		j++;
 	}
-	dest[d_len + j] = '\0';
-	while (k < dest[k])
-	{
-		write(1, &dest[k], 1);
-		k++;
-	}
-	return (i + s_len);
+	dest[i + j] = '\0';
+	while (src[j])
+		j++;
+	if (i > size)
+		return (size + j);
+	return (i + j);
 }
 
 int main()
 {
 	char dest[20] = "12345";
 	char src[3] = "abc";
-	unsigned int size = 8;
-	unsigned int result;
-	result = ft_strlcat(dest, src, size);
-	printf("%d", result);
+	printf("%u\n", ft_strlcat(dest, src, 5));
 }

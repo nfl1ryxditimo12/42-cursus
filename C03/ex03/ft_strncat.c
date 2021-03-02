@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 20:37:31 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/22 20:45:34 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 16:38:16 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,29 @@
 
 char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
-	int i;
-	unsigned int j;
-	
+	unsigned int i;
+	char *temp;
+
 	i = 0;
-	j = 0;
-	while (dest[i])
-		i++;
-	while (j < nb || src[j])
+	temp = dest;
+	while (1)
 	{
-		dest[i] = src[j];
-		i++;
-		j++;
+		if (*dest == '\0')
+		{
+			if (*src != '\0' && i < nb)
+			{
+				*dest = *src;
+				src++;
+				i++;
+			}
+			else if (i == nb || *src == '\0')
+			{
+				dest++;
+				*dest = '\0';
+				break ;
+			}
+		}
+		dest++;
 	}
-	return (dest);
+	return (temp);
 }

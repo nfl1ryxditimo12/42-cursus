@@ -3,24 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcapitalize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seongsu <seongsu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 14:08:09 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/24 00:11:55 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 15:00:05 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-char    *ft_strcapitalize(char *str)
+char	*ft_strcapitalize(char *str)
 {
 	int		i;
 	char	s;
 
 	i = 1;
 	if ('a' <= str[0] && str[0] <= 'z')
-		str[0] = str[0] - 32;
-	while (str[i] != '\0')
+		str[0] -= 32;
+	while (str[i])
 	{
 		s = str[i - 1];
 		if (!(('a' <= s && s <= 'z') || ('A' <= s && s <= 'Z')))
@@ -39,12 +37,4 @@ char    *ft_strcapitalize(char *str)
 		i++;
 	}
 	return (str);
-}
-
-int main()
-{
-	char str[200] = "salut, comment tu vas ? 42mots quarante-deux; cinquante+et+un";
-	ft_strcapitalize(str);
-	for (int i = 0; str[i]; i++)
-		printf("%c", str[i]);
 }

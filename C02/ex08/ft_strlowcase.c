@@ -6,11 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 14:00:12 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/23 22:24:56 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:58:46 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char    *ft_strlowcase(char *str)
+char	*ft_strlowcase(char *str)
 {
 	int i;
 

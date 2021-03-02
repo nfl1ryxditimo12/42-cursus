@@ -6,11 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:13:03 by seonkim           #+#    #+#             */
-/*   Updated: 2021/02/23 20:53:06 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:57:15 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_str_is_alpha(char *str)
+int	ft_str_is_alpha(char *str)
 {
 	int i;
 	int j;
