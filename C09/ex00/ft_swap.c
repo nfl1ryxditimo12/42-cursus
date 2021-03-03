@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iterative_power.c                               :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 17:17:41 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 20:30:46 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/03 20:20:24 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/03 20:21:16 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-int	ft_iterative_power(int nb, int power)
+void	ft_swap(int *a, int *b)
 {
-	int num;
-
-	num = 1;
-	if (nb < 0 || power < 0)
-		return (0);
-	if (power == 0)
-		return (1);
-	while (power > 0)
-	{
-		num *= nb;
-		power--;
-	}
-	return (num);
+	int temp;
+	temp = *a;
+	*a = *b;
+	*a = temp;
 }
-

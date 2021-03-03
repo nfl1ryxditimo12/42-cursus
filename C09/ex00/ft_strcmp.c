@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iterative_power.c                               :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 17:17:41 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 20:30:46 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/03 20:24:22 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/03 20:26:21 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-int	ft_iterative_power(int nb, int power)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int num;
-
-	num = 1;
-	if (nb < 0 || power < 0)
-		return (0);
-	if (power == 0)
-		return (1);
-	while (power > 0)
+	while (*s1 && *s1 == *s2)
 	{
-		num *= nb;
-		power--;
+		if (*s1 != *s2)
+				return (*s1 - *s2);
+		s1++;
+		s2++;
 	}
-	return (num);
+	return (*s1 - *s2);
 }
-

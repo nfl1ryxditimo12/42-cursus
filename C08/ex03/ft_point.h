@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iterative_power.c                               :+:      :+:    :+:   */
+/*   ft_point.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 17:17:41 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 20:30:46 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/03 19:48:21 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/03 20:00:49 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef FT_POINT_H
 
-int	ft_iterative_power(int nb, int power)
+# define FT_POINT_H
+
+typedef struct s_point
 {
-	int num;
+	int x;
+	int y;
+} t_point;
 
-	num = 1;
-	if (nb < 0 || power < 0)
-		return (0);
-	if (power == 0)
-		return (1);
-	while (power > 0)
-	{
-		num *= nb;
-		power--;
-	}
-	return (num);
-}
-
+#endif
