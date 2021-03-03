@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 12:54:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 16:08:42 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/03 16:56:07 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**ft_split(char *str, char *charset)
 		str += n;
 		printf("%d\n", string_len(arr[i], charset));
 	}
-	arr[size] = 0;
+	arr[i] = 0;
 	return (arr);
 }
 
