@@ -1,30 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iterative_factorial.c                           :+:      :+:    :+:   */
+/*   ft.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 17:07:58 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 18:00:53 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/03 17:51:52 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/03 17:59:52 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 
-int	ft_iterative_factorial(int nb)
-{
-	int num;
-
-	num = nb;
-	if (nb < 0)
-		return (0);
-	else if (nb == 0)
-		return (1);
-	while (nb - 1 != 0)
-	{
-		num *= nb - 1;
-		nb--;
-	}
-	return (num);
-}
