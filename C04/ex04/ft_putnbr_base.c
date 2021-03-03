@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 01:27:02 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/02 15:18:47 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/03 16:50:59 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,16 @@ void	ft_putnbr_base(int nbr, char *base)
 	if (exception(base, i) == 0)
 		return ;
 	if (nbr == 0)
-		write(1, "0", 1);
-	if (nbr > 0)
 	{
-		output(nbr / i, base, i);
-		write(1, &base[nbr % i], 1);
+		write(1, &base[0], 1);
+		return ;
 	}
+	else if (nbr > 0)
+		output(nbr, base, i);
 	else if (nbr < 0)
 	{
 		write(1, "-", 1);
-		output(nbr / -i, base, i);
-		write(1, &base[-(nbr % i)], 1);
+		output(-nbr, base, i);
 	}
 
 }
