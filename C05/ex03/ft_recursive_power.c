@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:23:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 20:46:26 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/03 20:51:13 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_recursive_power(int nb, int power)
 {
-	if (nb < 0 || power < 0)
+	if (power < 0)
 		return (0);
 	if (power == 0)
 		return (1);
