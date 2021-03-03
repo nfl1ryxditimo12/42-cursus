@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 01:21:29 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 14:51:15 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/03 12:54:43 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/03 14:46:59 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
-{
-	int check_minus;
-	int number;
+#include <stdlib.h>
 
-	check_minus = 1;
-	number = 0;
-	while (*str == '\t' || *str == '\n' || *str == '\v'
-			|| *str == '\f' || *str == '\r' || *str == ' ')
-		str++;
-	while (*str == '+' || *str == '-')
-		if (*(str++) == 45)
-			check_minus *= -1;
-	while ('0' <= *str && *str <= '9')
+int	string_sep(char check_ch, char *charset)
+{
+	while (*charset)
 	{
-		number *= 10;
-		number = number + check_minus * (*(str++) - '0');
+		if (check_ch == *charset)
+			return (1);
+		charset++;
 	}
-	return (number);
+	return (0);
+}
+
+int	string_len(char *str, char *charset
+
+char	**ft_split(char *str, char *charset)
+{
+
 }
