@@ -6,30 +6,27 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:15:52 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/04 12:33:50 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/04 12:51:21 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 
 int	string_sep(char *str, char *charset)
 {
 	while (*charset)
-			if (*str == *charset++)
-					return (1);
+		if (*str == *charset++)
+			return (1);
 	return (0);
 }
 
-int string_len(char *str, char *charset)
+int	string_len(char *str, char *charset)
 {
 	int len;
 
 	len = 0;
-	while (str[len])
-	{
-		while (str[len] && !string_sep(str, charset))
-				len++;
-	}
+	while (str[len] && !string_sep(str + len, charset))
+		len++;
 	return (len);
 }
 
@@ -38,7 +35,6 @@ int	total_size(char *str, char *charset)
 	int i;
 	int j;
 
-	i = 0;
 	j = 0;
 	while (*str)
 	{
@@ -52,9 +48,15 @@ int	total_size(char *str, char *charset)
 	return (j);
 }
 
-void	string_cpy(char *str, int len)
+char	*string_cpy(char *str, int len)
 {
-	
+	char *dest;
+
+	dest = malloc(sizeof(char) * (len + 1));
+	dest[len] = '\0';
+	while (len--)
+		dest[len] = str[len];
+	return (dest);
 }
 
 char	**ft_split(char *str, char *charset)
@@ -64,5 +66,18 @@ char	**ft_split(char *str, char *charset)
 	int i;
 	int j;
 	
-	arr = malloc(sizeof(
+	size = total_size(str, charset);
+	arr = malloc(sizeof(char *) * (size + 1));
+	i = 0;
+	while (i < size)
+	{
+		while (*str && string_sep(str, charset))
+			str++;
+		j = string_len(str, charset);
+		arr[i] = string_cpy(str, j);
+		str += j;
+		i++;
+	}
+	arr[size] = 0;
+	return (arr);
 }
