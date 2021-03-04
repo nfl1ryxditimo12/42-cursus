@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_prime.c                                      :+:      :+:    :+:   */
+/*   ft.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 17:54:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/04 12:34:20 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/03 17:51:52 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/03 18:04:14 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_prime(int nb)
-{
-	int i;
+#ifndef FT_H
 
-	i = 2;
-	if (nb <= 1)
-		return (0);
-	while (i < nb)
-	{
-		if (nb % i == 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}
+#define FT_H
+
+void	ft_putchar(char c);
+void	ft_swap(int *a, int *b);
+void	ft_putstr(char *str);
+int	ft_strlen(char *str);
+int	ft_strcmp(char *s1, char *s2);
+
+#endif
