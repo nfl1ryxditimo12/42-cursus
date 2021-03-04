@@ -6,13 +6,13 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:42:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/02 17:52:58 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/04 12:07:55 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_sqrt(int nb)
 {
-	unsigned int i;
+	long long int i;
 
 	if (nb < 0)
 		return (0);
