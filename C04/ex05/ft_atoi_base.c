@@ -5,13 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 15:19:39 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/02 17:05:18 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/04 14:32:10 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/04 15:18:38 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <unistd.h>
-#include <stdio.h>
 
 int	atoi(char *str)
 {
@@ -20,22 +17,19 @@ int	atoi(char *str)
 
 	check_minus = 1;
 	number = 0;
-	while (!('0' <= *str && *str <= '9'))
-	{
-		if (*str == 45)
-			check_minus *= -1;
+	while (*str == '\t' || *str == '\n' || *str == '\v'
+			|| *str == '\f' || *str == '\r' || *str == ' ')
 		str++;
-	}
+	while (*str == '+' || *str == '-')
+		if (*(str++) == 45)
+			check_minus *= -1;
 	while ('0' <= *str && *str <= '9')
 	{
 		number *= 10;
-		number = number + check_minus * (*str - '0');
-		str++;
+		number = number + check_minus * (*(str++) - '0');
 	}
 	return (number);
 }
-
-int	
 
 int	exception(char *base, int len)
 {
@@ -61,22 +55,17 @@ int	exception(char *base, int len)
 	return (1);
 }
 
+
+
 int	ft_atoi_base(char *str, char *base)
 {
-	int num;
-	int i;
+	int size;
+	int number;
 
-	num = atoi(str);
-	i = 0;
-	while (base[i])
-		i++;
-	if (exception(base, i) == 0)
+	size = 0;
+
+	if (exception(base, len) == 0)
 		return (0);
-
-	return (num);
-}
-
-int main()
-{
-	printf("%d", ft_atoi_base("42", "poneyvif"));
+	number = atoi(str);
+	return (number);
 }

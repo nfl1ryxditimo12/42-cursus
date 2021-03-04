@@ -6,30 +6,38 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:59:40 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 01:28:15 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/04 14:17:39 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int	ft_is_prime(int nb)
+{
+	long long	i;
+
+	i = 2;
+	if (nb <= 1)
+		return (0);
+	while (i * i <= nb)
+	{
+		if (nb % i == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	ft_find_next_prime(int nb)
 {
-	int i;
-	int check;
-	
-	if (nb < 3)
+	if (nb <= 2)
 		return (2);
-	while (nb)
-	{
-		i = 2;
-		check = 0;
-		while (i < nb)
-		{
-			if (nb % i == 0)
-				check++;
-			i++;
-		}
-		if (check == 0)
-			break ;
+	if (ft_is_prime(nb) == 1)
+		return (nb);
+	if (++nb % 2 == 0)
 		nb++;
+	while (1)
+	{
+		if (ft_is_prime(nb) == 1)
+			return (nb);
+		nb = nb + 1;
 	}
-	return (nb);
 }

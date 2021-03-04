@@ -6,18 +6,18 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:54:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/04 12:34:20 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/04 14:18:55 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_is_prime(int nb)
 {
-	int i;
+	long long i;
 
 	i = 2;
 	if (nb <= 1)
 		return (0);
-	while (i < nb)
+	while (i <= (nb / 2))
 	{
 		if (nb % i == 0)
 			return (0);

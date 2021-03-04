@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 19:41:39 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/02 20:27:45 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/04 15:19:50 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,5 @@ int	main(int argc, char *argv[])
 		write(1, "\n", 1);
 		argc--;
 	}
+	return (0);
 }
