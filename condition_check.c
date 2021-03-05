@@ -65,7 +65,7 @@ int	ft_check_coner(int **cond)
 	return (1);
 }
 
-int	**ft_condition_check(char **argv)
+int	**ft_condition_check(char *argv)
 {
 	int	**cond;
 	int	count;
@@ -76,7 +76,7 @@ int	**ft_condition_check(char **argv)
 	i = -1;
 	while (++i < N)
 		cond[i] = (int *)malloc(sizeof(int) * (N + 1));
-	cond = ft_char_to_num(argv[1], &count, cond);
+	cond = ft_char_to_num(argv, &count, cond);
 	if (ft_check_coner(cond))
 		if (count == 16)
 			return (cond);

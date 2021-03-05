@@ -2,7 +2,7 @@
 
 #define N 4
 
-int	**ft_condition_check(char **argv);
+int	**ft_condition_check(char *argv);
 int	**board_size(void);
 
 
