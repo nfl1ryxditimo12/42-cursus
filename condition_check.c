@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 
 #define N 4
@@ -66,7 +65,7 @@ int	ft_check_coner(int **cond)
 	return (1);
 }
 
-int	main(int argc, char **argv)
+int	**ft_condition_check(char **argv)
 {
 	int	**cond;
 	int	count;
@@ -75,19 +74,11 @@ int	main(int argc, char **argv)
 	cond = (int **)malloc(sizeof(int *) * (N + 1));
 	count = 0;
 	i = -1;
-	if (argc == 2)
-	{
-		while (++i < N)
-			cond[i] = (int *)malloc(sizeof(int) * (N + 1));
-		cond = ft_char_to_num(argv[1], &count, cond);
-		if (ft_check_coner(cond))
-			if (count == 16)
-				for (int j = 0; j < N; j++)
-				{
-					for (int k = 0; k < N; k++)
-						printf("%d ", cond[j][k]);
-					printf("\n");
-				}
-	}
+	while (++i < N)
+		cond[i] = (int *)malloc(sizeof(int) * (N + 1));
+	cond = ft_char_to_num(argv[1], &count, cond);
+	if (ft_check_coner(cond))
+		if (count == 16)
+			return (cond);
 	return (0);
 }

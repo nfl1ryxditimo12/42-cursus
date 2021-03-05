@@ -9,9 +9,13 @@
 
 #define N 4
 
-int	*ft_cond(int argc, char *argv);
+int	**ft_condition_check(char *argv);
+void	pre_col_up(int **board, int **cond);
+void	pre_col_down(int **board, int **cond);
+void	pre_row_left(int **board, int **cond);
+void	pre_row_right(int **board, int **cond);
 
-int	**board_size(void)
+int	**board_size(int **cond)
 {
 	int **board;
 	int i;
@@ -20,55 +24,9 @@ int	**board_size(void)
 	board = (int **)malloc(sizeof(int *) * (N + 1));
 	while (++i < N)
 		board[i] = (int *)malloc(sizeof(int) * (N + 1));
+	pre_col_up(board, cond);
+	pre_col_down(board, cond);
+	pre_row_left(board, cond);
+	pre_row_right(board, cond);
 	return (board);
-}
-
-int	ft_preprocess(int index, int **board_size)
-{
-	int row;
-	int col;
-	int i;
-
-	i = -1;
-	if (index < 8)
-	{
-		while (
-	}
-	else (index >= 8)
-	{
-		row = index % 4;
-
-	}
-}
-
-int	ft_location(int *condition, int **board)
-{
-	int i;
-	int row;
-	int col;
-
-	i = -1;
-	while (++i < N * N)
-	{
-		if (condition[i] == 4)
-			ft_preprocess(i, board);
-	}
-	return (0);
-}
-
-int main()
-{
-	int **arr;
-	int i;
-	int j;
-	
-	arr = board_size();
-	i = -1;
-	while (++i < N)
-	{
-		j = -1;
-		while (++j < N)
-			printf("%d ", arr[i][j]);
-		printf("\n");
-	}
 }

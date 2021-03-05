@@ -1,5 +1,7 @@
 #include <unistd.h>
 
+#define N 4
+
 void	print_str(char *str)
 {
 	int i;
