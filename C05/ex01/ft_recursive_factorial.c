@@ -6,11 +6,9 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:12:24 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/02 17:17:25 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/06 15:23:04 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 int	factorial(int nb)
 {

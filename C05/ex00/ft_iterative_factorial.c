@@ -6,11 +6,9 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:07:58 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 18:00:53 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/06 15:22:55 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 int	ft_iterative_factorial(int nb)
 {

@@ -6,11 +6,9 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:23:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 20:51:13 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/06 15:23:21 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 int	ft_recursive_power(int nb, int power)
 {
