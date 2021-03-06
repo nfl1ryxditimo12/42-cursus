@@ -1,31 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_program_name.c                            :+:      :+:    :+:   */
+/*   ft_convert_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 18:26:53 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/04 15:22:49 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/04 17:09:09 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/04 17:15:37 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 
-int main(int argc, char **argv)
-{
-	int i;
-
-	i = 0;
-	
-	if (argc <= 0)
-		return (-1);
-
-	while (argv[0][i])
-	{
-		write(1, &argv[0][i], 1);
-		i++;
-	}
-	write(1, "\n", 1);
-	return (0);
-}

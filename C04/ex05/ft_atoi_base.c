@@ -6,9 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:32:10 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/04 15:18:38 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/06 15:20:48 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	g_baselen;
 
 int	atoi(char *str)
 {
@@ -31,7 +33,7 @@ int	atoi(char *str)
 	return (number);
 }
 
-int	exception(char *base, int len)
+int	exception(char *base)
 {
 	int i;
 	int j;
@@ -44,7 +46,7 @@ int	exception(char *base, int len)
 		if (base[i] == '-' || base[i] == '+' || base[i] == ' ')
 			return (0);
 		j = i + 1;
-		while (j < len)
+		while (j < g_baselen)
 		{
 			if (base[i] == base[j])
 				return (0);
@@ -55,17 +57,23 @@ int	exception(char *base, int len)
 	return (1);
 }
 
-
+int	base_to_num(int num)
+{
+	if (num == 0)
+		return (0);
+	return ((num % g_baselen) + (base_to_num(num / g_baselen) * 10));
+}
 
 int	ft_atoi_base(char *str, char *base)
 {
-	int size;
 	int number;
-
-	size = 0;
-
-	if (exception(base, len) == 0)
+	
+	g_baselen = 0;
+	while (base[g_baselen])
+		g_baselen++;
+	if (exception(base) == 0)
 		return (0);
 	number = atoi(str);
+	number = base_to_num(number);
 	return (number);
 }
