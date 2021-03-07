@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 21:17:32 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/02 21:23:37 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:06:14 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 int	*ft_range(int min, int max)
 {
-	int *ptr;
 	int *arr;
 	int i;
 
 	i = 0;
 	if (min >= max)
-		return (ptr);
+		return (0);
 	arr = (int *)malloc(sizeof(int) * (max - min));
 	while (min < max)
 	{

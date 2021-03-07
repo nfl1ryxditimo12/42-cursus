@@ -6,11 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:32:10 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/06 15:20:48 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/07 20:54:56 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	g_baselen;
+int g_baselen;
 
 int	atoi(char *str)
 {
@@ -67,13 +67,12 @@ int	base_to_num(int num)
 int	ft_atoi_base(char *str, char *base)
 {
 	int number;
-	
+
 	g_baselen = 0;
 	while (base[g_baselen])
 		g_baselen++;
 	if (exception(base) == 0)
 		return (0);
 	number = atoi(str);
-	number = base_to_num(number);
-	return (number);
+	return (base_to_num(number));
 }

@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:12:24 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/06 15:23:04 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/07 10:59:31 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,3 @@ int	ft_recursive_factorial(int nb)
 		return (0);
 	return (factorial(nb));
 }
-

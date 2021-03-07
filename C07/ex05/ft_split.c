@@ -6,14 +6,13 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 12:54:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 16:56:07 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:15:18 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 
-int	string_sep(char *str, char *charset)
+int		string_sep(char *str, char *charset)
 {
 	while (*charset)
 		if (*str == *charset++)
@@ -21,9 +20,9 @@ int	string_sep(char *str, char *charset)
 	return (0);
 }
 
-int	string_len(char *str, char *charset)
+int		string_len(char *str, char *charset)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (str[i] && !string_sep(str + i, charset))
@@ -31,10 +30,10 @@ int	string_len(char *str, char *charset)
 	return (i);
 }
 
-int	total_size(char *str, char *charset)
+int		total_size(char *str, char *charset)
 {
-	int i;
-	int w;
+	int		i;
+	int		w;
 
 	w = 0;
 	while (*str)
@@ -51,10 +50,10 @@ int	total_size(char *str, char *charset)
 
 char	*string_cpy(char *str, int len)
 {
-	char *dest;
+	char	*dest;
 
 	if (!(dest = malloc(sizeof(char) * (len + 1))))
-		return (NULL);
+		return (0);
 	dest[len] = '\0';
 	while (len--)
 		dest[len] = str[len];
@@ -63,15 +62,15 @@ char	*string_cpy(char *str, int len)
 
 char	**ft_split(char *str, char *charset)
 {
-	char **arr;
-	int size;
-	int i;
-	int n;
+	char	**arr;
+	int		size;
+	int		i;
+	int		n;
 
 	size = total_size(str, charset);
 	i = -1;
-	if(!(arr = malloc(sizeof(char *) * (size + 1))))
-		return (NULL);
+	if (!(arr = malloc(sizeof(char *) * (size + 1))))
+		return (0);
 	while (++i < size)
 	{
 		while (*str && string_sep(str, charset))
@@ -79,20 +78,9 @@ char	**ft_split(char *str, char *charset)
 		n = string_len(str, charset);
 		arr[i] = string_cpy(str, n);
 		if (!arr[i])
-			return (NULL);
+			return (0);
 		str += n;
-		printf("%d\n", string_len(arr[i], charset));
 	}
 	arr[i] = 0;
 	return (arr);
-}
-
-int main()
-{
-	char **ptr = ft_split("helloww--world--hihi", "--");
-	int i;
-
-	i = 0;
-	while (i < 3)
-		printf("%s\n", ptr[i++]);
 }

@@ -6,13 +6,13 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 19:41:39 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/04 15:19:50 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:04:10 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	ft_strcmp(char *arr1, char *arr2)
+int		ft_strcmp(char *arr1, char *arr2)
 {
 	while (*arr1 && *arr2)
 	{
@@ -47,7 +47,7 @@ void	sort(int argc, char *argv[])
 	}
 }
 
-int	main(int argc, char *argv[])
+int		main(int argc, char *argv[])
 {
 	sort(argc, argv);
 	argc -= 1;

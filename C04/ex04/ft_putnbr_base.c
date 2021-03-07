@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 01:27:02 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 17:01:55 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/07 20:17:37 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	output(int nbr, char *base, int len)
 	write(1, &base[nbr % len], 1);
 }
 
-int	exception(char *base, int len)
+int		exception(char *base, int len)
 {
 	int i;
 	int j;
