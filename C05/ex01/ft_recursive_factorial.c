@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:12:24 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/07 10:59:31 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/08 01:52:22 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	factorial(int nb)
 
 int	ft_recursive_factorial(int nb)
 {
-	if (nb <= 0)
+	if (nb < 0)
 		return (0);
+	else if (nb == 0)
+		return (1);
 	return (factorial(nb));
 }
