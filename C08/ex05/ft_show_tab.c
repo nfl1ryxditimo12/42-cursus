@@ -1,30 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_show_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 01:21:29 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/09 21:06:04 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/11 11:20:38 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/11 11:26:19 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 
-int	ft_atoi(char *str)
+void	ft_putnbr(int nb)
 {
-	int check_minus;
-	int number;
+	if (nb == 0)
+		return (0);
+	ft_putnbr(nb / 10);
+	write(1, nb % 10 + '0', 1);
+}
 
-	check_minus = 1;
-	number = 0;
-	while (*str == 32 || (9 <= *str && *str <= 13))
-		str++;
-	while (*str == '+' || *str == '-')
-		if (*(str++) == 45)
-			check_minus *= -1;
-	while ('0' <= *str && *str <= '9')
-		number = number * 10 + *(str++) - '0';
-	return (number * check_minus);
+void	ft_putstr(char *str)
+{
+	while (*str)
+		write(1, str++, 1);
+}
+
+void	ft_show_tab(struct s_stock_str *par)
+{
+	int i;
+
+	i = -1;
+	while (par[++i])
+	{
+		ft_putstr(par[i].str);
+		if (par[i].size == 0)
+			write(1, "0", 1);
+		else
+			ft_putnbr(par[i].size);
+		ft_putstr(par[i].copy);
+	}
 }

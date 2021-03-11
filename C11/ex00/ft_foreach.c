@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_foreach.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 01:21:29 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/09 21:06:04 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/11 13:28:44 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/11 13:38:57 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-int	ft_atoi(char *str)
+void	ft_foreach(int *tab, int length, void(*f)(int))
 {
-	int check_minus;
-	int number;
-
-	check_minus = 1;
-	number = 0;
-	while (*str == 32 || (9 <= *str && *str <= 13))
-		str++;
-	while (*str == '+' || *str == '-')
-		if (*(str++) == 45)
-			check_minus *= -1;
-	while ('0' <= *str && *str <= '9')
-		number = number * 10 + *(str++) - '0';
-	return (number * check_minus);
+	
 }

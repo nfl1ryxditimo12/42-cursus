@@ -6,9 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:32:10 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/07 20:54:56 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/09 17:03:44 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 int g_baselen;
 
@@ -75,4 +77,9 @@ int	ft_atoi_base(char *str, char *base)
 		return (0);
 	number = atoi(str);
 	return (base_to_num(number));
+}
+
+int main()
+{
+	printf("%d", ft_atoi_base("10", "01"));
 }
