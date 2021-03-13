@@ -1,2 +1,2 @@
-gcc -Wall -Wextra -Werror -c *.c
-ar -crs libft.a *.c
+gcc -c -Wall -Wextra -Werror *.c
+ar -cr libft.a *.o
