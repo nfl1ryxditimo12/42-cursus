@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_foreach.c                                       :+:      :+:    :+:   */
+/*   ft_count_if.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 13:28:44 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/11 17:49:28 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/11 17:57:39 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/11 18:01:19 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_foreach(int *tab, int length, void (*f)(int))
+int	ft_count_if(char **tab, int length, int (*f)(char *))
 {
-	int	i;
+	int	ret;
 
-	i = 0;
-	while (i < length)
-		f(tab[i++]);
+	ret = 0;
+	while (length--)
+		if (f(tab[length]) != 0)
+			ret++;
+	return (ret);
 }

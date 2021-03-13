@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_foreach.c                                       :+:      :+:    :+:   */
+/*   ft_is_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 13:28:44 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/11 17:49:28 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/11 18:03:50 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/11 20:15:23 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_foreach(int *tab, int length, void (*f)(int))
+int	ft_is_sort(int *tab, int length, int (*f)(int, int))
 {
-	int	i;
-
-	i = 0;
-	while (i < length)
-		f(tab[i++]);
+	
 }

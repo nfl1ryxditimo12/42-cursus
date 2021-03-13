@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_foreach.c                                       :+:      :+:    :+:   */
+/*   ft_any.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 13:28:44 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/11 17:49:28 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/11 17:49:42 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/11 17:55:41 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_foreach(int *tab, int length, void (*f)(int))
+int	ft_any(char **tab, int (*f)(char *))
 {
-	int	i;
-
-	i = 0;
-	while (i < length)
-		f(tab[i++]);
+	while (*tab)
+	{
+		if (f(*tab) != 0)
+			return (1);
+		tab++;
+	}
+	return (1);
 }

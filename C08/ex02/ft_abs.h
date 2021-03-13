@@ -6,14 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:26:11 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/03 19:47:17 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/13 22:40:32 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_ABS_H
-
 # define FT_ABS_H
-
-# define ABC(Value) ((Value < 0) ? -Value : Value)
-
+# define ABS(Value) ((Value < 0) ? (-Value) : (Value))
 #endif
