@@ -1,44 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_combn.c                                   :+:      :+:    :+:   */
+/*   exception.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/21 17:54:44 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/14 15:41:34 by seonkim          ###   ########.fr       */
+/*   Created: 2021/03/14 17:31:50 by seonkim           #+#    #+#             */
+/*   Updated: 2021/03/15 14:41:25 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "bsq.h"
 
-int	g_len;
-char	g_nbr[10];
-
-void	rec(int prev, int n)
+void	board_valid(void)
 {
-	int i;
+	int	i;
+	int	j;
+	char	c;
 
-	if (n == glen)
+	i = -1;
+	while (++i < g_row_size)
 	{
-		
+		j = -1;
+		while (++j < g_col_size)
+		{
+			c = g_board[i][j];
+			if (c != g_obstacle || c != g_blank)
+			{
+				print_error(BOARD_ERR);
+				exit(1);
+			}
+		}
 	}
-}
-
-void	print_last(int i)
-{
-	
-}
-
-void	ft_print_combn(int n)
-{
-	int i;
-
-	i = 0;
-	while (i < 10 - n)
-	{
-		g_nbr[0] = '0' + i;
-		rev(i++, 1);
-	}
-	print_last(i);
 }
