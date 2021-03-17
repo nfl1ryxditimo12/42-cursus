@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 17:49:42 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/11 17:55:41 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/16 18:06:34 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ int	ft_any(char **tab, int (*f)(char *))
 			return (1);
 		tab++;
 	}
-	return (1);
+	return (0);
 }
