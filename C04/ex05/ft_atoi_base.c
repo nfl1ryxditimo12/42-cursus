@@ -6,7 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:32:10 by seonkim           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/03/14 00:51:11 by seonkim          ###   ########.fr       */
+=======
+/*   Updated: 2021/03/14 15:03:03 by seonkim          ###   ########.fr       */
+>>>>>>> 5a1bcf3de2bb113a5eb48ed378a3f1b87b1c33d7
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +18,18 @@
 
 int g_baselen;
 
-int	atoi(char *str)
+int	atoi(char *str, char *base, )
 {
 	int check_minus;
 	int number;
 
 	check_minus = 1;
 	number = 0;
+<<<<<<< HEAD
 	while (*str == 32 || (9 <= *str && *str <= 13))
+=======
+	while (*str == 32 || (9 <= *str && *str <= 13)
+>>>>>>> 5a1bcf3de2bb113a5eb48ed378a3f1b87b1c33d7
 		str++;
 	while (*str == '+' || *str == '-')
 		if (*(str++) == 45)
