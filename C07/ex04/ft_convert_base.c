@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/*hhh ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_convert_base.c                                  :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:09:09 by seonkim           #+#    #+#             */
-/*   Updated: 2021/03/18 18:58:53 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/03/18 21:16:53 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	atoi_(char *nbr, char *base, int base_len)
 
 char	*putnbr_(int nbr, char *base, int base_len)
 {
-	int	tmp;
-	int	size;
-	char	*ret;
+	long long	tmp;
+	int			size;
+	char		*ret;
 
 	if (nbr == 0)
 	{
