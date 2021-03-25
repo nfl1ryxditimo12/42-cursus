@@ -2,4 +2,4 @@
 
 ### 4기 1차
 
-![IMG_9504](https://user-images.githubusercontent.com/74334399/112432912-e4472780-8d84-11eb-83e8-34caa2c7e6c2.PNG)
+![IMG_9504](https://user-images.githubusercontent.com/74334399/112433312-66cfe700-8d85-11eb-8724-990bf9773bc1.jpg)
