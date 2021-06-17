@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 15:26:46 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/17 20:55:37 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/17 22:49:28 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_img
 	void	*right;
 	void	*wall;
 	void	*ground;
+	void	*apple;
+	void	*exit;
 //	int		*data;
 //	int		bpp;
 //	int		size_line;
@@ -53,6 +55,7 @@ typedef struct s_game
 	int		map[ROW][COL];
 	int		cur_x;
 	int		cur_y;
+	int		score;
 }				t_game;
 
 typedef struct s_param
@@ -76,6 +79,8 @@ void	img_init(t_game *game)
 	game->img.down = mlx_xpm_file_to_image(game->mlx, "./source/down.xpm", &game->img.width, &game->img.height);
 	game->img.left = mlx_xpm_file_to_image(game->mlx, "./source/left.xpm", &game->img.width, &game->img.height);
 	game->img.right = mlx_xpm_file_to_image(game->mlx, "./source/right.xpm", &game->img.width, &game->img.height);
+	game->img.apple = mlx_xpm_file_to_image(game->mlx, "./source/apple.xpm", &game->img.width, &game->img.height);
+	game->img.exit = mlx_xpm_file_to_image(game->mlx, "./source/exit.xpm", &game->img.width, &game->img.height);
 	//game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_line, &game->img.endian);
 }
 
@@ -91,6 +96,7 @@ void	draw_tiles(t_game *game)
 	int col;
 
 	row = 0;
+	printf("test3\n");
 	while (row < ROW)
 	{
 		col = 0;
@@ -106,7 +112,19 @@ void	draw_tiles(t_game *game)
 				mlx_put_image_to_window(game->mlx, game->win, game->img.down, col * TILES + 15, row * TILES);
 				game->cur_x = col * TILES;
 				game->cur_y = row * TILES + 15;
-				printf("x : %d, y : %d\n", game->cur_x / TILES, (game->cur_y - 15) / TILES);
+			}
+			else if (game->map[row][col] == 4)
+			{
+				printf("test5\n");
+				mlx_put_image_to_window(game->mlx, game->win, game->img.ground, col * TILES, row * TILES);
+				printf("test6\n");
+				mlx_put_image_to_window(game->mlx, game->win, game->img.apple, col * TILES + 16, row * TILES + 16);
+				printf("test7\n");
+			}
+			else if (game->map[row][col] == 2)
+			{
+				//mlx_put_image_to_window(game->mlx, game->win, game->img.ground, col * TILES, row * TILES);
+				mlx_put_image_to_window(game->mlx, game->win, game->img.exit, col * TILES, row * TILES);
 			}
 			col++;
 		}
@@ -118,7 +136,7 @@ void	map_init(t_game *game)
 {
 	int src[ROW][COL] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+    {1, 2, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 4, 0, 1},
     {1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1},
     {1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1},
     {1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1},
@@ -137,6 +155,7 @@ void	map_init(t_game *game)
 	int j;
 
 	i = -1;
+	printf("test4\n");
 	memcpy(game->map, src, sizeof(int) * ROW * COL);
 	for (int i = 0; i < ROW; i++)
 	{
@@ -158,35 +177,56 @@ int	press_key(int keycode, t_game *game)
 
 	x = game->cur_x / TILES;
 	y = game->cur_y / TILES;
+	printf("score : %d\n", game->score);
 	if (keycode == KEYCODE_EXIT)
 		exit(0);
-	else if (keycode == KEY_W && game->map[x - 1][y] == 0)
+	else if (keycode == KEY_W && (!game->map[x - 1][y] || game->map[x - 1][y] == 4))
 	{
 		game->cur_x -= 64;
+		if (game->map[x - 1][y] == 4)
+		{
+			game->score++;
+			game->map[x - 1][y] = 0;
+		}
 		mlx_put_image_to_window(game->mlx, game->win, game->img.up, game->cur_y, game->cur_x);
 		mlx_put_image_to_window(game->mlx, game->win, game->img.ground, game->cur_y - 15, game->cur_x + 64);
 		game->map[x - 1][y] = 3;
 		game->map[x][y] = 0;
 	}
-	else if (keycode == KEY_S && game->map[x + 1][y] == 0)
+	else if (keycode == KEY_S && (!game->map[x + 1][y] || game->map[x + 1][y] == 4))
 	{
 		game->cur_x += 64;
+		if (game->map[x + 1][y] == 4)
+		{
+			game->score++;
+			game->map[x + 1][y] = 0;
+		}
 		mlx_put_image_to_window(game->mlx, game->win, game->img.down, game->cur_y, game->cur_x);
 		mlx_put_image_to_window(game->mlx, game->win, game->img.ground, game->cur_y - 15, game->cur_x - 64);
 		game->map[x + 1][y] = 3;
 		game->map[x][y] = 0;
 	}
-	else if (keycode == KEY_A && game->map[x][y - 1] == 0)
+	else if (keycode == KEY_A && (!game->map[x][y - 1] || game->map[x][y - 1] == 4))
 	{
 		game->cur_y -= 64;
+		if (game->map[x][y - 1] == 4)
+		{
+			game->score++;
+			game->map[x][y - 1] = 0;
+		}
 		mlx_put_image_to_window(game->mlx, game->win, game->img.left, game->cur_y, game->cur_x);
 		mlx_put_image_to_window(game->mlx, game->win, game->img.ground, game->cur_y + 49, game->cur_x);
 		game->map[x][y - 1] = 3;
 		game->map[x][y] = 0;
 	}
-	else if (keycode == KEY_D && game->map[x][y + 1] == 0)
+	else if (keycode == KEY_D && (!game->map[x][y + 1] || game->map[x][y + 1] == 4))
 	{
 		game->cur_y += 64;
+		if (game->map[x][y + 1] == 4)
+		{
+			game->score++;
+			game->map[x][y + 1] = 0;
+		}
 		mlx_put_image_to_window(game->mlx, game->win, game->img.right, game->cur_y, game->cur_x);
 		mlx_put_image_to_window(game->mlx, game->win, game->img.ground, game->cur_y - 79, game->cur_x);
 		game->map[x][y + 1] = 3;
@@ -212,10 +252,13 @@ int main()
 
 	minilibx_init(&game);
 	img_init(&game);
+	printf("test1\n");
 	map_init(&game);
+	printf("test2\n");
 	param_init(&param);
 	//mlx_put_image_to_window(game.mlx, game.win, game.img.img, 0, 0);
+	printf("test\n");
+	game.score = 0;
 	mlx_hook(game.win, X_EVENT_KEYPRESS, 0, &press_key, &game);
-
 	mlx_loop(game.mlx);
 }
