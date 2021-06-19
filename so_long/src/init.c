@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 17:43:47 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/19 15:46:11 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 01:47:31 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ void	minilibx_init(t_game *game)
 			game->map.col * TILES, game->map.row * TILES + 64, "Garden of Eden");
 	img_init(game);
 	game->score = 0;
-	game->flag = 0;
+	game->f_score = 0;
+	game->step = 0;
+	game->f_step = 0;
+	game->c_cnt = 0;
 	draw_tiles(game);
 }

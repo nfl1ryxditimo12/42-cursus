@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 16:09:54 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/19 16:14:28 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 02:00:10 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,48 @@ static int	get_value(int n)
 		return (n);
 }
 
+void		ft_putnbr(int n)
+{
+	char nbr;
+
+	if (!n)
+		return ;
+	ft_putnbr(n / 10);
+	nbr = n % 10 + '0';
+	write(1, &nbr, 1);
+}
+
+void		print_step(t_game *game)
+{
+	write(1, "YOUR STEP : ", 12);
+	if (!game->step)
+		write(1, "0", 1);
+	else
+		ft_putnbr(game->step);
+	write(1, "\n", 1);
+}
+
 void		process_key(t_game *game, int x, int y, void *side)
 {
 	int dx;
 	int dy;
 
+	game->step++;
+	print_step(game);
 	dx = get_value(game->map.cur_x - x * TILES);
 	dy = get_value(game->map.cur_y - y * TILES);
 	game->map.cur_x -= (dx * 64);
 	game->map.cur_y -= (dy * 64);
 	if (game->map.map[x][y] == 'C')
-	{
 		game->score++;
-		game->map.map[x][y] = '0';
-		draw_ground(game, game->map.cur_x, game->map.cur_y);
-	}
 	else if (game->map.map[x][y] == 'E')
-		print_finish(game, "Well Done!", game->score);
+		print_finish(game, game->score == game->c_cnt ? "Well Done!" : \
+				"Score is not enough!", game->score);
 	else if (game->map.map[x][y] == 'A')
 		print_finish(game, "Game Over!", game->score);
 	draw_player(game, game->map.cur_x, game->map.cur_y + 15, side);
-	draw_ground(game,
-			game->map.cur_x + dx * TILES, game->map.cur_y + dy * TILES);
+	draw_ground(game, game->map.cur_x + dx * TILES,
+			game->map.cur_y + dy * TILES);
 	game->map.map[x][y] = 'P';
 	game->map.map[x + dx][y + dy] = '0';
 }

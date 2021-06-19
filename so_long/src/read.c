@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 15:57:18 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/19 16:44:44 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 00:41:23 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ static char	*get_value(t_game *game, int fd)
 	while ((len = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		if (!(tmp = malloc((size + len + 1) * sizeof(char))))
-			print_err(game, MEM_ERR, buf);
+			print_err(0, MEM_ERR, content);
 		tmp = ft_bufcpy(tmp, content, size);
-		ft_free(content);
+		free(content);
 		ft_bufcpy(tmp + size, buf, len);
 		content = tmp;
 		size += len;
 		content[size] = '\0';
 	}
 	if (len)
-		ft_free(content);
-	ft_free(tmp);
+		free(content);
+	free(tmp);
 	return ((len) ? NULL : content);
 }
 

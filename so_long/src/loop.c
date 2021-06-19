@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 16:08:30 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/19 16:46:19 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 01:38:21 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,30 +39,31 @@ char			*nbr_to_str(t_game *game, int n)
 	return (ret);
 }
 
-int			view_score(t_game *game)
+void			view_score_step(t_game *game)
 {
-	char	*str;
+	char	*s_score;
+	char	*s_step;
 	int	size;
 
-	str = nbr_to_str(game, game->score);
-	mlx_string_put(game->mlx, game->win, 32, game->map.col * 64 + 100,
-			0xEAEAEA, "YOUR SCORE : ");
-	if (game->flag == game->score)
-	{
-		mlx_string_put(game->mlx, game->win, 170,
-				game->map.col * 64 + 100, 0xEAEAEA, str);
-		game->flag = 1;
-	}
-	else if (game->flag != game->score)
-	{
+	s_score = nbr_to_str(game, game->score);
+	s_step = nbr_to_str(game, game->step);
+	mlx_string_put(game->mlx, game->win, 32, ROW, TEXT, STEP);
+	mlx_string_put(game->mlx, game->win, 32, ROW + 32, TEXT, SCORE);
+	if (game->f_step == game->step)
+		mlx_string_put(game->mlx, game->win, 170, ROW, TEXT, s_step);
+	else if (game->f_step != game->step)
 		mlx_put_image_to_window(game->mlx, game->win,
-				game->img.black, 170, game->map.col * 64 + 64);
-		game->flag = 0;
-	}
-	game->flag = game->score;
-	ft_free(str);
-	str = 0;
-	return (0);
+				game->img.black, 170, ROW - 16);
+	if (game->f_score == game->score)
+		mlx_string_put(game->mlx, game->win, 170, ROW + 32,
+				TEXT, s_score);
+	else if (game->f_score != game->score)
+		mlx_put_image_to_window(game->mlx, game->win, game->img.black,
+				170, ROW + 16);
+	game->f_step = game->step;
+	game->f_score = game->score;
+	ft_free(s_score);
+	ft_free(s_step);
 }
 
 
@@ -97,7 +98,7 @@ int			loop_score(t_game *game)
 
 	flag = 0;
 	i = -1;
-	view_score(game);
+	view_score_step(game);
 	while (++i < game->map.row)
 	{
 		j = -1;

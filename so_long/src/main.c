@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 15:39:42 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/19 16:53:32 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 00:48:09 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int			main(int ac, char **av)
 		check_extension(av[1]);
 		read_file(&game, av[1]);
 		minilibx_init(&game);
+		print_step(&game);
 		mlx_loop_hook(game.mlx, &loop_score, &game);
 		mlx_hook(game.win, EVENT_KEYPRESS, 0, &press_key, &game);
 		mlx_loop(game.mlx);
