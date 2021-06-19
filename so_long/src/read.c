@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 15:57:18 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 00:41:23 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 05:31:09 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char		*ft_bufcpy(char *dest, char *src, int n)
 	return (dest);
 }
 
-static char	*get_value(t_game *game, int fd)
+static char	*get_value(int fd)
 {
 	char	buf[BUFFER_SIZE];
 	char	*content;
@@ -60,7 +60,7 @@ void		read_file(t_game *game, char *file)
 		game->map.map = 0;
 		print_err(0, "Cannot open file", 0);
 	}
-	game->map.map = ft_split(game, get_value(game, fd), 0);
+	game->map.map = ft_split(game, get_value(fd), 0);
 	close(fd);
 	check_map(game);
 }

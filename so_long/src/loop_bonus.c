@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 16:08:30 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 02:46:15 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 05:50:31 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void			view_score_step(t_game *game)
 {
 	char	*s_score;
 	char	*s_step;
-	int	size;
 
 	s_score = nbr_to_str(game, game->score);
 	s_step = nbr_to_str(game, game->step);
