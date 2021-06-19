@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 16:40:14 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/18 21:11:57 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/19 16:45:59 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char		**ft_split(t_game *game, char *str, int i)
 	int		len;
 
 	if (!(arr = (char **)malloc(sizeof(char *) * wd_len(str) + 1)))
-		print_err(game, MEM_ERR);
+		print_err(0, MEM_ERR, str);
 	game->map.row = wd_len(str);
 	while (*str)
 	{
@@ -69,7 +69,7 @@ char		**ft_split(t_game *game, char *str, int i)
 			while (!is_newline(*str) && *str)
 				str++;
 			if (!(arr[i] = (char *)malloc(str - from + 1)))
-				print_err(game, MEM_ERR);
+				print_err(game, MEM_ERR, str);
 			ft_strcpy(arr[i], from, str);
 			len = ft_strlen(arr[i++]);
 			check_col(game, len);

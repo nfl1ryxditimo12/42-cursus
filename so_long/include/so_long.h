@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 15:51:21 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/18 21:37:18 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/19 16:50:53 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct	s_img
 	void	*ground;
 	void	*score;
 	void	*score2;
+	void	*black;
+	void	*ptr;
 	void	*enemy;
 	void	*exit;
 	int		width;
@@ -64,11 +66,13 @@ typedef struct	s_game
 	void	*mlx;
 	void	*win;
 	int		score;
+	int		flag;
 }				t_game;
 
-void			ft_free(t_game *game);
+void			ft_frees(t_game *game);
+void			ft_free(char *str);
 
-void			print_err(t_game *game, char *err);
+void			print_err(t_game *game, char *err, char *fstr);
 void			print_finish(t_game *game, char *message, int score);
 
 void			minilibx_init(t_game *game);
@@ -77,12 +81,15 @@ void			read_file(t_game *game, char *file);
 
 char			**ft_split(t_game *game, char *str, int i);
 
-void			check_extension(t_game *game, char *file);
+void			check_extension(char *file);
 void			check_map(t_game *game);
 void			check_col(t_game *game, int len);
 
 void			draw_tiles(t_game *game);
 void			draw_ground(t_game *game, int x, int y);
 void			draw_player(t_game *game, int x, int y, void *side);
+
+int			press_key(int key, t_game *game);
+int			loop_score(t_game *game);
 
 #endif

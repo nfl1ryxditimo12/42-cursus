@@ -5,72 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/18 18:34:52 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/18 20:23:40 by seonkim          ###   ########.fr       */
+/*   Created: 2021/06/19 16:09:54 by seonkim           #+#    #+#             */
+/*   Updated: 2021/06/19 16:14:28 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	draw_ground(t_game *game, int x, int y)
+static int	get_value(int n)
 {
-	mlx_put_image_to_window(game->mlx, game->win, game->img.ground, y, x);
+	if (n > 1)
+		return (1);
+	else if (n < -1)
+		return (-1);
+	else if (n == 0)
+		return (0);
+	else
+		return (n);
 }
 
-void	draw_player(t_game *game, int x, int y, void *side)
+void		process_key(t_game *game, int x, int y, void *side)
 {
-	mlx_put_image_to_window(game->mlx, game->win, side, y, x);
+	int dx;
+	int dy;
+
+	dx = get_value(game->map.cur_x - x * TILES);
+	dy = get_value(game->map.cur_y - y * TILES);
+	game->map.cur_x -= (dx * 64);
+	game->map.cur_y -= (dy * 64);
+	if (game->map.map[x][y] == 'C')
+	{
+		game->score++;
+		game->map.map[x][y] = '0';
+		draw_ground(game, game->map.cur_x, game->map.cur_y);
+	}
+	else if (game->map.map[x][y] == 'E')
+		print_finish(game, "Well Done!", game->score);
+	else if (game->map.map[x][y] == 'A')
+		print_finish(game, "Game Over!", game->score);
+	draw_player(game, game->map.cur_x, game->map.cur_y + 15, side);
+	draw_ground(game,
+			game->map.cur_x + dx * TILES, game->map.cur_y + dy * TILES);
+	game->map.map[x][y] = 'P';
+	game->map.map[x + dx][y + dy] = '0';
 }
 
-void	draw(t_game *game, char c, int x, int y)
+int			press_key(int key, t_game *game)
 {
-	if (c == '1')
-		mlx_put_image_to_window(game->mlx, game->win, game->img.wall, x, y);
-	else if (c == '0')
-		mlx_put_image_to_window(game->mlx, game->win, game->img.ground, x, y);
-	else if (c == 'C')
-	{
-		mlx_put_image_to_window(game->mlx, game->win, game->img.ground, x, y);
-		mlx_put_image_to_window(game->mlx, game->win,
-				game->img.score, x + 16, y + 16);
-	}
-	else if (c == 'E')
-	{
-		mlx_put_image_to_window(game->mlx, game->win, game->img.ground, x, y);
-		mlx_put_image_to_window(game->mlx, game->win, game->img.exit, x, y);
-	}
-	else if (c == 'P')
-	{
-		mlx_put_image_to_window(game->mlx, game->win, game->img.ground, x, y);
-		draw_player(game, y, x + 15, game->img.down);
-	}
-	else if (c == 'A')
-	{
-		mlx_put_image_to_window(game->mlx, game->win, game->img.ground, x, y);
-		mlx_put_image_to_window(game->mlx, game->win, game->img.enemy, x, y);
-	}
-}
+	int x;
+	int y;
 
-int		invalid_sprite(char c)
-{
-	return (c == 'C' || c == 'E' || c == 'P' ||
-			c == 'A' || c == '1' || c == '0');
-}
-
-void	draw_tiles(t_game *game)
-{
-	int i;
-	int j;
-
-	i = -1;
-	while (++i < game->map.row)
-	{
-		j = -1;
-		while (++j < game->map.col)
-		{
-			if (!invalid_sprite(game->map.map[i][j]))
-				print_err(game, "Invalid Sprite");
-			draw(game, game->map.map[i][j], j * TILES, i * TILES);
-		}
-	}
+	x = game->map.cur_x / TILES;
+	y = game->map.cur_y / TILES;
+	if (key == KEY_EXIT)
+		print_finish(game, "Program Exit", game->score);
+	else if (key == KEY_W && game->map.map[x - 1][y] != '1')
+		process_key(game, x - 1, y, game->img.up);
+	else if (key == KEY_S && game->map.map[x + 1][y] != '1')
+		process_key(game, x + 1, y, game->img.down);
+	else if (key == KEY_A && game->map.map[x][y - 1] != '1')
+		process_key(game, x, y - 1, game->img.left);
+	else if (key == KEY_D && game->map.map[x][y + 1] != '1')
+		process_key(game, x, y + 1, game->img.right);
+	return (0);
 }

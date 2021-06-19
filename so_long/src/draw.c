@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process.c                                          :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 18:34:52 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/18 21:53:25 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/19 16:48:47 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	draw_tiles(t_game *game)
 		while (++j < game->map.col)
 		{
 			if (!invalid_sprite(game->map.map[i][j]))
-				print_err(game, "Invalid Sprite");
-			draw(game, game->map.map[i][j], j * TILES, i * TILES + 64);
+				print_err(game, "Invalid Sprite", 0);
+			draw(game, game->map.map[i][j], j * TILES, i * TILES);
 		}
 	}
 }
