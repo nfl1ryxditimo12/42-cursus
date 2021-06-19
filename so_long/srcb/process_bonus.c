@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process.c                                          :+:      :+:    :+:   */
+/*   process_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 16:09:54 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 02:51:31 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 02:47:00 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static int	get_value(int n)
 {
@@ -62,6 +62,8 @@ void		process_key(t_game *game, int x, int y, void *side)
 	else if (game->map.map[x][y] == 'E')
 		print_finish(game, game->score == game->c_cnt ? "Well Done!" : \
 				"Score is not enough!", game->score);
+	else if (game->map.map[x][y] == 'A')
+		print_finish(game, "Game Over!", game->score);
 	draw_player(game, game->map.cur_x, game->map.cur_y + 16, side);
 	draw_ground(game, game->map.cur_x + dx * TILES,
 			game->map.cur_y + dy * TILES);

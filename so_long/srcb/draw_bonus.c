@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 18:34:52 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 02:50:58 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 02:46:07 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	draw_ground(t_game *game, int x, int y)
 {
@@ -44,11 +44,17 @@ void	draw(t_game *game, char c, int x, int y)
 		mlx_put_image_to_window(game->mlx, game->win, game->img.ground, x, y);
 		draw_player(game, y, x + 16, game->img.down);
 	}
+	else if (c == 'A')
+	{
+		mlx_put_image_to_window(game->mlx, game->win, game->img.ground, x, y);
+		mlx_put_image_to_window(game->mlx, game->win, game->img.enemy, x, y);
+	}
 }
 
 int		invalid_sprite(char c)
 {
-	return (c == 'C' || c == 'E' || c == 'P' || c == '1' || c == '0');
+	return (c == 'C' || c == 'E' || c == 'P' ||
+			c == 'A' || c == '1' || c == '0');
 }
 
 void	draw_tiles(t_game *game)

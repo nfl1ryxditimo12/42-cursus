@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 17:43:47 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 02:54:34 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 02:55:26 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	img_init(t_game *game)
 {
@@ -29,6 +29,12 @@ void	img_init(t_game *game)
 			&game->img.width, &game->img.height);
 	game->img.score = mlx_xpm_file_to_image(game->mlx, "../img/score.xpm",
 			&game->img.width, &game->img.height);
+	game->img.score2 = mlx_xpm_file_to_image(game->mlx, "../img/score2.xpm",
+			&game->img.width, &game->img.height);
+	game->img.black = mlx_xpm_file_to_image(game->mlx, "../img/black.xpm",
+			&game->img.width, &game->img.height);
+	game->img.enemy = mlx_xpm_file_to_image(game->mlx, "../img/enemy.xpm",
+			&game->img.width, &game->img.height);
 	game->img.exit = mlx_xpm_file_to_image(game->mlx, "../img/exit.xpm",
 			&game->img.width, &game->img.height);
 }
@@ -37,10 +43,12 @@ void	minilibx_init(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx,
-			game->map.col * TILES, game->map.row * TILES, "Garden of Eden");
+			game->map.col * TILES, game->map.row * TILES + 64, "Garden of Eden - Bonus");
 	img_init(game);
 	game->score = 0;
 	game->step = 0;
+	game->f_score = 0;
+	game->f_step = 0;
 	game->c_cnt = 0;
 	draw_tiles(game);
 }

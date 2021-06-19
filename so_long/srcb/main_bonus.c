@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 15:39:42 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 02:48:27 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 02:46:54 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void		ft_free(char *str)
 {
@@ -45,6 +45,7 @@ int			main(int ac, char **av)
 		read_file(&game, av[1]);
 		minilibx_init(&game);
 		print_step(&game);
+		mlx_loop_hook(game.mlx, &loop_score, &game);
 		mlx_hook(game.win, EVENT_KEYPRESS, 0, &press_key, &game);
 		mlx_loop(game.mlx);
 	}

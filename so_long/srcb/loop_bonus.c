@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   score.c                                            :+:      :+:    :+:   */
+/*   loop_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 16:08:30 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 01:38:21 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 02:46:15 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 char			*nbr_to_str(t_game *game, int n)
 {
@@ -93,20 +93,9 @@ void			draw_score(t_game *game)
 int			loop_score(t_game *game)
 {
 	int	i;
-	int	j;
-	int	flag;
 
-	flag = 0;
-	i = -1;
 	view_score_step(game);
-	while (++i < game->map.row)
-	{
-		j = -1;
-		while (++j < game->map.col)
-			if (game->map.map[i][j] == 'C')
-				flag = 1;
-	}
-	if (!flag)
+	if (game->score == game->c_cnt)
 		return (0);
 	i = -1;
 	while (++i < 40000001)
