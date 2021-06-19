@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 17:43:47 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 06:44:11 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 06:59:49 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	minilibx_init(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx,
-			game->map.col * TILES, game->map.row * TILES, "Garden of Eden");
+			game->map.col * TILES, game->map.row * TILES,
+			"Garden of Eden");
 	img_init(game);
 	game->score = 0;
 	game->step = 0;
