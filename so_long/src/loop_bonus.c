@@ -6,13 +6,13 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 16:08:30 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 07:09:13 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 07:38:51 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-char			*nbr_to_str(t_game *game, int n)
+char	*nbr_to_str(t_game *game, int n)
 {
 	char	*ret;
 	int		size;
@@ -39,34 +39,35 @@ char			*nbr_to_str(t_game *game, int n)
 	return (ret);
 }
 
-void			view_score_step(t_game *game)
+void	view_score_step(t_game *game)
 {
 	char	*s_score;
 	char	*s_step;
+	int		row;
 
+	row = game->map.row * 64 + 20;
 	s_score = nbr_to_str(game, game->score);
 	s_step = nbr_to_str(game, game->step);
-	mlx_string_put(game->mlx, game->win, 32, ROW, TEXT, STEP);
-	mlx_string_put(game->mlx, game->win, 32, ROW + 32, TEXT, SCORE);
+	mlx_string_put(game->mlx, game->win, 32, row, TEXT, STEP);
+	mlx_string_put(game->mlx, game->win, 32, row + 32, TEXT, SCORE);
 	if (game->f_step == game->step)
-		mlx_string_put(game->mlx, game->win, 170, ROW, TEXT, s_step);
+		mlx_string_put(game->mlx, game->win, 170, row, TEXT, s_step);
 	else if (game->f_step != game->step)
 		mlx_put_image_to_window(game->mlx, game->win,
-				game->img.black, 170, ROW - 16);
+				game->img.black, 170, row - 16);
 	if (game->f_score == game->score)
-		mlx_string_put(game->mlx, game->win, 170, ROW + 32,
+		mlx_string_put(game->mlx, game->win, 170, row + 32,
 				TEXT, game->score ? s_score : "Clear!");
 	else if (game->f_score != game->score)
 		mlx_put_image_to_window(game->mlx, game->win, game->img.black,
-				170, ROW + 16);
+				170, row + 16);
 	game->f_step = game->step;
 	game->f_score = game->score;
 	ft_free(s_score);
 	ft_free(s_step);
 }
 
-
-void			draw_score(t_game *game)
+void	draw_score(t_game *game)
 {
 	int	i;
 	int	j;
@@ -89,7 +90,7 @@ void			draw_score(t_game *game)
 	}
 }
 
-int			loop_score(t_game *game)
+int		loop_score(t_game *game)
 {
 	int	i;
 

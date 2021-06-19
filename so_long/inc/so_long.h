@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 15:51:21 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 02:52:33 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 07:43:05 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include <string.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
 
 # define TILES 64
 # define EVENT_KEYPRESS 2
-# define EVENT_EXIT 17
 # define KEY_EXIT 53
 # define KEY_W 13
 # define KEY_A 0
@@ -31,9 +29,6 @@
 # define SCORE "YOUR SCORE : "
 # define STEP "YOUR STEP  : "
 # define TEXT 0xEAEAEA
-# define ROW game->map.row * 64 + 20
-# define FLAG (data == game->step ? game->f_step : game->f_score)
-# define DATA data == game->step ? game->step : game->score
 
 # define BUFFER_SIZE 1000000
 # define MEM_ERR "Memory alloctaion ERROR"
@@ -94,6 +89,6 @@ void			draw_tiles(t_game *game);
 void			draw_ground(t_game *game, int x, int y);
 void			draw_player(t_game *game, int x, int y, void *side);
 
-int			press_key(int key, t_game *game);
+int				press_key(int key, t_game *game);
 
 #endif
