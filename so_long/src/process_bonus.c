@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 16:09:54 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 02:47:00 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 07:07:19 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,15 @@ void		process_key(t_game *game, int x, int y, void *side)
 	dy = get_value(game->map.cur_y - y * TILES);
 	game->map.cur_x -= (dx * 64);
 	game->map.cur_y -= (dy * 64);
-	game->score += game->map.map[x][y] == 'C' ? 1 : 0;
+	game->score -= game->map.map[x][y] == 'C' ? 1 : 0;
+	game->c_cnt += game->map.map[x][y] == 'C' ? 1 : 0;
 	if (game->map.map[x][y] == 'C')
 		draw_ground(game, game->map.cur_x, game->map.cur_y);
 	else if (game->map.map[x][y] == 'E')
-		print_finish(game, game->score == game->c_cnt ? "Well Done!" : \
-				"Score is not enough!", game->score);
+		print_finish(game, game->score == 0 ? "Well Done!" : \
+				"Score is not enough!", game->c_cnt);
 	else if (game->map.map[x][y] == 'A')
-		print_finish(game, "Game Over!", game->score);
+		print_finish(game, "Game Over!", game->c_cnt);
 	draw_player(game, game->map.cur_x, game->map.cur_y + 16, side);
 	draw_ground(game, game->map.cur_x + dx * TILES,
 			game->map.cur_y + dy * TILES);

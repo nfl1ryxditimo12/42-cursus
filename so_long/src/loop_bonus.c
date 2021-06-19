@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 16:08:30 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 05:50:31 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 07:09:13 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void			view_score_step(t_game *game)
 				game->img.black, 170, ROW - 16);
 	if (game->f_score == game->score)
 		mlx_string_put(game->mlx, game->win, 170, ROW + 32,
-				TEXT, s_score);
+				TEXT, game->score ? s_score : "Clear!");
 	else if (game->f_score != game->score)
 		mlx_put_image_to_window(game->mlx, game->win, game->img.black,
 				170, ROW + 16);

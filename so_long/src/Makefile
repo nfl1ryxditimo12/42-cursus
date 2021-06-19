@@ -6,7 +6,7 @@
 #    By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/20 03:05:45 by seonkim           #+#    #+#              #
-#    Updated: 2021/06/20 06:57:26 by seonkim          ###   ########.fr        #
+#    Updated: 2021/06/20 07:02:41 by seonkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ all : $(NAME)
 	gcc $(FLAGS) -I ../inc -c $< -o $@
 
 ${NAME} : $(OBJ) ../inc/so_long.h
-	gcc $(FLAGS) $(OBJ) -I ../inc $(FLAGSMLX) -L ../lib -o $(NAME)
+	gcc $(FLAGS) $(OBJ) -I ../inc $(FLAGSMLX) -L ../mlx -o $(NAME)
 
 clean :
 	$(RM) $(OBJ) $(OBJB)
@@ -40,6 +40,6 @@ fclean : clean
 	$(RM) $(NAME)
 
 bonus : $(OBJB) ../inc/so_long_bonus.h
-	gcc $(FLAGS) $(OBJB) -I ../inc $(FLAGSMLX) -L ../lib -o $(NAME)
+	gcc $(FLAGS) $(OBJB) -I ../inc $(FLAGSMLX) -L ../mlx -o $(NAME)
 
 re : fclean all

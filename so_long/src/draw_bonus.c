@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 18:34:52 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 06:02:32 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/20 07:04:50 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	draw_tiles(t_game *game)
 				print_err(game, "Invalid Sprite", 0);
 			draw(game, game->map.map[i][j], j * TILES, i * TILES);
 			if (game->map.map[i][j] == 'C')
-				game->c_cnt++;
+				game->score++;
 		}
 	}
 }
