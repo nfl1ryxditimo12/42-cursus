@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 15:51:21 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 07:43:14 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/21 15:37:48 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct	s_game
 void			ft_frees(t_game *game);
 void			ft_free(char *str);
 
+int				program_exit(t_game *game);
 void			print_step(t_game *game);
 void			print_err(t_game *game, char *err, char *fstr);
 void			print_finish(t_game *game, char *message, int score);

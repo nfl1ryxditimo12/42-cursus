@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 17:29:56 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 02:46:23 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/21 15:38:42 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ void	putnbr(int n)
 	putnbr(n / 10);
 	ch_nb = n % 10 + 48;
 	write(1, &ch_nb, 1);
+}
+
+int		program_exit(t_game *game)
+{
+	print_finish(game, "Program Exit", game->c_cnt);
+	return (0);
 }
 
 void	print_finish(t_game *game, char *message, int score)

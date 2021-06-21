@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 16:09:54 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/21 11:46:30 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/21 15:34:23 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int			press_key(int key, t_game *game)
 	x = game->map.cur_x / TILES;
 	y = game->map.cur_y / TILES;
 	if (key == KEY_EXIT)
-		print_finish(game, "Program Exit", game->score);
+		program_exit(game);
 	else if (key == KEY_W && game->map.map[x - 1][y] != '1')
 		process_key(game, x - 1, y, game->img.up);
 	else if (key == KEY_S && game->map.map[x + 1][y] != '1')

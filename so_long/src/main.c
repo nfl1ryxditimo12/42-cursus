@@ -6,13 +6,13 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 15:39:42 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 06:43:54 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/21 15:35:18 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void		ft_free(char *str)
+void	ft_free(char *str)
 {
 	if (!str)
 		return ;
@@ -20,7 +20,7 @@ void		ft_free(char *str)
 	str = 0;
 }
 
-void		ft_frees(t_game *game)
+void	ft_frees(t_game *game)
 {
 	int i;
 
@@ -34,7 +34,7 @@ void		ft_frees(t_game *game)
 	game->map.map = 0;
 }
 
-int			main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	t_game	game;
 
@@ -45,6 +45,7 @@ int			main(int ac, char **av)
 		read_file(&game, av[1]);
 		minilibx_init(&game);
 		print_step(&game);
+		mlx_hook(game.win, 17, 0, &program_exit, &game);
 		mlx_hook(game.win, EVENT_KEYPRESS, 0, &press_key, &game);
 		mlx_loop(game.mlx);
 	}
