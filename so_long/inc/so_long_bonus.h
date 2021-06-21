@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 15:51:21 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/21 15:37:48 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/21 16:20:07 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void			check_col(t_game *game, int len);
 
 void			draw_tiles(t_game *game);
 void			draw_ground(t_game *game, int x, int y);
-void			draw_player(t_game *game, int x, int y, void *side);
+void			draw_player(t_game *game, void *side);
 
 int				press_key(int key, t_game *game);
 int				loop_score(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 17:29:56 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/21 15:38:42 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/21 16:21:47 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ void	putnbr(int n)
 	putnbr(n / 10);
 	ch_nb = n % 10 + 48;
 	write(1, &ch_nb, 1);
+}
+
+void	print_step(t_game *game)
+{
+	write(1, "YOUR STEP : ", 12);
+	if (!game->step)
+		write(1, "0", 1);
+	else
+		putnbr(game->step);
+	write(1, "\n", 1);
 }
 
 int		program_exit(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 16:09:54 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/21 15:39:36 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/21 16:20:55 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,17 @@ static int	get_value(int n)
 		return (n);
 }
 
-void		ft_putnbr(int n)
+void		turn_side(t_game *game, int key)
 {
-	char nbr;
-
-	if (!n)
-		return ;
-	ft_putnbr(n / 10);
-	nbr = n % 10 + '0';
-	write(1, &nbr, 1);
-}
-
-void		print_step(t_game *game)
-{
-	write(1, "YOUR STEP : ", 12);
-	if (!game->step)
-		write(1, "0", 1);
-	else
-		ft_putnbr(game->step);
-	write(1, "\n", 1);
+	draw_ground(game, game->map.cur_x, game->map.cur_y);
+	if (key == KEY_W)
+		draw_player(game, game->img.up);
+	else if (key == KEY_S)
+		draw_player(game, game->img.down);
+	else if (key == KEY_A)
+		draw_player(game, game->img.left);
+	else if (key == KEY_D)
+		draw_player(game, game->img.right);
 }
 
 void		process_key(t_game *game, int x, int y, void *side)
@@ -65,7 +57,7 @@ void		process_key(t_game *game, int x, int y, void *side)
 				"Not complete!", game->c_cnt);
 	else if (game->map.map[x][y] == 'A')
 		print_finish(game, "Game Over!", game->c_cnt);
-	draw_player(game, game->map.cur_x, game->map.cur_y + 16, side);
+	draw_player(game, side);
 	draw_ground(game, game->map.cur_x + dx * TILES,
 			game->map.cur_y + dy * TILES);
 	game->map.map[x][y] = 'P';
@@ -89,5 +81,7 @@ int			press_key(int key, t_game *game)
 		process_key(game, x, y - 1, game->img.left);
 	else if (key == KEY_D && game->map.map[x][y + 1] != '1')
 		process_key(game, x, y + 1, game->img.right);
+	else if (key == KEY_W || key == KEY_S || key == KEY_A || key == KEY_D)
+		turn_side(game, key);
 	return (0);
 }

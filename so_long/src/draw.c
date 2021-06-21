@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 18:34:52 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/20 06:43:40 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/21 16:09:38 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ void	draw_ground(t_game *game, int x, int y)
 	mlx_put_image_to_window(game->mlx, game->win, game->img.ground, y, x);
 }
 
-void	draw_player(t_game *game, int x, int y, void *side)
+void	draw_player(t_game *game, void *side)
 {
-	mlx_put_image_to_window(game->mlx, game->win, side, y, x);
+	mlx_put_image_to_window(game->mlx, game->win, side,
+			game->map.cur_y + 16, game->map.cur_x);
 }
 
 void	draw(t_game *game, char c, int x, int y)
@@ -42,7 +43,7 @@ void	draw(t_game *game, char c, int x, int y)
 	else if (c == 'P')
 	{
 		mlx_put_image_to_window(game->mlx, game->win, game->img.ground, x, y);
-		draw_player(game, y, x + 16, game->img.down);
+		draw_player(game, game->img.down);
 	}
 }
 
