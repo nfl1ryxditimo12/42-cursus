@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 13:03:57 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/23 15:11:06 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 16:00:42 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int		check_str(char *str)
 			while (*str != ' ' && *str)
 			{
 				if (!((65 <= *str && *str <= 90) ||
-							(97 <= *str && *str <= 122) || *str == 45))
+							(97 <= *str && *str <= 122) || *str == 45 ||
+							(48 <= *str && *str <= 57)))
 					print_error("Invalid Command");
 				str++;
 			}
