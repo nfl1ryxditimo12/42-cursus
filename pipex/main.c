@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 12:30:12 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/23 17:04:59 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 17:12:24 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	process(t_cmd *cmd, char *command, char **envp)
 	perror(cmd->av[0]);
 }
 
-int main(int ac, char **av, char **envp)
+int		main(int ac, char **av, char **envp)
 {
 	int		pipe_fd[2];
 	int		fd[2];
@@ -65,13 +65,13 @@ int main(int ac, char **av, char **envp)
 		print_error("Usage: ./pipex file1 cmd1 cmd2 file2");
 	if (pipe(pipe_fd) == -1)
 		print_error("pipex: fail");
-	if ((fd[0] = open(FILE1, O_RDONLY)) == -1)
+	if ((fd[0] = open(av[1], O_RDONLY)) == -1)
 		print_error("open file1: fail");
-	if ((fd[1] = open(FILE2, O_RDWR | O_TRUNC | O_CREAT, 0644)) == -1)
+	if ((fd[1] = open(av[4], O_RDWR | O_TRUNC | O_CREAT, 0644)) == -1)
 		print_error("open file2: fail");
 	if ((pid = fork()) < 0)
 		print_error("fork: fail");
 	connect_pipe(pipe_fd, fd, pid > 0 ? 2 : 1);
-	process(&cmd, pid > 0 ? CMD2 : CMD1, envp);
+	process(&cmd, pid > 0 ? av[3] : av[2], envp);
 	return (0);
 }

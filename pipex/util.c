@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 13:03:57 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/23 16:00:42 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 17:13:18 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		check_str(char *str)
 char	*ft_strcpy(char *src)
 {
 	int		i;
-	int 	j;
+	int		j;
 	char	*dst;
 
 	i = 0;
@@ -92,7 +92,7 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*ret;
 	int		i;
-	
+
 	if (!s1 || !s2)
 		print_error("Invalid Command");
 	i = 0;

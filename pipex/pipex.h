@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 13:37:36 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/23 15:03:21 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 17:11:37 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
-# define FILE1 av[1]
-# define FILE2 av[4]
-# define CMD1 av[2]
-# define CMD2 av[3]
-
 typedef struct	s_cmd
 {
 	char	*cmd[5];
@@ -30,9 +25,9 @@ typedef struct	s_cmd
 	char	**en;
 }				t_cmd;
 
-void		print_error(char *err);
+void			print_error(char *err);
 
-char		**ft_split(char *str);
-char		*ft_strjoin(char *s1, char *s2);
+char			**ft_split(char *str);
+char			*ft_strjoin(char *s1, char *s2);
 
 #endif
