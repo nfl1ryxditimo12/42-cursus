@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 12:30:12 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/23 16:30:48 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 17:04:59 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int main(int ac, char **av, char **envp)
 {
 	int		pipe_fd[2];
 	int		fd[2];
-	int		status;
 	t_cmd	cmd;
 	pid_t	pid;
 
@@ -72,10 +71,6 @@ int main(int ac, char **av, char **envp)
 		print_error("open file2: fail");
 	if ((pid = fork()) < 0)
 		print_error("fork: fail");
-	if (pid > 0)
-		waitpid(pid, &status, 0);
-	if (!WIFEXITED(status))
-		print_error("Program Error");
 	connect_pipe(pipe_fd, fd, pid > 0 ? 2 : 1);
 	process(&cmd, pid > 0 ? CMD2 : CMD1, envp);
 	return (0);
