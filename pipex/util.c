@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 13:03:57 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/23 17:13:18 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 17:33:04 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		check_str(char *str)
 				if (!((65 <= *str && *str <= 90) ||
 							(97 <= *str && *str <= 122) || *str == 45 ||
 							(48 <= *str && *str <= 57)))
-					print_error("Invalid Command");
+					print_error(CMD_ERR);
 				str++;
 			}
 			cnt++;
@@ -48,7 +48,7 @@ char	*ft_strcpy(char *src)
 	while (src[i] != ' ' && src[i])
 		i++;
 	if (!(dst = malloc(i + 1)))
-		print_error("Memory Error");
+		print_error(MEM_ERR);
 	while (++j < i)
 		dst[j] = src[j];
 	dst[j] = 0;
@@ -61,10 +61,10 @@ char	**ft_split(char *str)
 	int		i;
 
 	if (!str)
-		return (0);
+		print_error(CMD_ERR);
 	i = 0;
 	if (!(ret = (char **)malloc(sizeof(char *) * check_str(str) + 1)))
-		print_error("Memory Error");
+		print_error(MEM_ERR);
 	while (*str)
 	{
 		while (*str == ' ' && *str)
@@ -94,10 +94,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 
 	if (!s1 || !s2)
-		print_error("Invalid Command");
+		print_error(CMD_ERR);
 	i = 0;
 	if (!(ret = malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
-		print_error("Memory Error");
+		print_error(MEM_ERR);
 	while (*s1)
 		ret[i++] = *s1++;
 	while (*s2)

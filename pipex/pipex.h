@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 13:37:36 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/23 17:11:37 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/23 17:32:29 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
+
+# define MEM_ERR "Memory Error"
+# define CMD_ERR "Invalid Command"
 
 typedef struct	s_cmd
 {
