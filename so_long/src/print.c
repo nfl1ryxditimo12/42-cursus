@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 17:29:56 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/21 16:21:42 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/25 13:46:41 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	print_step(t_game *game)
 
 int		program_exit(t_game *game)
 {
-	print_finish(game, "Program Exit", game->c_cnt);
+	print_finish(game, "Program Exit", game->score);
 	return (0);
 }
 
