@@ -6,41 +6,40 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:06:41 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/25 20:32:41 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/27 00:01:42 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		save_param(t_stack *ps, int sep, int tmp)
+int		save_param(t_stack *ps, int sep)
 {
-	int tmp_data;
-
-	tmp_data = ps->top->data;
-	if ((ps->size == 1 && sep == 2) || (ps->size == 2 && sep == 1))
-		ps->top->data = 3;
-	else if ((ps->size == 6 && sep == 7) || (ps->size == 7 && sep == 6))
-		ps->top->data = 8;
-	else if ((ps->size == 9 && sep == 10) || (ps->size == 10 && sep == 9))
-		ps->top->data = 11;
-	if (tmp_data != ps->top->data)
-		return (ps->top->data);
+	if ((ps->cur == SA && sep == SB) || (ps->cur == SB && sep == SA))
+		sep = SS;
+	else if ((ps->cur == RA && sep == RB) || (ps->cur == RB && sep == RA))
+		sep = RR;
+	else if ((ps->cur == RRA && sep == RRB) || (ps->cur == RRB && sep == RRA))
+		sep = RRR;
 	return (sep);
 }
 
 void	push_swap_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int sep)
 {
+	if (!sep)
+		return ;
+	printf("before sep : %d", sep);
 	sep = save_param(ps, sep);
-	if (sep != 3 || sep != 8 || sep != 11)
+	if (sep != SS || sep != RR || sep != RRR || !ps->top)
 		node_push(ps, 0);
 	ps->top->data = sep;
-	if (1 <= sep && sep <= 3)
+	printf(", after sep : %d\n\n", sep);
+	if (SA <= sep && sep <= SS)
 		ft_swap(stk_a, stk_b, ps, sep);
-	else if (sep == 4 || sep == 5)
-		ft_push(stk_a, stk_b, ps, sep);
-	else if (6 <= sep && sep <= 8)
+	else if (sep == PA || sep == PB)
+		ft_push(stk_a, stk_b, sep);
+	else if (RA <= sep && sep <= RR)
 		ft_rotate(stk_a, stk_b, ps, sep);
-	else
+	else if (RRA <= sep && sep <= RRR)
 		ft_reverse(stk_a, stk_b, ps, sep);
-	ps->size = sep;
+	ps->cur = sep;
 }

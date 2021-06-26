@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   node_util.c                                        :+:      :+:    :+:   */
+/*   node.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:18:44 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/25 20:52:50 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/26 23:27:07 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	node_front(t_stack *stk)
+void	node_top(t_stack *stk)
 {
-	while (stk->top->pre)
+	int i;
+
+	i = stk->size;
+	while (stk->top->pre && i > 0)
+	{
 		stk->top = stk->top->pre;
+		i--;
+	}
 }
 
-void	node_back(t_stack *stk)
+void	node_bottom(t_stack *stk)
 {
-	while (stk->top->next)
+	int	i;
+
+	i = stk->cur;
+	while (stk->top->next && i > 0)
+	{
 		stk->top = stk->top->next;
+		i--;
+	}
 }
 
 void	node_push(t_stack *stk, char *str)
@@ -29,7 +41,7 @@ void	node_push(t_stack *stk, char *str)
 	t_node	*node;
 	t_node	*old;
 
-	node = create_node(str);
+	node = node_init(str);
 	if (stk->top == NULL)
 		stk->top = node;
 	else
@@ -42,11 +54,12 @@ void	node_push(t_stack *stk, char *str)
 	stk->size++;
 }
 
-void	node_pop_front(t_stack *stk)
+void	node_pop_top(t_stack *stk)
 {
 	t_node *cur_top;
 	t_node *new_top;
 
+	node_top(stk);
 	cur_top = stk->top;
 	if (!cur_top)
 		return ;
@@ -60,11 +73,12 @@ void	node_pop_front(t_stack *stk)
 	free(cur_top);
 }
 
-void	node_pop_back(t_stach *stk)
+void	node_pop_bottom(t_stack *stk)
 {
 	t_node *cur_top;
 	t_node *new_top;
 
+	node_bottom(stk);
 	cur_top = stk->top;
 	if (!cur_top)
 		return ;

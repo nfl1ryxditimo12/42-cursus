@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 20:03:09 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/25 20:47:25 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/26 23:15:31 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,24 @@
 
 void	process_rotate(t_stack *stk, t_stack *ps)
 {
-	t_stack	*ptr;
-	t_node	*n_ptr;
-	int		tmp;
+	t_node	*new_top;
+	t_node	*old_top;
 
-	ptr = stk;
-	node_front(ptr->top);
-	tmp = ptr->top->data;
-	node_pop(ptr);
-	node_back(ptr->top);
-	ptr->top->next = create_node(0);
-	n_ptr = ptr->top->next;
-	n_ptr->ptr = ptr->top;
-	n_ptr->data = tmp;
+	node_bottom(stk);
+	old_top = stk->top;
+	node_top(stk);
+	new_top = stk->top->next;
+	new_top->pre = NULL;
+	stk->top->next = NULL;
+	old_top->next = stk->top;
+	stk->top->pre = old_top;
+	stk->top = new_top;
 }
 
 void	ft_rotate(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int sep)
 {
-	if (sep == 6 || (sep == 8 && ps->size == 7))
+	if (sep == RA || (sep == RR && ps->size == RB))
 		process_rotate(stk_a, ps);
-	else if (sep == 7 || (sep == 8 && ps->size == 6))
+	else if (sep == RB || (sep == RR && ps->size == RA))
 		process_rotate(stk_b, ps);
 }
