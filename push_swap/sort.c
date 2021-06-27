@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 21:02:48 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/27 00:04:22 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 03:37:04 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int		pvot_init(t_stack *stk)
 	int		j;
 	int		tmp;
 
-	node_top(stk);
+	stk->ptr = stk->top;
 	arr = malloc(sizeof(int) * stk->size);
 	i = -1;
 	while (++i < stk->size)
 	{
-		arr[i] = stk->top->data;
-		if (stk->top->next)
-			stk->top = stk->top->next;
+		arr[i] = stk->ptr->data;
+		if (stk->ptr->next)
+			stk->ptr = stk->ptr->next;
 	}
 	i = -1;
 	while (++i < stk->size)
@@ -58,11 +58,13 @@ void	B_to_A(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size)
 	i = -1;
 	ps->rb = 0;
 	ps->pa = 0;
-	node_top(stk_b);
+	stk_b->ptr = stk_b->top;
+	stk_a->ptr = stk_a->size ? stk_a->top : NULL;
 	pvot = pvot_init(stk_b);
+	stk_b->ptr = stk_b->top;
 	while (++i < size)
 	{
-		if (stk_b->top->data > pvot)
+		if (stk_b->ptr->data > pvot)
 		{
 			push_swap_init(stk_a, stk_b, ps, RB);
 			ps->rb++;
@@ -71,18 +73,14 @@ void	B_to_A(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size)
 		{
 			push_swap_init(stk_a, stk_b, ps, PA);
 			ps->pa++;
-			stk_b->size--;
-			stk_a->size++;
 		}
-		if (stk_b->top->next)
-			stk_b->top = stk_b->top->next;
 	}
 	i = -1;
 	while (++i < ps->rb)
-		push_swap_init(stk_a, stk_b, ps, RRB);
+		push_swap_init(stk_a, stk_b, ps, RRA);
 	valid_init(stk_a, stk_b, ps);
-	A_to_B(stk_a, stk_b, ps, ps->rb);
-	B_to_A(stk_a, stk_b, ps, ps->pa);
+	A_to_B(stk_a, stk_b, ps, ps->pa);
+	B_to_A(stk_a, stk_b, ps, ps->rb);
 }
 
 void	A_to_B(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size)
@@ -94,32 +92,14 @@ void	A_to_B(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size)
 		return ;
 	ps->ra = 0;
 	ps->pb = 0;
-	node_top(stk_a);
-	i = -1;
-	while (++i < stk_a->size)
-	{
-		printf("%d ", stk_a->top->data);
-		if (stk_a->top->next)
-			stk_a->top = stk_a->top->next;
-	}
-	printf("\n");
-	node_top(stk_a);
+	stk_a->ptr = stk_a->top;
+	stk_b->ptr = stk_b->size ? stk_b->top : NULL;
 	pvot = pvot_init(stk_a);
-	node_top(stk_a);
-	i = -1;
-	while (++i < stk_a->size)
-	{
-		printf("%d ", stk_a->top->data);
-		if (stk_a->top->next)
-			stk_a->top = stk_a->top->next;
-	}
-	printf("\n");
-	node_top(stk_a);
+	stk_a->ptr = stk_a->top;
 	i = -1;
 	while (++i < size)
 	{
-		printf("%d\n", stk_a->top->data);
-		if (stk_a->top->data > pvot)
+		if (stk_a->ptr->data > pvot)
 		{
 			push_swap_init(stk_a, stk_b, ps, RA);
 			ps->ra++;
@@ -128,11 +108,7 @@ void	A_to_B(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size)
 		{
 			push_swap_init(stk_a, stk_b, ps, PB);
 			ps->pb++;
-			stk_a->size--;
-			stk_b->size++;
 		}
-		if (stk_a->top->next)
-			stk_a->top = stk_a->top->next;
 	}
 	i = -1;
 	while (++i < ps->ra)
@@ -146,5 +122,8 @@ void	sort_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps)
 {
 	valid_init(stk_a, stk_b, ps);
 	A_to_B(stk_a, stk_b, ps, stk_a->size);
+	//push_swap_init(stk_a, stk_b, ps, SB);
+	//push_swap_init(stk_a, stk_b, ps, PA);
+	//push_swap_init(stk_a, stk_b, ps, PA);
 	print_finish(stk_a, stk_b, ps);
 }

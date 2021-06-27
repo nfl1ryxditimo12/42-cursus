@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 19:27:30 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/26 23:00:24 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/27 18:58:04 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	process_swap(t_stack *stk)
 	t_node *ptr;
 	int tmp;
 
-	node_top(stk);
-	ptr = stk->top;
+	stk->ptr = stk->top;
+	ptr = stk->ptr;
 	tmp = ptr->data;
 	ptr->data = ptr->next->data;
 	ptr->next->data = tmp;

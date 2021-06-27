@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:38:34 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/27 00:01:57 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 03:28:05 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct	s_node
 typedef struct	s_stack
 {
 	t_node	*top;
+	t_node	*bot;
+	t_node	*ptr;
 	int		size;
 	int		cur;
 	int		arg;
@@ -55,7 +57,7 @@ t_node	*create_node(char *str);
 
 int		str_to_nbr(char *str, int sep);
 
-void	valid_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
+int		valid_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
 
 void	check_arg(char **arr, int len);
 
@@ -65,8 +67,8 @@ void	stack_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int ac);
 void	print_err(char *err, void *arr);
 void	print_finish(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
 
-void	node_top(t_stack *stk);
-void	node_bottom(t_stack *stk);
+t_node	*node_top(t_stack *stk);
+t_node	*node_bottom(t_stack *stk);
 void	node_push(t_stack *stk, char *str);
 void	node_pop_top(t_stack *stk);
 void	node_pop_bottom(t_stack *stk);

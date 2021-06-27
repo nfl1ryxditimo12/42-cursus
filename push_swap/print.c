@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 17:07:12 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/26 22:10:52 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 03:23:07 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,45 +51,55 @@ void	print_ps(int data)
 
 void	free_stack(t_stack *stk_a, t_stack *stk_b, t_stack *ps)
 {
-	node_top(stk_a);
-	node_top(stk_b);
-	node_top(ps);
-	while (stk_a->top)
+	stk_a->ptr = stk_a->top;
+	stk_b->ptr = stk_b->top;
+	ps->ptr = ps->top;
+	while (stk_a->size--)
 		node_pop_top(stk_a);
-	while (stk_b->top)
+	while (stk_b->size--)
 		node_pop_top(stk_b);
-	while (ps->top)
+	while (ps->size--)
 		node_pop_top(ps);
-	free(stk_a);
-	free(stk_b);
-	free(ps);
 }
 
 void	print_finish(t_stack *stk_a, t_stack *stk_b, t_stack *ps)
 {
-	node_top(ps);
 	int i = -1;
-	node_top(stk_a);
-	node_top(stk_b);
-	while (++i < stk_a->cur)
+
+	ps->ptr = ps->top;
+	stk_a->ptr = stk_a->top;
+	stk_b->ptr = stk_b->top;
+	while (++i < stk_a->size)
 	{
-		printf("a num : %d\n", stk_a->top->data);
-		if (stk_a->top->next)
-			stk_a->top = stk_a->top->next;
+		printf("%d ", stk_a->ptr->data);
+		if (stk_a->ptr->next)
+			stk_a->ptr = stk_a->ptr->next;
+	}
+	printf("\n");
+	i = -1;
+	while (++i < stk_b->size)
+	{
+		printf("%d ", stk_b->ptr->data);
+		if (stk_b->ptr->next)
+			stk_b->ptr = stk_b->ptr->next;
+	}
+	printf("\n");
+	while (ps->ptr->next)
+	{
+		print_ps(ps->ptr->data);
+		if (ps->ptr->next)
+			ps->ptr = ps->ptr->next;
 	}
 	i = -1;
-	while (++i < stk_b->cur)
+	stk_a->ptr = stk_a->top;
+	printf("sorted : ");
+	while (++i < 5)
 	{
-		printf("a num : %d\n", stk_b->top->data);
-		if (stk_b->top->next)
-			stk_b->top = stk_b->top->next;
+		printf("%d ", stk_a->ptr->data);
+		if (stk_a->ptr->next)
+			stk_a->ptr = stk_a->ptr->next;
 	}
-	while (ps->top->next)
-	{
-		print_ps(ps->top->data);
-		if (ps->top->next)
-			ps->top = ps->top->next;
-	}
-	free_stack(stk_a, stk_b, ps);
+	printf("\n");
+	//free_stack(stk_a, stk_b, ps);
 	exit(0);
 }
