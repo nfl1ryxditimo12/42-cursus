@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:18:44 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/27 19:04:18 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 17:41:44 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	node_pop_top(t_stack *stk)
 	cur_top = stk->ptr;
 	if (!stk->ptr || !stk->top)
 		return ;
-	else
+	else if (stk->size > 1)
 	{
 		new_top = stk->ptr->next;
 		new_top->pre = NULL;

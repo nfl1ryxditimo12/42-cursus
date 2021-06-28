@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 18:36:42 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/27 19:11:56 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 16:51:05 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ t_node	*node_init(char *str)
 	t_node	*node;
 
 	if (!(node = malloc(sizeof(t_node))))
-			print_err(MEM_ERR, 0);
-	node->data =  str_to_nbr(str, 0);
+		print_err(MEM_ERR, 0);
+	node->data = str_to_nbr(str, 0);
 	node->pre = NULL;
 	node->next = NULL;
 	return (node);
@@ -45,7 +45,7 @@ void	stack_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int ac)
 	stack_process(ps, ac);
 }
 
-void	list_init(char **av, t_stack *stk_a, t_stack *stk_b, t_stack *ps)
+void	list_init(char **av, t_stack *stk_a)
 {
 	int i;
 

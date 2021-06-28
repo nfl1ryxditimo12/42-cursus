@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:06:41 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/27 19:17:03 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 16:13:52 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ void	push_swap_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int sep)
 {
 	if (!sep)
 		return ;
-	printf("arg : %d\n", stk_a->ptr->data);
 	sep = save_param(ps, sep);
-	if (sep != SS || sep != RR || sep != RRR || !ps->top)
+	if (!(sep == SS || sep == RR || sep == RRR))
 		node_push(ps, 0);
 	if (ps->size == 1)
 		ps->top = ps->ptr;

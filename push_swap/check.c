@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:42:52 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/26 21:28:37 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 17:47:54 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		str_to_nbr(char *str, int sep)
 		num = num * 10 + *str++ - 48;
 	num *= check;
 	if ((num < -2147483648 || num > 2147483647 || *str != 0) & sep)
-		print_err("Invalid Argument", 0);
+		print_err("Error", 0);
 	return (num);
 }
 
@@ -39,10 +39,13 @@ void	check_arg(char **arr, int len)
 	int *arrn;
 	int i;
 	int j;
-	int tmp;
 
 	if (!(arrn = malloc(sizeof(int) * len)))
 		print_err(MEM_ERR, 0);
+	i = -1;
+	while (++i < len)
+		if (!arr[i][0])
+			print_err("Error", 0);
 	i = -1;
 	while (++i < len)
 		arrn[i] = str_to_nbr(arr[i], 1);
@@ -52,7 +55,10 @@ void	check_arg(char **arr, int len)
 		j = i;
 		while (arrn[++j])
 			if (arrn[i] == arrn[j])
-				print_err("Duplicate Argument", arrn);
+			{
+				free(arrn);
+				print_err("Error", 0);
+			}
 	}
 	free(arrn);
 }

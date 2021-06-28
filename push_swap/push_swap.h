@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:38:34 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/28 03:28:05 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 17:28:40 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-
 
 # define MEM_ERR "Memoey Error"
 
@@ -34,7 +33,7 @@
 
 typedef struct	s_node
 {
-	int		data;
+	int				data;
 	struct s_node	*pre;
 	struct s_node	*next;
 }				t_node;
@@ -53,36 +52,42 @@ typedef struct	s_stack
 	int		pb;
 }				t_stack;
 
-t_node	*create_node(char *str);
+t_node			*create_node(char *str);
 
-int		str_to_nbr(char *str, int sep);
+int				str_to_nbr(char *str, int sep);
 
-int		valid_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
+int				valid_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
+int				valid_check1(t_stack *stk);
+int				valid_check2(t_stack *stk);
+void			small_arg(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
 
-void	check_arg(char **arr, int len);
+void			check_arg(char **arr, int len);
 
-void	list_init(char **av, t_stack *stk_a, t_stack *stk_b, t_stack *ps);
-void	stack_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int ac);
+void			list_init(char **av, t_stack *stk_a);
+void			stack_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int ac);
 
-void	print_err(char *err, void *arr);
-void	print_finish(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
+void			print_err(char *err, char *arr);
+void			print_finish(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
 
-t_node	*node_top(t_stack *stk);
-t_node	*node_bottom(t_stack *stk);
-void	node_push(t_stack *stk, char *str);
-void	node_pop_top(t_stack *stk);
-void	node_pop_bottom(t_stack *stk);
-t_node	*node_init(char *str);
+t_node			*node_top(t_stack *stk);
+t_node			*node_bottom(t_stack *stk);
+void			node_push(t_stack *stk, char *str);
+void			node_pop_top(t_stack *stk);
+void			node_pop_bottom(t_stack *stk);
+t_node			*node_init(char *str);
 
-void	sort_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
-void	A_to_B(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size);
-void	B_to_A(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size);
+void			sort_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
+void			a_to_b(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size);
+void			b_to_a(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size);
+int				pvot_init(t_stack *stk, int size);
 
-void	ft_swap(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int sep);
-void	ft_push(t_stack *stk_a, t_stack *stk_b, int sep);
-void	ft_rotate(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int sep);
-void	ft_reverse(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int sep);
+void			ft_swap(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int sep);
+void			ft_push(t_stack *stk_a, t_stack *stk_b, int sep);
+void			ft_rotate(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int sep);
+void			ft_reverse(t_stack *stk_a, t_stack *stk_b,
+		t_stack *ps, int sep);
 
-void	push_swap_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int sep);
+void			push_swap_init(t_stack *stk_a, t_stack *stk_b,
+		t_stack *ps, int sep);
 
 #endif
