@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 21:02:48 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/28 16:59:43 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 19:14:44 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	b_to_a(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size)
 		push_swap_init(stk_a, stk_b, ps, PA);
 		return ;
 	}
+	ps->flag = 1;
 	rb = 0;
 	pa = 0;
 	i = -1;
@@ -115,6 +116,7 @@ void	a_to_b(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size)
 		}
 	}
 	i = -1;
+	//if (ps->flag)
 	while (++i < ra)
 		push_swap_init(stk_a, stk_b, ps, RRA);
 	valid_init(stk_a, stk_b, ps);

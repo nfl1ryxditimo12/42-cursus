@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:38:34 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/28 17:28:40 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 19:09:29 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_stack
 	t_node	*ptr;
 	int		size;
 	int		cur;
+	int		flag;
 	int		arg;
 	int		ra;
 	int		rb;

@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 18:36:42 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/28 16:51:05 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/28 19:09:40 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	stack_process(t_stack *stk, int ac)
 	stk->cur = 0;
 	stk->size = 0;
 	stk->arg = ac;
+	stk->flag = 0;
 	stk->ra = 0;
 	stk->rb = 0;
 	stk->pa = 0;
