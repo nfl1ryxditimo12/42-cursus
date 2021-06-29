@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 	t_stack stk_b;
 	t_stack	ps;
 
-	if (ac <= 1)
+	if (ac == 1)
 		print_err(0, 0);
 	stack_init(&stk_a, &stk_b, &ps, ac - 1);
 	list_init(av, &stk_a);
