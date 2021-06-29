@@ -14,9 +14,12 @@
 
 void	print_err(char *err, char *arr)
 {
-	while (*err)
-		write(1, err++, 1);
-	write(1, "\n", 1);
+	if (err)
+	{
+		while (*err)
+			write(1, err++, 1);
+		write(1, "\n", 1);
+	}
 	if (arr)
 		free(arr);
 	exit(-1);
