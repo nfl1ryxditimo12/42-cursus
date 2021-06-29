@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:38:34 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/28 19:09:29 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 12:53:16 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,12 @@ void			sort_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
 void			a_to_b(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size);
 void			b_to_a(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size);
 int				pvot_init(t_stack *stk, int size);
+
+int				pvot_util(int *arr, int size);
+void			sort_util_a(t_stack *stk_a, t_stack *stk_b,
+		t_stack *ps, int size);
+void			sort_util_b(t_stack *stk_a, t_stack *stk_b,
+		t_stack *ps, int size);
 
 void			ft_swap(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int sep);
 void			ft_push(t_stack *stk_a, t_stack *stk_b, int sep);

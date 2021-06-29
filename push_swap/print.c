@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 17:07:12 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/28 19:12:04 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 12:54:55 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,6 @@ void	print_finish(t_stack *stk_a, t_stack *stk_b, t_stack *ps)
 		if (ps->ptr->next)
 			ps->ptr = ps->ptr->next;
 	}
-	stk_a->ptr = stk_a->top;
-	/*for (int i = 0; i < stk_a->size; i++)
-	{
-		printf("%d ", stk_a->ptr->data);
-		if (stk_a->ptr->next)
-			stk_a->ptr = stk_a->ptr->next;
-	}
-	printf ("\n");*/
 	stk_a->ptr = stk_a->top;
 	free_stack(stk_a, stk_b, ps);
 	exit(0);

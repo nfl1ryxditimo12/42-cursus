@@ -6,19 +6,28 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 19:50:04 by seonkim           #+#    #+#             */
-/*   Updated: 2021/06/28 16:53:03 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 12:40:28 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	get_ptr(t_stack *a)
+{
+	int i;
+
+	i = -1;
+	while (++i < a->size)
+		if (a->ptr->next)
+			a->ptr = a->ptr->next;
+	a->bot = a->ptr;
+}
+
 void	process_push(t_stack *a, t_stack *b)
 {
 	t_node	*n_a;
 	t_node	*n_b;
-	int		i;
 
-	i = -1;
 	b->ptr = b->top;
 	n_b = NULL;
 	if (!b->size)
@@ -39,12 +48,7 @@ void	process_push(t_stack *a, t_stack *b)
 	a->size++;
 	b->size--;
 	if (a->size > 0 && !a->bot)
-	{
-		while (++i < a->size)
-			if (a->ptr->next)
-				a->ptr = a->ptr->next;
-		a->bot = a->ptr;
-	}
+		get_ptr(a);
 	a->ptr = a->top;
 }
 
