@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/01 19:01:24 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/01 20:50:35 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 typedef struct  s_token
 {
     char            *token;
+    char            **av;
     int             type;
     int             index;
     struct s_token  *pre;
@@ -36,6 +37,7 @@ typedef struct  s_handler
 {
     t_token *line;
     t_token *top;
+    char    *cmd[5];
     char    **env;
     char    *clear;
     char    *dir;
@@ -46,6 +48,8 @@ typedef struct  s_handler
 }               t_handler;
 
 void	node_push(t_handler *hand, int index);
+
+int     chk_symbol(char *line);
 
 int     ft_strlen(char  *str);
 int     ft_strcmp(char *s1, char *s2);

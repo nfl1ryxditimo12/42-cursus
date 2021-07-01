@@ -6,11 +6,25 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/01 19:03:52 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/01 20:50:35 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void    cmd_init(t_handler *hand)
+{
+    int i;
+
+    i = -1;
+    if (hand->cmd)
+        while (++i < 5)
+        {
+            if (hand->cmd[i])
+                free(hand->cmd[i]);
+            hand->cmd[i] = 0;
+        }
+}
 
 void    hand_init(t_handler *hand, char **env)
 {
@@ -43,23 +57,25 @@ char    *prompt(t_handler *hand)
     return ("😎 \033[0;32m\033[1mminishell ▸ \033[0m");
 }
 
-void    process(t_handler *hand)
+void    process_line(t_handler *hand)
 {
     while (hand->line != NULL)
     {
-        check_type();
+        check_type(hand);
         if (hand->line->type == 0)
             process_command(hand);
         else if (hand->line->type == 1)
             process_file(hand);
         else if (hand->line->type == 2)
             process_symbol(hand);
+        hand->line = hand->line->next;
     }
 }
 
 void    process_init(t_handler *hand)
 {
     char    *line;
+    int     status;
 
     while (hand->exit == 0)
     {
@@ -74,8 +90,10 @@ void    process_init(t_handler *hand)
         line_split(hand, line);
         hand->line = hand->top;
         hand->pid = fork();
-        if (hand->pid == 0)
-            process(hand);
+        if (hand->pid > 0)
+            waitpid(hand->pid, &status, 0);
+        else if (hand->pid == 0)
+            process_line(hand);
     }
 }
 
