@@ -58,6 +58,29 @@ int		valid_check1(t_stack *stk)
 	return (1);
 }
 
+int		stk_check(t_stack *stk)
+{
+	t_node	*tmp;
+	int		i;
+
+	i = -1;
+	if (!stk->size)
+		return (0);
+	stk->ptr = stk->top;
+	while (++i < stk->size)
+	{
+		if (stk->ptr->next)
+			tmp = stk->ptr->next;
+		else
+			return (1);
+		if (!(stk->ptr->data < tmp->data))
+			return (0);
+		if (stk->ptr->next)
+			stk->ptr = stk->ptr->next;
+	}
+	return (0);
+}
+
 void	valid_process(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int proc)
 {
 	int i;

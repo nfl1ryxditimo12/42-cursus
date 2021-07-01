@@ -41,6 +41,7 @@ void	sort_util_b(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size)
 	i = -1;
 	pvot = pvot_init(stk_b, size);
 	stk_b->ptr = stk_b->top;
+	stk_b->ptr = stk_b->top;
 	while (++i < size)
 	{
 		if (stk_b->ptr->data <= pvot)
@@ -67,6 +68,7 @@ void	sort_util_a(t_stack *stk_a, t_stack *stk_b, t_stack *ps, int size)
 
 	i = -1;
 	pvot = pvot_init(stk_a, size);
+	stk_a->ptr = stk_a->top;
 	stk_a->ptr = stk_a->top;
 	while (++i < size)
 	{

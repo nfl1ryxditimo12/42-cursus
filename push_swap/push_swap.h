@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 # define MEM_ERR "Memoey Error"
 
@@ -60,6 +59,7 @@ int				str_to_nbr(char *str, int sep);
 int				valid_init(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
 int				valid_check1(t_stack *stk);
 int				valid_check2(t_stack *stk);
+int				stk_check(t_stack *stk);
 void			small_arg(t_stack *stk_a, t_stack *stk_b, t_stack *ps);
 
 void			check_arg(char **arr, int len);
