@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/01 19:01:24 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/01 19:03:52 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,11 @@ void    process_init(t_handler *hand)
     {
         line = readline(prompt(hand));
         if (!line)
+        {
+            hand->status = 0;
             continue ;
+        }
+        hand->status = 1;
         add_history(line);
         line_split(hand, line);
         hand->line = hand->top;
