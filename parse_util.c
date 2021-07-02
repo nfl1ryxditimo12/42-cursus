@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/01 19:01:24 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/02 13:13:21 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,24 @@ int     ft_strlen(char  *str)
     return (i);
 }
 
-void    ft_strjoin(t_token *ptr, char *line)
+void    line_cpy(t_token *ptr, char *line)
 {
-    int     s1_len;
-    int     s2_len;
-    int     i;
-    char    *tmp;
-    char    *tmp2;
+    int i;
+    int j;
 
-    if (!line)
-        return ;
-    s1_len = ft_strlen(ptr->token);
-    s2_len = ft_strlen(line);
-    tmp = malloc(s1_len + s2_len + 1 + (*line == 45));
     i = 0;
-    while (i < s1_len)
-        tmp[i++] = *ptr->token++;
-    if (*line == 45)
-        tmp[i++] = ' ';
-	if (*line == 45)
-		s2_len++;
-    while (i < s1_len + s2_len)
-        tmp[i++] = *(line++);
-    tmp[i] = 0;
-    ptr->token = tmp;
+    j = 0;
+    while (ptr->token[i])
+        i++;
+    ptr->token[i] = malloc(ft_strlen(line) + 1);
+    if (!chk_symbol)
+        while (*line && !(*line == 32 || *line == 9) && !chk_symbol(line))
+            ptr->token[i][j++] = *line++;
+    else
+        while (j < chk_symbol(line))
+            ptr->token[i][j++] = *line++;    
+    ptr->token[i][j] = 0;
+    ptr->token[i + 1] = 0;
 }
 
 int     ft_strcmp(char *s1, char *s2)

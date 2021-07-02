@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 15:41:25 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/01 19:01:24 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/02 13:13:21 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int     chk_symbol(char *line)
     if (*line == '&')
         if (*(line + 1) == '&')
             return (2);
-    if (*line == '<' || *line == '>' || *line == '|' || *line == '\'' ||
-        *line == '\"' || *line == '$' || *line == '?' || *line == '\\')
+    if (*line == '<' || *line == '>' || *line == '|')
         return (1);
     return (0);
 }
@@ -35,27 +34,27 @@ int     chk_symbol(char *line)
 int     get_token_cnt(char *line)
 {
     int cnt;
+    int flag;
 
     cnt = 0;
+    flag = 0;
     while (*line)
     {
         while (*line && (*line == 32 || *line == 9 || *line == 45))
             line++;
         if (chk_symbol(line))
         {
-            if (chk_symbol(line) > 1)
-                line += 2;
-            else if (chk_symbol(line) == 1)
-                line++;
+            line += chk_symbol(line);
+            flag = 0;
             cnt++;
         }
         if (*line && !(*line == 32 || *line == 9) && !chk_symbol(line))
         {
-            if (*(line - 1) == 45)
-                cnt--;
+            if (!flag)
+                cnt++;
             while (*line && !(*line == 32 || *line == 9) && !chk_symbol(line))
                 line++;
-            cnt++;
+            flag = 1;
         }
     }
     return (cnt);
@@ -63,24 +62,29 @@ int     get_token_cnt(char *line)
 
 void    process_split(t_token *ptr, char *line)
 {
+    int flag;
+
+    flag = 0;
     while (*line)
     {
         while (*line && (*line == 32 || *line == 9))
             line++;
         if (chk_symbol(line))
         {
-            ft_strjoin(ptr, line);
+            if (flag == 1)
 			ptr = ptr->next;
+            line_cpy(ptr, line);
             line += chk_symbol(line);
+            flag = 2;
         }
         if (*line && !(*line == 32 || *line == 9) && !chk_symbol(line))
         {
-            if (*line == '-')
-                ptr = ptr->pre;
-            ft_strjoin(ptr, line);
-			ptr = ptr->next;
+            if (flag == 2)
+                ptr = ptr->next;
+            line_cpy(ptr, line);
             while (*line && !(*line == 32 || *line == 9) && !chk_symbol(line))
                 line++;
+            flag = 1;
         }
     }
 }
