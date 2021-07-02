@@ -6,21 +6,11 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/02 19:52:26 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/02 20:36:58 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_lmt_command.h"
-
-#define IN	0
-#define OUT	1
-#define ERR	2
-
-
-void	set_std_io(t_command *p_command, t_token *line)
-{
-	// line 을 통한 p_command 초기화
-}
 
 void	lmt_command_run(t_command *p_command, char **env)
 {
