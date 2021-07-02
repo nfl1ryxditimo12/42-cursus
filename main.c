@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/01 20:50:35 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/02 14:07:31 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,18 @@ void    cmd_init(t_handler *hand)
     int i;
 
     i = -1;
-    if (hand->cmd)
-        while (++i < 5)
-        {
-            if (hand->cmd[i])
-                free(hand->cmd[i]);
-            hand->cmd[i] = 0;
-        }
+    while (++i < 5)
+    {
+        if (hand->cmd[i])
+            free(hand->cmd[i]);
+        hand->cmd[i] = 0;
+    }
+}
+
+void    print_err(char *err, char *arr)
+{
+    (void)err;
+    (void)arr;
 }
 
 void    hand_init(t_handler *hand, char **env)
@@ -38,16 +43,23 @@ void    hand_init(t_handler *hand, char **env)
     hand->status = 1;
     hand->pid = 0;
     hand->cmd_flag = 0;
+    hand->cmd[0] = "/bin/";
+    hand->cmd[1] = "/usr/local/bin/";
+    hand->cmd[2] = "/usr/bin/";
+    hand->cmd[3] = "/usr/sbin";
+    hand->cmd[4] = "/sbin/";
 }
 
-void    shell_init(t_handler *hand)
+void    shell_init(t_handler *hand, char **env)
 {
     int     pid;
-    char    *clear;
+    char    *clear[2];
 
+    clear[0] = "clear";
+    clear[1] = 0;
     pid = fork();
     if (pid == 0)
-        execve("/usr/bin/clear", "clear", hand->env);
+        execve("/usr/bin/clear", clear, env);
 }
 
 char    *prompt(t_handler *hand)
@@ -59,20 +71,23 @@ char    *prompt(t_handler *hand)
 
 void    process_line(t_handler *hand)
 {
-    while (hand->line != NULL)
+    int check;
+
+    hand->cmd_flag = 0;
+    while (hand->line)
     {
-        check_type(hand);
-        if (hand->line->type == 0)
+        check = check_type(hand);
+        if (check == 1)
             process_command(hand);
-        else if (hand->line->type == 1)
+        else if (check == 2)
             process_file(hand);
-        else if (hand->line->type == 2)
-            process_symbol(hand);
+        else if (check == 0)
+            perror(hand->line->token[0]);
         hand->line = hand->line->next;
     }
 }
 
-void    process_init(t_handler *hand)
+void    process_init(t_handler *hand, char **env)
 {
     char    *line;
     int     status;
@@ -85,7 +100,7 @@ void    process_init(t_handler *hand)
             hand->status = 0;
             continue ;
         }
-        hand->status = 1;
+        hand_init(hand, env);
         add_history(line);
         line_split(hand, line);
         hand->line = hand->top;
@@ -103,7 +118,7 @@ int main(int ac, char **av, char **env)
 
     (void)ac;
     (void)av;
-    hand_init(&hand, env);
-    shell_init(&hand);
-    process_init(&hand);
+    hand.status = 1;
+    shell_init(&hand, env);
+    process_init(&hand, env);
 }

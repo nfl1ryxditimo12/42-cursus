@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/02 13:13:21 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/02 13:23:39 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void    line_cpy(t_token *ptr, char *line)
     while (ptr->token[i])
         i++;
     ptr->token[i] = malloc(ft_strlen(line) + 1);
-    if (!chk_symbol)
+    if (!chk_symbol(line))
         while (*line && !(*line == 32 || *line == 9) && !chk_symbol(line))
             ptr->token[i][j++] = *line++;
     else

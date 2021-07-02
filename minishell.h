@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/01 20:50:35 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/02 18:04:23 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 
 typedef struct  s_token
 {
-    char            *token;
-    char            **av;
+    char            *token[100];
+    char            *cmd_dir;
     int             type;
     int             index;
+    int             size;
     struct s_token  *pre;
     struct s_token  *next;
 }               t_token;
@@ -53,6 +54,10 @@ int     chk_symbol(char *line);
 
 int     ft_strlen(char  *str);
 int     ft_strcmp(char *s1, char *s2);
-void    ft_strjoin(t_token *ptr, char *line);
+
+void    line_split(t_handler *hand, char *line);
+void    line_cpy(t_token *ptr, char *line);
+
+void    print_err(char *err, char *arr);
 
 #endif

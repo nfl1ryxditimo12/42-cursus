@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 15:41:25 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/02 13:13:21 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/02 13:44:12 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void    process_split(t_token *ptr, char *line)
             line++;
         if (chk_symbol(line))
         {
-            if (flag == 1)
-			ptr = ptr->next;
+            if (flag == 1 || flag == 2)
+			    ptr = ptr->next;
             line_cpy(ptr, line);
             line += chk_symbol(line);
             flag = 2;
