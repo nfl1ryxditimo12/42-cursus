@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:49 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/02 19:03:11 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/03 14:13:58 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void	lmt_sigaction_set(int signal, t_sigaction_handler handler)
 {
 	if (signal(signal, handler) == SIG_ERR)
-		// exit();
+		// error_exit();
 }
 
 void	lmt_signal_init(void)

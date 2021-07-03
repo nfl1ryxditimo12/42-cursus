@@ -6,21 +6,24 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/02 20:36:58 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/03 22:51:58 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_lmt_command.h"
 
-void	lmt_command_run(t_command *p_command, char **env)
+void	lmt_command_run(t_lmt_command *p_command, char **env)
 {
-	int	pipe_fd[2];
+	int	fd_pipe[2];
 
 	while (p_command != NULL)
 	{
-		if (/* 다음 커맨드와 파이프로 연결 됨 */)
-			if (pipe(pipe_fd) == -1)
-				// error
+		if (p_command->next != NULL)
+		{
+			if (pipe(fd_pipe) == -1)
+				// error_exit
+			dup2(p_command->std_fd[OUT], 
+		}
 		pid = fork();
 		if (pid == 0)  // 자식
 		{
@@ -30,6 +33,7 @@ void	lmt_command_run(t_command *p_command, char **env)
 			dup2(p_command->std_fd[IN], IN);
 			dup2(p_command->std_fd[OUT], OUT);
 			dup2(p_command->std_fd[ERR], ERR);
+			execute_command(p_command->argv, env);
 			execve(p_command[0], p_command->token, env);
 			break ;
 		}

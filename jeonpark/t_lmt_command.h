@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:43 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/03 16:06:41 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/03 20:39:14 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 
 typedef struct s_lmt_command
 {
-	char	*token[100];
+	char	**argv;
 	pid_t	pid;
-	int		std_fd[3];
+	int	std_fd[3];
+	struct s_lmt_command	*next;
 }	t_lmt_command;
 
 t_lmt_command	*lmt_command_new();
