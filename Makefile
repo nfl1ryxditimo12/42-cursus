@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/07/02 19:56:05 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/07/03 16:09:45 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS		:= \
 			   node.c \
 			   parse.c \
 			   parse_util.c \
+			   jeonpark/lmt_util/lmt_env_path_array.c \
 			   main.c
 OBJS		:= $(SRCS:.c=.o)
 
@@ -30,6 +31,8 @@ CFLAG		:= -Wall -Wextra -Werror
 
 ABSTRACT_INCLUDE	:= \
 			   $(READLINE_DIR)/include \
+			   jeonpark \
+			   jeonpark/lmt_util \
 			   .
 INCLUDE		:= $(addprefix -I ,$(ABSTRACT_INCLUDE))
 

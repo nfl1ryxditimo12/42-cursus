@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_lmt_command.h                                    :+:      :+:    :+:   */
+/*   lmt_env_path_array.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/02 19:02:43 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/03 16:06:41 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/07/03 16:05:44 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/07/03 16:05:52 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_LMT_COMMAND_H
-# define T_LMT_COMMAND_H
+#ifndef LMT_ENV_PATH_ARRAY_H
+# define LMT_ENV_PATH_ARRAY_H
 
-# include "lmt_env_path_array.h"
-
-# define IN		0
-# define OUT	1
-# define ERR	2
-
-typedef struct s_lmt_command
-{
-	char	*token[100];
-	pid_t	pid;
-	int		std_fd[3];
-}	t_lmt_command;
-
-t_lmt_command	*lmt_command_new();
-void			lmt_command_free(t_lmt_command *p_command);
+char	**lmt_env_path_array_new(void);
+void	lmt_env_path_array_free(char **array);
 
 #endif
