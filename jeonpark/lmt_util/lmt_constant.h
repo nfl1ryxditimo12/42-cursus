@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 17:26:09 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/04 22:09:08 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,9 @@
 # define TYPE_COMMAND		0
 # define TYPE_REDIRECTION	1
 # define TYPE_PIPE			2
+
+//	Parse error
+# define NORMAL				0
+# define SYNTAX_ERROR_PIPE	1
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 15:50:34 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/04 19:21:45 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ t_lmt_redirection	*lmt_redirection_new(int fd, char *path)
 
 void	lmt_redirection_free(t_lmt_redirection *p_redirection)
 {
+	// Should free fd and path?
 	free(p_redirection);
 }

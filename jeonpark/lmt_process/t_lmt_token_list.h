@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:18:47 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 18:31:30 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/04 21:47:05 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_lmt_token_list	*lmt_token_list_new();
 void	lmt_token_list_free(t_lmt_token *list);
 
 //	method function
-void	lmt_token_list_push(t_lmt_token_list *list, int type, char *string);
 void	lmt_token_list_append(t_lmt_token_list *list, int type, char *string);
 
 #endif

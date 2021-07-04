@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 18:56:09 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/04 21:51:33 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,24 @@
 #include "t_lmt_process.h"
 #include "lmt_util.h"
 
-t_lmt_process	*lmt_process_list_new(void)
+static t_lmt_process_list	*lmt_process_list_alloc(void)
 {
-	return (lmt_process_new(NULL, NULL));
+	return (lmt_alloc(sizeof(t_lmt_process_list)));
+}
+
+static void	lmt_process_list_init(t_lmt_process_list *list)
+{
+	list->p_dummy = lmt_process_new();
+	list->p_bottom = list->p_dummy;
+}
+
+t_lmt_process_list	*lmt_process_list_new(void)
+{
+	t_lmt_process_list	*list;
+
+	list = lmt_process_list_alloc();
+	lmt_process_list_init(list);
+	return (list);
 }
 
 void	lmt_process_list_free(t_lmt_process *list)

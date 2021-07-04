@@ -6,26 +6,26 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 15:32:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 15:38:32 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/04 19:27:24 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_lmt_redirection_array.h"
 #include "lmt_util.h"
 
-static t_lmt_redirection	*lmt_redirection_array_alloc(void)
+static t_lmt_redirection	**lmt_redirection_array_alloc(void)
 {
-	return (lmt_alloc(sizeof(t_lmt_redirection) * REDIRECTION_TYPE_COUNT));
+	return (lmt_alloc(sizeof(t_lmt_redirection *) * REDIRECTION_TYPE_COUNT));
 }
 
-static void	lmt_redirection_array_init(t_lmt_redidrection *array)
+static void	lmt_redirection_array_init(t_lmt_redidrection **array)
 {
-	lmt_redirection_init(array[IN], IN, NULL);
-	lmt_redirection_init(array[OUT], OUT, NULL);
-	lmt_redirection_init(array[ERR], ERR, NULL);
+	array[IN] = lmt_redirection_new(IN, NULL);
+	array[OUT] = lmt_redirection_new(OUT, NULL);
+	array[ERR] = lmt_redirection_new(ERR, NULL);
 }
 
-t_lmt_redidrection	*lmt_redirection_array_new(void)
+t_lmt_redidrection	**lmt_redirection_array_new(void)
 {
 	t_lmt_redidrection	*array;
 
@@ -34,7 +34,7 @@ t_lmt_redidrection	*lmt_redirection_array_new(void)
 	return (array);
 }
 
-void	lmt_redirection_array_free(t_lmt_redidrection *array)
+void	lmt_redirection_array_free(t_lmt_redidrection **array)
 {
 	lmt_redirection_free(array[IN]);
 	lmt_redirection_free(array[OUT]);
