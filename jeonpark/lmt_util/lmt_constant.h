@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 15:34:00 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/04 17:26:09 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,11 @@
 //		t_lmt_command_execute_command()/fd_pipe/index
 # define PIPE_READ	0
 # define PIPE_WRITE	1
+
+//	Used for:
+//		lmt_token/type
+# define TYPE_COMMAND		0
+# define TYPE_REDIRECTION	1
+# define TYPE_PIPE			2
 
 #endif
