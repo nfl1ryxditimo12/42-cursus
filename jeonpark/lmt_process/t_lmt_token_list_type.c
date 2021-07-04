@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:18:46 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 18:32:20 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/04 18:56:33 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ t_lmt_token_list	*lmt_token_list_new(void)
 
 void	lmt_token_list_free(t_lmt_token *list)
 {
-	t_lmt_process	*element;
-	t_lmt_process	*next_element;
+	t_lmt_process	*iterator;
+	t_lmt_process	*next;
 
-	element = list;
-	while (element != NULL)
+	iterator = list;
+	while (iterator != NULL)
 	{
-		next_element = element->next;
-		lmt_token_free(element);
-		element = next_element;
+		next = iterator->next;
+		lmt_token_free(iterator);
+		iterator = next;
 	}
 	free(list);
 }
