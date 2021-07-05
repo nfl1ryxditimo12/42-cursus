@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/07/03 16:09:45 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/07/05 10:38:57 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,29 @@ SRCS		:= \
 			   node.c \
 			   parse.c \
 			   parse_util.c \
+			   jeonpark/lmt_signal.c \
 			   jeonpark/lmt_util/lmt_env_path_array.c \
+			   jeonpark/lmt_util/lmt_alloc.c \
+			   jeonpark/lmt_util/lmt_exit.c \
+			   jeonpark/lmt_util/lmt_unsafe_strlen.c \
+			   jeonpark/lmt_process_manager/t_lmt_process.h \
+			   jeonpark/lmt_process_manager/t_lmt_process_list.h \
+			   jeonpark/lmt_process_manager/t_lmt_process_list_method.c \
+			   jeonpark/lmt_process_manager/t_lmt_process_list_type.c \
+			   jeonpark/lmt_process_manager/t_lmt_process_manager.h \
+			   jeonpark/lmt_process_manager/t_lmt_process_manager_method.c \
+			   jeonpark/lmt_process_manager/t_lmt_process_manager_type.c \
+			   jeonpark/lmt_process_manager/t_lmt_process_method.c \
+			   jeonpark/lmt_process_manager/t_lmt_process_type.c \
+			   jeonpark/lmt_process_manager/t_lmt_redirection.c \
+			   jeonpark/lmt_process_manager/t_lmt_redirection.h \
+			   jeonpark/lmt_process_manager/t_lmt_redirection_array.c \
+			   jeonpark/lmt_process_manager/t_lmt_redirection_array.h \
+			   jeonpark/lmt_process_manager/t_lmt_token.c \
+			   jeonpark/lmt_process_manager/t_lmt_token.h \
+			   jeonpark/lmt_process_manager/t_lmt_token_list.h \
+			   jeonpark/lmt_process_manager/t_lmt_token_list_method.c \
+			   jeonpark/lmt_process_manager/t_lmt_token_list_type.c \
 			   main.c
 OBJS		:= $(SRCS:.c=.o)
 
@@ -33,6 +55,7 @@ ABSTRACT_INCLUDE	:= \
 			   $(READLINE_DIR)/include \
 			   jeonpark \
 			   jeonpark/lmt_util \
+			   jeonpark/lmt_process_manager \
 			   .
 INCLUDE		:= $(addprefix -I ,$(ABSTRACT_INCLUDE))
 
