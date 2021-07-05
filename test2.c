@@ -12,6 +12,14 @@ int     ft_strcmp(char *s1, char *s2)
     return (1);
 }
 
+int     ft_strcmp2(char *s1, char *s2)
+{
+    while (*s1 || *s2)
+        if (*s1++ != *s2++)
+            return (0);
+    return (1);
+}
+
 void	process_ls(char **env)
 {
 	char *cmd[2] = {"ls", 0};
@@ -49,6 +57,25 @@ static int  cmd_len(char *str)
     return (i);
 }
 
+char    *connect_dir(char *path, char *token)
+{
+    char    *connect;
+    int     i;
+    
+    if (*token == '~')
+        token++;
+    connect = malloc(cmd_len(path) + cmd_len(token) + 3);
+    i = 0;
+    while (path && *path)
+        connect[i++] = *path++;
+	connect[i++] = '/';
+    while (token && *token)
+        connect[i++] = *token++;
+    connect[i] = '/';
+	connect[i + 1] = 0;
+    return (connect);
+}
+
 char    *home_dir(char **env)
 {
     int i;
@@ -59,14 +86,15 @@ char    *home_dir(char **env)
     while (env[++i])
         if (ft_strcmp(env[i], "HOME="))
             break ;
-    home = malloc(cmd_len(env[i] - 4));
+    home = malloc(cmd_len(env[i]) - 3);
     j = 0;
     while (env[i][j + 5])
     {
         home[j] = env[i][j + 5];
         j++;
     }
-    home[j] = 0;
+    home[j] = '/';
+	home[j + 1] = 0;
     return (home);
 }
 
@@ -93,28 +121,48 @@ char    *pre_dir(char *dir)
     return (ret_dir);
 }
 
+char    *process_comma(char *line, char *dir)
+{
+    int comma;
+
+    comma = -1;
+    while (line[++comma])
+        if (line[comma] != '.')
+            return (0);
+    if (comma == 1)
+        return (".");
+    else if (comma == 2)
+        return (pre_dir(dir));
+    else if (comma == 3)
+        return ("/Users/");
+    else
+        return ("/");
+}
+
 void	process_cd(char *line, char **env)
 {
-	char *dir;
+    char    *dir;
 	char	name[1024];
-	char *cmd;
+    int     comma;
 
-	dir = getcwd(name, 1024);
-	cmd = ft_strcpy(line);
-	if (line[3] == ' ')
-		line += 3;
-	if (!line[3])
-	{
-		chdir(home_dir(env));
-		dir = getcwd(name, 1024);
-	}
-	else if (ft_strcmp(line, ".."))
-	{
-		chdir(pre_dir(dir));
-		dir = getcwd(name, 1024);
-	}
+	getcwd(name, 1024);
+	printf("Before DIR : %s\n", name);
+	line += 3;
+    if (ft_strcmp(line, "~/"))
+        dir = connect_dir(home_dir(env), line);
+    else if (!*line || ft_strcmp2(line, "~"))
+        dir = home_dir(env);
+    else if (*line == '.')
+        dir = process_comma(line, name);
+	else if (*line == '/')
+		dir = line;
 	else
-		chdir(cmd);
+		dir = connect_dir(name, line);
+    if (chdir(dir))
+        perror(dir);
+    else
+        getcwd(name, 1024);
+	printf("After DIR : %s\n", name);
 }
 
 int		main(int ac, char **av, char **env)
