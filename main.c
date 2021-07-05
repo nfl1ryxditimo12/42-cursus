@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/05 16:27:29 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/05 18:35:54 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void    hand_init(t_handler *hand, char **env)
     node_push(hand, 1);
     hand->top = hand->line;
     hand->clear = 0;
-    hand->dir = getcwd(hand->dir, BUFFER_SIZE);
+    getcwd(hand->dir, 1024);
     hand->home_dir = home_dir(env);
     hand->exit = 0;
     hand->status = 1;

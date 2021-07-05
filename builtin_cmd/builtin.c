@@ -6,13 +6,13 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:29:39 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/05 16:27:29 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/05 17:26:03 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int  cmd_len(char *str)
+int  cmd_len(char *str)
 {
     int i;
 
@@ -99,14 +99,15 @@ char    *home_dir(char **env)
     while (env[++i])
         if (ft_strcmp(env[i], "HOME="))
             break ;
-    home = malloc(cmd_len(env[i] - 4));
+    home = malloc(cmd_len(env[i]) - 4);
     j = 0;
     while (env[i][j + 5])
     {
         home[j] = env[i][j + 5];
         j++;
     }
-    home[j] = 0;
+    home[j] = '/';
+    home[j + 1] = 0;
     return (home);
 }
 
