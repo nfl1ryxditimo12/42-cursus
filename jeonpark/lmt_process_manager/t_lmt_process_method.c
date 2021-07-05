@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 12:02:04 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:06:57 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	lmt_process_execute_child(t_lmt_process *p_process, char **env)
 	dup2(p_process->redirection_array[IN]->fd, IN);
 	dup2(p_process->redirection_array[OUT]->fd, OUT);
 	dup2(p_process->redirection_array[ERR]->fd, ERR);
-	execve("/bin/cat" /* get_real_path(*p_process->argv) */, p_process->argv, env);
+	execve(p_process->argv[0] /* get_real_path(*p_process->argv) */, p_process->argv, env);
 //	if fail, process and exit(?)
 }
 
