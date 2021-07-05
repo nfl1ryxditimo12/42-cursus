@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/02 18:04:23 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/05 16:27:29 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct  s_handler
     char    **env;
     char    *clear;
     char    *dir;
+    char    *home_dir;
     int     exit;
     int     status;
     int     pid;

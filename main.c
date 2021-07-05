@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/02 14:07:31 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/05 16:27:29 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void    hand_init(t_handler *hand, char **env)
     hand->top = hand->line;
     hand->clear = 0;
     hand->dir = getcwd(hand->dir, BUFFER_SIZE);
+    hand->home_dir = home_dir(env);
     hand->exit = 0;
     hand->status = 1;
     hand->pid = 0;
@@ -78,9 +79,11 @@ void    process_line(t_handler *hand)
     {
         check = check_type(hand);
         if (check == 1)
-            process_command(hand);
+            process_builtin_cmd(hand);
         else if (check == 2)
-            process_file(hand);
+            process_non_builtin_cmd(hand);
+        else if (check == 3)
+            process_symbol(hand);
         else if (check == 0)
             perror(hand->line->token[0]);
         hand->line = hand->line->next;

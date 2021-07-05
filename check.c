@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:31:26 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/02 16:57:19 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/05 16:27:29 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ int    not_builtin_cmd(t_handler *hand)
     if (hand->line->cmd_dir)
     {
         hand->cmd_flag = 1;
+        closedir(cmd[i]);
         return (1);
     }
+    closedir(cmd[i]);
     return (0);
 }
 
