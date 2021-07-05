@@ -6,10 +6,11 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 19:21:45 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/05 12:02:41 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "t_lmt_redirection.h"
 #include "lmt_util.h"
 

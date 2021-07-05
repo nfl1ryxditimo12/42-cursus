@@ -6,10 +6,11 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 21:51:33 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:39:54 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "t_lmt_process_list.h"
 #include "t_lmt_process.h"
 #include "lmt_util.h"
@@ -21,7 +22,7 @@ static t_lmt_process_list	*lmt_process_list_alloc(void)
 
 static void	lmt_process_list_init(t_lmt_process_list *list)
 {
-	list->p_dummy = lmt_process_new();
+	list->p_dummy = lmt_process_new(NULL, NULL);
 	list->p_bottom = list->p_dummy;
 }
 
@@ -34,12 +35,12 @@ t_lmt_process_list	*lmt_process_list_new(void)
 	return (list);
 }
 
-void	lmt_process_list_free(t_lmt_process *list)
+void	lmt_process_list_free(t_lmt_process_list *list)
 {
 	t_lmt_process	*iterator;
 	t_lmt_process	*next;
 
-	iterator = list;
+	iterator = list->p_dummy;
 	while (iterator != NULL)
 	{
 		next = iterator->next;

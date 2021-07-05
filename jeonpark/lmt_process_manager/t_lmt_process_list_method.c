@@ -6,11 +6,12 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 10:20:20 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:37:33 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_lmt_process_list.h"
+#include "t_lmt_process.h"
 #include "lmt_util.h"
 
 void	lmt_process_list_append(t_lmt_process_list *list, char **argv, t_lmt_redirection **redirection_array)
@@ -18,15 +19,15 @@ void	lmt_process_list_append(t_lmt_process_list *list, char **argv, t_lmt_redire
 	t_lmt_process *p_element;
 
 	p_element = lmt_process_new(argv, redirection_array);
-	list->bottom->next = p_element;
+	list->p_bottom->next = p_element;
 	p_element->next = NULL;
-	list->bottom = p_element;
+	list->p_bottom = p_element;
 }
 
 void	lmt_process_list_execute(t_lmt_process_list *list, char **env)
 {
 	t_lmt_process	*iterator;
-	int	fd_pipe;
+	int	fd_pipe[2];
 
 	iterator = list->p_dummy->next;
 	while (iterator != NULL)
@@ -35,11 +36,11 @@ void	lmt_process_list_execute(t_lmt_process_list *list, char **env)
 		{
 			if (pipe(fd_pipe) == -1)
 				lmt_exit(0, NULL);
-			lmt_process(set_redirection(iterator, OUT, fd_pipe[PIPE_WRITE], NULL);
-			lmt_process(set_redirection(iterator->next, IN, fd_pipe[PIPE_READ], NULL);
+			lmt_process_set_redirection(iterator, OUT, fd_pipe[PIPE_WRITE], NULL);
+			lmt_process_set_redirection(iterator->next, IN, fd_pipe[PIPE_READ], NULL);
 		}
 		lmt_process_execute(iterator, env);
-		close(pipe[PIPE_WRITE]);
+		close(fd_pipe[PIPE_WRITE]);
 		//	PIPE_READ 는 어떻게 close 할 지 결정하기
 		iterator = iterator->next;
 	}

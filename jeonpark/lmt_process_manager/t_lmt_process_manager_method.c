@@ -6,11 +6,15 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:19 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 22:24:10 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:43:10 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_lmt_process_manager.h"
+#include "t_lmt_token_list.h"
+#include "t_lmt_process_list.h"
+#include "t_lmt_redirection_array.h"
+#include "minishell.h"
 #include "lmt_util.h"
 
 static int	lmt_process_manager_read_token(t_lmt_process_manager *p_proman, t_token *p_token)
@@ -20,7 +24,7 @@ static int	lmt_process_manager_read_token(t_lmt_process_manager *p_proman, t_tok
 	iterator = p_token;
 	while (iterator != NULL)
 	{
-		if (**iterator_string == '|')
+		if (**iterator->token == '|')
 			return (SYNTAX_ERROR_PIPE);
 		lmt_process_list_append(p_proman->process_list, iterator->token, lmt_redirection_array_new());
 		iterator = iterator->next;
@@ -31,6 +35,7 @@ static int	lmt_process_manager_read_token(t_lmt_process_manager *p_proman, t_tok
 		if (iterator == NULL)
 			return (SYNTAX_ERROR_PIPE);
 	}
+	return (NORMAL);
 }
 
 int	lmt_process_manager_execute(t_token *p_token, char **env)
@@ -39,9 +44,10 @@ int	lmt_process_manager_execute(t_token *p_token, char **env)
 	int	ret;
 
 	p_proman = lmt_process_manager_new();
-	ret = lmt_process_manager_read_token(p_token);
-	if (ret != NULL)
+	ret = lmt_process_manager_read_token(p_proman, p_token);
+	if (ret != NORMAL)
 		return (ret);
 	lmt_process_list_execute(p_proman->process_list, env);
 	lmt_process_manager_free(p_proman);
+	return (NORMAL);
 }

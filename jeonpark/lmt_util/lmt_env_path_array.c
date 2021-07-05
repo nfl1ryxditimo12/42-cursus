@@ -6,10 +6,11 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 16:05:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/03 16:39:59 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:11:04 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "lmt_util.h"
 
 static int	lmt_get_env_path_element_count(char *path_string)
@@ -30,7 +31,7 @@ static int	lmt_get_env_path_element_count(char *path_string)
 
 static char	**lmt_env_path_array_alloc(int count)
 {
-	return (/*malloc(sizeof(char *) * count + 1)*/);
+	return (lmt_alloc(sizeof(char *) * count + 1));
 }
 
 //	Before:	element1:element2:element3

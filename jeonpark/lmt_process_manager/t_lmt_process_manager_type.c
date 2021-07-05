@@ -6,11 +6,14 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:19 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 18:43:23 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:45:27 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "t_lmt_process_manager.h"
+#include "t_lmt_token_list.h"
+#include "t_lmt_process_list.h"
 #include "lmt_util.h"
 
 static t_lmt_process_manager	*lmt_process_manager_alloc(void)
@@ -33,7 +36,7 @@ t_lmt_process_manager	*lmt_process_manager_new(void)
 	return (p_proman);
 }
 
-void	*lmt_process_manager_free(t_lmt_process_manager *p_proman)
+void	lmt_process_manager_free(t_lmt_process_manager *p_proman)
 {
 	lmt_token_list_free(p_proman->token_list);
 	lmt_process_list_free(p_proman->process_list);

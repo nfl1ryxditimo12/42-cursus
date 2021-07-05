@@ -6,12 +6,14 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:18:46 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 18:56:33 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/05 12:07:52 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <stddef.h>
 #include "t_lmt_token_list.h"
+#include "t_lmt_token.h"
 #include "lmt_util.h"
 
 static t_lmt_token_list	*lmt_token_list_alloc(void)
@@ -21,7 +23,7 @@ static t_lmt_token_list	*lmt_token_list_alloc(void)
 
 static void	lmt_token_list_init(t_lmt_token_list *list)
 {
-	list->p_dummy = lmt_token_new();
+	list->p_dummy = lmt_token_new(TYPE_LIST_DUMMY, NULL);
 	list->p_bottom = list->p_dummy;
 }
 
@@ -34,12 +36,12 @@ t_lmt_token_list	*lmt_token_list_new(void)
 	return (list);
 }
 
-void	lmt_token_list_free(t_lmt_token *list)
+void	lmt_token_list_free(t_lmt_token_list *list)
 {
-	t_lmt_process	*iterator;
-	t_lmt_process	*next;
+	t_lmt_token	*iterator;
+	t_lmt_token	*next;
 
-	iterator = list;
+	iterator = list->p_dummy;
 	while (iterator != NULL)
 	{
 		next = iterator->next;

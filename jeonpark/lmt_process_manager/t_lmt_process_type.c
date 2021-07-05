@@ -6,11 +6,13 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:39 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 19:32:57 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/05 12:01:15 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "t_lmt_process.h"
+#include "t_lmt_redirection_array.h"
 #include "lmt_util.h"
 
 static t_lmt_process	*lmt_process_alloc(void)
@@ -35,7 +37,7 @@ t_lmt_process	*lmt_process_new(char **argv, t_lmt_redirection **redirection_arra
 
 void	lmt_process_free(t_lmt_process *p_process)
 {
-	free(argv);
+	free(p_process->argv);
 	lmt_redirection_array_free(p_process->redirection_array);
 	free(p_process);
 }

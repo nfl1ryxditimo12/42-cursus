@@ -6,14 +6,16 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:43 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 10:12:19 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:37:18 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef T_LMT_PROCESS_H
 # define T_LMT_PROCESS_H
 
-# include "lmt_env_path_array.h"
+# include <unistd.h>
+
+typedef struct s_lmt_redirection	t_lmt_redirection;
 
 typedef struct s_lmt_process
 {
@@ -28,6 +30,7 @@ t_lmt_process	*lmt_process_new(char **argv, t_lmt_redirection **redirection_arra
 void			lmt_process_free(t_lmt_process *p_process);
 
 //	method function
-void	lmt_process_set_redidrection(t_lmt_process *p_process, int old_fd, int new_fd, char *new_path);
+void	lmt_process_set_redirection(t_lmt_process *p_process, int old_fd, int new_fd, char *new_path);
+void	lmt_process_execute(t_lmt_process *p_process, char **env);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 22:09:08 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/05 12:07:15 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef LMT_CONSTANT_H
+#ifndef LMT_CONSTANT_H
 # define LMT_CONSTANT_H
 
 //# define PARSE		0
@@ -34,6 +34,7 @@
 
 //	Used for:
 //		lmt_token/type
+# define TYPE_LIST_DUMMY	-1
 # define TYPE_COMMAND		0
 # define TYPE_REDIRECTION	1
 # define TYPE_PIPE			2
