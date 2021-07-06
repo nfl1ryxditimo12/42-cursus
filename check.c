@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:31:26 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/05 17:56:48 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/06 19:37:41 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int    builtin_cmd(t_handler *hand)
 {
-    if (ft_strcmp(hand->line->token[0], "echo") ||
-    ft_strcmp(hand->line->token[0], "cd") ||
-    ft_strcmp(hand->line->token[0], "pwd") ||
-    ft_strcmp(hand->line->token[0], "export") ||
-    ft_strcmp(hand->line->token[0], "unset") ||
-    ft_strcmp(hand->line->token[0], "env") ||
-    ft_strcmp(hand->line->token[0], "exit"))
+    if (ft_strcmp2(hand->line->token[0], "echo") ||
+    ft_strcmp2(hand->line->token[0], "cd") ||
+    ft_strcmp2(hand->line->token[0], "pwd") ||
+    ft_strcmp2(hand->line->token[0], "export") ||
+    ft_strcmp2(hand->line->token[0], "unset") ||
+    ft_strcmp2(hand->line->token[0], "env") ||
+    ft_strcmp2(hand->line->token[0], "exit"))
     {
         hand->cmd_flag = 1;
         return (1);
@@ -50,22 +50,22 @@ int    not_builtin_cmd(t_handler *hand)
     int i;
     char    *cmd[5];
 
-    cmd[0] = connect_dir(hand->cmd[0], hand->line->token[0]);
-	cmd[1] = connect_dir(hand->cmd[1], hand->line->token[0]);
-	cmd[2] = connect_dir(hand->cmd[2], hand->line->token[0]);
-	cmd[3] = connect_dir(hand->cmd[3], hand->line->token[0]);
-	cmd[4] = connect_dir(hand->cmd[4], hand->line->token[0]);
     i = -1;
     while (++i < 5)
-        if (opendir(cmd[i]))
+        cmd[i] = connect_dir(hand->cmd[i], hand->line->token[0]);
+    i = -1;
+    while (++i < 5)
+    {
+        if (!stat(cmd[i], hand->buf))
             hand->line->cmd_dir = cmd[i];
+        else
+            free(cmd[i]);
+    }
     if (hand->line->cmd_dir)
     {
         hand->cmd_flag = 1;
-        closedir(cmd[i]);
         return (1);
     }
-    closedir(cmd[i]);
     return (0);
 }
 

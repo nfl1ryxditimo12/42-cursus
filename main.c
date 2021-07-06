@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/05 18:35:54 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/06 19:10:03 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void    print_err(char *err, char *arr)
 
 void    hand_init(t_handler *hand, char **env)
 {
-    hand->env = env;
+    hand->env = dup_env(hand, env, 0);
     hand->line = 0;
     node_push(hand, 1);
     hand->top = hand->line;

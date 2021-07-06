@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/06 14:10:08 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/06 19:30:07 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct  s_handler
 {
     t_token *line;
     t_token *top;
+    struct stat *buf;
     char    *cmd[5];
     char    **env;
     char    *clear;
@@ -57,12 +58,15 @@ int     count_fd(char *line);
 
 int     ft_strlen(char  *str);
 int     ft_strcmp(char *s1, char *s2);
+int     ft_strcmp2(char *s1, char *s2);
 
 void    line_split(t_handler *hand, char *line);
 int    line_cpy(t_token *ptr, char *line);
 
 char    *connect_dir(char *path, char *token);
 int     cmd_len(char *str);
+
+char    **dup_env(t_handler *hand, char **env, int flag);
 
 void    print_err(char *err, char *arr);
 
