@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/07/05 12:12:44 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/07/07 22:33:45 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS		:= \
 			   jeonpark/lmt_util/lmt_env_path_array.c \
 			   jeonpark/lmt_util/lmt_alloc.c \
 			   jeonpark/lmt_util/lmt_exit.c \
+			   jeonpark/lmt_util/lmt_return_error.c \
 			   jeonpark/lmt_util/lmt_unsafe_strlen.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_type.c \
@@ -34,7 +35,7 @@ SRCS		:= \
 			   jeonpark/lmt_process_manager/t_lmt_process_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_redirection.c \
-			   jeonpark/lmt_process_manager/t_lmt_redirection_array.c \
+			   jeonpark/lmt_process_manager/t_lmt_redirection_list.c \
 			   jeonpark/lmt_process_manager/t_lmt_token.c \
 			   jeonpark/lmt_process_manager/t_lmt_token_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_token_list_type.c \

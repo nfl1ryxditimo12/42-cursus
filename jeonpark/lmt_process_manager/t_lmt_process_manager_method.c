@@ -6,64 +6,35 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:19 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 17:40:57 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/07 22:33:32 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_lmt_process_manager.h"
-#include "t_lmt_token_list.h"
 #include "t_lmt_process_list.h"
+#include "t_lmt_redirection_list.h"
 #include "t_lmt_process.h"
-#include "t_lmt_redirection_array.h"
 #include "minishell.h"
 #include "lmt_util.h"
 
-static int	lmt_process_manager_read_token(t_lmt_process_manager *p_proman, t_token *p_token)
+int	lmt_process_manager_execute(t_lmt_token_sublist *token_sublist)
 {
-	t_token	*iterator;
+	t_lmt_process_list	*process_list;
+	int	exit_code;
 
-	iterator = p_token;
-	while (iterator != NULL)
-	{
-		if (**iterator->token == '|')
-			return (SYNTAX_ERROR_PIPE);
-		lmt_process_list_append(p_proman->process_list, iterator->token, lmt_redirection_array_new());
-		iterator = iterator->next;
-		//	iterator 의 끝이 NULL 인가 아니면 갯수만큼 돌려야하는가?
-		if (iterator == NULL)
-			return (NORMAL);
-		iterator = iterator->next;
-		if (iterator == NULL)
-			return (SYNTAX_ERROR_PIPE);
-	}
-	return (NORMAL);
+	lmt_process_list_set_by_lmt_token_sublist(process_list, token_sublist);
+	exit_code = lmt_process_list_execute(p_proman->process_list, env);
+	lmt_process_list_free(process_list);
+	return (exit_code);
 }
 
-static void	lmt_process_manager_wait_children(t_lmt_process_manager *p_proman)
-{
-	t_lmt_process	*iterator;
-	int	stat_loc;
-
-	iterator = p_proman->process_list->p_dummy->next;
-	while (iterator != NULL)
-	{
-		waitpid(iterator->pid, &stat_loc, 0);
-		iterator = iterator->next;
-	}
-}
-
-int	lmt_process_manager_execute(t_token *p_token, char **env)
+int	lmt_process_manager_execute_by_handler(t_handler *hand)
 {
 	t_lmt_process_manager *p_proman;
 	int	ret;
 
-	p_proman = lmt_process_manager_new();
-	ret = lmt_process_manager_read_token(p_proman, p_token);
-	if (ret != NORMAL)
-		return (ret);
-	lmt_process_list_execute(p_proman->process_list, env);
-	lmt_process_manager_wait_children(p_proman);
-	lmt_process_manager_describe(p_proman);
-	lmt_process_manager_free(p_proman);
-	return (NORMAL);
+	p_proman = lmt_program_manager_new(lmt_token_list_new_by_token(hand->top));
+	ret = lmt_process_manager_execute(token_sublist);
+	lmt_process_manageer_free(p_proman);
+	return (ret);
 }

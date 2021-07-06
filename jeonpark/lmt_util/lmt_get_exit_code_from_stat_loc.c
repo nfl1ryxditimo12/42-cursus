@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_lmt_redirection_array.h                          :+:      :+:    :+:   */
+/*   lmt_get_exit_code_from_stat_loc.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/04 15:32:22 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 11:16:44 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/07/07 18:54:36 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/07/07 18:55:39 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_LMT_REDIRECTION_ARRAY_H
-# define T_LMT_REDIRECTION_ARRAY_H
+#include "lmt_util.h"
 
-typedef struct s_lmt_redirection	t_lmt_redirection;
-
-//	type function
-t_lmt_redirection	**lmt_redirection_array_new();
-void	lmt_redirection_array_free(t_lmt_redirection **array);
-
-#endif
+int	lmt_get_exit_code_from_stat_loc(int stat_loc)
+{
+	return ((stat_loc >> 8) & 0x000000ff);
+}

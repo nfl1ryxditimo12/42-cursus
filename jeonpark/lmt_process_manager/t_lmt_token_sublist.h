@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   t_lmt_token_sublist.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/07 21:52:38 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/07/07 19:03:05 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/07/07 19:21:28 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_UTIL_H
-# define LMT_UTIL_H
+#ifndef T_LMT_TOKEN_SUBLIST_H
+# define T_LMT_TOKEN_SUBLIST_H
 
-# include <stddef.h>
-# include "lmt_constant.h"
-# include "lmt_string_array.h"
+# include "lmt_process_manager_typedef.h"
 
-void	lmt_exit(int exit_code, char *string);
-int	lmt_return_error(char *string);
-void	*lmt_alloc(size_t size);
-size_t	lmt_unsafe_strlen(const char *p_string);
-int	lmt_get_exit_code_from_stat_loc(int stat_loc);
+typedef struct s_lmt_token_sublist
+{
+	t_lmt_token	*first;
+	t_lmt_token	*last;
+}	t_lmt_token_sublist;
+
+t_lmt_token_sublist	*lmt_token_sublist_new(t_lmt_token *first, t_lmt_token *last);
+void	lmt_token_sublist_free(t_lmt_token_sublist *sublist);
 
 #endif

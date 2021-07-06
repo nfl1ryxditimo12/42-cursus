@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_lmt_token_list.h                                 :+:      :+:    :+:   */
+/*   t_lmt_redirection_list.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/04 17:18:47 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/07 19:08:10 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/07/04 15:32:22 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/07/07 12:18:06 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_LMT_TOKEN_LIST_H
-# define T_LMT_TOKEN_LIST_H
+#ifndef T_LMT_REDIRECTION_LIST_H
+# define T_LMT_REDIRECTION_LIST_H
 
 # include "lmt_process_manager_typedef.h"
 
-typedef struct s_lmt_token_list
+typedef struct s_lmt_redirection_list
 {
-	t_lmt_token	*p_dummy;
-	t_lmt_token	*last;
-}	t_lmt_token_list;
+	t_lmt_redirection	*p_dummy;
+	t_lmt_redirection	*last;
+}	t_lmt_redirection_list;
 
 //	type function
-t_lmt_token_list	*lmt_token_list_new();
-t_lmt_token_list	*lmt_token_list_new_by_token(t_token *p_token);
-void	lmt_token_list_free(t_lmt_token_list *list);
+t_lmt_redirection_list	*lmt_redirection_list_new();
+void	lmt_redirection_list_free(t_lmt_redirection_list *list, int option);
 
 //	method function
-void	lmt_token_list_append(t_lmt_token_list *list, char *string);
-char	**lmt_token_get_argv(t_lmt_token_list *list);
+void	lmt_redirection_list_append(t_lmt_redirection_list *list, int fd, char *path, int fd2);
+void	lmt_redirection_list_apply(t_lmt_redirection_list *list);
 
 #endif

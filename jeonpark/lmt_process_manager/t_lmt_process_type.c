@@ -6,38 +6,42 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:39 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 12:01:15 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/07 20:52:27 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "t_lmt_process.h"
-#include "t_lmt_redirection_array.h"
+#include "t_lmt_redirection_list.h"
 #include "lmt_util.h"
+
+//	stdlib.h: free()
 
 static t_lmt_process	*lmt_process_alloc(void)
 {
 	return (lmt_alloc(sizeof(t_lmt_process)));
 }
 
-static void	lmt_process_init(t_lmt_process *p_process, char **argv, t_lmt_redirection **redirection_array)
+static void	lmt_process_init(t_lmt_process *p_process, int type, t_lmt_token_sublist *token_sublist, int op)
 {
-	p_process->argv = argv;
-	p_process->redirection_array = redirection_array;
+	p_process->type = type;
+	p_process->token_sublist = token_sublist;
+	p_process->redirection_list = lmt_redirection_list_new();
+	p_process->op = op;
 }
 
-t_lmt_process	*lmt_process_new(char **argv, t_lmt_redirection **redirection_array)
+t_lmt_process	*lmt_process_new(int type, t_lmt_token_sublist *token_sublist, int op)
 {
 	t_lmt_process	*p_process;
 
 	p_process = lmt_process_alloc();
-	lmt_process_init(p_process, argv, redirection_array);
+	lmt_process_init(p_process, type, token_list, op);
 	return (p_process);
 }
 
 void	lmt_process_free(t_lmt_process *p_process)
 {
-	free(p_process->argv);
-	lmt_redirection_array_free(p_process->redirection_array);
+	lmt_token_sublist_free(p_process->token_sublist);
+	lmt_redirection_list_free(p_process->redirection_list, REDIRECTION_FREE_NORMAL);
 	free(p_process);
 }
