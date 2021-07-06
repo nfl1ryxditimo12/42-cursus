@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:18:46 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 12:07:52 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/06 11:02:38 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_lmt_token_list	*lmt_token_list_alloc(void)
 static void	lmt_token_list_init(t_lmt_token_list *list)
 {
 	list->p_dummy = lmt_token_new(TYPE_LIST_DUMMY, NULL);
-	list->p_bottom = list->p_dummy;
+	list->last = list->p_dummy;
 }
 
 t_lmt_token_list	*lmt_token_list_new(void)

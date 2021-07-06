@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:18:47 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 11:44:36 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/06 11:02:38 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef struct s_lmt_token	t_lmt_token;
 typedef struct s_lmt_token_list
 {
 	t_lmt_token	*p_dummy;
-	t_lmt_token	*p_bottom;
+	t_lmt_token	*last;
 }	t_lmt_token_list;
 
 //	type function

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 11:59:38 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 11:39:07 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/06 11:02:38 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_lmt_redirection	t_lmt_redirection;
 typedef struct s_lmt_process_list
 {
 	t_lmt_process	*p_dummy;
-	t_lmt_process	*p_bottom;
+	t_lmt_process	*last;
 }	t_lmt_process_list;
 
 //	type function

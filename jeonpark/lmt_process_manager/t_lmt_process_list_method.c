@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 11:37:33 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/06 11:02:38 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	lmt_process_list_append(t_lmt_process_list *list, char **argv, t_lmt_redire
 	t_lmt_process *p_element;
 
 	p_element = lmt_process_new(argv, redirection_array);
-	list->p_bottom->next = p_element;
+	list->last->next = p_element;
 	p_element->next = NULL;
-	list->p_bottom = p_element;
+	list->last = p_element;
 }
 
 void	lmt_process_list_execute(t_lmt_process_list *list, char **env)

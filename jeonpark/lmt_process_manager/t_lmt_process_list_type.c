@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 11:39:54 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/06 11:02:38 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_lmt_process_list	*lmt_process_list_alloc(void)
 static void	lmt_process_list_init(t_lmt_process_list *list)
 {
 	list->p_dummy = lmt_process_new(NULL, NULL);
-	list->p_bottom = list->p_dummy;
+	list->last = list->p_dummy;
 }
 
 t_lmt_process_list	*lmt_process_list_new(void)
