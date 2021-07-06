@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/05 17:25:52 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/06 12:35:08 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int     ft_strlen(char  *str);
 int     ft_strcmp(char *s1, char *s2);
 
 void    line_split(t_handler *hand, char *line);
-void    line_cpy(t_token *ptr, char *line);
+int    line_cpy(t_token *ptr, char *line);
 
 char    *connect_dir(char *path, char *token);
 int     cmd_len(char *str);

@@ -6,13 +6,13 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/05 16:27:29 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/06 12:35:08 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int     ft_strlen(char  *str)
+int     token_len(char  *str)
 {
     int i;
 
@@ -29,7 +29,7 @@ int     ft_strlen(char  *str)
     return (i);
 }
 
-void    line_cpy(t_token *ptr, char *line)
+int    line_cpy(t_token *ptr, char *line)
 {
     int i;
     int j;
@@ -39,15 +39,22 @@ void    line_cpy(t_token *ptr, char *line)
     while (ptr->token[i])
         i++;
     ptr->token[i] = malloc(ft_strlen(line) + 1);
-    if (!chk_symbol(line))
-        while (*line && !(*line == 32 || *line == 9) && !chk_symbol(line))
+    if (!chk_symbol(line) && !check_num(line) && !chk_redirect(line))
+        while (*line && !(*line == 32 || *line == 9) && !chk_symbol(line) && !check_num(line) && !chk_redirect(line))
             ptr->token[i][j++] = *line++;
-    else
+    else if (check_num(line))
+        while (j < check_num(line))
+            ptr->token[i][j++] = *line++;
+    else if (chk_redirect(line))
+        while (j < chk_redirect(line))
+            ptr->token[i][j++] + *line++;
+    else if (chk_symbol(line))
         while (j < chk_symbol(line))
             ptr->token[i][j++] = *line++;
     ptr->size++;
     ptr->token[i][j] = 0;
     ptr->token[i + 1] = 0;
+    return (j);
 }
 
 int     ft_strcmp(char *s1, char *s2)
