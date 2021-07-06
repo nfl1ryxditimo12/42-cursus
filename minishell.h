@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/06 12:35:08 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/06 14:10:08 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct  s_handler
 void	node_push(t_handler *hand, int index);
 
 int     chk_symbol(char *line);
+int     chk_redirect(char *line);
+int     count_fd(char *line);
 
 int     ft_strlen(char  *str);
 int     ft_strcmp(char *s1, char *s2);

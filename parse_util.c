@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/06 12:35:08 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/06 14:11:18 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ int     token_len(char  *str)
 		return (0);
     if (chk_symbol(str))
         return (chk_symbol(str));
-    while (*str && !(*str == 32 || *str == 9) && !chk_symbol(str))
+    if (count_fd(str))
+        return (count_fd(str));
+    if (chk_redirect(str))
+        return (chk_redirect(str));
+    while (*str && !(*str == 32 || *str == 9) && !chk_symbol(str) &&
+            !chk_redirect(str) && !count_fd(str))
 	{
 		str++;
         i++;
@@ -33,24 +38,16 @@ int    line_cpy(t_token *ptr, char *line)
 {
     int i;
     int j;
+    int size;
 
     i = 0;
     j = 0;
     while (ptr->token[i])
         i++;
-    ptr->token[i] = malloc(ft_strlen(line) + 1);
-    if (!chk_symbol(line) && !check_num(line) && !chk_redirect(line))
-        while (*line && !(*line == 32 || *line == 9) && !chk_symbol(line) && !check_num(line) && !chk_redirect(line))
-            ptr->token[i][j++] = *line++;
-    else if (check_num(line))
-        while (j < check_num(line))
-            ptr->token[i][j++] = *line++;
-    else if (chk_redirect(line))
-        while (j < chk_redirect(line))
-            ptr->token[i][j++] + *line++;
-    else if (chk_symbol(line))
-        while (j < chk_symbol(line))
-            ptr->token[i][j++] = *line++;
+    size = token_len(line);
+    ptr->token[i] = malloc(size + 1);
+    while (j < size)
+        ptr->token[i][j++] = *line++;
     ptr->size++;
     ptr->token[i][j] = 0;
     ptr->token[i + 1] = 0;

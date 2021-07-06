@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:29:39 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/05 17:26:03 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/06 12:49:25 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,18 +124,44 @@ char    *dir_cpy(char *str)
     return (ret_dir);
 }
 
+char    *process_comma(t_handler *hand)
+{
+    int comma;
+
+    comma = -1;
+    while (hand->line->token[1][++comma])
+        if (hand->line->token[1][comma] != '.')
+            reuturn (0);
+    if (comma == 1)
+        return (hand->dir);
+    else if (comma == 2)
+        return (pre_dir(hand));
+    else if (comma == 3)
+        return ("/Users/");
+    else if (comma >= 4)
+        return ("/");
+}
+
 void    process_cd(t_handler *hand)
 {
     char    *dir;
+    int     comma;
 
+    getcwd(hand->dir, 1024);
     if (hand->line->token[2])
-        perror(hand->line->token[0]);
-    if (ft_strcmp(hand->line->token[1], ".."))
-        dir = pre_dir(hand);
-    else if (!hand->line->token[1][0])
+        perror(hand->line->token[2]);
+    if (ft_strcmp(hand->line->token[1], "~/"))
+        dir = connect_dir(hand->home_dir, hand->line->token[1]);
+    else if (!hand->line->token[1][0] || ft_strcmp2(hand->line->token[1], "~"))
         dir = hand->home_dir;
+    else if (hand->line->token[1][0] == '.')
+        dir = process_comma(hand);
+    if (chdir(dir))
+        perror(dir);
     else
-        hand->dir = getcwd(dir, 100000);
+        getcwd(hand->dir, 1024);
+    if (dir && *dir)
+        free(dir);
 }
 
 void    process_builtin_cmd(t_handler *hand)

@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 15:41:25 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/06 12:27:21 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/06 14:11:18 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ int     chk_symbol(char *line)
     return (0);
 }
 
-int     is_num(char c)
-{
-    if ('0' <= c && c <= '9')
-        return (1);
-    return (0);
-}
-
 int     chk_redirect(char *line)
 {
     int cnt;
@@ -46,17 +39,17 @@ int     chk_redirect(char *line)
     return (0);
 }
 
-int     check_num(char *line)
+int     count_fd(char *line)
 {
     int cnt;
 
     cnt = 0;
-    while (is_num(*line))
+    while ('0' <= *line && *line <= '9')
     {
         line++;
         cnt++;
     }
-    if (*line == '<' || *line == '>')
+    if (cnt && (*line == '<' || *line == '>'))
         return (cnt + 1);
     return (0);
 }
@@ -72,18 +65,18 @@ int     get_token_cnt(char *line)
     {
         while (*line && (*line == 32 || *line == 9 || *line == 45))
             line++;
-        if (chk_symbol(line))
+        if (chk_symbol(line) || chk_redirect(line) || count_fd(line))
         {
-            line += chk_symbol(line);
+            line += token_len(line);
             flag = 0;
             cnt++;
         }
-        if (*line && !(*line == 32 || *line == 9) && !chk_symbol(line))
+        else if (*line && !(*line == 32 || *line == 9) && !chk_symbol(line) &&
+                    !chk_redirect(line) && !count_fd(line))
         {
             if (!flag)
                 cnt++;
-            while (*line && !(*line == 32 || *line == 9) && !chk_symbol(line))
-                line++;
+            line += token_len(line);
             flag = 1;
         }
     }
@@ -99,28 +92,18 @@ void    process_split(t_token *ptr, char *line)
     {
         while (*line && (*line == 32 || *line == 9))
             line++;
-        if (chk_symbol(line))
+        if (chk_symbol(line) || chk_redirect(line) || count_fd(line))
         {
             if (flag == 1 || flag == 2)
-			    ptr = ptr->next;
-            line_cpy(ptr, line);
-            line += chk_symbol(line);
+                ptr = ptr->next;
+            line += line_cpy(ptr, line);
             flag = 2;
         }
-        if (check_num(line) || chk_redirect(line))
+        if (*line && !(*line == 32 || *line == 9) && !chk_symbol(line) && !chk_redirect(line) && !count_fd(line))
         {
-            if (flag == 1 || flag == 2 || flag == 3)
+            if (flag == 2)
                 ptr = ptr->next;
             line += line_cpy(ptr, line);
-            flag = 3;
-        }
-        if (*line && !(*line == 32 || *line == 9) && !chk_symbol(line))
-        {
-            if (flag == 2 || flag == 3)
-                ptr = ptr->next;
-            line += line_cpy(ptr, line);
-            while (*line && !(*line == 32 || *line == 9) && !chk_symbol(line))
-                line++;
             flag = 1;
         }
     }
