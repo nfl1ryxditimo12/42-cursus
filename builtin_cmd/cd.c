@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:02:11 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/06 18:07:10 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/07 17:39:37 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,6 @@ char    *pre_dir(t_handler *hand)
     return (ret_dir);
 }
 
-char    *home_dir(char **env)
-{
-    int i;
-    int j;
-    char    *home;
-
-    i = -1;
-    while (env[++i])
-        if (ft_strcmp(env[i], "HOME="))
-            break ;
-    home = malloc(cmd_len(env[i]) - 3);
-    j = 0;
-    while (env[i][j + 5])
-    {
-        home[j] = env[i][j + 5];
-        j++;
-    }
-    home[j] = '/';
-    home[j + 1] = 0;
-    return (home);
-}
-
 char    *dir_cpy(char *str)
 {
     char    *ret_dir;
@@ -64,7 +42,7 @@ char    *dir_cpy(char *str)
 
     ret_dir = malloc(cmd_len(str) + 1);
     i = -1;
-    while (++i < cmd_len)
+    while (++i < cmd_len(str))
         ret_dir[i] = str[i];
     ret_dir[i] = 0;
     return (ret_dir);
@@ -77,7 +55,7 @@ char    *process_comma(t_handler *hand)
     comma = -1;
     while (hand->line->token[1][++comma])
         if (hand->line->token[1][comma] != '.')
-            reuturn (0);
+            return (0);
     if (hand->dir[0] == '/' && hand->dir[1] == 0)
         return (ft_strdup("/"));
     if (comma == 1)

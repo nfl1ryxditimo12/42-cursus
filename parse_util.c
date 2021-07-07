@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/06 19:30:07 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/07 18:34:33 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,17 @@ int    line_cpy(t_token *ptr, char *line)
 
 int     ft_strcmp(char *s1, char *s2)
 {
+    int i;
+
+    i = 0;
     while (*s1 && *s2)
+    {
         if (*s1++ != *s2++)
             return (0);
+        i++;
+    }
+    if (!i)
+        return (0);
     return (1);
 }
 
@@ -67,5 +75,7 @@ int     ft_strcmp2(char *s1, char *s2)
     while (*s1 || *s2)
         if (*s1++ != *s2++)
             return (0);
+    if (*s1 || *s2)
+        return (0);
     return (1);
 }

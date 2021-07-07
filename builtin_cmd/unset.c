@@ -6,55 +6,49 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:19:02 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/06 19:29:06 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/07 19:14:37 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char    *home_dir(char **env)
+static char *get_env_value(char *env)
 {
     int i;
-    int j;
-    char    *home;
+    int size;
+    char    *ret;
 
+    size = 0;
+    while (env[size])
+        size++;
+    size++;
+    ret = malloc(size + 1);
     i = -1;
-    while (env[++i])
-        if (ft_strcmp(env[i], "HOME="))
-            break ;
-    home = malloc(cmd_len(env[i]) - 3);
-    j = 0;
-    while (env[i][j + 5])
-    {
-        home[j] = env[i][j + 5];
-        j++;
-    }
-    home[j] = '/';
-    home[j + 1] = 0;
-    return (home);
+    while (++i < size)
+        ret[i] = env[i];
+    ret[i] = '=';
+    ret[i + 1] = 0;
+    return (ret);
 }
 
-char    **sub_env(t_handler *hand, char **env)
+char    **sub_env(t_handler *hand)
 {
     int     size;
     int     i;
     int     j;
     char    **ret;
+    char    *arg;
     
-    size = env_len(env);
-    ret = (char **)malloc(sizeof(char *) * size);
+    size = env_len(hand->env);
+    arg = get_env_value(hand->line->token[1]);
+    ret = (char **)malloc(sizeof(char *) * 50 + 1);
     i = -1;
-    while (env[++i])
-    {
-        j = -1;
-        if (ft_strcmp(env[i], hand->line->token[1]))
-            continue ;
-        ret[i] = malloc(cmd_len(env[i]) + 1);
-        while (env[i][++j])
-            ret[i][j] = env[i][j];
-        ret[i][j] = 0;
-    }
-    ret[i] = 0;
+    while (hand->env[++i])
+        if (!ft_strcmp(hand->env[i], arg))
+            ret[i] = ft_strdup(hand->env[i]);
+    while (i < 50)
+        ret[i++] = 0;
+    free(arg);
     return (ret);
 }
 
@@ -62,18 +56,20 @@ void    process_unset(t_handler *hand)
 {
     int i;
     int flag;
-    char    *tmp;
+    char    **tmp;
 
     if (hand->line->token[2])
         perror(hand->line->token[2]);
+    else if (!hand->line->token[1])
+        return ;
     i = -1;
     flag = 0;
     while (hand->env[++i])
         if (ft_strcmp(hand->env[i], hand->line->token[1]))
-            flag++;
+            flag = 1;
     if (flag == 1)
     {
-        tmp = sub_env(hand, hand->env);
+        tmp = sub_env(hand);
         free_env(hand->env);
         hand->env = tmp;
     }

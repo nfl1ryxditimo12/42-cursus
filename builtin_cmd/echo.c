@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:05:45 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/06 18:05:54 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/07 16:12:48 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void    process_echo(t_handler *hand)
     {
 		tmp = echo_connect(echo, hand->line->token[i],
                             hand->line->size - (i + 1), option);
-		if (echo)
+		if (*echo)
 			free(echo);
 		echo = tmp;
 		i++;
