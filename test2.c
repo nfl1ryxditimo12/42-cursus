@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <dirent.h>
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -52,6 +53,8 @@ static int  cmd_len(char *str)
     int i;
 
     i = 0;
+	if (!str || !*str)
+		return (0);
     while (str[i])
         i++;
     return (i);
@@ -115,28 +118,46 @@ char    *pre_dir(char *dir)
     end = start;
     start = -1;
     ret_dir = malloc(end);
-    ret_dir[end] = 0;
     while (++start < end)
         ret_dir[start] = dir[start];
+	ret_dir[end] = 0;
     return (ret_dir);
+}
+
+char	*ft_strdup(char *str)
+{
+	char *ret;
+	int i;
+
+	i = 0;
+	ret = malloc(cmd_len(str) + 1);
+	while (*str)
+		ret[i++] = *str++;
+	ret[i] = 0;
+	return (ret);
 }
 
 char    *process_comma(char *line, char *dir)
 {
     int comma;
+	char	*ret;
 
     comma = -1;
     while (line[++comma])
         if (line[comma] != '.')
             return (0);
+	if (dir[0] == '/' && dir[1] == 0)
+		return (dir);
     if (comma == 1)
-        return (".");
+        ret = ft_strdup(".");
     else if (comma == 2)
-        return (pre_dir(dir));
-    else if (comma == 3)
-        return ("/Users/");
-    else
-        return ("/");
+        ret = (pre_dir(dir));
+	else
+		return (0);
+    if (opendir(ret))
+		return (ret);
+	else
+		return (ft_strdup("/"));
 }
 
 void	process_cd(char *line, char **env)
@@ -155,13 +176,14 @@ void	process_cd(char *line, char **env)
     else if (*line == '.')
         dir = process_comma(line, name);
 	else if (*line == '/')
-		dir = line;
+		dir = ft_strdup(line);
 	else
 		dir = connect_dir(name, line);
     if (chdir(dir))
         perror(dir);
     else
         getcwd(name, 1024);
+	free(dir);
 	printf("After DIR : %s\n", name);
 }
 
