@@ -25,7 +25,7 @@ t_lmt_string_array	*lmt_string_array_new(void)
 	return (array);
 }
 
-void	lmt_string_array_free(lmt_string_array *array)
+void	lmt_string_array_free(t_lmt_string_array *array)
 {
 	free(array->array);
 	free(array);
@@ -50,7 +50,7 @@ void	lmt_string_array_append(t_lmt_string_array *string_array, char *string)
 	string_array->array = array;
 }
 
-void	lmt_string_array_append_lmt_string_array(t_lmt_string_array *lhs, t_lmt_string_array *rhs)
+void	lmt_string_array_append_array(t_lmt_string_array *lhs, t_lmt_string_array *rhs)
 {
 	char	**array;
 	int	index;

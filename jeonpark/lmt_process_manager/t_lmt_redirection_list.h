@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 15:32:22 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/07 12:18:06 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/08 19:02:19 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ t_lmt_redirection_list	*lmt_redirection_list_new();
 void	lmt_redirection_list_free(t_lmt_redirection_list *list, int option);
 
 //	method function
-void	lmt_redirection_list_append(t_lmt_redirection_list *list, int fd, char *path, int fd2);
+void	lmt_redirection_list_push(t_lmt_redirection_list *list, t_lmt_redirection *p_redirection);
+void	lmt_redirection_list_append(t_lmt_redirection_list *list, t_lmt_redirection *p_redirection);
 void	lmt_redirection_list_apply(t_lmt_redirection_list *list);
+t_lmt_redirection_list	*lmt_redirection_list_backup(t_lmt_redirection_list *list);
+void	lmt_redirection_list_backdown(t_lmt_redirection_list *list);
 
 #endif

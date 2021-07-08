@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_lmt_token.h                                      :+:      :+:    :+:   */
+/*   lmt_check_type.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/04 16:54:16 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 19:21:45 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/07/08 09:33:27 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/07/08 11:40:36 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_LMT_TOKEN_H
-# define T_LMT_TOKEN_H
+#include "lmt_check_type.h"
+#include "lmt_util.h"
 
-# include "lmt_process_manager_typedef.h"
-
-typedef struct s_lmt_token
+int	lmt_is_type_redirection(int type)
 {
-	int	type;
-	t_lmt_string_array	*array;
-	struct s_lmt_token	*next;
-}	t_lmt_token;
+	return ((type & TYPE_REDIRECTION) != 0);
+}
 
-//	type function
-t_lmt_token	*lmt_token_new(int type);
-void	lmt_token_free(t_lmt_token *p_token);
-//
-//	method function
-void	lmt_token_append_token(t_lmt_token *lhs, t_lmt_token *rhs);
-
-#endif
+int	lmt_is_type_operator(int type)
+{
+	return ((type & TYPE_DELIMITER) != 0);
+}

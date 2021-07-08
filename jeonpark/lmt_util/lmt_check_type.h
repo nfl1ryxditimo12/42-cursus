@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   lmt_check_type.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 17:26:12 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/07/08 09:33:31 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/07/08 10:23:32 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_UTIL_H
-# define LMT_UTIL_H
+#ifndef LMT_CHECK_TYPE_H
+# define LMT_CHECK_TYPE_H
 
-# include <stddef.h>
-# include "t_lmt_string_array.h"
-# include "lmt_constant.h"
-# include "lmt_check_type.h"
-
-void	*lmt_alloc(size_t size);
-int	lmt_return_error(char *string);
-void	lmt_exit(int exit_code, char *string);
-int	lmt_atoi(char *string, int *p_result);
-size_t	lmt_unsafe_strlen(const char *p_string);
-int	lmt_get_exit_code_from_stat_loc(int stat_loc);
+int	lmt_is_type_redirection(int type);
+int	lmt_is_type_operator(int type);
 
 #endif

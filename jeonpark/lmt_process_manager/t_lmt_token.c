@@ -6,13 +6,12 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 16:54:15 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/07 22:13:14 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/08 19:55:31 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "t_lmt_token.h"
-#include "lmt_util.h"
+#include "t_lmt_process_manager.h"
 
 //	stdlib.h: free(), NULL
 
@@ -24,7 +23,7 @@ static t_lmt_token	*lmt_token_alloc(void)
 static void	lmt_token_init(t_lmt_token *p_token, int type)
 {
 	p_token->type = type;
-	p_token->string_array = lmt_string_array_new();
+	p_token->array = lmt_string_array_new();
 }
 
 t_lmt_token	*lmt_token_new(int type)
@@ -38,7 +37,7 @@ t_lmt_token	*lmt_token_new(int type)
 
 void	lmt_token_free(t_lmt_token *p_token)
 {
-	free(p_token->string_array);
+	lmt_string_array_free(p_token->array);
 	free(p_token);
 }
 
@@ -47,7 +46,7 @@ void	lmt_token_append_string(t_lmt_token *p_token, char *string)
 	lmt_string_array_append(p_token->array, string);
 }
 
-void	lmt_token_append_lmt_token(t_lmt_token *lhs, t_lmt_token *rhs)
+void	lmt_token_append_token(t_lmt_token *lhs, t_lmt_token *rhs)
 {
-	lmt_string_array_append_lmt_string_array(lhs->array, rhs->array);
+	lmt_string_array_append_array(lhs->array, rhs->array);
 }

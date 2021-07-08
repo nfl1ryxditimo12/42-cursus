@@ -6,15 +6,12 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:19 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/07 20:23:50 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/08 17:05:05 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "t_lmt_process_manager.h"
-#include "t_lmt_process_list.h"
-#include "t_lmt_redirection_list.h"
-#include "lmt_util.h"
 
 //	stdlib.h: free()
 
@@ -26,15 +23,15 @@ static t_lmt_process_manager	*lmt_process_manager_alloc(void)
 static void	lmt_process_manager_init(t_lmt_process_manager *p_proman, t_lmt_token_list *token_list)
 {
 	p_proman->token_list = token_list;
-	p_proman->token_sublist = lmt_token_sublist_new(token_list->p_dummy->next, token_list->last);
+	p_proman->token_sublist = lmt_token_sublist_new(token_list->p_dummy->next, token_list->last->next);
 }
 
-t_lmt_process_manager	*lmt_process_manager_new(void)
+t_lmt_process_manager	*lmt_process_manager_new(t_lmt_token_list *token_list)
 {
 	t_lmt_process_manager	*p_proman;
 
 	p_proman = lmt_process_manager_alloc();
-	lmt_process_manager_init(p_proman);
+	lmt_process_manager_init(p_proman, token_list);
 	return (p_proman);
 }
 

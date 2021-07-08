@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:20 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/07 20:17:44 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/08 19:41:12 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,29 @@
 # define T_LMT_PROCESS_MANAGER_H
 
 # include "lmt_process_manager_typedef.h"
+#include "t_lmt_process.h"
+#include "t_lmt_process_list.h"
+#include "t_lmt_process_manager.h"
+#include "t_lmt_redirection.h"
+#include "t_lmt_redirection_list.h"
+#include "t_lmt_token.h"
+#include "t_lmt_token_list.h"
+#include "t_lmt_token_sublist.h"
+#include "lmt_util.h"
+#include "minishell.h"
 
-//	close 할 redirection 을 list 에 보관했다가 close 하는데, fd 한계가 발생할 수 있으므로 생각을 더 해볼 것
 typedef struct s_lmt_process_manager
 {
 	t_lmt_token_list	*token_list;
 	t_lmt_token_sublist	*token_sublist;
-	t_lmt_process_list	*process_list;
 }	t_lmt_process_manager;
 
 //	type function
-t_lmt_process_manager	*lmt_process_manager_new(void);
+t_lmt_process_manager	*lmt_process_manager_new(t_lmt_token_list *token_list);
 void	lmt_process_manager_free(t_lmt_process_manager *p_proman);
 
 //	method function
-int	lmt_process_manager_execute(t_token *p_token, char **env);
+int	lmt_process_manager_execute(t_lmt_token_sublist *token_sublist, char **env);
+int	lmt_process_manager_execute_by_handler(t_handler *hand, char **env);
 
 #endif

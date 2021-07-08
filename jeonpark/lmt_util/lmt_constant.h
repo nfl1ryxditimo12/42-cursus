@@ -6,16 +6,20 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/07 21:01:01 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/08 13:25:50 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LMT_CONSTANT_H
 # define LMT_CONSTANT_H
 
-# define STANDARD_IN	0
-# define STANDARD_OUT	1
-# define STANDARD_ERR	2
+# define PARSE_SUCCESS	0
+# define PARSE_FAIL		1
+
+# define FD_NONE	-1
+# define FD_IN		0
+# define FD_OUT		1
+# define FD_ERR		2
 
 //	t_lmt_command_list_execute()/fd_pipe/index
 # define PIPE_READ	0
@@ -31,16 +35,18 @@
 
 //	lmt_token/type
 //	lmt_process/op
-# define TYPE_LIST_DUMMY		-1
-# define TYPE_NONE				0
-# define TYPE_COMMAND			1
-# define TYPE_REDIRECTION_IN	2
-# define TYPE_REDIRECTION_OUT	3
-# define TYPE_OPERATOR_PIPE		4
-# define TYPE_OPERATOR_AND		5
-# define TYPE_OPERATOR_OR		6
-# define TYPE_PARENTHESIS_OPEN	7
-# define TYPE_PARENTHESIS_CLOSE	8
+# define TYPE_NONE				0x00000001
+# define TYPE_COMMAND			0x00000002
+# define TYPE_REDIRECTION_IN	0x00000004
+# define TYPE_REDIRECTION_OUT	0x00000008
+# define TYPE_OPERATOR_PIPE		0x00000010
+# define TYPE_OPERATOR_AND		0x00000020
+# define TYPE_OPERATOR_OR		0x00000040
+# define TYPE_PARENTHESIS_OPEN	0x00000080
+# define TYPE_PARENTHESIS_CLOSE	0x00000100
+
+# define TYPE_REDIRECTION		0x0000000c
+# define TYPE_DELIMITER			0x00000071
 
 //	exit status
 # define EXIT_STATUS_TRUE	0

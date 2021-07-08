@@ -6,14 +6,12 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:18:46 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/07 21:23:17 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/08 19:24:10 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "t_lmt_token_list.h"
-#include "t_lmt_token.h"
-#include "lmt_util.h"
+#include "t_lmt_process_manager.h"
 
 //	stdlib.h: free()
 
@@ -24,10 +22,10 @@ static t_lmt_token_list	*lmt_token_list_alloc(void)
 
 static void	lmt_token_list_init(t_lmt_token_list *list)
 {
-	list->p_dummy = lmt_token_new(TYPE_LIST_DUMMY);
+	list->p_dummy = lmt_token_new(TYPE_NONE);
 	list->last = list->p_dummy;
 	list->last->next = lmt_token_new(TYPE_NONE);
-	lsit->last->next->next = NULL;
+	list->last->next->next = NULL;
 }
 
 t_lmt_token_list	*lmt_token_list_new(void)

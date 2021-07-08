@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/07/07 22:33:45 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/07/08 19:39:59 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,16 +18,19 @@ READLINE_DIR	:= /Users/$(value USER)/.brew/opt/readline
 
 SRCS		:= \
 			   check.c \
-			   command.c \
 			   node.c \
 			   parse.c \
 			   parse_util.c \
 			   jeonpark/lmt_signal.c \
-			   jeonpark/lmt_util/lmt_env_path_array.c \
 			   jeonpark/lmt_util/lmt_alloc.c \
+			   jeonpark/lmt_util/lmt_atoi.c \
+			   jeonpark/lmt_util/lmt_check_type.c \
+			   jeonpark/lmt_util/lmt_env_path_array.c \
 			   jeonpark/lmt_util/lmt_exit.c \
+			   jeonpark/lmt_util/lmt_get_exit_code_from_stat_loc.c \
 			   jeonpark/lmt_util/lmt_return_error.c \
 			   jeonpark/lmt_util/lmt_unsafe_strlen.c \
+			   jeonpark/lmt_util/t_lmt_string_array.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_manager_method.c \
@@ -39,6 +42,7 @@ SRCS		:= \
 			   jeonpark/lmt_process_manager/t_lmt_token.c \
 			   jeonpark/lmt_process_manager/t_lmt_token_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_token_list_type.c \
+			   jeonpark/lmt_process_manager/t_lmt_token_sublist.c \
 			   main.c
 OBJS		:= $(SRCS:.c=.o)
 
