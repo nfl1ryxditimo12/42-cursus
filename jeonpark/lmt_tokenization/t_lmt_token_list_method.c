@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:18:46 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 19:23:55 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/09 12:07:31 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@ void	lmt_token_list_append(t_lmt_token_list *list, t_lmt_token *p_element)
 }
 
 //	Return new lmt_token_list by t_token
-t_lmt_token_list	*lmt_token_list_new_by_token(t_token *p_token)
+t_lmt_token_list	*lmt_token_list_new_by_token(t_token *iterator)
 {
 	t_lmt_token_list	*list;
 
-	(void)p_token;
 	list = lmt_token_list_new();
+	while (iterator != NULL)
+	{
+		iterator = iterator->next;
+	}
 	return (list);
 ///	compose this code...
 //
