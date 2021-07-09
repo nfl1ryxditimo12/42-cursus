@@ -1,53 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_lmt_redirection.c                                :+:      :+:    :+:   */
+/*   t_lmt_redirection_method.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 19:00:51 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:57:25 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include "t_lmt_process_manager.h"
 
 //	fcntl.h: open()
 //	unistd.h: close()
-//	stddlib.h: free()
-
-static t_lmt_redirection	*lmt_redirection_alloc(void)
-{
-	return (lmt_alloc(sizeof(t_lmt_redirection)));
-}
-
-static void	lmt_redirection_init(t_lmt_redirection *p_redirection, int fd, char *path, int type)
-{
-	p_redirection->fd = fd;
-	p_redirection->path = path;
-	p_redirection->type = type;
-}
-
-t_lmt_redirection	*lmt_redirection_new(int fd, char *path, int type, int fd2)
-{
-	t_lmt_redirection	*p_redirection;
-
-	p_redirection = lmt_redirection_alloc();
-	lmt_redirection_init(p_redirection, fd, path, type);
-	p_redirection->fd2 = fd2;
-	return (p_redirection);
-}
-
-void	lmt_redirection_free(t_lmt_redirection *p_redirection, int option)
-{
-	//	path 는 어디서 free 하는가?
-	if (option == REDIRECTION_FREE_FD)
-		close(p_redirection->fd);
-	free(p_redirection);
-}
 
 void	lmt_redirection_apply(t_lmt_redirection *p_redirection)
 {

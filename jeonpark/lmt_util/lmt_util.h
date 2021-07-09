@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 17:26:12 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/09 17:31:19 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	lmt_return_error(char *string);
 void	lmt_exit(int exit_code, char *string);
 int	lmt_atoi(char *string, int *p_result);
 size_t	lmt_unsafe_strlen(const char *p_string);
+int	lmt_unsafe_memcmp(char *lhs, char *rhs, size_t size);
 int	lmt_get_exit_code_from_stat_loc(int stat_loc);
 
 #endif

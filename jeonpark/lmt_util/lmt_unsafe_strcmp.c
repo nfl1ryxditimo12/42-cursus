@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_check_type.h                                   :+:      :+:    :+:   */
+/*   lmt_unsafe_strcmp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 09:33:31 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/09 17:27:28 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/07/09 17:35:05 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/07/09 17:37:34 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_CHECK_TYPE_H
-# define LMT_CHECK_TYPE_H
+#include "lmt_util.h"
 
-int	lmt_is_type_redirection(int type);
-int	lmt_is_type_operator(int type);
-int	lmt_is_builtin(char *string);
-
-#endif
+int	lmt_unsafe_strcmp(char *lhs, char *rhs)
+{
+	size_t	= 
+	while (size
+}

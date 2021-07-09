@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 13:25:50 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:47:20 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,20 @@
 
 //	lmt_token/type
 //	lmt_process/op
-# define TYPE_NONE				0x00000001
-# define TYPE_COMMAND			0x00000002
-# define TYPE_REDIRECTION_IN	0x00000004
-# define TYPE_REDIRECTION_OUT	0x00000008
-# define TYPE_OPERATOR_PIPE		0x00000010
-# define TYPE_OPERATOR_AND		0x00000020
-# define TYPE_OPERATOR_OR		0x00000040
-# define TYPE_PARENTHESIS_OPEN	0x00000080
-# define TYPE_PARENTHESIS_CLOSE	0x00000100
+# define TYPE_NONE					0x00000001
+# define TYPE_COMMAND				0x00000002
+# define TYPE_REDIRECTION_IN		0x00000004
+# define TYPE_REDIRECTION_WORD		0x00000008
+# define TYPE_REDIRECTION_OUT		0x00000010
+# define TYPE_REDIRECTION_APPEND	0x00000020
+# define TYPE_OPERATOR_PIPE			0x00000040
+# define TYPE_OPERATOR_AND			0x00000080
+# define TYPE_OPERATOR_OR			0x00000100
+# define TYPE_PARENTHESIS_OPEN		0x00000200
+# define TYPE_PARENTHESIS_CLOSE		0x00000400
 
-# define TYPE_REDIRECTION		0x0000000c
-# define TYPE_DELIMITER			0x00000071
+# define TYPE_REDIRECTION			0x0000003c
+# define TYPE_DELIMITER				0x000001c0
 
 //	exit status
 # define EXIT_STATUS_TRUE	0

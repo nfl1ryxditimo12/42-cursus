@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:57 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 19:04:59 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/09 16:02:15 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 typedef struct s_lmt_redirection
 {
-	int	fd;
-	char	*path;
+	int	fd_old;
 	int	type;
-	int	fd2;
+	int	fd_new;
+	const char	*new_path;
 	struct s_lmt_redirection	*next;
 }	t_lmt_redirection;
 
 //	type function
-t_lmt_redirection	*lmt_redirection_new(int fd, char *path, int type, int fd2);
+t_lmt_redirection	*lmt_redirection_new(int fd_old, int type, int fd_new, const char *new_path);
 void	lmt_redirection_free(t_lmt_redirection *p_lmt_redirection, int option);
 
 //	meethod function

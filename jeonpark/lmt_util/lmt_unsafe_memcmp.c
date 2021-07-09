@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_check_type.h                                   :+:      :+:    :+:   */
+/*   lmt_memcmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 09:33:31 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/09 17:27:28 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/07/09 17:27:33 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/07/09 17:30:38 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_CHECK_TYPE_H
-# define LMT_CHECK_TYPE_H
+#include "lmt_util.h"
 
-int	lmt_is_type_redirection(int type);
-int	lmt_is_type_operator(int type);
-int	lmt_is_builtin(char *string);
-
-#endif
+int	lmt_unsafe_memcmp(char *lhs, char *rhs, size_t size)
+{
+	while (size-- > 1)
+		if (*lhs++ != *rhs++)
+			break ;
+	return (lhs - rhs);
+}
