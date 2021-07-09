@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/07 19:08:57 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/09 17:33:57 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,39 @@ typedef struct  s_token
     char            *token[100];
     char            *cmd_dir;
     int             type;
-    int             index;
     int             size;
     struct s_token  *pre;
     struct s_token  *next;
 }               t_token;
 
+typedef struct  s_path
+{
+    struct stat buf;
+    char    *cmd[5];
+    char    dir[1024];
+    char    *home_dir;
+}               t_path;
+
 typedef struct  s_handler
 {
     t_token *line;
     t_token *top;
-    struct stat *buf;
-    char    *cmd[5];
+    t_path  *path;
     char    **env;
     char    *clear;
-    char    dir[1024];
-    char    *home_dir;
+    int     token_size;
     int     exit;
     int     status;
     int     pid;
     int     cmd_flag;
 }               t_handler;
 
+// init
+void    process_init(t_handler *hand, char **env);
+void    shell_init(t_handler *hand, char **env);
+
 // node
-void	node_push(t_handler *hand, int index);
+void	node_push(t_handler *hand);
 
 // parse
 int     chk_symbol(char *line);
@@ -74,7 +83,7 @@ int    check_type(t_handler *hand);
 
 // process
 void    process_builtin_cmd(t_handler *hand);
-void    process_non_builtin_cmd(t_handler *hand);
+void    process_non_builtin_cmd(t_handler *hand, char **env);
 void    process_symbol(t_handler *hand);
 
 // builtin_cmd
@@ -89,6 +98,9 @@ void    process_env(t_handler *hand);
 int     cmd_len(char *str);
 char    *ft_strdup(char *str);
 char    *connect_dir(char *path, char *token);
+char    *dir_cpy(char *str);
+char    *pree_dir(char *dir);
+char    *pre_dir(char *dir);
 
 // env
 int     env_len(char **env);
@@ -97,5 +109,8 @@ char    **env_control(char **env);
 
 // print
 void    print_err(char *err, char *arr);
+
+// reset
+void    hand_reset(t_handler *hand);
 
 #endif

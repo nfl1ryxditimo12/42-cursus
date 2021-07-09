@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:16:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/07 19:30:17 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/09 13:09:54 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char    **env_control(char **env)
     i = -1;
     while (++i < size)
     {
-        ret[i] = malloc(cmd_len(env[i]) + 1);
         ret[i] = ft_strdup(env[i]);
         ret[i][cmd_len(env[i])] = 0;
     }

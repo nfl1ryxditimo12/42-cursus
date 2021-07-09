@@ -1,4 +1,6 @@
-a.out
-a.out.dSYM
-.vscode
-.gitignore
+# a.out
+# a.out.dSYM
+# .vscode
+# .gitignore
+# test
+# leaks.sh

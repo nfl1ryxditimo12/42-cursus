@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/06 18:35:06 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 16:06:57 by seonkim          ###   ########seoul.kr  */
+/*   Created: 2021/07/09 17:24:59 by seonkim           #+#    #+#             */
+/*   Updated: 2021/07/09 17:33:50 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    process_exit(t_handler *hand)
+void    print_err(char *err, char *arr)
 {
-    printf("exit\n");
-    hand->exit = 1;
+    (void)err;
+    (void)arr;
 }

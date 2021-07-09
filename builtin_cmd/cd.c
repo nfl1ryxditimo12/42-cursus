@@ -6,62 +6,63 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:02:11 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/07 17:39:37 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/09 17:32:50 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char    *pre_dir(t_handler *hand)
+char    *process_slash(t_handler *hand)
 {
-    int end;
-    int start;
-    char    *ret_dir;
+    int i;
+    int comma;
+    char *ret;
 
-    start = 0;
-    while (hand->dir[start])
-        start++;
-    start--;
-    if (hand->dir[start] == '/')
-        start--;
-    while (hand->dir[start] != '/')
-        start--;
-    end = start;
-    start = -1;
-    ret_dir = malloc(end);
-    while (++start < end)
-        ret_dir[start] = hand->dir[start];
-    ret_dir[start] = 0;
-    return (ret_dir);
-}
-
-char    *dir_cpy(char *str)
-{
-    char    *ret_dir;
-    int     i;
-
-    ret_dir = malloc(cmd_len(str) + 1);
     i = -1;
-    while (++i < cmd_len(str))
-        ret_dir[i] = str[i];
-    ret_dir[i] = 0;
-    return (ret_dir);
+    comma = 0;
+    ret = ft_strdup(hand->path->dir);
+    while (hand->line->token[1][++i])
+    {
+        if (hand->line->token[1][i] == '.')
+            comma++;
+        if (comma > 2)
+        {
+            free(ret);
+            return (ft_strdup(""));
+        }
+        if (hand->line->token[1][i + 1] == '/' || !hand->line->token[1][i + 1])
+        {
+            if (comma == 2)
+                ret = pree_dir(ret);
+            comma = 0;
+        }
+    }
+    return (ret);
 }
 
 char    *process_comma(t_handler *hand)
 {
     int comma;
+    int slash;
 
     comma = -1;
+    slash = 0;
     while (hand->line->token[1][++comma])
-        if (hand->line->token[1][comma] != '.')
+    {
+        if (hand->line->token[1][comma] != '.' &&
+            hand->line->token[1][comma] != '/')
             return (0);
-    if (hand->dir[0] == '/' && hand->dir[1] == 0)
+        if (hand->line->token[1][comma] == '/')
+            slash++;
+    }
+    if (hand->path->dir[0] == '/' && hand->path->dir[1] == 0)
         return (ft_strdup("/"));
-    if (comma == 1)
+    if (comma == 1 && !slash)
         return (ft_strdup("."));
-    else if (comma == 2)
-        return (pre_dir(hand));
+    else if (comma == 2 && !slash)
+        return (pre_dir(hand->path->dir));
+    else if (slash)
+        return (process_slash(hand));
     else
         return (ft_strdup(""));
 }
@@ -71,22 +72,21 @@ void    process_cd(t_handler *hand)
     char    *dir;
     int     comma;
 
-    getcwd(hand->dir, 1024);
     if (hand->line->token[2])
         perror(hand->line->token[2]);
-    if (ft_strcmp(hand->line->token[1], "~/"))
-        dir = connect_dir(hand->home_dir, hand->line->token[1]);
-    else if (!hand->line->token[1][0] || ft_strcmp2(hand->line->token[1], "~"))
-        dir = ft_strdup(hand->home_dir);
+    if (!hand->line->token[1] || ft_strcmp2(hand->line->token[1], "~"))
+        dir = ft_strdup(hand->path->home_dir);
+    else if (ft_strcmp(hand->line->token[1], "~/"))
+        dir = connect_dir(hand->path->home_dir, hand->line->token[1]);
     else if (hand->line->token[1][0] == '.')
         dir = process_comma(hand);
     else if (hand->line->token[1][0] == '/')
         dir = ft_strdup(hand->line->token[1]);
     else
-        dir = connect_dir(hand->home_dir, hand->line->token[1]);
+        dir = connect_dir(hand->path->dir, hand->line->token[1]);
     if (chdir(dir))
         perror(dir);
     else
-        getcwd(hand->dir, 1024);
+        getcwd(hand->path->dir, 1024);
     free(dir);
 }

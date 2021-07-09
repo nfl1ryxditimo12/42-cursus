@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:29:39 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/07 19:06:25 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/07/09 16:20:54 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    process_builtin_cmd(t_handler *hand)
     else if (ft_strcmp2(hand->line->token[0], "cd"))
         process_cd(hand);
     else if (ft_strcmp2(hand->line->token[0], "pwd"))
-        printf("%s\n", hand->dir);
+        printf("%s\n", hand->path->dir);
     else if (ft_strcmp2(hand->line->token[0], "export"))
         process_export(hand);
     else if (ft_strcmp2(hand->line->token[0], "unset"))
