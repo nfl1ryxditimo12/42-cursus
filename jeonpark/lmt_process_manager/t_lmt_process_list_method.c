@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 18:25:38 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/13 22:03:19 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ int	lmt_process_list_execute(t_lmt_process_list *list, char **env)
 		{
 			if (pipe(fd_pipe) == -1)
 				lmt_exit(0, "Pipe error has occured \n");
-			p_redirection = lmt_redirection_new(fd_pipe[PIPE_WRITE], NULL, -1, FD_OUT);
+			p_redirection = lmt_redirection_new(FD_OUT, -1, fd_pipe[PIPE_WRITE], NULL);
 			lmt_process_append_redirection(iterator, p_redirection);
-			p_redirection = lmt_redirection_new(fd_pipe[PIPE_READ], NULL, -1, FD_IN);
+			p_redirection = lmt_redirection_new(FD_IN, -1, fd_pipe[PIPE_READ], NULL);
 			lmt_process_append_redirection(iterator, p_redirection);
 			lmt_process_execute(iterator, env);
 			close(fd_pipe[PIPE_WRITE]);
-			p_redirection = lmt_redirection_new(fd_pipe[PIPE_READ], NULL, -1, -1);
+			p_redirection = lmt_redirection_new(-1, -1, fd_pipe[PIPE_READ], NULL);
 			lmt_redirection_list_append(list->redirection_to_close_list, p_redirection);
 		}
 		else if (iterator->op != TYPE_NONE)

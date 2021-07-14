@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 18:49:35 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/12 19:31:26 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	lmt_process_execute_builtin(t_lmt_process *p_process)
 
 	lmt_process_set(p_process);
 	lmt_process_backup_redirection_list(p_process);
-	return_value = 0; //	return_value = call_builtin_function(lmt_process_argv(p_process)[0]);
+	return_value = 0;
+//	return_value = call_builtin_function(lmt_process_argv(p_process)[0]);
 	lmt_process_backdown_redirection_list(p_process);
 	return (return_value);
 }

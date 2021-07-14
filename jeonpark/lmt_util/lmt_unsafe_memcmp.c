@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_memcmp.c                                       :+:      :+:    :+:   */
+/*   lmt_unsafe_memcmp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 17:27:33 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/09 17:30:38 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:03:12 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 int	lmt_unsafe_memcmp(char *lhs, char *rhs, size_t size)
 {
 	while (size-- > 1)
-		if (*lhs++ != *rhs++)
-			break ;
+	{
+		if (*lhs != *rhs)
+			return (lhs - rhs);
+		++lhs;
+		++rhs;
+	}
 	return (lhs - rhs);
 }
