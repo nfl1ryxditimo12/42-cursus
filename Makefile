@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/07/14 13:13:06 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/07/14 13:34:49 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,11 @@ READLINE_DIR	:= /Users/$(value USER)/.brew/opt/readline
 
 SRCS		:= \
 			   check.c \
+			   init.c \
 			   node.c \
 			   parse.c \
 			   parse_util.c \
+			   print.c \
 			   builtin_cmd/builtin.c \
 			   builtin_cmd/builtin_util.c \
 			   builtin_cmd/cd.c \
@@ -51,6 +53,8 @@ SRCS		:= \
 			   jeonpark/lmt_util/lmt_exit.c \
 			   jeonpark/lmt_util/lmt_get_exit_code_from_stat_loc.c \
 			   jeonpark/lmt_util/lmt_return_error.c \
+			   jeonpark/lmt_util/lmt_unsafe_memcmp.c \
+			   jeonpark/lmt_util/lmt_unsafe_strcmp.c \
 			   jeonpark/lmt_util/lmt_unsafe_strlen.c \
 			   jeonpark/lmt_util/t_lmt_string_array.c \
 			   main.c
