@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/12 19:31:26 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/16 17:51:55 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,85 +32,75 @@ void	lmt_process_append_redirection(t_lmt_process *p_process, t_lmt_redirection 
 	lmt_redirection_list_append(p_process->redirection_list, p_redirection);
 }
 
+//	lmt_process 의 token_sublist 를 순차적으로 돌면서
+//	redirection 들을 list 에 추가한다
 void	lmt_process_set(t_lmt_process *p_process)
 {
-	t_lmt_token	*iterator;
-	t_lmt_token	*p_argv_token;
+	t_token				*iterator;
+	t_token				*p_command_token;
 	t_lmt_redirection	*p_element;
-	t_lmt_token_sublist	*sublist;
 
-	p_argv_token = NULL;
 	iterator = p_process->token_sublist->first;
 	while (iterator != p_process->token_sublist->last)
 	{
 		if (iterator->type == TYPE_COMMAND)
+			p_command_token = iterator;
+		else if (lmt_is_token_type_redirection(iterator))
 		{
-			if (p_argv_token == NULL)
-				p_argv_token = iterator;
-			else
-				lmt_token_append_token(p_argv_token, iterator);
-		}
-		else if (lmt_is_type_redirection(iterator->type))
-		{
-			p_element = lmt_redirection_new_by_string_array(iterator->array);
+			p_element = lmt_redirection_new_by_token(iterator);
 			lmt_redirection_list_append(p_process->redirection_list, p_element);
 		}
 		else
 			lmt_exit(-1, LMT_WRONG_PATH);
 		iterator = iterator->next;
 	}
-
-	sublist = lmt_token_sublist_new(p_argv_token, p_argv_token->next);
-	lmt_token_sublist_free(p_process->token_sublist);
-	p_process->token_sublist = sublist;
+	p_process->token_sublist->first = p_command_token;
+	p_process->token_sublist->last = p_command_token->next;
 }
 
-char	**lmt_process_argv(t_lmt_process *p_process)
-{
-	return (p_process->token_sublist->first->array->array);
-}
-
-int	lmt_process_execute_builtin(t_lmt_process *p_process)
+//	(가명) seonkim_builtin_function(t_handler) 를 호출하는 함수이다
+//	parent 가 command 를 실행하는 함수를 호출하여
+//	parent 상에서 command 가 실행한다
+//	앞 lmt_process 의 op 가 '|' 가 아니고,
+//	현재 lmt_process 의 op 가 '||' 나 '&&' 이거나 'TYPE_NONE' 인 경우
+//	builtin command 는 parent 상에서 실행되어야 한다
+//	저번에 zsh 과 bash 에서 'cd ..' 의 차이가 나는 부분은 '|' 뿐이었다
+int	lmt_process_execute_parent(t_lmt_process *p_process, t_handler *p_handler)
 {
 	int	return_value;
 
 	lmt_process_set(p_process);
 	lmt_process_backup_redirection_list(p_process);
 	return_value = 0;
-//	return_value = call_builtin_function(lmt_process_argv(p_process)[0]);
+	(void)p_handler;
+//	return_value = seonkim_builtin_function(p_handler);
 	lmt_process_backdown_redirection_list(p_process);
 	return (return_value);
 }
 
-static void	lmt_process_execute_child(t_lmt_process *p_process, char **env)
+//	process_line(p_handler) 를 호출하는 함수이다
+//	lmt_process_list_set_by_token_sublist() 에서 설정한
+//	lmt_process 의 type 에 따라 바로 명령을 실행하기도 하고
+//	재귀적으로 다시 lmt_process_manager_execute() 를 호출하기도 한다
+void	lmt_process_execute_child(t_lmt_process *p_process, t_handler *p_handler)
 {
 	int	ret;
 
+	p_process->pid = fork();
+	if (p_process->pid > 0)
+		return ;
 	if (p_process->type == TYPE_PROCESS_NORMAL)
 	{
 		lmt_process_set(p_process);
 		lmt_process_apply_redirection_list(p_process);
-		if (1 /* if p_process->argv[0] is external_command */)
-			execve(lmt_process_argv(p_process)[0] /* get_real_path(*p_process->argv) */, lmt_process_argv(p_process), env);
-		else
-		{
-			printf("[%s: Enter message for not a command error] \n", lmt_process_argv(p_process)[0]);
-			exit(127);
-		}
+		process_line(p_handler, p_handler->env);
 	}
-	else if (p_process->type == TYPE_PROCESS_SHELL)
+	else if (p_process->type == TYPE_PROCESS_SUBSHELL)
 	{
 		lmt_process_apply_redirection_list(p_process);
-		ret = lmt_process_manager_execute(p_process->token_sublist, env);
+		ret = lmt_process_manager_execute_token_sublist(p_handler, p_process->token_sublist);
 		exit(ret);
 	}
 	else
 		lmt_exit(-1, LMT_WRONG_PATH);
-}
-
-void	lmt_process_execute(t_lmt_process *p_process, char **env)
-{
-	p_process->pid = fork();
-	if (p_process->pid == 0)
-		lmt_process_execute_child(p_process, env);
 }

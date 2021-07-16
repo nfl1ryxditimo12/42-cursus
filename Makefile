@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/07/14 13:34:49 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/07/16 18:06:45 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,16 +35,13 @@ SRCS		:= \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_manager_method.c \
-			   jeonpark/lmt_process_manager/t_lmt_process_manager_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_redirection_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_redirection_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_redirection_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_redirection_list_type.c \
-			   jeonpark/lmt_tokenization/t_lmt_token.c \
-			   jeonpark/lmt_tokenization/t_lmt_token_list_method.c \
-			   jeonpark/lmt_tokenization/t_lmt_token_list_type.c \
+			   jeonpark/lmt_tokenization/lmt_tokenize.c \
 			   jeonpark/lmt_tokenization/t_lmt_token_sublist.c \
 			   jeonpark/lmt_util/lmt_alloc.c \
 			   jeonpark/lmt_util/lmt_atoi.c \

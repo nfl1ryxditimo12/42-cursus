@@ -6,12 +6,14 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:03:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 17:02:51 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/16 17:55:05 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "t_lmt_process_manager.h"
+#include "t_lmt_token_sublist.h"
+#include "lmt_util.h"
+#include "minishell.h"
 
 //	stdlib.h: free()
 
@@ -20,14 +22,13 @@ static t_lmt_token_sublist	*lmt_token_sublist_alloc(void)
 	return (lmt_alloc(sizeof(t_lmt_token_sublist)));
 }
 
-static void	lmt_token_sublist_init(t_lmt_token_sublist *sublist, t_lmt_token *first, t_lmt_token *last)
+static void	lmt_token_sublist_init(t_lmt_token_sublist *sublist, t_token *first, t_token *last)
 {
 	sublist->first = first;
 	sublist->last = last;
-
 }
 
-t_lmt_token_sublist	*lmt_token_sublist_new(t_lmt_token *first, t_lmt_token *last)
+t_lmt_token_sublist	*lmt_token_sublist_new(t_token *first, t_token *last)
 {
 	t_lmt_token_sublist	*sublist;
 

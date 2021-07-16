@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 11:59:38 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 18:24:25 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:37:27 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	lmt_process_list_free(t_lmt_process_list *list);
 //	method function
 void	lmt_process_list_append(t_lmt_process_list *list, t_lmt_process *p_process);
 void	lmt_process_list_set_by_token_sublist(t_lmt_process_list *list, t_lmt_token_sublist *sublist);
-int	lmt_process_list_execute(t_lmt_process_list *list, char **env);
+int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *p_handler);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:57 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/14 11:20:39 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/16 17:47:43 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	lmt_redirection_free(t_lmt_redirection *p_lmt_redirection, int option);
 
 //	meethod function
 void	lmt_redirection_apply(t_lmt_redirection *p_redirection);
-t_lmt_redirection	*lmt_redirection_new_by_string_array(t_lmt_string_array *array);
+t_lmt_redirection	*lmt_redirection_new_by_token(t_token *p_token);
 int	lmt_redirection_backup(t_lmt_redirection *p_redirection);
 
 #endif
