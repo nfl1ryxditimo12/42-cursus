@@ -6,27 +6,47 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 17:51:55 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/16 21:15:10 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_lmt_process_manager.h"
 
+//	lmt_process 의 redirection_list 의 redirection 들을 적용시키는 함수
 static void	lmt_process_apply_redirection_list(t_lmt_process *p_process)
 {
 	lmt_redirection_list_apply(p_process->redirection_list);
 }
 
+//	lmt_process 의 redirection_list 의 redirection 들을 적용시키고
+//	redirection 을 적용시키기 전 상태로 되돌리기 위해
+//	undo_list 를 설정하는 함수
+//
+//	- 추가 설명:
+//	lmt_process_execute_parent() 의 주석에서 설명한 것과 같이
+//	bash 에서도 특정 상태의 builtin command 는 parent 에서 실행되어야 하며
+//	이 때 만약 해당 command 에 redirection type 의 token 과 함께 있다면
+//	redirection 을 적용한 상태로 command 를 실행한 뒤,
+//	다시 원래 상태로 fd 의 연결을 되돌려줄 필요가 있다
 static void	lmt_process_backup_redirection_list(t_lmt_process *p_process)
 {
-	lmt_redirection_list_backup(p_process->redirection_list);
+	t_lmt_redirection_list	*undo_list;
+
+	undo_list = lmt_redirection_list_backup(p_process->redirection_list);
+	lmt_redirection_list_free(p_process->redirection_list, REDIRECTION_FREE_NORMAL);
+	p_process->redirection_list = undo_list;
 }
 
+//	backup 한 redirection_list 를 다시 원래 상태로 되돌리기 위해
+//	호출하는 함수
 static void	lmt_process_backdown_redirection_list(t_lmt_process *p_process)
 {
+//	지금은 작동이 이상한 것 같아 수정이 필요하다
 	lmt_redirection_list_backdown(p_process->redirection_list);
 }
 
+//	lmt_process 의 redirection_list 에 새로운 redirection node 를
+//	append 할 때 호출할 목적으로 만든 함수
 void	lmt_process_append_redirection(t_lmt_process *p_process, t_lmt_redirection *p_redirection)
 {
 	lmt_redirection_list_append(p_process->redirection_list, p_redirection);

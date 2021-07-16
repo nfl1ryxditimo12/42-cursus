@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 17:45:42 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/16 20:31:29 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 //	sys/wait.h: waitpid()
 
-//	push 가 top 에 node 를 붙인다면 append 는 bottom 에 새로운 노드를 추가한다
+//	push 가 top 에 새로운 node 를 추가한다면, append 는 bottom 에 새로운 노드를 추가한다
 void	lmt_process_list_append(t_lmt_process_list *list, t_lmt_process *p_process)
 {
 	list->last->next = p_process;
@@ -23,7 +23,7 @@ void	lmt_process_list_append(t_lmt_process_list *list, t_lmt_process *p_process)
 	list->last = p_process;
 }
 
-//	정상적으로 실행된 자식 프로세스를 기다리는 함수
+//	정상적으로 fork 된 자식 프로세스를 기다리는 함수
 static int	lmt_process_list_wait(t_lmt_process_list *list)
 {
 	t_lmt_process	*iterator;

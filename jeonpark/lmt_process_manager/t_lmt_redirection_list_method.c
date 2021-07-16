@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 15:32:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/14 12:56:52 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/16 21:06:10 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 //	stddef.h: NULL
 
+//	새로운 노드를 p_dummy(통상 말하는 'top' 의 앞에 있는 node) 바로 뒤에 추가하는 함수
 void	lmt_redirection_list_push(t_lmt_redirection_list *list, t_lmt_redirection *p_redirection)
 {
 	p_redirection->next = list->p_dummy->next;
@@ -23,6 +24,7 @@ void	lmt_redirection_list_push(t_lmt_redirection_list *list, t_lmt_redirection *
 		list->last = p_redirection;
 }
 
+//	새로운 노드를 last(push_swap 에서 bottom 급) 바로 뒤에 추가하는 함수
 void	lmt_redirection_list_append(t_lmt_redirection_list *list, t_lmt_redirection *p_redirection)
 {
 	list->last->next = p_redirection;
@@ -30,6 +32,7 @@ void	lmt_redirection_list_append(t_lmt_redirection_list *list, t_lmt_redirection
 	list->last = p_redirection;
 }
 
+//	lmt_redirection_list 의 lmt_redirection 들을 적용시키는 함수
 void	lmt_redirection_list_apply(t_lmt_redirection_list *list)
 {
 	t_lmt_redirection	*iterator;
@@ -42,7 +45,9 @@ void	lmt_redirection_list_apply(t_lmt_redirection_list *list)
 	}
 }
 
-///	Applies parameter 'list' and returns a redirection list for undo
+//	Applies parameter 'list' and returns a redirection list for undo
+//	lmt_redirection_list 를 적용시키고 undo(마치 'command-z' 처럼 되돌리는 작업) 하기 위한
+//	lmt_redirection_list 를 생성하여 반환하는 함수
 t_lmt_redirection_list	*lmt_redirection_list_backup(t_lmt_redirection_list *list)
 {
 	t_lmt_redirection		*iterator;
@@ -62,8 +67,11 @@ t_lmt_redirection_list	*lmt_redirection_list_backup(t_lmt_redirection_list *list
 	return (ret_list);
 }
 
+//	undo 를 위해 생성된 lmt_redirection_list 를 인자로 받아서
+//	apply 후 free 를 하는 함수
 void	lmt_redirection_list_backdown(t_lmt_redirection_list *list)
 {
+//	free 는 왜 하지? 생각을 더 해봐야겠다
 	lmt_redirection_list_apply(list);
 	lmt_redirection_list_free(list, REDIRECTION_FREE_NORMAL);
 }

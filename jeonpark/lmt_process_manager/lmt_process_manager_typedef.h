@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lmt_process_manager_typedef.h                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/16 21:10:13 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/07/16 21:10:19 by jeonpark         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LMT_PROCESS_MANAGER_TYPEDEF_H
 # define LMT_PROCESS_MANAGER_TYPEDEF_H
 

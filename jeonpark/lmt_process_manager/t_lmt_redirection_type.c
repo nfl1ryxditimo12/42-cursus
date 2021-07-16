@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/14 11:31:20 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/16 21:06:57 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ t_lmt_redirection	*lmt_redirection_new(int fd_old, int type, int fd_new, const c
 	return (p_redirection);
 }
 
+//	- 인자:
+//		- p_redirection: free 할 lmt_redirection
+//		- option:
+//			- REDIRECTION_FREE_NORMAL: 각 redirection 의 fd_new 를 close 하지 않는다
+//			- REDIRECTION_FREE_FD: 각 redirection 의 fd_new 를 close 한다
 void	lmt_redirection_free(t_lmt_redirection *p_redirection, int option)
 {
 	if (option == REDIRECTION_FREE_FD)
