@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/07/16 18:06:45 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/07/17 11:44:22 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,6 @@ SRCS		:= \
 			   jeonpark/lmt_util/lmt_unsafe_memcmp.c \
 			   jeonpark/lmt_util/lmt_unsafe_strcmp.c \
 			   jeonpark/lmt_util/lmt_unsafe_strlen.c \
-			   jeonpark/lmt_util/t_lmt_string_array.c \
 			   main.c
 OBJS		:= $(SRCS:.c=.o)
 

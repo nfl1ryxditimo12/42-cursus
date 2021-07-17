@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/14 13:20:32 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/16 21:20:22 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LMT_UTIL_H
 
 # include <stddef.h>
-# include "t_lmt_string_array.h"
 # include "lmt_constant.h"
 # include "lmt_check_type.h"
 
