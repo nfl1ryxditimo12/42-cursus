@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 13:32:17 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 21:07:01 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	lmt_process_list_init(t_lmt_process_list *list)
 	p_dummy->next = NULL;
 	list->p_dummy = p_dummy;
 	list->last = p_dummy;
-	list->redirection_to_close_list = lmt_redirection_list_new();
 }
 
 t_lmt_process_list	*lmt_process_list_new(void)
@@ -54,6 +53,5 @@ void	lmt_process_list_free(t_lmt_process_list *list)
 		iterator = next;
 		next = iterator->next;
 	}
-	lmt_redirection_list_free(list->redirection_to_close_list, REDIRECTION_FREE_FD);
 	free(list);
 }

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 13:32:40 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 22:29:21 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *p_handler)
 			lmt_process_execute_child(iterator, p_handler);
 			close(fd_pipe[PIPE_WRITE]);
 			p_redirection = lmt_redirection_new(-1, -1, fd_pipe[PIPE_READ], NULL);
-			lmt_redirection_list_append(list->redirection_to_close_list, p_redirection);
 		}
 //	pipe 를 제외한 모든 op 에 대해 builtin command 가 parent 에서 실행되는 것이 아니다
 //	이전 process 의 op 가 pipe 인지 확인하도록 수정하자
@@ -143,10 +142,16 @@ int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *p_handler)
 		{
 			lmt_process_set(iterator);
 			if (0 /* is_builtin(lmt_process_argv(iterator)[0]) */)
+			{
 				exit_code = lmt_process_execute_parent(iterator, p_handler);
+				if (iterator->prev->op == TYPE_OPERATOR_PIPE)
+					close(iterator->redirection_list->p_dummy->next->fd_new);
+			}
 			else
 			{
 				lmt_process_execute_child(iterator, p_handler);
+				if (iterator->prev->op == TYPE_OPERATOR_PIPE)
+					close(iterator->redirection_list->p_dummy->next->fd_new);
 				waitpid(iterator->pid, &stat_loc, 0);
 				exit_code = lmt_get_exit_code_from_stat_loc(stat_loc);
 			}
@@ -158,7 +163,11 @@ int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *p_handler)
 			}
 		}
 		else
+		{
 			lmt_process_execute_child(iterator, p_handler);
+			if (iterator->prev->op == TYPE_OPERATOR_PIPE)
+				close(iterator->redirection_list->p_dummy->next->fd_new);
+		}
 		iterator = iterator->next;
 	}
 	exit_code = lmt_process_list_wait(list);
