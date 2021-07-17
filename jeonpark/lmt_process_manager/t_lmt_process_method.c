@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 12:20:40 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 21:59:57 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	lmt_process_execute_parent(t_lmt_process *p_process, t_handler *p_handler)
 
 	lmt_process_set(p_process);
 	lmt_process_backup_redirection_list(p_process);
-	return_value = 0;
+	return_value = EXIT_STATUS_NORMAL;
 	(void)p_handler;
 //	return_value = seonkim_builtin_function(p_handler);
 	lmt_process_backdown_redirection_list(p_process);

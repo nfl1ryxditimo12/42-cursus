@@ -6,12 +6,15 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 11:27:29 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 21:57:35 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LMT_CONSTANT_H
 # define LMT_CONSTANT_H
+
+# define LMT_FALSE	0
+# define LMT_TRUE	1
 
 # define PARSE_SUCCESS	0
 # define PARSE_FAIL		1
@@ -59,8 +62,7 @@
 # define TYPE_DELIMITER				0x00000380
 
 //	exit status
-# define EXIT_STATUS_TRUE	0
-# define EXIT_STATUS_FALSE	1
+# define EXIT_STATUS_NORMAL	0
 
 # define LMT_WRONG_PATH	"WRONG PATH \n"
 

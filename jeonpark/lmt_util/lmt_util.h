@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 21:20:22 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 22:21:50 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "lmt_check_type.h"
 
 void	*lmt_alloc(size_t size);
-int	lmt_return_error(char *string);
+int	lmt_return_error(int exit_status, char *string);
 void	lmt_exit(int exit_code, char *string);
 int	lmt_atoi(char *string, int *p_result);
 size_t	lmt_unsafe_strlen(const char *p_string);

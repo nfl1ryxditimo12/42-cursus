@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 11:49:48 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 21:47:05 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 void	lmt_exit(int exit_code, char *string)
 {
 	if (string != NULL)
-		write(2, string, lmt_unsafe_strlen(string));
+		write(FD_ERR, string, lmt_unsafe_strlen(string));
 	exit(exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 15:32:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 13:24:04 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 21:49:56 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_lmt_redirection_list	*lmt_redirection_list_alloc(void)
 
 static void	lmt_redirection_list_init(t_lmt_redirection_list *list)
 {
-	list->p_dummy = lmt_redirection_new(TYPE_NONE, -1, -1, NULL);
+	list->p_dummy = lmt_redirection_new(FD_NONE, TYPE_NONE, FD_NONE, NULL);
 	list->last = list->p_dummy;
 }
 

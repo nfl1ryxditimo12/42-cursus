@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 17:54:16 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 21:48:46 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	lmt_redirection_apply(t_lmt_redirection *p_redirection)
 		else
 		{
 			lmt_exit(-1, LMT_WRONG_PATH);
-			fd_new = -1;
+			fd_new = FD_NONE;
 		}
-		if (fd_new == -1)
+		if (fd_new == FD_NONE)
 			lmt_exit(-1, NULL);
 		dup2(fd_new, p_redirection->fd_old);
 		close(fd_new);
@@ -60,9 +60,9 @@ int	lmt_redirection_backup(t_lmt_redirection *p_redirection)
 		else
 		{
 			lmt_exit(-1, LMT_WRONG_PATH);
-			fd_new = -1;
+			fd_new = FD_NONE;
 		}
-		if (fd_new == -1)
+		if (fd_new == FD_NONE)
 			lmt_exit(-1, NULL);
 		duplicated_fd = dup(p_redirection->fd_old);
 		dup2(fd_new, p_redirection->fd_old);
@@ -84,14 +84,14 @@ t_lmt_redirection	*lmt_redirection_new_by_token(t_token *p_token)
 	int					fd_new;
 	char				*path_new;
 
-	fd_old = -1;
-	fd_new = -1;
+	fd_old = FD_NONE;
+	fd_new = FD_NONE;
 	path_new = NULL;
 	if (!lmt_is_token_type_redirection(p_token))
 		return (NULL);
 	if (p_token->size == 2)
 	{
-		fd_new = -1;
+		fd_new = FD_NONE;
 		if (p_token->type == TYPE_REDIRECTION_IN)
 			fd_old = FD_IN;
 		else if (p_token->type == TYPE_REDIRECTION_WORD)
@@ -106,7 +106,7 @@ t_lmt_redirection	*lmt_redirection_new_by_token(t_token *p_token)
 	}
 	else if (p_token->size == 3)
 	{
-		fd_new = -1;
+		fd_new = FD_NONE;
 		if (lmt_atoi(p_token->token[0], &fd_old) == PARSE_FAIL)
 			lmt_exit(-1, LMT_WRONG_PATH);
 		else
