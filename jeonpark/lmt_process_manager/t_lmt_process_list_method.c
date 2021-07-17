@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 20:31:29 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 12:20:04 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	lmt_process_list_set_by_token_sublist(t_lmt_process_list *list, t_lmt_token
 	int					process_type;
 
 	iterator = sublist->first;
-	while (iterator != sublist->last)
+	while (iterator != sublist->terminator)
 	{
 		if (iterator->type == TYPE_PARENTHESIS_OPEN)
 		{

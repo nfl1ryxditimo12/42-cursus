@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 21:15:10 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 12:20:40 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	lmt_process_set(t_lmt_process *p_process)
 	t_lmt_redirection	*p_element;
 
 	iterator = p_process->token_sublist->first;
-	while (iterator != p_process->token_sublist->last)
+	while (iterator != p_process->token_sublist->terminator)
 	{
 		if (iterator->type == TYPE_COMMAND)
 			p_command_token = iterator;
@@ -75,7 +75,7 @@ void	lmt_process_set(t_lmt_process *p_process)
 		iterator = iterator->next;
 	}
 	p_process->token_sublist->first = p_command_token;
-	p_process->token_sublist->last = p_command_token->next;
+	p_process->token_sublist->terminator = p_command_token->next;
 }
 
 //	(가명) seonkim_builtin_function(t_handler) 를 호출하는 함수이다
