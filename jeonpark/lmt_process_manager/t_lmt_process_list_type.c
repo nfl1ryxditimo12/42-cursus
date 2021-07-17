@@ -6,14 +6,14 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 18:28:39 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 13:32:17 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "t_lmt_process_manager.h"
 
-//	stdlib.h: free()
+//	stdlib.h: free(), NULL
 
 static t_lmt_process_list	*lmt_process_list_alloc(void)
 {
@@ -22,8 +22,13 @@ static t_lmt_process_list	*lmt_process_list_alloc(void)
 
 static void	lmt_process_list_init(t_lmt_process_list *list)
 {
-	list->p_dummy = lmt_process_new(TYPE_NONE, NULL, TYPE_NONE);
-	list->last = list->p_dummy;
+	t_lmt_process	*p_dummy;
+
+	p_dummy = lmt_process_new(TYPE_NONE, NULL, TYPE_NONE);
+	p_dummy->prev = NULL;
+	p_dummy->next = NULL;
+	list->p_dummy = p_dummy;
+	list->last = p_dummy;
 	list->redirection_to_close_list = lmt_redirection_list_new();
 }
 

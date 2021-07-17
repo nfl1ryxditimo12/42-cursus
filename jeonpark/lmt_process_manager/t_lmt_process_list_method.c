@@ -6,21 +6,24 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 12:20:04 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 13:32:40 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
 #include <sys/wait.h>
 #include "t_lmt_process_manager.h"
 
+//	stddef.h: NULL
 //	sys/wait.h: waitpid()
 
 //	push 가 top 에 새로운 node 를 추가한다면, append 는 bottom 에 새로운 노드를 추가한다
-void	lmt_process_list_append(t_lmt_process_list *list, t_lmt_process *p_process)
+void	lmt_process_list_append(t_lmt_process_list *list, t_lmt_process *element)
 {
-	list->last->next = p_process;
-	p_process->next = NULL;
-	list->last = p_process;
+	element->prev = list->last;
+	element->next = NULL;
+	list->last->next = element;
+	list->last = element;
 }
 
 //	정상적으로 fork 된 자식 프로세스를 기다리는 함수

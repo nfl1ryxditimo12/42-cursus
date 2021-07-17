@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:43 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 16:38:59 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 13:25:25 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 
 typedef struct s_lmt_process
 {
-	int	type;
-	t_lmt_token_sublist	*token_sublist;
+	int						type;
+	t_lmt_token_sublist		*token_sublist;
+	int						op;
 	t_lmt_redirection_list	*redirection_list;
-	int	op;
-	pid_t	pid;
+	pid_t					pid;
+	struct s_lmt_process	*prev;
 	struct s_lmt_process	*next;
 }	t_lmt_process;
 
