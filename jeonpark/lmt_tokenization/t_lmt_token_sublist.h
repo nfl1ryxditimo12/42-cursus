@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:03:05 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 12:15:48 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 21:03:41 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "minishell.h"
 
+//	시작 t_token 과 끝 t_token 을 담아두는 구조체
+//	실제 t_token 은 건들이지 않으면서
+//	시작과 끝을 마킹하는 용도로 사용한다
 typedef struct s_lmt_token_sublist
 {
 	t_token	*first;

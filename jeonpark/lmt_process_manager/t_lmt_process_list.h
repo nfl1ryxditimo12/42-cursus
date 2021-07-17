@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 11:59:38 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 16:37:27 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 21:01:21 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "lmt_process_manager_typedef.h"
 
+//	lmt_process 들을 list 로 담아 놓는 구조체
 typedef struct s_lmt_process_list
 {
 	t_lmt_process	*p_dummy;

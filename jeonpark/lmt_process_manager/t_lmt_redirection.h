@@ -6,13 +6,14 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:57 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 17:47:43 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/17 21:01:44 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef T_LMT_REDIRECTION_H
 # define T_LMT_REDIRECTION_H
 
+//	redirection 을 처리하기 위한 정보를 담고 있는 구조체
 typedef struct s_lmt_redirection
 {
 	int	fd_old;
