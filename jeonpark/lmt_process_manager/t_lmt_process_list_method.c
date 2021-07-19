@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 22:29:58 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/19 11:59:24 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,17 +125,8 @@ int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *p_handler)
 	while (iterator != NULL)
 	{
 		if (iterator->op == TYPE_OPERATOR_PIPE)
-		{
-			if (pipe(fd_pipe) == -1)
-				lmt_exit(0, "Pipe error has occured \n");
-			p_redirection = lmt_redirection_new(FD_OUT, TYPE_NONE, fd_pipe[PIPE_WRITE], NULL);
-			lmt_process_append_redirection(iterator, p_redirection);
-			p_redirection = lmt_redirection_new(FD_IN, TYPE_NONE, fd_pipe[PIPE_READ], NULL);
-			lmt_process_append_redirection(iterator->next, p_redirection);
+			lmt_process_append_pipe_redirection(iterator);
 			lmt_process_execute_child(iterator, p_handler);
-			close(fd_pipe[PIPE_WRITE]);
-			p_redirection = lmt_redirection_new(FD_NONE, TYPE_NONE, fd_pipe[PIPE_READ], NULL);
-		}
 //	pipe 를 제외한 모든 op 에 대해 builtin command 가 parent 에서 실행되는 것이 아니다
 //	이전 process 의 op 가 pipe 인지 확인하도록 수정하자
 		else if (iterator->op != TYPE_NONE)

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 21:59:57 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/19 12:03:30 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,19 @@ static void	lmt_process_backdown_redirection_list(t_lmt_process *p_process)
 void	lmt_process_append_redirection(t_lmt_process *p_process, t_lmt_redirection *p_redirection)
 {
 	lmt_redirection_list_append(p_process->redirection_list, p_redirection);
+}
+
+int	lmt_process_append_pipe_redirection(t_lmt_process *p_process)
+{
+	int					fd_pipe[2];
+	t_lmt_redirection	*p_redirection;
+
+	if (pipe(fd_pipe) == -1)
+		lmt_exit(0, "Pipe error has occured \n");
+	p_redirection = lmt_redirection_new(FD_OUT, TYPE_NONE, fd_pipe[PIPE_WRITE], NULL);
+	lmt_process_append_redirection(p_process, p_redirection);
+	p_redirection = lmt_redirection_new(FD_IN, TYPE_NONE, fd_pipe[PIPE_READ], NULL);
+	lmt_process_append_redirection(p_process->next, p_redirection);
 }
 
 //	lmt_process 의 token_sublist 를 순차적으로 돌면서

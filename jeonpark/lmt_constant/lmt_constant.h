@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 21:57:35 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/19 12:01:56 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # define REDIRECTION_FREE_FD		1
 
 //	lmt_process/type
-# define TYPE_PROCESS_NORMAL	0
-# define TYPE_PROCESS_SUBSHELL	1
+# define TYPE_PROCESS_NORMAL	2
+# define TYPE_PROCESS_SUBSHELL	3
 
 //	t_token/type
 //	lmt_process/op
