@@ -2,26 +2,26 @@ import sys
 
 def periodic_table():
     html_text = """\
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Periodic Table</title>
-        <style>
-            .text-center {
-                text-align: center;
-            }
-            
-            .box {
-                width: 150px;
-            }
-        </style>
-    </head>
-    <body>
-        <div>
-            <table>
-                <tr>
-    """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Periodic Table</title>
+    <style>
+        .text-center {
+            text-align: center;
+        }
+        
+        .box {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+"""
 
     r = open('periodic_table.txt', 'r')
     data = list(filter(None, r.read().split('\n')))
