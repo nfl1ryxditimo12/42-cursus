@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 def my_sort():
     d = {
     'Hendrix' : '1942',

@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 class Text(str):
     def __str__(self):
         return super().__str__().replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace('\n', '\n<br />\n')

@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import sys
 
 def is_states(state):

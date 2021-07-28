@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 class HotBeverage:
     def __init__(self) -> None:
         self.name = "hot beverage"

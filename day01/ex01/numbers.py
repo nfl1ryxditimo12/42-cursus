@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 def numbers():
     r = open('numbers.txt', 'r')
     data = r.read()

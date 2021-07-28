@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from elem import Elem, Text
 
 class Html(Elem):
