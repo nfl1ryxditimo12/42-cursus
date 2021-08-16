@@ -152,12 +152,12 @@ char    *process_comma(char *line, char *dir)
         ret = ft_strdup(".");
     else if (comma == 2)
         ret = (pre_dir(dir));
-	else
-		return (0);
+    else
+	return (0);
     if (opendir(ret))
-		return (ret);
-	else
-		return (ft_strdup("/"));
+	return (ret);
+    else
+	return (ft_strdup("/"));
 }
 
 void	process_cd(char *line, char **env)
@@ -175,16 +175,31 @@ void	process_cd(char *line, char **env)
         dir = home_dir(env);
     else if (*line == '.')
         dir = process_comma(line, name);
-	else if (*line == '/')
-		dir = ft_strdup(line);
-	else
-		dir = connect_dir(name, line);
+    else if (*line == '/')
+	dir = ft_strdup(line);
+    else
+	dir = connect_dir(name, line);
     if (chdir(dir))
         perror(dir);
     else
         getcwd(name, 1024);
 	free(dir);
 	printf("After DIR : %s\n", name);
+}
+
+void	process_clear(char **env)
+{
+	int pid;
+	int status;
+	char *clear[2];
+
+	clear[0] = "clear";
+	clear[1] = 0;
+	pid = fork();
+	if (!pid)
+		execve("/usr/bin/clear", clear, 0);
+	else
+		waitpid(pid, &status, 0);
 }
 
 int		main(int ac, char **av, char **env)
@@ -203,5 +218,8 @@ int		main(int ac, char **av, char **env)
 		if (line[0] == 'l')
 			if (line [1] == 's')
 				process_ls(env);
+		if (line[0] == 'c')
+			if (line[1] == 'l')
+				process_clear(env);
 	}
 }
