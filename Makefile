@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/07/17 11:44:22 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/04 17:33:58 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,9 +66,8 @@ ABSTRACT_INCLUDE	:= \
 			   jeonpark/lmt_describer \
 			   jeonpark/lmt_process_manager \
 			   jeonpark/lmt_util \
-			   jeonpark/lmt_tokenization \
-			   .
-INCLUDE		:= $(addprefix -I ,$(ABSTRACT_INCLUDE))
+			   jeonpark/lmt_tokenization
+INCLUDE		:= $(addprefix -I ,$(ABSTRACT_INCLUDE)) \
 
 LIBRARY		:= -L $(READLINE_DIR)/lib -l readline
 

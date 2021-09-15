@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/19 12:03:30 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/07/23 15:52:21 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ void	lmt_process_append_redirection(t_lmt_process *p_process, t_lmt_redirection 
 	lmt_redirection_list_append(p_process->redirection_list, p_redirection);
 }
 
+//	pipe 를 연결하는 작동을 수행하도록 현재 lmt_process 와
+//	다음 lmt_process 의 redirection_list 에 pipe() 로 받아온
+//	fd 값이 설정된 lmt_redirection 을 생성하여 append 해준다
 int	lmt_process_append_pipe_redirection(t_lmt_process *p_process)
 {
 	int					fd_pipe[2];
@@ -67,7 +70,7 @@ int	lmt_process_append_pipe_redirection(t_lmt_process *p_process)
 
 //	lmt_process 의 token_sublist 를 순차적으로 돌면서
 //	redirection 들을 list 에 추가한다
-void	lmt_process_set(t_lmt_process *p_process)
+static void	lmt_process_set(t_lmt_process *p_process)
 {
 	t_token				*iterator;
 	t_token				*p_command_token;
@@ -117,11 +120,24 @@ int	lmt_process_execute_parent(t_lmt_process *p_process, t_handler *p_handler)
 //	재귀적으로 다시 lmt_process_manager_execute() 를 호출하기도 한다
 void	lmt_process_execute_child(t_lmt_process *p_process, t_handler *p_handler)
 {
-	int	ret;
+	int					ret;
+	t_lmt_redirection	*p_redirection;
 
 	p_process->pid = fork();
+	if (p_process->pid == -1)
+		lmt_exit(0, "Fork error has occured \n");
 	if (p_process->pid > 0)
+	{
+		p_redirection = p_process->redirection_list->p_dummy->next;
+		if (p_process->prev->op == TYPE_OPERATOR_PIPE)
+		{
+			close(p_redirection->fd_new);
+			p_redirection = p_redirection->next;
+		}
+		if (p_process->op == TYPE_OPERATOR_PIPE)
+			close(p_redirection->fd_new);
 		return ;
+	}
 	if (p_process->type == TYPE_PROCESS_NORMAL)
 	{
 		lmt_process_set(p_process);
