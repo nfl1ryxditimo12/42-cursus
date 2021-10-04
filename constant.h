@@ -6,18 +6,12 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/19 12:01:56 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/04 20:09:25 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_CONSTANT_H
-# define LMT_CONSTANT_H
-
-# define LMT_FALSE	0
-# define LMT_TRUE	1
-
-# define PARSE_SUCCESS	0
-# define PARSE_FAIL		1
+#ifndef CONSTANT_H
+# define CONSTANT_H
 
 # define FD_NONE	-1
 # define FD_IN		0
@@ -27,14 +21,6 @@
 //	t_lmt_command_list_execute()/fd_pipe[]/index
 # define PIPE_READ	0
 # define PIPE_WRITE	1
-
-//	lmt_redirection_free()/option
-# define REDIRECTION_FREE_NORMAL	0
-# define REDIRECTION_FREE_FD		1
-
-//	lmt_process/type
-# define TYPE_PROCESS_NORMAL	2
-# define TYPE_PROCESS_SUBSHELL	3
 
 //	t_token/type
 //	lmt_process/op
@@ -60,10 +46,5 @@
 # define TYPE_COMMAND				0X00000006
 # define TYPE_REDIRECTION			0x00000078
 # define TYPE_DELIMITER				0x00000380
-
-//	exit status
-# define EXIT_STATUS_NORMAL	0
-
-# define LMT_WRONG_PATH	"WRONG PATH \n"
 
 #endif

@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/04 17:40:02 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/04 20:18:04 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,6 @@ ABSTRACT_INCLUDE	:= \
 			   $(READLINE_DIR)/include \
 			   . \
 			   jeonpark \
-			   jeonpark/lmt_constant \
 			   jeonpark/lmt_describer \
 			   jeonpark/lmt_process_manager \
 			   jeonpark/lmt_util \

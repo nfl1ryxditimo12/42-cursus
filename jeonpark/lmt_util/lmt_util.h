@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 22:21:50 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/04 20:11:53 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LMT_UTIL_H
 
 # include <stddef.h>
-# include "lmt_constant.h"
+# include "constant.h"
 # include "lmt_check_type.h"
 
 void	*lmt_alloc(size_t size);
