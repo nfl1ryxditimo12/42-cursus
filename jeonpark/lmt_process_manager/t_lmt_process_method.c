@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/23 15:52:21 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/04 19:26:54 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	lmt_process_append_pipe_redirection(t_lmt_process *p_process)
 	lmt_process_append_redirection(p_process, p_redirection);
 	p_redirection = lmt_redirection_new(FD_IN, TYPE_NONE, fd_pipe[PIPE_READ], NULL);
 	lmt_process_append_redirection(p_process->next, p_redirection);
+	//	에러를 없애기 위해 임시 추가
+	return (0);
 }
 
 //	lmt_process 의 token_sublist 를 순차적으로 돌면서

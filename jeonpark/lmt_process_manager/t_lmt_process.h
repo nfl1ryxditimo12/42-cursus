@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:43 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 21:38:01 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/04 19:23:20 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			lmt_process_free(t_lmt_process *p_process);
 
 //	method function
 void	lmt_process_append_redirection(t_lmt_process *p_process, t_lmt_redirection *p_redirection);
-void	lmt_process_set(t_lmt_process *p_process);
+int		lmt_process_append_pipe_redirection(t_lmt_process *p_process);
 int	lmt_process_execute_parent(t_lmt_process *p_process, t_handler *p_handler);
 void	lmt_process_execute_child(t_lmt_process *p_process, t_handler *p_handler);
 
