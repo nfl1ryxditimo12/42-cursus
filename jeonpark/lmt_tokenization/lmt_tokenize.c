@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 14:04:53 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 17:06:42 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/05 21:49:20 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "minishell.h"
 #include "lmt_constant.h"
 #include "lmt_util.h"
+
+int	lmt_is_token_word_out_of_range(char *word)
+{
+	return (*word == '\0');
+}
 
 int	lmt_is_token_type_operator(t_token *p_token)
 {

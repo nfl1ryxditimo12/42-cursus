@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:03:05 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 21:03:41 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/05 20:44:30 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@
 //	시작과 끝을 마킹하는 용도로 사용한다
 typedef struct s_lmt_token_sublist
 {
-	t_token	*first;
-	t_token	*terminator;
+	t_token	*token_first;
+	char	*word_first;
+	t_token	*token_current;
+	char	*word_current;
+	t_token	*token_last;
+	char	*word_terminator;
 }	t_lmt_token_sublist;
 
 //	타입 함수
