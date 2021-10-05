@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   lmt_c_library.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 14:14:53 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/05 13:43:45 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 14:44:39 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_UTIL_H
-# define LMT_UTIL_H
+#ifndef LMT_C_LIBRARY_H
+# define LMT_C_LIBRARY_H
 
-int	is_type_operator(int type);
-int	is_type_redirection(int type);
-int	lmt_get_exit_code_from_stat_loc(int stat_loc);
+# include "lmt_alloc.h"
+# include "lmt_io.h"
+# include "lmt_primitive_type.h"
+# include "lmt_sequence.h"
+# include "lmt_string.h"
+# include "lmt_unsafe.h"
 
 #endif

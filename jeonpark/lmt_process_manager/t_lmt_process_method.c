@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/04 19:26:54 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/05 12:28:16 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	lmt_process_backup_redirection_list(t_lmt_process *p_process)
 	t_lmt_redirection_list	*undo_list;
 
 	undo_list = lmt_redirection_list_backup(p_process->redirection_list);
-	lmt_redirection_list_free(p_process->redirection_list, REDIRECTION_FREE_NORMAL);
+	lmt_redirection_list_free(p_process->redirection_list, REDIRECTION_FREE);
 	p_process->redirection_list = undo_list;
 }
 
@@ -61,7 +61,7 @@ int	lmt_process_append_pipe_redirection(t_lmt_process *p_process)
 	t_lmt_redirection	*p_redirection;
 
 	if (pipe(fd_pipe) == -1)
-		lmt_exit(0, "Pipe error has occured \n");
+		exit(1);
 	p_redirection = lmt_redirection_new(FD_OUT, TYPE_NONE, fd_pipe[PIPE_WRITE], NULL);
 	lmt_process_append_redirection(p_process, p_redirection);
 	p_redirection = lmt_redirection_new(FD_IN, TYPE_NONE, fd_pipe[PIPE_READ], NULL);
@@ -89,7 +89,7 @@ static void	lmt_process_set(t_lmt_process *p_process)
 			lmt_redirection_list_append(p_process->redirection_list, p_element);
 		}
 		else
-			lmt_exit(-1, LMT_WRONG_PATH);
+			exit(1);
 		iterator = iterator->next;
 	}
 	p_process->token_sublist->first = p_command_token;
@@ -105,15 +105,15 @@ static void	lmt_process_set(t_lmt_process *p_process)
 //	저번에 zsh 과 bash 에서 'cd ..' 의 차이가 나는 부분은 '|' 뿐이었다
 int	lmt_process_execute_parent(t_lmt_process *p_process, t_handler *p_handler)
 {
-	int	return_value;
+	int	exit_code;
 
 	lmt_process_set(p_process);
 	lmt_process_backup_redirection_list(p_process);
-	return_value = EXIT_STATUS_NORMAL;
+	exit_code = 0;
 	(void)p_handler;
-//	return_value = seonkim_builtin_function(p_handler);
+//	exit_code = seonkim_builtin_function(p_handler);
 	lmt_process_backdown_redirection_list(p_process);
-	return (return_value);
+	return (exit_code);
 }
 
 //	process_line(p_handler) 를 호출하는 함수이다
@@ -127,7 +127,7 @@ void	lmt_process_execute_child(t_lmt_process *p_process, t_handler *p_handler)
 
 	p_process->pid = fork();
 	if (p_process->pid == -1)
-		lmt_exit(0, "Fork error has occured \n");
+		exit(1);
 	if (p_process->pid > 0)
 	{
 		p_redirection = p_process->redirection_list->p_dummy->next;
@@ -153,5 +153,5 @@ void	lmt_process_execute_child(t_lmt_process *p_process, t_handler *p_handler)
 		exit(ret);
 	}
 	else
-		lmt_exit(-1, LMT_WRONG_PATH);
+		exit(1);
 }

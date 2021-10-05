@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_unsafe_memcmp.c                                :+:      :+:    :+:   */
+/*   lmt_unsafe_strcpy.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/09 17:27:33 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/14 13:03:12 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/09/21 20:13:27 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/09/21 20:13:31 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lmt_util.h"
+#include "lmt_unsafe.h"
 
-int	lmt_unsafe_memcmp(char *lhs, char *rhs, size_t size)
+void	*lmt_unsafe_strcpy(char *p_write, const char *p_read)
 {
-	while (size-- > 1)
-	{
-		if (*lhs != *rhs)
-			return (lhs - rhs);
-		++lhs;
-		++rhs;
-	}
-	return (lhs - rhs);
+	while (*p_read != '\0')
+		*p_write++ = *p_read++;
+	return (p_write);
 }

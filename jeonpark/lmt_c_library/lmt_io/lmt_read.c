@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   lmt_read.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 14:14:53 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/09/01 13:32:40 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 13:48:41 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_UTIL_H
-# define LMT_UTIL_H
+#include <unistd.h>
+#include <stddef.h>
+#include <sys/types.h>
+#include <stdlib.h>
+#include "lmt_io.h"
 
-int	is_type_operator(int type);
-int	is_type_redirection(int type);
-int	lmt_get_exit_code_from_stat_loc(int stat_loc);
+ssize_t	lmt_read(int fd, void *buffer, size_t size)
+{
+	ssize_t	reads_len;
 
-#endif
+	reads_len = read(fd, buffer, size);
+	if (reads_len == -1)
+		exit(1);
+	return (reads_len);
+}

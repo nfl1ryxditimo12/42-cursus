@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   lmt_alloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 14:14:53 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/08/05 19:09:47 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 13:43:19 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_UTIL_H
-# define LMT_UTIL_H
+#include <stdlib.h>
+#include "lmt_alloc.h"
+#include "lmt_constant.h"
 
-int	is_type_operator(int type);
-int	is_type_redirection(int type);
-int	lmt_get_exit_code_from_stat_loc(int stat_loc);
+//	stdlib.h: malloc(), exit(), size_t, NULL
 
-#endif
+void	*lmt_alloc(size_t size)
+{
+	void	*p_address;
+
+	p_address = malloc(size);
+	if (p_address == NULL)
+		exit(1);
+	return (p_address);
+}

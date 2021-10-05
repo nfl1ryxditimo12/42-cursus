@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_unsafe_strlen.c                                :+:      :+:    :+:   */
+/*   lmt_put_ch.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/14 22:00:57 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 11:49:10 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/09/01 14:38:42 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 13:48:20 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include "lmt_util.h"
+#include <unistd.h>
+#include <sys/types.h>
+#include <stdlib.h>
+#include "lmt_io.h"
 
-size_t	lmt_unsafe_strlen(const char *p_string)
+void	lmt_put_ch(const char ch)
 {
-	const char	*p_string_ch;
+	ssize_t	return_value;
 
-	p_string_ch = p_string;
-	while (*p_string_ch != '\0')
-		++p_string_ch;
-	return (p_string_ch - p_string);
+	return_value = write(1, &ch, 1);
+	if (return_value == -1)
+		exit(1);
 }

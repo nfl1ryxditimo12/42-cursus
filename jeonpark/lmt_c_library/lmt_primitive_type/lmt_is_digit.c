@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   lmt_is_digit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 14:14:53 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/06/14 21:58:44 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 13:46:50 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_UTIL_H
-# define LMT_UTIL_H
+#include "lmt_primitive_type.h"
 
-int	is_type_operator(int type);
-int	is_type_redirection(int type);
-int	lmt_get_exit_code_from_stat_loc(int stat_loc);
-
-#endif
+int	lmt_is_digit(const char ch)
+{
+	return ('0' <= ch && ch <= '9');
+}

@@ -6,19 +6,19 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:49 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 11:09:32 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/05 13:04:10 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
-#include "lmt_util.h"
+#include <stdlib.h>
 
 typedef void	(*t_signal_handler)(int);
 
 static void	lmt_signal_set(int signal_number, t_signal_handler handler)
 {
 	if (signal(signal_number, handler) == SIG_ERR)
-		lmt_exit(0 /* set_signal_error_exit_code */, NULL /* set error_massage */);
+		exit(1);
 }
 
 static void	signal_handler_sigint(int signal)

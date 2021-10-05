@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   t_lmt_sequence_constant.h                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 14:14:53 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/09/21 16:32:53 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/09/21 16:33:57 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_UTIL_H
-# define LMT_UTIL_H
+#ifndef T_LMT_SEQUENCE_CONSTANT_H
+# define T_LMT_SEQUENCE_CONSTANT_H
 
-int	is_type_operator(int type);
-int	is_type_redirection(int type);
-int	lmt_get_exit_code_from_stat_loc(int stat_loc);
+typedef void (*t_lmt_sequence_appliance)(void *);
 
 #endif

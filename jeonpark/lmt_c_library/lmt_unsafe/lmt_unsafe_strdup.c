@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   lmt_unsafe_strdup.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 14:14:53 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/09/19 14:13:27 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/09/19 14:13:49 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_UTIL_H
-# define LMT_UTIL_H
+#include <stddef.h>
+#include "lmt_unsafe.h"
+#include "lmt_alloc.h"
 
-int	is_type_operator(int type);
-int	is_type_redirection(int type);
-int	lmt_get_exit_code_from_stat_loc(int stat_loc);
+void	*lmt_unsafe_strdup(const char *string)
+{
+	size_t	count;
+	char	*string_dup;
 
-#endif
+	count = lmt_unsafe_strlen(string) + 1;
+	string_dup = lmt_alloc(sizeof(*string_dup) * count);
+	lmt_unsafe_memcpy(string_dup, string, count);
+	return (string_dup);
+}

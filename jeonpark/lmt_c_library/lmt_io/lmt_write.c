@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_unsafe_strcmp.c                                :+:      :+:    :+:   */
+/*   lmt_write.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/09 17:35:05 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/14 13:20:24 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/09/01 14:38:40 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 13:50:23 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lmt_util.h"
+#include <unistd.h>
+#include <sys/types.h>
+#include <stdlib.h>
+#include "lmt_io.h"
+#include "lmt_unsafe.h"
 
-int	lmt_unsafe_strcmp(char *lhs, char *rhs)
+ssize_t	lmt_write(const char *string)
 {
-	size_t	size;
+	ssize_t	number_of_bytes_write;
 
-	size = lmt_unsafe_strlen(lhs);
-	return (lmt_unsafe_memcmp(lhs, rhs, size));
+	if (string == NULL)
+		return (0);
+	number_of_bytes_write = write(1, string, lmt_unsafe_strlen(string));
+	if (number_of_bytes_write == -1)
+		exit(1);
+	return (number_of_bytes_write);
 }

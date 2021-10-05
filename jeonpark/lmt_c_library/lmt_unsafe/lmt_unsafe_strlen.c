@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt.h                                              :+:      :+:    :+:   */
+/*   lmt_unsafe_strlen.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/02 19:02:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 20:27:25 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/06/14 22:00:57 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/09/01 13:11:26 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_H
-# define LMT_H
+#include <stddef.h>
+#include "lmt_unsafe.h"
 
-typedef void	(*t_sigaction_handler)(int);
+size_t	lmt_unsafe_strlen(const char *p_string)
+{
+	const char	*p_string_ch;
 
-// Init signal
-
-void	lmt_signal_init(void);
-
-#endif
+	p_string_ch = p_string;
+	while (*p_string_ch != '\0')
+		++p_string_ch;
+	return (p_string_ch - p_string);
+}

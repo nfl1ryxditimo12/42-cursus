@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_check_type.h                                   :+:      :+:    :+:   */
+/*   lmt_unsafe_strchr.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 09:33:31 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 17:46:46 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/09/19 17:50:22 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/09/19 17:50:24 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_CHECK_TYPE_H
-# define LMT_CHECK_TYPE_H
+#include <stddef.h>
+#include "lmt_unsafe.h"
 
-int	lmt_is_type_operator(int type);
-int	lmt_is_type_redirection(int type);
-int	lmt_is_builtin(char *string);
+char	*lmt_unsafe_strchr(char *string, char *word)
+{
+	char	*p_char;
 
-#endif
+	p_char = string;
+	while (*p_char != '\0')
+	{
+		if (lmt_unsafe_string_starts(p_char, word))
+			return (p_char);
+		++p_char;
+	}
+	return (NULL);
+}

@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_exit.c                                         :+:      :+:    :+:   */
+/*   check_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 21:47:05 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/05 14:14:35 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 14:15:16 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
 #include "lmt_util.h"
+#include "constant.h"
+#include "lmt_constant.h"
 
-void	lmt_exit(int exit_code, char *string)
+int	is_type_operator(int type)
 {
-	if (string != NULL)
-		write(FD_ERR, string, lmt_unsafe_strlen(string));
-	exit(exit_code);
+	return ((type & TYPE_OPERATOR) != 0);
+}
+
+int	is_type_redirection(int type)
+{
+	return ((type & TYPE_REDIRECTION) != 0);
 }

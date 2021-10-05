@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_alloc.c                                        :+:      :+:    :+:   */
+/*   lmt_is_space.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/30 18:23:29 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 11:11:39 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/06/14 21:48:39 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 13:46:50 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "lmt_util.h"
+#include "lmt_primitive_type.h"
 
-void	*lmt_alloc(size_t size)
+int	lmt_is_space(const char ch)
 {
-	void	*p_address;
-
-	p_address = malloc(size);
-	if (p_address == NULL)
-		lmt_exit(0 /* set ALLOCATION_ERROR */, "");
-	return (p_address);
+	return ((9 <= ch && ch <= 13) || ch == 32);
 }

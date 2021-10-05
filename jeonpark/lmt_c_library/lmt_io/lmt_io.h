@@ -5,16 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 14:14:53 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 13:49:20 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_UTIL_H
-# define LMT_UTIL_H
+#ifndef LMT_IO_H
+# define LMT_IO_H
 
-int	is_type_operator(int type);
-int	is_type_redirection(int type);
-int	lmt_get_exit_code_from_stat_loc(int stat_loc);
+# include <stddef.h>
+# include <sys/types.h>
+
+ssize_t	lmt_read(int fd, void *buffer, size_t size);
+void	lmt_put_ch(const char ch);
+ssize_t	lmt_write(const char *string);
 
 #endif

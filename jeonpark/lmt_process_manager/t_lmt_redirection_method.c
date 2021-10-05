@@ -6,13 +6,15 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 21:48:46 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/05 17:06:22 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <stddef.h>
 #include "t_lmt_process_manager.h"
+#include "lmt_primitive_type.h"
+#include "lmt_constant.h"
 
 //	fcntl.h: open()
 //	stddef.h: NULL
@@ -30,11 +32,11 @@ void	lmt_redirection_apply(t_lmt_redirection *p_redirection)
 			fd_new = open(p_redirection->path_new, O_RDONLY);
 		else
 		{
-			lmt_exit(-1, LMT_WRONG_PATH);
+			exit(1);
 			fd_new = FD_NONE;
 		}
 		if (fd_new == FD_NONE)
-			lmt_exit(-1, NULL);
+			exit(1);
 		dup2(fd_new, p_redirection->fd_old);
 		close(fd_new);
 	}
@@ -59,11 +61,11 @@ int	lmt_redirection_backup(t_lmt_redirection *p_redirection)
 			fd_new = open(p_redirection->path_new, O_RDONLY);
 		else
 		{
-			lmt_exit(-1, LMT_WRONG_PATH);
+			exit(1);
 			fd_new = FD_NONE;
 		}
 		if (fd_new == FD_NONE)
-			lmt_exit(-1, NULL);
+			exit(1);
 		duplicated_fd = dup(p_redirection->fd_old);
 		dup2(fd_new, p_redirection->fd_old);
 		close(fd_new);
@@ -101,19 +103,19 @@ t_lmt_redirection	*lmt_redirection_new_by_token(t_token *p_token)
 		else if (p_token->type == TYPE_REDIRECTION_APPEND)
 			(void)p_token;	// compose code here..
 		else
-			lmt_exit(-1, LMT_WRONG_PATH);
+			exit(1);
 		path_new = p_token->token[1];
 	}
 	else if (p_token->size == 3)
 	{
 		fd_new = FD_NONE;
-		if (lmt_atoi(p_token->token[0], &fd_old) == PARSE_FAIL)
-			lmt_exit(-1, LMT_WRONG_PATH);
+		if (lmt_atoi(p_token->token[0], &fd_old) == PARSE_FAILURE)
+			exit(1);
 		else
-			lmt_exit(-1, LMT_WRONG_PATH);
+			exit(1);
 		path_new = p_token->token[1];
 	}
 	else
-		lmt_exit(-1, LMT_WRONG_PATH);
+		exit(1);
 	return (lmt_redirection_new(fd_old, p_token->type, fd_new, path_new));
 }

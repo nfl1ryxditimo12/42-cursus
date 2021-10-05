@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/04 20:18:04 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/05 14:54:09 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,16 +43,12 @@ SRCS		:= \
 			   jeonpark/lmt_process_manager/t_lmt_redirection_list_type.c \
 			   jeonpark/lmt_tokenization/lmt_tokenize.c \
 			   jeonpark/lmt_tokenization/t_lmt_token_sublist.c \
-			   jeonpark/lmt_util/lmt_alloc.c \
-			   jeonpark/lmt_util/lmt_atoi.c \
-			   jeonpark/lmt_util/lmt_check_type.c \
-			   jeonpark/lmt_util/lmt_env_path_array.c \
-			   jeonpark/lmt_util/lmt_exit.c \
+			   jeonpark/lmt_c_library/lmt_alloc/lmt_alloc.c \
+			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_atoi.c \
+			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_digit.c \
+			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_space.c \
+			   jeonpark/lmt_util/check_type.c \
 			   jeonpark/lmt_util/lmt_get_exit_code_from_stat_loc.c \
-			   jeonpark/lmt_util/lmt_return_error.c \
-			   jeonpark/lmt_util/lmt_unsafe_memcmp.c \
-			   jeonpark/lmt_util/lmt_unsafe_strcmp.c \
-			   jeonpark/lmt_util/lmt_unsafe_strlen.c \
 			   main.c
 OBJS		:= $(SRCS:.c=.o)
 
@@ -62,11 +58,14 @@ CFLAG		:= -Wall -Wextra -Werror
 ABSTRACT_INCLUDE	:= \
 			   $(READLINE_DIR)/include \
 			   . \
-			   jeonpark \
 			   jeonpark/lmt_describer \
 			   jeonpark/lmt_process_manager \
+			   jeonpark/lmt_tokenization \
+			   jeonpark/lmt_c_library \
+			   jeonpark/lmt_c_library/lmt_alloc \
+			   jeonpark/lmt_c_library/lmt_primitive_type \
 			   jeonpark/lmt_util \
-			   jeonpark/lmt_tokenization
+			   jeonpark
 INCLUDE		:= $(addprefix -I ,$(ABSTRACT_INCLUDE))
 
 LIBRARY		:= -L $(READLINE_DIR)/lib -l readline

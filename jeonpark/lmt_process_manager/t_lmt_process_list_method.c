@@ -6,13 +6,14 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/04 19:22:56 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:53:13 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <sys/wait.h>
 #include "t_lmt_process_manager.h"
+#include "lmt_util.h"
 
 //	stddef.h: NULL
 //	sys/wait.h: waitpid()
