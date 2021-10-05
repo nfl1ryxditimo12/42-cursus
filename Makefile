@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/05 14:54:09 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/05 17:05:14 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRCS		:= \
 			   builtin_cmd/exit.c \
 			   builtin_cmd/export.c \
 			   builtin_cmd/unset.c \
-			   jeonpark/lmt_signal.c \
+			   jeonpark/signal/signal.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_manager_method.c \
@@ -50,6 +50,7 @@ SRCS		:= \
 			   jeonpark/lmt_util/check_type.c \
 			   jeonpark/lmt_util/lmt_get_exit_code_from_stat_loc.c \
 			   main.c
+
 OBJS		:= $(SRCS:.c=.o)
 
 CC			:= clang
@@ -57,15 +58,17 @@ CFLAG		:= -Wall -Wextra -Werror
 
 ABSTRACT_INCLUDE	:= \
 			   $(READLINE_DIR)/include \
-			   . \
+			   jeonpark \
 			   jeonpark/lmt_describer \
 			   jeonpark/lmt_process_manager \
 			   jeonpark/lmt_tokenization \
 			   jeonpark/lmt_c_library \
 			   jeonpark/lmt_c_library/lmt_alloc \
 			   jeonpark/lmt_c_library/lmt_primitive_type \
+			   jeonpark/signal \
 			   jeonpark/lmt_util \
-			   jeonpark
+			   .
+
 INCLUDE		:= $(addprefix -I ,$(ABSTRACT_INCLUDE))
 
 LIBRARY		:= -L $(READLINE_DIR)/lib -l readline
