@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/05 17:15:23 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/05 19:58:57 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS		:= \
 			   builtin_cmd/export.c \
 			   builtin_cmd/unset.c \
 			   jeonpark/lmt_c_library/lmt_alloc/lmt_alloc.c \
+			   jeonpark/lmt_c_library/lmt_io/lmt_put_ch.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_atoi.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_digit.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_space.c \
@@ -61,6 +62,7 @@ ABSTRACT_INCLUDE	:= \
 			   jeonpark \
 			   jeonpark/lmt_c_library \
 			   jeonpark/lmt_c_library/lmt_alloc \
+			   jeonpark/lmt_c_library/lmt_io \
 			   jeonpark/lmt_c_library/lmt_primitive_type \
 			   jeonpark/lmt_describer \
 			   jeonpark/lmt_process_manager \
