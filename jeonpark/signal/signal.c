@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_signal.c                                       :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:49 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 20:00:51 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/06 05:58:47 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <readline/readline.h>
-#include "lmt_constant.h"
-#include "lmt_io.h"
+#include "lmt_c_library.h"
 
 typedef void	(*t_signal_handler)(int);
 
