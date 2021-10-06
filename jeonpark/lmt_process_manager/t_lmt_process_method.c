@@ -6,11 +6,13 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 12:28:16 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:24:51 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_lmt_process_manager.h"
+#include "minishell.h"
+#include "constant.h"
 
 //	lmt_process 의 redirection_list 의 redirection 들을 적용시키는 함수
 static void	lmt_process_apply_redirection_list(t_lmt_process *p_process)
@@ -144,7 +146,28 @@ void	lmt_process_execute_child(t_lmt_process *p_process, t_handler *p_handler)
 	{
 		lmt_process_set(p_process);
 		lmt_process_apply_redirection_list(p_process);
-		process_line(p_handler, p_handler->env);
+
+		//	builin 판별 함수 작성
+		if (1)
+		{
+			if (1)
+			{
+				p_handler->line = p_process->token_sublist->first;
+				process_builtin_cmd(p_handler);
+			}
+		}
+		//	nonbuiltin 판별 함수 작성
+		else if (1)
+		{
+			//	argv 만들어서 적용하길
+			execve("/usr/bin/ls", p_process->token_sublist->first->token, p_handler->env);
+		}
+		else
+		{
+			// 실행 가능한 명령이 아님 -> 에러처리
+			perror("ls");
+			exit (1);
+		}
 	}
 	else if (p_process->type == TYPE_PROCESS_SUBSHELL)
 	{

@@ -6,11 +6,12 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 17:23:08 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/06 15:30:14 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/06 17:19:09 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "t_lmt_process_manager.h"
 
 void    hand_init(t_handler *hand)
 {
@@ -63,8 +64,6 @@ void    process_line(t_handler *hand)
             process_builtin_cmd(hand);
         else if (check == 2)
             process_non_builtin_cmd(hand);
-        //else if (check == 3)
-        //    process_symbol(hand);
         else if (check == 0)
         {
             perror(hand->line->token[0]);
@@ -165,7 +164,6 @@ int     chk_token_valid(t_handler *hand)
 void    process_init(t_handler *hand)
 {
     char    *line;
-    int     status;
 
     while (hand->exit == 0)
     {
@@ -182,7 +180,7 @@ void    process_init(t_handler *hand)
             hand->line = hand->top;
             printf("\n\x1b[31m=======\x1b[0m Process \x1b[31m===================================\x1b[0m\n\n");
             if (chk_token_valid(hand))
-                process_line(hand);
+				lmt_process_manager_execute(hand);
             else
                 printf("Token Error!!\n");
             printf("\n\x1b[31m===================================================\x1b[0m\n\n");

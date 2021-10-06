@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/05 19:58:57 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/06 17:33:05 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ SRCS		:= \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_atoi.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_digit.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_space.c \
+			   jeonpark/lmt_c_library/lmt_string/lmt_string_method.c \
+			   jeonpark/lmt_c_library/lmt_string/lmt_string_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_manager_method.c \

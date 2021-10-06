@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:36:19 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/05 13:40:41 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/06 15:58:18 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ void    dup_env(t_handler *hand)
 
 void    process_export(t_handler *hand)
 {
-    int i;
-
     if (hand->line->token[2])
         perror(hand->line->token[2]);
     else if (!hand->line->token[1])
