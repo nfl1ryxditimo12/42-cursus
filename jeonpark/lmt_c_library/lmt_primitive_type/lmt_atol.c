@@ -6,49 +6,56 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 21:43:14 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 17:24:59 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/05 13:46:50 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
-#include "lmt_util.h"
+#include "lmt_primitive_type.h"
+#include "lmt_constant.h"
 
-//	limits: INT_MAX
-
-static int lmt_is_space(const char ch)
+///	- Assume: reading and writing p_result would be slower than
+///		reading and writing result
+static int	lmt_atol_parse_digit(char *string, long *p_result)
 {
-	return ((9 <= ch && ch <= 13) || ch == 32);
-}
-
-int lmt_is_digit(const char ch)
-{
-	return ('0' <= ch && ch <= '9');
-}
-
-int	lmt_atoi(char *string, int *p_result)
-{
-	int		sign;
 	long	result;
 
-	if (*string == '\0')
-		return (PARSE_FAIL);
-	while (lmt_is_space(*string))
-		++string;
-	sign = 1 - (*string == '-') * 2;
-	if (sign == -1 || *string == '+')
-		++string;
 	while (*string == '0')
 		++string;
 	result = 0;
 	while (lmt_is_digit(*string))
 	{
 		result = result * 10 + (*string - '0');
-		if (result > INT_MAX)
-			return (PARSE_FAIL);
+		if (result < 0)
+			return (PARSE_FAILURE);
 		++string;
 	}
-	*p_result = sign * result;
 	if (*string == '\0')
+	{
+		*p_result = result;
 		return (PARSE_SUCCESS);
-	return (PARSE_FAIL);
+	}
+	else
+		return (PARSE_FAILURE);
+}
+
+int	lmt_atol(char *string, long *p_result)
+{
+	int		sign;
+
+	if (*string == '\0')
+		return (PARSE_FAILURE);
+	while (lmt_is_space(*string))
+		++string;
+	sign = 1 - (*string == '-') * 2;
+	if (*string == '-' || *string == '+')
+		++string;
+	if (!lmt_is_digit(*string))
+		return (PARSE_FAILURE);
+	if (lmt_atol_parse_digit(string, p_result) == PARSE_FAILURE)
+		return (PARSE_FAILURE);
+	else
+	{
+		*p_result = sign * *p_result;
+		return (PARSE_SUCCESS);
+	}
 }

@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_env_path_array.h                               :+:      :+:    :+:   */
+/*   lmt_unsafe_strrchr.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/03 16:05:44 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/03 16:05:52 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/09/19 17:50:21 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/09/19 17:50:25 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_ENV_PATH_ARRAY_H
-# define LMT_ENV_PATH_ARRAY_H
+#include <stddef.h>
+#include "lmt_unsafe.h"
 
-char	**lmt_env_path_array_new(void);
-void	lmt_env_path_array_free(char **array);
+char	*lmt_unsafe_strrchr(char *string, char *word)
+{
+	char	*p_char;
 
-#endif
+	p_char = string;
+	while (*p_char != '\0')
+		++p_char;
+	while (string < p_char)
+	{
+		--p_char;
+		if (lmt_unsafe_string_starts(p_char, word))
+			return (p_char);
+	}
+	return (NULL);
+}

@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_get_exit_code_from_stat_loc.c                  :+:      :+:    :+:   */
+/*   lmt_util.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:34 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 14:15:02 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 13:49:20 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lmt_util.h"
+#ifndef LMT_IO_H
+# define LMT_IO_H
 
-int	lmt_get_exit_code_from_stat_loc(int stat_loc)
-{
-	return ((stat_loc >> 8) & 0x000000ff);
-}
+# include <stddef.h>
+# include <sys/types.h>
+
+ssize_t	lmt_read(int fd, void *buffer, size_t size);
+void	lmt_put_ch(const char ch);
+ssize_t	lmt_write(const char *string);
+
+#endif

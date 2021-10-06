@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_lmt_token_sublist.c                              :+:      :+:    :+:   */
+/*   t_lmt_token_sublist_type.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:03:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 12:21:13 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/06 06:01:20 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "t_lmt_token_sublist.h"
-#include "lmt_util.h"
+#include "lmt_c_library.h"
 #include "minishell.h"
 
 //	stdlib.h: free()

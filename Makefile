@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/04 17:40:02 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/06 17:33:05 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,29 +31,29 @@ SRCS		:= \
 			   builtin_cmd/exit.c \
 			   builtin_cmd/export.c \
 			   builtin_cmd/unset.c \
-			   jeonpark/lmt_signal.c \
+			   jeonpark/lmt_c_library/lmt_alloc/lmt_alloc.c \
+			   jeonpark/lmt_c_library/lmt_io/lmt_put_ch.c \
+			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_atoi.c \
+			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_digit.c \
+			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_space.c \
+			   jeonpark/lmt_c_library/lmt_string/lmt_string_method.c \
+			   jeonpark/lmt_c_library/lmt_string/lmt_string_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_manager_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_type.c \
-			   jeonpark/lmt_process_manager/t_lmt_redirection_method.c \
-			   jeonpark/lmt_process_manager/t_lmt_redirection_type.c \
-			   jeonpark/lmt_process_manager/t_lmt_redirection_list_method.c \
-			   jeonpark/lmt_process_manager/t_lmt_redirection_list_type.c \
+			   jeonpark/lmt_redirection/t_lmt_redirection_method.c \
+			   jeonpark/lmt_redirection/t_lmt_redirection_type.c \
+			   jeonpark/lmt_redirection/t_lmt_redirection_list_method.c \
+			   jeonpark/lmt_redirection/t_lmt_redirection_list_type.c \
 			   jeonpark/lmt_tokenization/lmt_tokenize.c \
 			   jeonpark/lmt_tokenization/t_lmt_token_sublist.c \
-			   jeonpark/lmt_util/lmt_alloc.c \
-			   jeonpark/lmt_util/lmt_atoi.c \
-			   jeonpark/lmt_util/lmt_check_type.c \
-			   jeonpark/lmt_util/lmt_env_path_array.c \
-			   jeonpark/lmt_util/lmt_exit.c \
+			   jeonpark/lmt_util/check_type.c \
 			   jeonpark/lmt_util/lmt_get_exit_code_from_stat_loc.c \
-			   jeonpark/lmt_util/lmt_return_error.c \
-			   jeonpark/lmt_util/lmt_unsafe_memcmp.c \
-			   jeonpark/lmt_util/lmt_unsafe_strcmp.c \
-			   jeonpark/lmt_util/lmt_unsafe_strlen.c \
+			   jeonpark/signal/signal.c \
 			   main.c
+
 OBJS		:= $(SRCS:.c=.o)
 
 CC			:= clang
@@ -61,13 +61,19 @@ CFLAG		:= -Wall -Wextra -Werror
 
 ABSTRACT_INCLUDE	:= \
 			   $(READLINE_DIR)/include \
-			   . \
 			   jeonpark \
-			   jeonpark/lmt_constant \
+			   jeonpark/lmt_c_library \
+			   jeonpark/lmt_c_library/lmt_alloc \
+			   jeonpark/lmt_c_library/lmt_io \
+			   jeonpark/lmt_c_library/lmt_primitive_type \
 			   jeonpark/lmt_describer \
 			   jeonpark/lmt_process_manager \
+			   jeonpark/lmt_redirection \
+			   jeonpark/lmt_tokenization \
 			   jeonpark/lmt_util \
-			   jeonpark/lmt_tokenization
+			   jeonpark/signal \
+			   .
+
 INCLUDE		:= $(addprefix -I ,$(ABSTRACT_INCLUDE))
 
 LIBRARY		:= -L $(READLINE_DIR)/lib -l readline

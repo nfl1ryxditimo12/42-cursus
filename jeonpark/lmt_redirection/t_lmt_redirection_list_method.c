@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 15:32:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 21:49:22 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/05 11:46:19 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ void	lmt_redirection_list_backdown(t_lmt_redirection_list *list)
 {
 //	free 는 왜 하지? 생각을 더 해봐야겠다
 	lmt_redirection_list_apply(list);
-	lmt_redirection_list_free(list, REDIRECTION_FREE_NORMAL);
+	lmt_redirection_list_free(list, REDIRECTION_FREE);
 }

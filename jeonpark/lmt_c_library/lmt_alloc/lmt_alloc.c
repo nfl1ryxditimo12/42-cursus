@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_get_exit_code_from_stat_loc.c                  :+:      :+:    :+:   */
+/*   lmt_alloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:34 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 14:15:02 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/08/05 19:09:47 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 13:43:19 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lmt_util.h"
+#include <stdlib.h>
+#include "lmt_alloc.h"
+#include "lmt_constant.h"
 
-int	lmt_get_exit_code_from_stat_loc(int stat_loc)
+//	stdlib.h: malloc(), exit(), size_t, NULL
+
+void	*lmt_alloc(size_t size)
 {
-	return ((stat_loc >> 8) & 0x000000ff);
+	void	*p_address;
+
+	p_address = malloc(size);
+	if (p_address == NULL)
+		exit(1);
+	return (p_address);
 }

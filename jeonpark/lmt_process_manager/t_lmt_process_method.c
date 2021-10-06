@@ -6,11 +6,13 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/23 15:52:21 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:24:51 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_lmt_process_manager.h"
+#include "minishell.h"
+#include "constant.h"
 
 //	lmt_process 의 redirection_list 의 redirection 들을 적용시키는 함수
 static void	lmt_process_apply_redirection_list(t_lmt_process *p_process)
@@ -33,7 +35,7 @@ static void	lmt_process_backup_redirection_list(t_lmt_process *p_process)
 	t_lmt_redirection_list	*undo_list;
 
 	undo_list = lmt_redirection_list_backup(p_process->redirection_list);
-	lmt_redirection_list_free(p_process->redirection_list, REDIRECTION_FREE_NORMAL);
+	lmt_redirection_list_free(p_process->redirection_list, REDIRECTION_FREE);
 	p_process->redirection_list = undo_list;
 }
 
@@ -61,11 +63,13 @@ int	lmt_process_append_pipe_redirection(t_lmt_process *p_process)
 	t_lmt_redirection	*p_redirection;
 
 	if (pipe(fd_pipe) == -1)
-		lmt_exit(0, "Pipe error has occured \n");
+		exit(1);
 	p_redirection = lmt_redirection_new(FD_OUT, TYPE_NONE, fd_pipe[PIPE_WRITE], NULL);
 	lmt_process_append_redirection(p_process, p_redirection);
 	p_redirection = lmt_redirection_new(FD_IN, TYPE_NONE, fd_pipe[PIPE_READ], NULL);
 	lmt_process_append_redirection(p_process->next, p_redirection);
+	//	에러를 없애기 위해 임시 추가
+	return (0);
 }
 
 //	lmt_process 의 token_sublist 를 순차적으로 돌면서
@@ -87,7 +91,7 @@ static void	lmt_process_set(t_lmt_process *p_process)
 			lmt_redirection_list_append(p_process->redirection_list, p_element);
 		}
 		else
-			lmt_exit(-1, LMT_WRONG_PATH);
+			exit(1);
 		iterator = iterator->next;
 	}
 	p_process->token_sublist->first = p_command_token;
@@ -103,15 +107,15 @@ static void	lmt_process_set(t_lmt_process *p_process)
 //	저번에 zsh 과 bash 에서 'cd ..' 의 차이가 나는 부분은 '|' 뿐이었다
 int	lmt_process_execute_parent(t_lmt_process *p_process, t_handler *p_handler)
 {
-	int	return_value;
+	int	exit_code;
 
 	lmt_process_set(p_process);
 	lmt_process_backup_redirection_list(p_process);
-	return_value = EXIT_STATUS_NORMAL;
+	exit_code = 0;
 	(void)p_handler;
-//	return_value = seonkim_builtin_function(p_handler);
+//	exit_code = seonkim_builtin_function(p_handler);
 	lmt_process_backdown_redirection_list(p_process);
-	return (return_value);
+	return (exit_code);
 }
 
 //	process_line(p_handler) 를 호출하는 함수이다
@@ -125,7 +129,7 @@ void	lmt_process_execute_child(t_lmt_process *p_process, t_handler *p_handler)
 
 	p_process->pid = fork();
 	if (p_process->pid == -1)
-		lmt_exit(0, "Fork error has occured \n");
+		exit(1);
 	if (p_process->pid > 0)
 	{
 		p_redirection = p_process->redirection_list->p_dummy->next;
@@ -142,7 +146,28 @@ void	lmt_process_execute_child(t_lmt_process *p_process, t_handler *p_handler)
 	{
 		lmt_process_set(p_process);
 		lmt_process_apply_redirection_list(p_process);
-		process_line(p_handler, p_handler->env);
+
+		//	builin 판별 함수 작성
+		if (1)
+		{
+			if (1)
+			{
+				p_handler->line = p_process->token_sublist->first;
+				process_builtin_cmd(p_handler);
+			}
+		}
+		//	nonbuiltin 판별 함수 작성
+		else if (1)
+		{
+			//	argv 만들어서 적용하길
+			execve("/usr/bin/ls", p_process->token_sublist->first->token, p_handler->env);
+		}
+		else
+		{
+			// 실행 가능한 명령이 아님 -> 에러처리
+			perror("ls");
+			exit (1);
+		}
 	}
 	else if (p_process->type == TYPE_PROCESS_SUBSHELL)
 	{
@@ -151,5 +176,5 @@ void	lmt_process_execute_child(t_lmt_process *p_process, t_handler *p_handler)
 		exit(ret);
 	}
 	else
-		lmt_exit(-1, LMT_WRONG_PATH);
+		exit(1);
 }

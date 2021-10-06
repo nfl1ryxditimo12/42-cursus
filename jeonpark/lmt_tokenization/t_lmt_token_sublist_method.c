@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_get_exit_code_from_stat_loc.c                  :+:      :+:    :+:   */
+/*   t_lmt_token_sublist_method.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:34 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 14:15:02 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/05 20:46:33 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/06 06:02:22 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lmt_util.h"
+#include "t_lmt_token_sublist.h"
+#include "minishell.h"
 
-int	lmt_get_exit_code_from_stat_loc(int stat_loc)
+const char	*lmt_token_sublist_get_current_word(t_lmt_token_sublist *sublist)
 {
-	return ((stat_loc >> 8) & 0x000000ff);
+	return (sublist->word_current);
+}
+
+void	*lmt_token_sublist_move_next_word(t_lmt_token_sublist *sublist)
+{
+	sublist->word_current++;
+	if (lmt_is_token_word_out_of_range(sublist->word_current))
+	{
+		++sublist->token_current;
+	}
 }

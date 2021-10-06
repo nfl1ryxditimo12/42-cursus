@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_get_exit_code_from_stat_loc.c                  :+:      :+:    :+:   */
+/*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:34 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 14:15:02 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/05 15:53:32 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/06 11:45:14 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lmt_util.h"
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-int	lmt_get_exit_code_from_stat_loc(int stat_loc)
-{
-	return ((stat_loc >> 8) & 0x000000ff);
-}
+# define STATUS_INIT		1
+# define STATUS_READING		2
+# define STATUS_PARSIGN		3
+# define STATUS_CHILD		4
+
+void	signal_set_status(int status);
+
+#endif

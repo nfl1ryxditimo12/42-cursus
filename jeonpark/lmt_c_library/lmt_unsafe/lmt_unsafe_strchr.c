@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_alloc.c                                        :+:      :+:    :+:   */
+/*   lmt_unsafe_strchr.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/30 18:23:29 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/05 11:11:39 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/09/19 17:50:22 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/09/19 17:50:24 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "lmt_util.h"
+#include <stddef.h>
+#include "lmt_unsafe.h"
 
-void	*lmt_alloc(size_t size)
+char	*lmt_unsafe_strchr(char *string, char *word)
 {
-	void	*p_address;
+	char	*p_char;
 
-	p_address = malloc(size);
-	if (p_address == NULL)
-		lmt_exit(0 /* set ALLOCATION_ERROR */, "");
-	return (p_address);
+	p_char = string;
+	while (*p_char != '\0')
+	{
+		if (lmt_unsafe_string_starts(p_char, word))
+			return (p_char);
+		++p_char;
+	}
+	return (NULL);
 }

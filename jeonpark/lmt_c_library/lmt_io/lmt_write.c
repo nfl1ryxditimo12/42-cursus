@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_exit.c                                         :+:      :+:    :+:   */
+/*   lmt_write.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 21:47:05 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/09/01 14:38:40 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 13:50:23 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <unistd.h>
-#include "lmt_util.h"
+#include <sys/types.h>
+#include <stdlib.h>
+#include "lmt_io.h"
+#include "lmt_unsafe.h"
 
-void	lmt_exit(int exit_code, char *string)
+ssize_t	lmt_write(const char *string)
 {
-	if (string != NULL)
-		write(FD_ERR, string, lmt_unsafe_strlen(string));
-	exit(exit_code);
+	ssize_t	number_of_bytes_write;
+
+	if (string == NULL)
+		return (0);
+	number_of_bytes_write = write(1, string, lmt_unsafe_strlen(string));
+	if (number_of_bytes_write == -1)
+		exit(1);
+	return (number_of_bytes_write);
 }

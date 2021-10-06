@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt.h                                              :+:      :+:    :+:   */
+/*   lmt_unsafe_strcmp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/02 19:02:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 20:27:25 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/09/19 16:26:35 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/09/19 17:15:43 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_H
-# define LMT_H
+#include "lmt_unsafe.h"
+#include "lmt_constant.h"
 
-typedef void	(*t_sigaction_handler)(int);
-
-// Init signal
-
-void	lmt_signal_init(void);
-
-#endif
+int	lmt_unsafe_string_starts(char *string, char *word)
+{
+	while (*word != '\0')
+		if (*string++ != *word++)
+			return (FALSE);
+	return (TRUE);
+}

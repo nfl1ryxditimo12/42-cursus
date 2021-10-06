@@ -6,12 +6,13 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:39 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/08 18:50:13 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:25:25 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "t_lmt_process_manager.h"
+#include "lmt_c_library.h"
 
 //	stdlib.h: free()
 
@@ -40,6 +41,6 @@ t_lmt_process	*lmt_process_new(int type, t_lmt_token_sublist *token_sublist, int
 void	lmt_process_free(t_lmt_process *p_process)
 {
 	lmt_token_sublist_free(p_process->token_sublist);
-	lmt_redirection_list_free(p_process->redirection_list, REDIRECTION_FREE_NORMAL);
+	lmt_redirection_list_free(p_process->redirection_list, REDIRECTION_FREE);
 	free(p_process);
 }

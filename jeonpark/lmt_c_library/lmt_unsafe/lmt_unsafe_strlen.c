@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_unsafe_memcmp.c                                :+:      :+:    :+:   */
+/*   lmt_unsafe_strlen.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/09 17:27:33 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/14 13:03:12 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/06/14 22:00:57 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/09/01 13:11:26 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lmt_util.h"
+#include <stddef.h>
+#include "lmt_unsafe.h"
 
-int	lmt_unsafe_memcmp(char *lhs, char *rhs, size_t size)
+size_t	lmt_unsafe_strlen(const char *p_string)
 {
-	while (size-- > 1)
-	{
-		if (*lhs != *rhs)
-			return (lhs - rhs);
-		++lhs;
-		++rhs;
-	}
-	return (lhs - rhs);
+	const char	*p_string_ch;
+
+	p_string_ch = p_string;
+	while (*p_string_ch != '\0')
+		++p_string_ch;
+	return (p_string_ch - p_string);
 }

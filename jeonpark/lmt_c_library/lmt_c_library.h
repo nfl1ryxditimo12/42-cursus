@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_unsafe_strlen.c                                :+:      :+:    :+:   */
+/*   lmt_c_library.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/14 22:00:57 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/04 11:49:10 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/05 13:43:45 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/06 17:26:03 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include "lmt_util.h"
+#ifndef LMT_C_LIBRARY_H
+# define LMT_C_LIBRARY_H
 
-size_t	lmt_unsafe_strlen(const char *p_string)
-{
-	const char	*p_string_ch;
+# include "lmt_alloc.h"
+# include "lmt_constant.h"
+# include "lmt_io.h"
+# include "lmt_primitive_type.h"
+# include "lmt_string.h"
+# include "lmt_unsafe.h"
 
-	p_string_ch = p_string;
-	while (*p_string_ch != '\0')
-		++p_string_ch;
-	return (p_string_ch - p_string);
-}
+#endif

@@ -6,13 +6,15 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/23 10:51:16 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:10:45 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <sys/wait.h>
 #include "t_lmt_process_manager.h"
+#include "lmt_util.h"
+#include "constant.h"
 
 //	stddef.h: NULL
 //	sys/wait.h: waitpid()
@@ -116,8 +118,6 @@ void	lmt_process_list_set_by_token_sublist(t_lmt_process_list *list, t_lmt_token
 int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *p_handler)
 {
 	t_lmt_process		*iterator;
-	int					fd_pipe[2];
-	t_lmt_redirection	*p_redirection;
 	int					stat_loc;
 	int					exit_code;
 
@@ -129,7 +129,7 @@ int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *p_handler)
 			lmt_process_append_pipe_redirection(iterator);
 			lmt_process_execute_child(iterator, p_handler);
 		}
-		else if (iterator->prev->op = TYPE_OPERATOR_PIPE)
+		else if (iterator->prev->op == TYPE_OPERATOR_PIPE)
 			lmt_process_execute_child(iterator, p_handler);
 		else
 		{

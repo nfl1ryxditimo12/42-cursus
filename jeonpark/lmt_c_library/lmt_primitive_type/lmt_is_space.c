@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_return_error.c                                 :+:      :+:    :+:   */
+/*   lmt_is_space.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/07 17:06:29 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 22:21:33 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/06/14 21:48:39 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 13:46:50 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
-#include "lmt_util.h"
+#include "lmt_primitive_type.h"
 
-int	lmt_return_error(int exit_status, char *string)
+int	lmt_is_space(const char ch)
 {
-	printf("minishell: %s: %s\n", string, strerror(errno));
-	return (exit_status);
+	return ((9 <= ch && ch <= 13) || ch == 32);
 }

@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_check_type.h                                   :+:      :+:    :+:   */
+/*   lmt_put_ch.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 09:33:31 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 17:46:46 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/09/01 14:38:42 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/05 13:48:20 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_CHECK_TYPE_H
-# define LMT_CHECK_TYPE_H
+#include <unistd.h>
+#include <sys/types.h>
+#include <stdlib.h>
+#include "lmt_io.h"
 
-int	lmt_is_type_operator(int type);
-int	lmt_is_type_redirection(int type);
-int	lmt_is_builtin(char *string);
+void	lmt_put_ch(const char ch)
+{
+	ssize_t	return_value;
 
-#endif
+	return_value = write(1, &ch, 1);
+	if (return_value == -1)
+		exit(1);
+}

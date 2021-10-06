@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_get_exit_code_from_stat_loc.c                  :+:      :+:    :+:   */
+/*   lmt_unsafe_memcpy.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:34 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 14:15:02 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/06/14 22:05:04 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/09/19 20:18:48 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lmt_util.h"
+#include <stddef.h>
+#include "lmt_unsafe.h"
+#include "lmt_constant.h"
 
-int	lmt_get_exit_code_from_stat_loc(int stat_loc)
+void	*lmt_unsafe_memcpy(void *p_write, const void *p_read, size_t size)
 {
-	return ((stat_loc >> 8) & 0x000000ff);
+	while (size > 0)
+	{
+		*(t_byte *)p_write++ = *(const t_byte *)p_read++;
+		--size;
+	}
+	return (p_write);
 }
