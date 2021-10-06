@@ -6,11 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:29:39 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 16:20:54 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/05 13:40:33 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void    process_builtin_cmd(t_handler *hand)
 {

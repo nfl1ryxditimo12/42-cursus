@@ -6,11 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:35:06 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 16:06:57 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/05 13:40:39 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void    process_exit(t_handler *hand)
 {
