@@ -6,13 +6,18 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 15:53:32 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 16:44:51 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/06 11:45:14 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SIGNAL_H
 # define SIGNAL_H
 
-void	signal_init(void);
+# define STATUS_INIT		1
+# define STATUS_READING		2
+# define STATUS_PARSIGN		3
+# define STATUS_CHILD		4
+
+void	signal_set_status(int status);
 
 #endif
