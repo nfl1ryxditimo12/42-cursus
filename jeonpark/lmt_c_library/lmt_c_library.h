@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:43:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/06 17:26:03 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:41:11 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "lmt_constant.h"
 # include "lmt_io.h"
 # include "lmt_primitive_type.h"
-# include "lmt_string.h"
+# include "t_lmt_string.h"
 # include "lmt_unsafe.h"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:49 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/06 11:45:06 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:50:15 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,10 @@ static void	signal_set(int signal_number, t_signal_handler handler)
 static void	signal_handler_sigint(int signal)
 {
 	(void)signal;
-	if (is_reading_line)
-	{
-		lmt_put_ch('\n');
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+	lmt_put_ch('\n');
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
 static void	signal_set_init(void)
