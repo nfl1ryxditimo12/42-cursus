@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 17:33:57 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/05 15:48:53 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef struct  s_handler
 }               t_handler;
 
 // init
-void    process_init(t_handler *hand, char **env);
-void    shell_init(t_handler *hand, char **env);
+void    process_init(t_handler *hand);
+void    shell_init(t_handler *hand);
 
 // node
 void	node_push(t_handler *hand);
@@ -74,7 +74,7 @@ int     ft_strlen(char  *str);
 int     ft_strcmp(char *s1, char *s2);
 int     ft_strcmp2(char *s1, char *s2);
 int     line_cpy(t_token *ptr, char *line);
-int     token_len(char  *str);
+int     token_len(char  *str, char quotes);
 
 // cd
 
@@ -83,7 +83,7 @@ int    check_type(t_handler *hand);
 
 // process
 void    process_builtin_cmd(t_handler *hand);
-void    process_non_builtin_cmd(t_handler *hand, char **env);
+void    process_non_builtin_cmd(t_handler *hand);
 void    process_symbol(t_handler *hand);
 
 // builtin_cmd

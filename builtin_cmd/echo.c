@@ -6,11 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:05:45 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 13:55:30 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/06 15:33:02 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char    *echo_connect(char *s1, char *s2, int size, int option)
 {

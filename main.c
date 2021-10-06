@@ -6,21 +6,20 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 17:36:27 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/05 15:08:07 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    process_non_builtin_cmd(t_handler *hand, char **env)
+void    process_non_builtin_cmd(t_handler *hand)
 {
-    int i;
     pid_t pid;
     int status;
     
     pid = fork();
     if (pid == 0)
-        execve(hand->line->cmd_dir, &hand->line->token[0], env);
+        execve(hand->line->cmd_dir, &hand->line->token[0], hand->env);
     else
         waitpid(pid, &status, 0);
 }
@@ -30,10 +29,10 @@ void    hand_reset(t_handler *hand)
     int i;
     t_token *ptr;
 
-    i = -1;
     hand->line = hand->top;
     while (hand->line)
     {
+        i = -1;
         while (hand->line->token[++i])
             if (hand->line->token[i])
             {
@@ -62,6 +61,6 @@ int main(int ac, char **av, char **env)
     hand.env = env_control(env);
     hand.status = 1;
     hand.path->home_dir = getenv("HOME");
-    shell_init(&hand, env);
-    process_init(&hand, env);
+    shell_init(&hand);
+    process_init(&hand);
 }

@@ -6,11 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:16:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 13:09:54 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/05 13:40:37 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int     env_len(char **env)
 {
