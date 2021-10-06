@@ -6,12 +6,14 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/17 21:07:01 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:41:58 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "t_lmt_process_manager.h"
+#include "lmt_c_library.h"
+#include "constant.h"
 
 //	stdlib.h: free(), NULL
 
