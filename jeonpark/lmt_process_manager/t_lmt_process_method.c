@@ -6,13 +6,11 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/06 17:24:51 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/07 20:43:43 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_lmt_process_manager.h"
-#include "minishell.h"
-#include "constant.h"
 
 //	lmt_process 의 redirection_list 의 redirection 들을 적용시키는 함수
 static void	lmt_process_apply_redirection_list(t_lmt_process *p_process)
@@ -133,12 +131,12 @@ void	lmt_process_execute_child(t_lmt_process *p_process, t_handler *p_handler)
 	if (p_process->pid > 0)
 	{
 		p_redirection = p_process->redirection_list->p_dummy->next;
-		if (p_process->prev->op == TYPE_OPERATOR_PIPE)
+		if (p_process->prev->next_operator == TYPE_CONTROL_OPERATOR_PIPE)
 		{
 			close(p_redirection->fd_new);
 			p_redirection = p_redirection->next;
 		}
-		if (p_process->op == TYPE_OPERATOR_PIPE)
+		if (p_process->next_operator == TYPE_CONTROL_OPERATOR_PIPE)
 			close(p_redirection->fd_new);
 		return ;
 	}
@@ -146,26 +144,18 @@ void	lmt_process_execute_child(t_lmt_process *p_process, t_handler *p_handler)
 	{
 		lmt_process_set(p_process);
 		lmt_process_apply_redirection_list(p_process);
-
-		//	builin 판별 함수 작성
-		if (1)
-		{
-			if (1)
-			{
-				p_handler->line = p_process->token_sublist->first;
-				process_builtin_cmd(p_handler);
-			}
-		}
-		//	nonbuiltin 판별 함수 작성
-		else if (1)
-		{
-			//	argv 만들어서 적용하길
-			execve("/usr/bin/ls", p_process->token_sublist->first->token, p_handler->env);
-		}
+		//	p_process->token_sublist->first[0] 가 항상 command 인 것은 아니다(redirection 일 수도 있다)
+		//	이후에 잘 정리가 되면 이 부분을 수정하도록 하자.
+		//	우선은 가장 처음에 redirection 이 절대 오지 않으며, command 가 나온다고 가정.
+		p_handler->line = p_process->token_sublist->first;
+		if (builtin_cmd(p_handler))
+			process_builtin_cmd(p_handler);
+		else if (not_builtin_cmd(p_handler))
+			execve(p_handler->line->cmd_dir, p_process->token_sublist->first->token, p_handler->env);
 		else
 		{
 			// 실행 가능한 명령이 아님 -> 에러처리
-			perror("ls");
+			perror(p_process->token_sublist->first->token[0]);
 			exit (1);
 		}
 	}

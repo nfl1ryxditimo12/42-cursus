@@ -6,15 +6,14 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/06 17:46:11 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/07 20:47:09 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>	// exit()
 #include <fcntl.h>
 #include <stddef.h>
-#include "t_lmt_process_manager.h"
-#include "lmt_c_library.h"
-#include "constant.h"
+#include "t_lmt_redirection.h"
 
 //	fcntl.h: open()
 //	stddef.h: NULL

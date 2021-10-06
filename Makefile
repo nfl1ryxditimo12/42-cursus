@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/06 17:52:13 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/07 17:26:44 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS		:= \
 			   builtin_cmd/exit.c \
 			   builtin_cmd/export.c \
 			   builtin_cmd/unset.c \
+			   jeonpark/lmt_arrange_token/lmt_arrange_token.c \
 			   jeonpark/lmt_c_library/lmt_alloc/lmt_alloc.c \
 			   jeonpark/lmt_c_library/lmt_io/lmt_put_ch.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_atoi.c \
@@ -44,6 +45,8 @@ SRCS		:= \
 			   jeonpark/lmt_c_library/lmt_unsafe/lmt_unsafe_strdup.c \
 			   jeonpark/lmt_c_library/lmt_unsafe/lmt_unsafe_string_starts.c \
 			   jeonpark/lmt_c_library/lmt_unsafe/lmt_unsafe_strlen.c \
+			   jeonpark/lmt_check_syntax_error/lmt_check_syntax_error.c \
+			   jeonpark/lmt_extension/lmt_extension_token.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_manager_method.c \
@@ -53,7 +56,6 @@ SRCS		:= \
 			   jeonpark/lmt_redirection/t_lmt_redirection_type.c \
 			   jeonpark/lmt_redirection/t_lmt_redirection_list_method.c \
 			   jeonpark/lmt_redirection/t_lmt_redirection_list_type.c \
-			   jeonpark/lmt_tokenization/lmt_tokenize.c \
 			   jeonpark/lmt_tokenization/t_lmt_token_sublist.c \
 			   jeonpark/lmt_util/check_type.c \
 			   jeonpark/lmt_util/lmt_get_exit_code_from_stat_loc.c \
@@ -68,12 +70,15 @@ CFLAG		:= -Wall -Wextra -Werror
 ABSTRACT_INCLUDE	:= \
 			   $(READLINE_DIR)/include \
 			   jeonpark \
+			   jeonpark/lmt_arrange_token \
 			   jeonpark/lmt_c_library \
 			   jeonpark/lmt_c_library/lmt_alloc \
 			   jeonpark/lmt_c_library/lmt_io \
 			   jeonpark/lmt_c_library/lmt_primitive_type \
 			   jeonpark/lmt_c_library/lmt_string \
 			   jeonpark/lmt_c_library/lmt_unsafe \
+			   jeonpark/lmt_check_syntax_error \
+			   jeonpark/lmt_extension \
 			   jeonpark/lmt_describer \
 			   jeonpark/lmt_process_manager \
 			   jeonpark/lmt_redirection \

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:19 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/07/16 16:41:30 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/07 20:41:09 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,20 @@ int	lmt_process_manager_execute_token_sublist(t_handler *p_handler, t_lmt_token_
 	return (exit_code);
 }
 
+static int	refine_token(t_token *p_first_token)
+{
+	int	return_value;
+
+	return_value = lmt_check_syntax_error(p_first_token);
+	if (return_value == PARSE_FAILURE)
+	{
+		printf("parse error. \n");
+		return (PARSE_FAILURE);
+	}
+	lmt_arrange_token(p_first_token);
+	return (PARSE_SUCCESS);
+}
+
 //	파싱이 끝난 p_handler 를 읽어 자식 프로세스 생성, 리다이렉션 적용,
 //	'|', '&&', '||' '()' 에 따라 적절히 자식 프로세스를 생성하고
 //	command 를 실행하는 함수를 호출한다
@@ -48,8 +62,12 @@ int	lmt_process_manager_execute_token_sublist(t_handler *p_handler, t_lmt_token_
 void	lmt_process_manager_execute(t_handler *p_handler)
 {
 	t_lmt_token_sublist	*token_sublist;
-	int	exit_code;
+	int					return_value;
+	int					exit_code;
 
+	return_value = refine_token(p_handler->top);
+	if (return_value == PARSE_FAILURE)
+		return ;
 	token_sublist = lmt_token_sublist_new(p_handler->top, NULL);
 	exit_code = lmt_process_manager_execute_token_sublist(p_handler, token_sublist);
 	lmt_token_sublist_free(token_sublist);

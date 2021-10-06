@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   lmt_arrange_token.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:14:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/07 19:50:36 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/07 17:15:08 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/07 19:19:36 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_UTIL_H
-# define LMT_UTIL_H
+#ifndef LMT_ARRANGE_TOKEN_H
+# define LMT_ARRANGE_TOKEN_H
 
-int	is_type_control_operator(int type);
-int	is_type_redirection(int type);
-int	is_type_open_parenthesis(int type);
-int	is_type_close_parenthesis(int type);
-int	is_type_command(int type);
+# include "minishell.h"
+# include "lmt_extension_token.h"
 
-int	lmt_get_exit_code_from_stat_loc(int stat_loc);
+void	lmt_arrange_token(t_token *p_first_token);
 
 #endif
