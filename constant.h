@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 12:48:46 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/07 20:49:33 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 # define TYPE_REDIRECTION_WORD		0x00000010
 # define TYPE_REDIRECTION_OUT		0x00000020
 # define TYPE_REDIRECTION_APPEND	0x00000040
-# define TYPE_OPERATOR_PIPE			0x00000080
-# define TYPE_OPERATOR_AND			0x00000100
-# define TYPE_OPERATOR_OR			0x00000200
-# define TYPE_PARENTHESIS_OPEN		0x00000400
-# define TYPE_PARENTHESIS_CLOSE		0x00000800
+# define TYPE_CONTROL_OPERATOR_PIPE	0x00000080
+# define TYPE_CONTROL_OPERATOR_AND	0x00000100
+# define TYPE_CONTROL_OPERATOR_OR	0x00000200
+# define TYPE_OPEN_PARENTHESIS		0x00000400
+# define TYPE_CLOSE_PARENTHESIS		0x00000800
 
 //	- 쓰임:
 //	if (token->type & TYPE_REDIRECTION != 0)
@@ -36,7 +36,7 @@
 //	}
 # define TYPE_COMMAND				0X00000006
 # define TYPE_REDIRECTION			0x00000078
-# define TYPE_OPERATOR				0x00000380
+# define TYPE_CONTROL_OPERATOR		0x00000380
 
 //	lmt_process_manager/t_lmt_redirection_type.c/lmt_redirection_free()
 # define REDIRECTION_FREE			0

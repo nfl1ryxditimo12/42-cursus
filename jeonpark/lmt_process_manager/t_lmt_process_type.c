@@ -6,14 +6,12 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:39 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/06 17:44:59 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:45:27 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "t_lmt_process_manager.h"
-#include "lmt_c_library.h"
-#include "constant.h"
 
 //	stdlib.h: free()
 
@@ -22,20 +20,23 @@ static t_lmt_process	*lmt_process_alloc(void)
 	return (lmt_alloc(sizeof(t_lmt_process)));
 }
 
-static void	lmt_process_init(t_lmt_process *p_process, int type, t_lmt_token_sublist *token_sublist, int op)
+static void	lmt_process_init(t_lmt_process *p_process, int type, t_lmt_token_sublist *token_sublist)
 {
 	p_process->type = type;
 	p_process->token_sublist = token_sublist;
 	p_process->redirection_list = lmt_redirection_list_new();
-	p_process->op = op;
+	if (token_sublist->terminator == NULL)
+		p_process->next_operator = TYPE_NONE;
+	else
+		p_process->next_operator = token_sublist->terminator->type;
 }
 
-t_lmt_process	*lmt_process_new(int type, t_lmt_token_sublist *token_sublist, int op)
+t_lmt_process	*lmt_process_new(int type, t_lmt_token_sublist *token_sublist)
 {
 	t_lmt_process	*p_process;
 
 	p_process = lmt_process_alloc();
-	lmt_process_init(p_process, type, token_sublist, op);
+	lmt_process_init(p_process, type, token_sublist);
 	return (p_process);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:43 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/06 16:24:33 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/07 19:52:36 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_lmt_process
 {
 	int						type;
 	t_lmt_token_sublist		*token_sublist;
-	int						op;
+	int						next_operator;
 	t_lmt_redirection_list	*redirection_list;
 	pid_t					pid;
 	struct s_lmt_process	*prev;
@@ -30,7 +30,7 @@ typedef struct s_lmt_process
 }	t_lmt_process;
 
 //	type function
-t_lmt_process	*lmt_process_new(int type, t_lmt_token_sublist *token_sublist, int op);
+t_lmt_process	*lmt_process_new(int type, t_lmt_token_sublist *token_sublist);
 void			lmt_process_free(t_lmt_process *p_process);
 
 //	method function
