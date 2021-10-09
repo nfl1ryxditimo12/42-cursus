@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/07 20:43:43 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/09 14:10:12 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,10 @@ void	lmt_process_execute_child(t_lmt_process *p_process, t_handler *p_handler)
 		if (builtin_cmd(p_handler))
 			process_builtin_cmd(p_handler);
 		else if (not_builtin_cmd(p_handler))
+		{
+			lmt_refine_token_argv_0(p_process->token_sublist->first);
 			execve(p_handler->line->cmd_dir, p_process->token_sublist->first->token, p_handler->env);
+		}
 		else
 		{
 			// 실행 가능한 명령이 아님 -> 에러처리
