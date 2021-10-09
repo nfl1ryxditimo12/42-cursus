@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/07 20:49:33 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/09 19:59:39 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 //	t_token/type
 //	lmt_process/op
 //	lmt_redirection/type
-# define TYPE_NONE					0x00000001
+# define TYPE_UNDEFINED				0x00000000
+# define TYPE_TERMINATOR			0x00000001
 # define TYPE_BUILTIN				0x00000002
 # define TYPE_NON_BUILTIN			0x00000004
 # define TYPE_REDIRECTION_IN		0x00000008

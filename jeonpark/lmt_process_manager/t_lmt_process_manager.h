@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:20 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/07 19:37:54 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/09 13:52:45 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #include "minishell.h"
 #include "constant.h"
 #include "lmt_check_syntax_error.h"
-#include "lmt_arrange_token.h"
+#include "lmt_extension_token.h"
 
 //	method function
 int	lmt_process_manager_execute_token_sublist(t_handler *p_handler, t_lmt_token_sublist *token_sublist);

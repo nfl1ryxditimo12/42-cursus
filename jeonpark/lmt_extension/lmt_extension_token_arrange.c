@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_arrange_token.c                                :+:      :+:    :+:   */
+/*   lmt_token_arrange.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 17:15:10 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/07 19:49:21 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/09 13:44:35 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lmt_arrange_token.h"
+#include "lmt_extension_token.h"
 
 static void	get_redirection_target_name(t_token *element)
 {

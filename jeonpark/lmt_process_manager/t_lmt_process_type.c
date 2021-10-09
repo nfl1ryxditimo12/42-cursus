@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:39 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/07 14:45:27 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/09 20:00:14 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	lmt_process_init(t_lmt_process *p_process, int type, t_lmt_token_sub
 	p_process->token_sublist = token_sublist;
 	p_process->redirection_list = lmt_redirection_list_new();
 	if (token_sublist->terminator == NULL)
-		p_process->next_operator = TYPE_NONE;
+		p_process->next_operator = TYPE_TERMINATOR;
 	else
 		p_process->next_operator = token_sublist->terminator->type;
 }

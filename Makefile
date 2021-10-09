@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/07 17:26:44 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/09 19:56:27 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,12 +31,12 @@ SRCS		:= \
 			   builtin_cmd/exit.c \
 			   builtin_cmd/export.c \
 			   builtin_cmd/unset.c \
-			   jeonpark/lmt_arrange_token/lmt_arrange_token.c \
 			   jeonpark/lmt_c_library/lmt_alloc/lmt_alloc.c \
 			   jeonpark/lmt_c_library/lmt_io/lmt_put_ch.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_atoi.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_digit.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_space.c \
+			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_str_equals.c \
 			   jeonpark/lmt_c_library/lmt_string/t_lmt_string_method.c \
 			   jeonpark/lmt_c_library/lmt_string/t_lmt_string_type.c \
 			   jeonpark/lmt_c_library/lmt_unsafe/lmt_unsafe_memcpy.c \
@@ -45,8 +45,13 @@ SRCS		:= \
 			   jeonpark/lmt_c_library/lmt_unsafe/lmt_unsafe_strdup.c \
 			   jeonpark/lmt_c_library/lmt_unsafe/lmt_unsafe_string_starts.c \
 			   jeonpark/lmt_c_library/lmt_unsafe/lmt_unsafe_strlen.c \
+			   jeonpark/lmt_c_library/lmt_unsafe/lmt_unsafe_strrchr.c \
 			   jeonpark/lmt_check_syntax_error/lmt_check_syntax_error.c \
-			   jeonpark/lmt_extension/lmt_extension_token.c \
+			   jeonpark/lmt_describer/lmt_describer.c \
+			   jeonpark/lmt_extension/lmt_extension_token_arrange.c \
+			   jeonpark/lmt_extension/lmt_extension_token_is_type.c \
+			   jeonpark/lmt_extension/lmt_extension_token_refine_argv_0.c \
+			   jeonpark/lmt_extension/lmt_extension_token_set_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_manager_method.c \
@@ -56,9 +61,9 @@ SRCS		:= \
 			   jeonpark/lmt_redirection/t_lmt_redirection_type.c \
 			   jeonpark/lmt_redirection/t_lmt_redirection_list_method.c \
 			   jeonpark/lmt_redirection/t_lmt_redirection_list_type.c \
-			   jeonpark/lmt_tokenization/t_lmt_token_sublist.c \
-			   jeonpark/lmt_util/check_type.c \
-			   jeonpark/lmt_util/lmt_get_exit_code_from_stat_loc.c \
+			   jeonpark/lmt_token_sublist/t_lmt_token_sublist.c \
+			   jeonpark/lmt_helper/check_type.c \
+			   jeonpark/lmt_helper/lmt_get_exit_code_from_stat_loc.c \
 			   jeonpark/signal/signal.c \
 			   main.c
 
@@ -68,9 +73,9 @@ CC			:= clang
 CFLAG		:= -Wall -Wextra -Werror
 
 ABSTRACT_INCLUDE	:= \
+			   ../playground/content/c \
 			   $(READLINE_DIR)/include \
 			   jeonpark \
-			   jeonpark/lmt_arrange_token \
 			   jeonpark/lmt_c_library \
 			   jeonpark/lmt_c_library/lmt_alloc \
 			   jeonpark/lmt_c_library/lmt_io \
@@ -78,12 +83,12 @@ ABSTRACT_INCLUDE	:= \
 			   jeonpark/lmt_c_library/lmt_string \
 			   jeonpark/lmt_c_library/lmt_unsafe \
 			   jeonpark/lmt_check_syntax_error \
-			   jeonpark/lmt_extension \
 			   jeonpark/lmt_describer \
+			   jeonpark/lmt_extension \
+			   jeonpark/lmt_helper \
 			   jeonpark/lmt_process_manager \
 			   jeonpark/lmt_redirection \
-			   jeonpark/lmt_tokenization \
-			   jeonpark/lmt_util \
+			   jeonpark/lmt_token_sublist \
 			   jeonpark/signal \
 			   .
 

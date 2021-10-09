@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_arrange_token.h                                :+:      :+:    :+:   */
+/*   lmt_strcmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 17:15:08 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/07 19:19:36 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/09 16:09:00 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/09 16:15:01 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_ARRANGE_TOKEN_H
-# define LMT_ARRANGE_TOKEN_H
+#include "lmt_primitive_type.h"
+#include "lmt_constant.h"
 
-# include "minishell.h"
-# include "lmt_extension_token.h"
-
-void	lmt_arrange_token(t_token *p_first_token);
-
-#endif
+///	- parameters:
+///		- lhs: non-optional
+///		- rhs: non-optional
+int	lmt_str_equals(const char *lhs, const char *rhs)
+{
+	while (*rhs != '\0')
+		if (*lhs++ != *rhs++)
+			return (FALSE);
+	if (*lhs != '\0')
+		return (FALSE);
+	return (TRUE);
+}

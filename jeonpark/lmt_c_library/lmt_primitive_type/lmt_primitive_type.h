@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:36:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/06 15:43:48 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/09 16:14:32 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ int		lmt_atol(char *string, long *p_result);
 int		lmt_atoui(char *string, unsigned int *p_result);
 char	*lmt_itoa(int number);
 char	*lmt_ltoa(long number);
+
+int		lmt_str_equals(const char *lhs, const char *rhs);
 
 #endif
