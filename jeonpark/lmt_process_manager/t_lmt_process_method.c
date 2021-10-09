@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/09 14:10:12 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/09 20:01:02 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int	lmt_process_append_pipe_redirection(t_lmt_process *p_process)
 
 	if (pipe(fd_pipe) == -1)
 		exit(1);
-	p_redirection = lmt_redirection_new(FD_OUT, TYPE_NONE, fd_pipe[PIPE_WRITE], NULL);
+	p_redirection = lmt_redirection_new(FD_OUT, TYPE_TERMINATOR, fd_pipe[PIPE_WRITE], NULL);
 	lmt_process_append_redirection(p_process, p_redirection);
-	p_redirection = lmt_redirection_new(FD_IN, TYPE_NONE, fd_pipe[PIPE_READ], NULL);
+	p_redirection = lmt_redirection_new(FD_IN, TYPE_TERMINATOR, fd_pipe[PIPE_READ], NULL);
 	lmt_process_append_redirection(p_process->next, p_redirection);
 	//	에러를 없애기 위해 임시 추가
 	return (0);

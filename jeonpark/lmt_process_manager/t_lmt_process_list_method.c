@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/07 20:57:07 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/09 20:00:11 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	lmt_process_list_wait(t_lmt_process_list *list)
 	element = list->p_dummy->next;
 	while (element != NULL)
 	{
-		if (element->next_operator == TYPE_CONTROL_OPERATOR_PIPE || element->next_operator == TYPE_NONE)
+		if (element->next_operator == TYPE_CONTROL_OPERATOR_PIPE || element->next_operator == TYPE_TERMINATOR)
 			if (element->pid != 0)
 				waitpid(element->pid, &stat_loc, 0);
 		element = element->next;

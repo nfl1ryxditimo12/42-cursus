@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_primitive.h                                    :+:      :+:    :+:   */
+/*   lmt_strcmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 13:36:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/09 16:14:32 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/09 16:09:00 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/09 16:15:01 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_PRIMITIVE_TYPE
-# define LMT_PRIMITIVE_TYPE
+#include "lmt_primitive_type.h"
+#include "lmt_constant.h"
 
-int		lmt_is_space(const char ch);
-int		lmt_is_digit(const char ch);
-
-int		lmt_atoi(char *string, int *p_result);
-int		lmt_atol(char *string, long *p_result);
-int		lmt_atoui(char *string, unsigned int *p_result);
-char	*lmt_itoa(int number);
-char	*lmt_ltoa(long number);
-
-int		lmt_str_equals(const char *lhs, const char *rhs);
-
-#endif
+///	- parameters:
+///		- lhs: non-optional
+///		- rhs: non-optional
+int	lmt_str_equals(const char *lhs, const char *rhs)
+{
+	while (*rhs != '\0')
+		if (*lhs++ != *rhs++)
+			return (FALSE);
+	if (*lhs != '\0')
+		return (FALSE);
+	return (TRUE);
+}

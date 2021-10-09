@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:19 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/07 20:41:09 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/09 20:02:15 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	refine_token(t_token *p_first_token)
 {
 	int	return_value;
 
+	lmt_set_token_type(p_first_token);
 	return_value = lmt_check_syntax_error(p_first_token);
 	if (return_value == PARSE_FAILURE)
 	{
