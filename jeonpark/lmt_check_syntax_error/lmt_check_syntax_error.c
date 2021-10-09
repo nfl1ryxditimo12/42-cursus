@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:10:01 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/07 19:50:50 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/10 12:34:10 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	check_syntax_error_to_element(t_token *element)
 	}
 	else if (lmt_is_token_type_redirection(element))
 	{
-		if (lmt_is_token_type_command(element->next))
+		if (!lmt_is_token_type_command(element->next))
 			return (PARSE_FAILURE);
 	}
 	return (PARSE_SUCCESS);
