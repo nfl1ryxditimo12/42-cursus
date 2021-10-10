@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/09 20:00:11 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/11 15:59:09 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,47 @@ static int	lmt_process_list_wait(t_lmt_process_list *list)
 	return (lmt_get_exit_code_from_stat_loc(stat_loc));
 }
 
+static t_token	*append_new_subshell_process_by_token(
+		t_lmt_process_list *list, t_token *element)
+{
+	int					parenthesis_count;
+	t_token				*new_process_first_token;
+	t_lmt_token_sublist	*new_token_sublist;
+	t_lmt_process		*new_process;
+
+	parenthesis_count = 1;
+	element = element->next;
+	new_process_first_token = element;
+	while (parenthesis_count > 0)
+	{
+		if (lmt_is_token_type_open_parenthesis(element))
+			++parenthesis_count;
+		else if (element->type == TYPE_CLOSE_PARENTHESIS)
+			--parenthesis_count;
+		element = element->next;
+	}
+	new_token_sublist = lmt_token_sublist_new(new_process_first_token, element);
+	new_process = lmt_process_new(TYPE_PROCESS_SUBSHELL, new_token_sublist);
+	lmt_process_list_append(list, new_process);
+	return (element);
+}
+
+static t_token	*append_new_process_by_token(
+		t_lmt_process_list *list, t_token *element)
+{
+	t_token				*new_process_first_token;
+	t_lmt_token_sublist	*new_token_sublist;
+	t_lmt_process		*new_process;
+
+	new_process_first_token = element;
+	while (!lmt_is_token_type_control_operator(element) && element != NULL)
+		element = element->next;
+	new_token_sublist = lmt_token_sublist_new(new_process_first_token, element);
+	new_process = lmt_process_new(TYPE_PROCESS_NORMAL, new_token_sublist);
+	lmt_process_list_append(list, new_process);
+	return (element);
+}
+
 //	두 번째 인자로 받은 token_sublist 를 읽어
 //	lmt_process 를 생성해 lmt_process_list 에 list 형식으로 저장해둔다
 //
@@ -51,43 +92,18 @@ static int	lmt_process_list_wait(t_lmt_process_list *list)
 //	lmt_process_list_new() 로 process_list 를 생성한 후,
 //	lmt_process_list_execute() 를 호출하기 전에
 //	이 함수를 호출한다
-void	lmt_process_list_set_by_token_sublist(t_lmt_process_list *list, t_lmt_token_sublist *token_sublist)
+void	lmt_process_list_set_by_token_sublist(
+		t_lmt_process_list *list, t_lmt_token_sublist *token_sublist)
 {
-	t_token				*element;
-	t_lmt_process		*p_process_new;
-	int					parenthesis_count;
-	t_token				*p_process_first_token;
-	t_lmt_token_sublist	*token_sublist_new;
+	t_token	*element;
 
 	element = token_sublist->first;
 	while (element != token_sublist->terminator)
 	{
-		if (element->type == TYPE_OPEN_PARENTHESIS)
-		{
-			parenthesis_count = 1;
-			p_process_first_token = element->next;
-			while (parenthesis_count > 0)
-			{
-				element = element->next;
-				if (element->type == TYPE_OPEN_PARENTHESIS)
-					++parenthesis_count;
-				else if (element->type == TYPE_CLOSE_PARENTHESIS)
-					--parenthesis_count;
-			}
-			token_sublist_new = lmt_token_sublist_new(p_process_first_token, element);
-			p_process_new = lmt_process_new(TYPE_PROCESS_SUBSHELL, token_sublist_new);
-			lmt_process_list_append(list, p_process_new);
-			element = element->next;
-		}
+		if (lmt_is_token_type_open_parenthesis(element))
+			element = append_new_subshell_process_by_token(list, element);
 		else
-		{
-			p_process_first_token = element;
-			while (!lmt_is_token_type_control_operator(element) || element != NULL)
-				element = element->next;
-			token_sublist_new = lmt_token_sublist_new(p_process_first_token, element);
-			p_process_new = lmt_process_new(TYPE_PROCESS_NORMAL, token_sublist_new);
-			lmt_process_list_append(list, p_process_new);
-		}
+			element = append_new_process_by_token(list, element);
 		if (lmt_is_token_type_control_operator(element))
 			element = element->next;
 	}
@@ -106,9 +122,9 @@ void	lmt_process_list_set_by_token_sublist(t_lmt_process_list *list, t_lmt_token
 //	프로세스가 실행되고 난 후 반환된 값
 int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *p_handler)
 {
-	t_lmt_process		*element;
-	int					stat_loc;
-	int					exit_code;
+	t_lmt_process	*element;
+	int				stat_loc;
+	int				exit_code;
 
 	element = list->p_dummy->next;
 	while (element != NULL)
