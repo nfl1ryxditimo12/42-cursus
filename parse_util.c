@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/11 16:23:26 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/11 18:17:00 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,36 +55,171 @@ int     token_len(char  *str, char quotes)
     return (i);
 }
 
-int     check_env_len(char *line)
+int     check_dollar(char *line, int size)
 {
-    int size;
+    int i;
 
-    size = 0;
-    while (line[size] && (line[size] != 32 || line[size] != 9))
-        size++;
-    return (size);
+    i = -1;
+    while (++i < size)
+        if (line[i] == '$' && (line[i + 1] != 32 || line[i + 1] != 9))
+            return (1);
+    return (0);
 }
 
-char    *line_join(char *str, char *line)
+int     get_arr_size(char *line, int size)
 {
-    
+    int i;
+    int token;
+
+    i = 0;
+    token = 0;
+    while (i < size)
+    {
+        if (line[i] == '$')
+        {
+            while (line[i] != 32)
+                i++;
+            token++;
+        }
+        else
+        {
+            while (line[i] != '$')
+                i++;
+            token++;
+        }
+    }
+    return (token);
 }
 
-// ptr->token[1] = "asdfasd $USER asdf" || command1 || command2
-// "asdfasd $USER asdf" => "asdfasd seonkim asdf"
+char    *get_line(char *line, int size)
+{
+    int i;
+    char *ret;
+
+    i = -1;
+    ret = malloc(size + 1);
+    while (++i < size)
+        ret[i] = line[i];
+    ret[i] = 0;
+    return (ret);
+}
+
+char    **split_line(char *line, int size)
+{
+    char **arr;
+    int i;
+    int j;
+    int token;
+
+    i = 0;
+    j = 0;
+    arr = (char **)malloc(sizeof(char *) * get_arr_size(line, size) + 1);
+    while (i < size)
+    {
+        token = 0;
+        if (line[i] == '$')
+        {
+            while (line[token] != 32)
+                token++;
+            arr[j++] = get_line(line, token);
+            i += token;
+        }
+        else
+        {
+            while (line[token] != '$')
+                token++;
+            arr[j++] = get_line(line, token);
+            i += token;
+        }
+    }
+    arr[j] = 0;
+    return (arr);
+}
+
+char    *line_to_environ(char *key, char **env)
+{
+    while (*env)
+    {
+        if (ft_strcmp(key, *env))
+        {
+            *env += cmd_len(key) + 1;
+            return (ft_strdup(*env));
+        }
+        env++;    
+    }
+    return (ft_strdup(""));
+}
+
+char    *ft_strjoin(char *s1, char *s2)
+{
+    int		s1_len;
+	int		s2_len;
+	char	*ret;
+	char	*p;
+
+	if (!s1 || !s2)
+		return (0);
+	s1_len = cmd_len(s1);
+	s2_len = cmd_len(s2);
+	if (!(ret = (char *)malloc(s1_len + s2_len + 1)))
+		return (0);
+	p = ret;
+	while (*s1)
+		*(p++) = *(s1++);
+	while (*s2)
+		*(p++) = *(s2++);
+	*p = 0;
+    free(s1);
+	return (ret);
+}
+
+char    *split_to_join(char **split)
+{
+    char *ptr;
+    int len;
+
+    len = 0;
+    while (*split)
+    {
+        ptr = ft_strjoin(ptr, *split);
+        free(*split);
+        split++;
+    }
+    return (ptr);
+}
+
+char    *switch_line_to_environ(char *line, int size, char **env)
+{
+    char **split;
+    char **arr;
+    char *ret;
+
+    split = split_line(line, size);
+    arr = split;
+    while (*arr)
+    {
+        if (**arr == '$')
+            *arr = line_to_environ(*arr, env);
+        arr++;
+    }
+    ret = split_to_join(split);
+    free(split);
+    return (ret);
+}
 
 char    *dup_line(char *line, int size, int quotes, char **env)
 {
     char *ret;
     int i;
 
+    if (check_dollar(line, size) && quotes != '\'')
+        return (switch_line_to_environ(line, size, env));
+    ret = malloc(size + 1);
     i = -1;
     while (++i < size)
-    {
-        // ret = 
-    }
-    
-    return (ret);
+        ret[i] = line[i];
+    ret[i] = 0;
+    return(ret);
 }
 
 int    line_cpy(t_token *ptr, char *line, char **env)

@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/11 16:30:17 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/11 16:37:25 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/stat.h>
+# include "t_lmt_string.h"
 
 # define BUFFER_SIZE 10000
 # define MEM_ERR "Memory Allocation Error"
