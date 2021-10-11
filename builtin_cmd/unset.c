@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:19:02 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/11 15:43:30 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/11 16:30:29 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char    **sub_env(t_handler *hand)
 {
     int     size;
     int     i;
-    int     j;
     char    **ret;
     char    *arg;
     

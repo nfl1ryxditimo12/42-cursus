@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:02:11 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/11 15:03:54 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/11 16:30:22 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char    *process_comma(t_handler *hand)
 void    process_cd(t_handler *hand)
 {
     char    *dir;
-    int     comma;
 
     if (hand->line->token[2])
         perror(hand->line->token[2]);

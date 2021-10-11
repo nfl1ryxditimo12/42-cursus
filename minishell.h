@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/11 15:32:02 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/11 16:30:17 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int     token_len(char  *str, char quotes);
 
 // check
 int    check_type(t_handler *hand);
+int	builtin_cmd(t_handler *hand);
+int	not_builtin_cmd(t_handler *hand);
 
 // process
 void    process_builtin_cmd(t_handler *hand);
