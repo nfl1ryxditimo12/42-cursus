@@ -6,14 +6,12 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 15:32:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/09 20:01:10 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/11 19:37:16 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stdlib.h>	// free(), NULL
 #include "t_lmt_redirection_list.h"
-
-//	stdlib.h: free(), NULL
 
 static t_lmt_redirection_list	*lmt_redirection_list_alloc(void)
 {

@@ -6,14 +6,12 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 15:32:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/07 14:45:28 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/11 20:10:32 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <stddef.h>	// NULL
 #include "t_lmt_redirection_list.h"
-
-//	stddef.h: NULL
 
 //	새로운 노드를 p_dummy(통상 말하는 'top' 의 앞에 있는 node) 바로 뒤에 추가하는 함수
 void	lmt_redirection_list_push(t_lmt_redirection_list *list, t_lmt_redirection *p_redirection)
@@ -74,4 +72,8 @@ void	lmt_redirection_list_backdown(t_lmt_redirection_list *list)
 //	free 는 왜 하지? 생각을 더 해봐야겠다
 	lmt_redirection_list_apply(list);
 	lmt_redirection_list_free(list, REDIRECTION_FREE);
+}
+
+void	lmt_redirection_list_new_by_token()
+{
 }

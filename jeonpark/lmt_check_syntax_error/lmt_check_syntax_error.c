@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:10:01 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/10 12:34:10 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/11 20:40:16 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ static int	check_syntax_error_to_element(t_token *element)
 {
 	if (lmt_is_token_type_open_parenthesis(element))
 	{
-		if (!lmt_is_token_type_control_operator(element->pre))
+		if (!(lmt_is_token_type_control_operator(element->pre)
+					|| lmt_is_token_type_open_parenthesis(element->pre)))
 			return (PARSE_FAILURE);
 	}
 	else if (lmt_is_token_type_close_parenthesis(element))
 	{
-		if (lmt_is_token_type_open_parenthesis(element->pre))
+		if (lmt_is_token_type_open_parenthesis(element->pre)
+				|| !(lmt_is_token_type_control_operator(element->next)
+					|| lmt_is_token_type_close_parenthesis(element->next)
+					|| element->next NULL))
 			return (PARSE_FAILURE);
 	}
 	else if (lmt_is_token_type_control_operator(element))
@@ -40,13 +44,13 @@ static int	check_syntax_error_to_element(t_token *element)
 	return (PARSE_SUCCESS);
 }
 
-int	lmt_check_syntax_error(t_token *p_first_token)
+int	lmt_check_syntax_error(t_token *first_token)
 {
 	t_token	*element;
 	int		return_value;
 
-	element = p_first_token;
-	if (lmt_is_token_type_control_operator(p_first_token))
+	element = first_token;
+	if (lmt_is_token_type_control_operator(first_token))
 		return (PARSE_FAILURE);
 	element = element->next;
 	while (element != NULL)
