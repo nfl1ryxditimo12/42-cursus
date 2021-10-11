@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/11 19:34:15 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/12 11:16:17 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,10 +58,7 @@ SRCS		:= \
 			   jeonpark/lmt_process_manager/t_lmt_process_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_redirection.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_type.c \
-			   jeonpark/lmt_redirection/t_lmt_redirection_method.c \
-			   jeonpark/lmt_redirection/t_lmt_redirection_type.c \
-			   jeonpark/lmt_redirection/t_lmt_redirection_list_method.c \
-			   jeonpark/lmt_redirection/t_lmt_redirection_list_type.c \
+			   jeonpark/lmt_redirection/lmt_apply_redirection.c \
 			   jeonpark/lmt_token_sublist/t_lmt_token_sublist.c \
 			   jeonpark/lmt_helper/check_type.c \
 			   jeonpark/lmt_helper/lmt_get_exit_code_from_stat_loc.c \
@@ -74,7 +71,6 @@ CC			:= clang
 CFLAG		:= -Wall -Wextra -Werror
 
 ABSTRACT_INCLUDE	:= \
-			   ../playground/content/c \
 			   $(READLINE_DIR)/include \
 			   jeonpark \
 			   jeonpark/lmt_c_library \

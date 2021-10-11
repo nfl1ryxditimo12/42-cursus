@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/11 15:44:00 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 10:59:44 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,10 @@
 # define TYPE_REDIRECTION			0x00000078
 # define TYPE_CONTROL_OPERATOR		0x00000380
 
-//	lmt_process_manager/t_lmt_redirection_type.c/lmt_redirection_free()
-# define REDIRECTION_FREE			0
-# define REDIRECTION_FREE_CLOSE_FD	1
-
 //	lmt_process_mananger/t_lmt_process_method.c/lmt_process_excute_child()
-# define TYPE_PROCESS_DUMMY		0
-# define TYPE_PROCESS_NORMAL	1
-# define TYPE_PROCESS_SUBSHELL	2
+# define TYPE_PROCESS_DUMMY			0
+# define TYPE_PROCESS_NORMAL		1
+# define TYPE_PROCESS_PARENTHESIS	2
 
 # define FD_NONE	-1
 # define FD_IN		0
@@ -56,5 +52,11 @@
 //	t_lmt_command_list_execute()/fd_pipe[]/index
 # define PIPE_READ	0
 # define PIPE_WRITE	1
+
+//	lmt_apply_redirection()
+# define DEFAULT_MODE	0644
+
+# define ERROR	1
+# define NORMAL	0
 
 #endif

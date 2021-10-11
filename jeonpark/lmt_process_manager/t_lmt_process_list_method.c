@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/11 19:38:25 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 10:40:58 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	lmt_process_list_wait(t_lmt_process_list *list)
 	return (lmt_get_exit_code_from_stat_loc(stat_loc));
 }
 
-static t_token	*append_new_subshell_process_by_token(
+static t_token	*append_new_parenthesis_process_by_token(
 		t_lmt_process_list *list, t_token *element)
 {
 	int					parenthesis_count;
@@ -60,7 +60,7 @@ static t_token	*append_new_subshell_process_by_token(
 		element = element->next;
 	}
 	new_token_sublist = lmt_token_sublist_new(new_process_first_token, element);
-	new_process = lmt_process_new(TYPE_PROCESS_SUBSHELL, new_token_sublist);
+	new_process = lmt_process_new(TYPE_PROCESS_PARENTHESIS, new_token_sublist);
 	lmt_process_list_append(list, new_process);
 	return (element);
 }
@@ -98,7 +98,7 @@ void	lmt_process_list_set_by_token_sublist(
 	while (element != token_sublist->terminator)
 	{
 		if (lmt_is_token_type_open_parenthesis(element))
-			element = append_new_subshell_process_by_token(list, element);
+			element = append_new_parenthesis_process_by_token(list, element);
 		else
 			element = append_new_process_by_token(list, element);
 		if (lmt_is_token_type_control_operator(element))
@@ -128,7 +128,7 @@ int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *handler)
 	{
 		if (element->next_control_op == TYPE_CONTROL_OPERATOR_PIPE)
 		{
-			lmt_process_append_pipe_redirection(element);
+			lmt_process_set_pipe_redirection(element);
 			lmt_process_execute_child(element, handler);
 		}
 		else if (element->prev->next_control_op == TYPE_CONTROL_OPERATOR_PIPE)
@@ -136,7 +136,7 @@ int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *handler)
 		else
 		{
 			if (builtin_cmd(handler))
-				exit_code = lmt_process_execute_parent(element, handler);
+				exit_code = lmt_process_execute_in_parent(element, handler);
 			else
 			{
 				lmt_process_execute_child(element, handler);

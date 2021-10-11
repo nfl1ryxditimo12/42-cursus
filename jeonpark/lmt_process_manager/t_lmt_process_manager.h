@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:20 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/11 19:26:30 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 10:52:57 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 #include "t_lmt_process.h"
 #include "t_lmt_process_list.h"
 #include "t_lmt_process_manager.h"
-#include "t_lmt_redirection.h"
-#include "t_lmt_redirection_list.h"
+#include "lmt_apply_redirection.h"
 #include "t_lmt_token_sublist.h"
 #include "lmt_c_library.h"
 #include "minishell.h"
