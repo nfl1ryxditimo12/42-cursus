@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/09 19:59:39 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/11 15:44:00 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@
 # define REDIRECTION_FREE_CLOSE_FD	1
 
 //	lmt_process_mananger/t_lmt_process_method.c/lmt_process_excute_child()
-# define TYPE_PROCESS_NORMAL	0
-# define TYPE_PROCESS_SUBSHELL	1
+# define TYPE_PROCESS_DUMMY		0
+# define TYPE_PROCESS_NORMAL	1
+# define TYPE_PROCESS_SUBSHELL	2
 
 # define FD_NONE	-1
 # define FD_IN		0

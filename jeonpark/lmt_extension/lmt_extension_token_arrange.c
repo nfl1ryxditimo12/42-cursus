@@ -6,51 +6,36 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 17:15:10 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/09 13:44:35 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/10 14:06:33 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lmt_extension_token.h"
 
-static void	get_redirection_target_name(t_token *element)
+static void	get_redirection_target_path(t_token *element)
 {
 	char	**source;
 	char	**target;
-	char	**ptr;
 
 	target = element->token + 1;
 	source = element->next->token;
-	ptr = source + 1;
 	*target = *source;
-	while (*ptr != NULL)
+	while (*source != NULL)
 	{
-		*(ptr - 1) = *ptr;
-		++ptr;
+		*source = *(source + 1);
+		++source;
 	}
 }
 
-static void	move_token_first(t_token **pp_first_token, t_token *element)
-{
-	element->pre->next = element->next;
-	if (element->next != NULL)
-		element->next->pre = element->pre;
-	if (element->pre != NULL)
-		element->pre->next = element;
-	(*pp_first_token)->pre = element;
-	element->pre = (*pp_first_token)->pre;
-	element->next = *pp_first_token;
-	*pp_first_token = element;
-}
-
-static void	move_token_contents_to_command_token(t_token *p_first_token, t_token *element)
+static void	append_token_to_first(t_token *first_token, t_token *element)
 {
 	char	**target;
 	char	**source;
 
-	target = p_first_token->token;
-	source = element->token;
+	target = first_token->token;
 	while (*target != NULL)
 		++target;
+	source = element->token;
 	while (*source != NULL)
 	{
 		*target = *source;
@@ -60,30 +45,65 @@ static void	move_token_contents_to_command_token(t_token *p_first_token, t_token
 	}
 }
 
-static void	lmt_arrange_token_element(t_token **pp_first_token, t_token *element)
+static void	arrange_token(t_handler *handler, t_token *element)
 {
 	if (lmt_is_token_type_redirection(element))
-		get_redirection_target_name(element);
-	if (lmt_is_token_type_command(element) && element->token[0] != NULL)
 	{
-		if (lmt_is_token_type_redirection(*pp_first_token))
-			move_token_first(pp_first_token, element);
-		else
-			move_token_contents_to_command_token(*pp_first_token, element);
+		get_redirection_target_path(element);
+		if (element == handler->line)
+		{
+			handler->line = lmt_remove_token(element->next);
+			lmt_insert_token_first(element, handler->line);
+		}
+	}
+	else if (lmt_is_token_type_command(element))
+		append_token_to_first(handler->line, element);
+	else
+		handler->line = element->next;
+}
+
+static void	remove_all_empty_token(t_token *first_token)
+{
+	t_token	*element;
+	t_token	*element_to_free;
+
+	element = first_token;
+	while (element != NULL)
+	{
+		if (element->token[0] == NULL)
+		{
+			element_to_free = element;
+			element = element->next;
+			lmt_remove_token(element_to_free);
+			free(element_to_free);
+			continue;
+		}
+		element = element->next;
 	}
 }
 
-void	lmt_arrange_token(t_token *p_first_token)
+///	Used handler->line as address of command_token.
+///	*Fix comment below*
+///	If element's type is redirection:
+///		Append element->next->token[0] to element->token.
+///		And if element is first_element, move element->next to first.
+///	If element's type is command:
+///		Append element->token to first_element->token.
+///		And free the empty element.
+/// Else:
+///		first_element = element->next;
+void	lmt_arrange_token(t_handler *handler)
 {
 	t_token	*element;
 
-	element = p_first_token;
+	handler->line = handler->top;
+	element = handler->top;
+	if (lmt_is_token_type_redirection(element))
+		handler->top = element->next;
 	while (element != NULL)
 	{
-		if (lmt_is_token_type_command(element) || lmt_is_token_type_redirection(element))
-			lmt_arrange_token_element(&p_first_token, element);
-		else
-			p_first_token = element->next;
+		arrange_token(handler, element);
 		element = element->next;
 	}
+	remove_all_empty_token(handler->top);
 }
