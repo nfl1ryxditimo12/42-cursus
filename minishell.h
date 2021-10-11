@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/07 20:42:05 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/11 16:37:25 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/stat.h>
+# include "t_lmt_string.h"
 
 # define BUFFER_SIZE 10000
 # define MEM_ERR "Memory Allocation Error"
@@ -73,7 +74,7 @@ void    line_split(t_handler *hand, char *line);
 int     ft_strlen(char  *str);
 int     ft_strcmp(char *s1, char *s2);
 int     ft_strcmp2(char *s1, char *s2);
-int     line_cpy(t_token *ptr, char *line);
+int     line_cpy(t_token *ptr, char *line, char **env);
 int     token_len(char  *str, char quotes);
 
 // cd
