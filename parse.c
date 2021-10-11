@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 15:41:25 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/06 14:59:01 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/11 15:32:20 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int     get_token_cnt(char *line)
     return (cnt);
 }
 
-void    process_split(t_token *ptr, char *line)
+void    process_split(t_token *ptr, char *line, char **env)
 {
     int flag;
 
@@ -117,14 +117,14 @@ void    process_split(t_token *ptr, char *line)
         {
             if (flag == 1 || flag == 2)
                 ptr = ptr->next;
-            line += line_cpy(ptr, line);
+            line += line_cpy(ptr, line, env);
             flag = 2;
         }
         if (*line && !(*line == 32 || *line == 9) && !chk_symbol(line) && !chk_redirect(line) && !count_fd(line))
         {
             if (flag == 2)
                 ptr = ptr->next;
-            line += line_cpy(ptr, line);
+            line += line_cpy(ptr, line, env);
             flag = 1;
         }
     }
@@ -154,7 +154,7 @@ void    line_split(t_handler *hand, char *line)
     while (++i < size)
         node_push(hand);
 	hand->line = hand->top;
-    process_split(hand->line, line);
+    process_split(hand->line, line, hand->env);
     hand->line = hand->top;
     print_parse(hand);
     hand->line = hand->top;

@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/06 15:03:27 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/11 16:23:26 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,53 @@ int     token_len(char  *str, char quotes)
     return (i);
 }
 
-int    line_cpy(t_token *ptr, char *line)
+int     check_env_len(char *line)
+{
+    int size;
+
+    size = 0;
+    while (line[size] && (line[size] != 32 || line[size] != 9))
+        size++;
+    return (size);
+}
+
+char    *line_join(char *str, char *line)
+{
+    
+}
+
+// ptr->token[1] = "asdfasd $USER asdf" || command1 || command2
+// "asdfasd $USER asdf" => "asdfasd seonkim asdf"
+
+char    *dup_line(char *line, int size, int quotes, char **env)
+{
+    char *ret;
+    int i;
+
+    i = -1;
+    while (++i < size)
+    {
+        // ret = 
+    }
+    
+    return (ret);
+}
+
+int    line_cpy(t_token *ptr, char *line, char **env)
 {
     int i;
-    int j;
     int size;
     char quotes;
 
     i = 0;
-    j = 0;
     quotes = 0;
     while (ptr->token[i])
         i++;
     if (*line == '\'' || *line == '\"')
         quotes = *line;
     size = token_len(line, quotes);
-    ptr->token[i] = malloc(size + 1);
-    while (j < size)
-        ptr->token[i][j++] = *line++;
+    ptr->token[i] = dup_line(line, size, quotes, env);
     ptr->size++;
-    ptr->token[i][j] = 0;
     ptr->token[++i] = 0;
     return (size);
 }
@@ -102,5 +129,21 @@ int     ft_strcmp2(char *s1, char *s2)
             return (0);
     if (*s1 || *s2)
         return (0);
+    return (1);
+}
+
+int     ft_strcmp3(char *s1, char *s2, int size)
+{
+    int i;
+
+    i = 0;
+    if (!size)
+        return (0);
+    while (*s1 && *s2 && i < size)
+    {
+        if (*s1++ != *s2++)
+            return (0);
+        i++;
+    }
     return (1);
 }
