@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 11:30:06 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 10:51:49 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 17:22:51 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "lmt_c_library.h"	// t_lmt_string
 # include "lmt_helper.h"	// is_type_()
 # include "constant.h"	// TYPE_
+
+void	lmt_reset_handler_all_size(t_handler *handler);
 
 void	lmt_arrange_token(t_handler *handler);
 

@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/12 11:16:17 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/12 17:24:15 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS		:= \
 			   jeonpark/lmt_c_library/lmt_unsafe/lmt_unsafe_strlen.c \
 			   jeonpark/lmt_c_library/lmt_unsafe/lmt_unsafe_strrchr.c \
 			   jeonpark/lmt_check_syntax_error/lmt_check_syntax_error.c \
+			   jeonpark/lmt_extension/lmt_extension_handler_reset_all_size.c \
 			   jeonpark/lmt_extension/lmt_extension_token_arrange.c \
 			   jeonpark/lmt_extension/lmt_extension_token_is_type.c \
 			   jeonpark/lmt_extension/lmt_extension_token_refine_argv_0.c \
