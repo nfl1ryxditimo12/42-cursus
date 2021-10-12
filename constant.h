@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 10:59:44 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 21:39:03 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 //	lmt_apply_redirection()
 # define DEFAULT_MODE	0644
 
-# define ERROR	1
 # define NORMAL	0
+# define ERROR	1
 
 #endif

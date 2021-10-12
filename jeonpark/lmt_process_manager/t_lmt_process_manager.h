@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:20 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 10:52:57 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 20:45:34 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #include "lmt_extension_token.h"
 
 //	method function
-int	lmt_process_manager_execute_token_sublist(t_handler *handler, t_lmt_token_sublist *token_sublist);
+int	lmt_process_manager_execute_token_sublist(t_handler *handler, t_lmt_token_sublist *token_sublist, int pipe_in_fd);
 int	lmt_process_manager_execute(t_handler *handler);
 
 #endif

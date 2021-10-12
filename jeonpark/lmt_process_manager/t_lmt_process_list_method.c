@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 10:40:58 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 21:38:14 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	lmt_process_list_wait(t_lmt_process_list *list)
 }
 
 static t_token	*append_new_parenthesis_process_by_token(
-		t_lmt_process_list *list, t_token *element)
+		t_lmt_process_list *list, t_token *element, int pipe_in_fd)
 {
 	int					parenthesis_count;
 	t_token				*new_process_first_token;
@@ -61,12 +61,13 @@ static t_token	*append_new_parenthesis_process_by_token(
 	}
 	new_token_sublist = lmt_token_sublist_new(new_process_first_token, element);
 	new_process = lmt_process_new(TYPE_PROCESS_PARENTHESIS, new_token_sublist);
+	new_process->pipe_fd_in = pipe_in_fd;
 	lmt_process_list_append(list, new_process);
 	return (element);
 }
 
 static t_token	*append_new_process_by_token(
-		t_lmt_process_list *list, t_token *element)
+		t_lmt_process_list *list, t_token *element, int pipe_in_fd)
 {
 	t_token				*new_process_first_token;
 	t_lmt_token_sublist	*new_token_sublist;
@@ -77,6 +78,7 @@ static t_token	*append_new_process_by_token(
 		element = element->next;
 	new_token_sublist = lmt_token_sublist_new(new_process_first_token, element);
 	new_process = lmt_process_new(TYPE_PROCESS_NORMAL, new_token_sublist);
+	new_process->pipe_fd_in = pipe_in_fd;
 	lmt_process_list_append(list, new_process);
 	return (element);
 }
@@ -90,7 +92,7 @@ static t_token	*append_new_process_by_token(
 //	lmt_process_list_execute() 를 호출하기 전에
 //	이 함수를 호출한다
 void	lmt_process_list_set_by_token_sublist(
-		t_lmt_process_list *list, t_lmt_token_sublist *token_sublist)
+		t_lmt_process_list *list, t_lmt_token_sublist *token_sublist, int pipe_in_fd)
 {
 	t_token	*element;
 
@@ -98,9 +100,9 @@ void	lmt_process_list_set_by_token_sublist(
 	while (element != token_sublist->terminator)
 	{
 		if (lmt_is_token_type_open_parenthesis(element))
-			element = append_new_parenthesis_process_by_token(list, element);
+			element = append_new_parenthesis_process_by_token(list, element, pipe_in_fd);
 		else
-			element = append_new_process_by_token(list, element);
+			element = append_new_process_by_token(list, element, pipe_in_fd);
 		if (lmt_is_token_type_control_operator(element))
 			element = element->next;
 	}
@@ -128,10 +130,11 @@ int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *handler)
 	{
 		if (element->next_control_op == TYPE_CONTROL_OPERATOR_PIPE)
 		{
-			lmt_process_set_pipe_redirection(element);
-			lmt_process_execute_child(element, handler);
+			if (lmt_process_set_pipe_redirection(element) == ERROR)
+				return (ERROR);
+			exit_code = lmt_process_execute_child(element, handler);
 		}
-		else if (element->prev->next_control_op == TYPE_CONTROL_OPERATOR_PIPE)
+		else if (element->pipe_fd_in != FD_NONE)
 			lmt_process_execute_child(element, handler);
 		else
 		{

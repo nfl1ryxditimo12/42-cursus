@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:43 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 11:04:18 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 21:15:37 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ t_lmt_process	*lmt_process_new(int type, t_lmt_token_sublist *token_sublist);
 void			lmt_process_free(t_lmt_process *process);
 
 //	method function
-int	lmt_process_execute_in_parent(t_lmt_process *process, t_handler *handler);
+int		lmt_process_execute_in_parent(t_lmt_process *process, t_handler *handler);
 int		lmt_process_execute_child(t_lmt_process *process, t_handler *handler);
 
 int		lmt_process_set_pipe_redirection(t_lmt_process *process);
-int		lmt_process_apply_redirection(t_lmt_process *process);
+int		lmt_process_attach_io(t_lmt_process *process);
 void	lmt_process_restore_redirection(t_lmt_process *process);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 11:08:10 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 21:09:32 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,6 @@
 #include <fcntl.h>	// open()
 #include <unistd.h>	// dup(), dup2()
 #include "lmt_apply_redirection.h"
-
-void	lmt_apply_pipe_redirection(t_lmt_process *process)
-{
-	if (process->pipe_fd_in != -1)
-	{
-		process->backuped_fd_in = dup(FD_IN);
-		if (dup2(process->pipe_fd_in, FD_IN) == -1)
-		{
-			close(process->backuped_fd_in);
-			exit (1);	// 여기서 perror 를 띄우자, 그런데 숫자를 문자로 바꿔야 하기 때문에 lmt_perror_in() 등을 만들어서 사용하자
-		}
-		close(process->pipe_fd_in);
-	}
-	else if (process->pipe_fd_out != -1)
-	{
-		process->backuped_fd_out = dup(FD_OUT);
-		if (dup2(process->pipe_fd_out, FD_OUT) == -1)
-		{
-			close(process->backuped_fd_out);
-			exit(1);
-		}
-		close(process->pipe_fd_out);
-	}
-}
 
 //	인자로 들어온 token 을 적용시킨다
 int	lmt_apply_redirection(t_token *token, int should_backup)
@@ -68,7 +44,7 @@ int	lmt_apply_redirection(t_token *token, int should_backup)
 		old_fd = FD_OUT;
 		new_fd = open(token->token[1], O_WRONLY | O_CREAT | O_APPEND, DEFAULT_MODE);
 	}
-	if (new_fd == -1)
+	if (new_fd == FD_NONE)
 		return (-1);	// 이 반환값을 통해 caller 가 에러를 처리하는가?, 여기서 perror() 를 출력하자
 	if (should_backup)
 		duplicated_fd = dup(old_fd);

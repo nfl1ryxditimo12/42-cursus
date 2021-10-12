@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 14:40:51 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 11:04:32 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 21:37:58 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,41 @@ int	lmt_process_set_pipe_redirection(t_lmt_process *process)
 	int					pipe_fd[2];
 
 	if (pipe(pipe_fd) == -1)
-		return(-1);
+		return(ERROR);
 	process->pipe_fd_out = pipe_fd[PIPE_WRITE];
 	process->next->pipe_fd_in = pipe_fd[PIPE_READ];
-	return (0);
+	return (NORMAL);
 }
 
-int	lmt_process_apply_redirection(t_lmt_process *process)
+static void	lmt_process_apply_pipe(t_lmt_process *process)
+{
+	if (process->pipe_fd_in != FD_NONE)
+	{
+		process->backuped_fd_in = dup(FD_IN);
+		if (dup2(process->pipe_fd_in, FD_IN) == -1)
+		{
+			close(process->backuped_fd_in);
+			exit (1);	// 여기서 perror 를 띄우자, 그런데 숫자를 문자로 바꿔야 하기 때문에 lmt_perror_in() 등을 만들어서 사용하자
+		}
+		close(process->pipe_fd_in);
+	}
+	else if (process->pipe_fd_out != FD_NONE)
+	{
+		process->backuped_fd_out = dup(FD_OUT);
+		if (dup2(process->pipe_fd_out, FD_OUT) == -1)
+		{
+			close(process->backuped_fd_out);
+			exit(1);
+		}
+		close(process->pipe_fd_out);
+	}
+}
+
+int	lmt_process_attach_io(t_lmt_process *process)
 {
 	t_token	*element;
 
-	lmt_apply_pipe_redirection(process);
+	lmt_process_apply_pipe(process);
 	element = process->token_sublist->first->next;
 	while (element != process->token_sublist->terminator)
 	{
