@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:10:00 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/09 13:51:58 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/11 19:32:08 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 # include "lmt_extension_token.h"
 # include "lmt_c_library.h"
 
-int	lmt_check_syntax_error(t_token *p_first_token);
+int	lmt_check_syntax_error(t_token *first_token);
 
 #endif

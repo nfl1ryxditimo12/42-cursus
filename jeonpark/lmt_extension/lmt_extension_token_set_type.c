@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 14:34:00 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/09 20:08:31 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/11 19:32:26 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static int	get_token_type(const char *token_0)
 	return (TYPE_COMMAND);
 }
 
-void	lmt_set_token_type(t_token *p_first_token)
+void	lmt_set_token_type(t_token *first_token)
 {
 	t_token	*element;
 
-	element = p_first_token;
+	element = first_token;
 	while (element != NULL)
 	{
 		element->type = get_token_type(element->token[0]);

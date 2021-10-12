@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/11 15:21:58 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/12 17:24:15 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRCS		:= \
 			   jeonpark/lmt_c_library/lmt_unsafe/lmt_unsafe_strlen.c \
 			   jeonpark/lmt_c_library/lmt_unsafe/lmt_unsafe_strrchr.c \
 			   jeonpark/lmt_check_syntax_error/lmt_check_syntax_error.c \
-			   jeonpark/lmt_describer/lmt_describer.c \
+			   jeonpark/lmt_extension/lmt_extension_handler_reset_all_size.c \
 			   jeonpark/lmt_extension/lmt_extension_token_arrange.c \
 			   jeonpark/lmt_extension/lmt_extension_token_is_type.c \
 			   jeonpark/lmt_extension/lmt_extension_token_refine_argv_0.c \
@@ -59,10 +59,7 @@ SRCS		:= \
 			   jeonpark/lmt_process_manager/t_lmt_process_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_redirection.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_type.c \
-			   jeonpark/lmt_redirection/t_lmt_redirection_method.c \
-			   jeonpark/lmt_redirection/t_lmt_redirection_type.c \
-			   jeonpark/lmt_redirection/t_lmt_redirection_list_method.c \
-			   jeonpark/lmt_redirection/t_lmt_redirection_list_type.c \
+			   jeonpark/lmt_redirection/lmt_apply_redirection.c \
 			   jeonpark/lmt_token_sublist/t_lmt_token_sublist.c \
 			   jeonpark/lmt_helper/check_type.c \
 			   jeonpark/lmt_helper/lmt_get_exit_code_from_stat_loc.c \
@@ -75,7 +72,6 @@ CC			:= clang
 CFLAG		:= -Wall -Wextra -Werror
 
 ABSTRACT_INCLUDE	:= \
-			   ../playground/content/c \
 			   $(READLINE_DIR)/include \
 			   jeonpark \
 			   jeonpark/lmt_c_library \
@@ -85,7 +81,6 @@ ABSTRACT_INCLUDE	:= \
 			   jeonpark/lmt_c_library/lmt_string \
 			   jeonpark/lmt_c_library/lmt_unsafe \
 			   jeonpark/lmt_check_syntax_error \
-			   jeonpark/lmt_describer \
 			   jeonpark/lmt_extension \
 			   jeonpark/lmt_helper \
 			   jeonpark/lmt_process_manager \

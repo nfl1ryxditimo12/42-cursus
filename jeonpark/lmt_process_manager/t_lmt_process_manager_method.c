@@ -6,20 +6,19 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:19 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/11 14:30:12 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 17:23:36 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>	// NULL
 #include "t_lmt_process_manager.h"
-#include "lmt_describer.h"
 
 //	token_sublist 의 범위 안에 있는 token 들로
 //	process 를 구성하고 실행한다
 //
 //	- 쓰임:
 //	lmt_process_manager_execute() 안에서,
-//	또는 type 이 subshell 인 lmt_process 를 execute 할 때 호출한다
+//	또는 type 이 parenthesis 인 lmt_process 를 execute 할 때 호출한다
 //
 //	- 반환값:
 //	프로세스가 실행된 후 반환된 값
@@ -40,7 +39,6 @@ static int	refine_token(t_handler *handler)
 	int	return_value;
 
 	lmt_set_token_type(handler->top);
-	token_list_describe(handler->top);
 	return_value = lmt_check_syntax_error(handler->top);
 	if (return_value == PARSE_FAILURE)
 	{
@@ -48,7 +46,7 @@ static int	refine_token(t_handler *handler)
 		return (PARSE_FAILURE);
 	}
 	lmt_arrange_token(handler);
-	token_list_describe(handler->top);
+	lmt_reset_handler_all_size(handler);
 	return (PARSE_SUCCESS);
 }
 

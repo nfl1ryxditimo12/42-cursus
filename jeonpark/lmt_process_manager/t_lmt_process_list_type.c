@@ -6,16 +6,14 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/11 15:44:14 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 17:36:53 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stdlib.h>	// free(), NULL
 #include "t_lmt_process_manager.h"
 #include "lmt_c_library.h"
 #include "constant.h"
-
-//	stdlib.h: free(), NULL
 
 static t_lmt_process_list	*lmt_process_list_alloc(void)
 {
@@ -49,11 +47,12 @@ void	lmt_process_list_free(t_lmt_process_list *list)
 
 	element = list->p_dummy;
 	next = element->next;
-	while (element != NULL)
+	while (next != NULL)
 	{
 		lmt_process_free(element);
 		element = next;
 		next = element->next;
 	}
+	free(element);
 	free(list);
 }

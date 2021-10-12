@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 17:15:10 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/10 14:06:33 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/12 17:14:58 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	append_token_to_first(t_token *first_token, t_token *element)
 	char	**target;
 	char	**source;
 
+	if (first_token == element)
+		return ;
 	target = first_token->token;
 	while (*target != NULL)
 		++target;
