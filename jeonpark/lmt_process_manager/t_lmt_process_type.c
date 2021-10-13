@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:39 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 20:54:44 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/13 11:53:43 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void	lmt_process_init(t_lmt_process *process, int type, t_lmt_token_subli
 	}
 	process->pipe_fd_in = FD_NONE;
 	process->pipe_fd_out = FD_NONE;
-	process->backuped_fd_in = FD_NONE;
-	process->backuped_fd_out = FD_NONE;
+	process->fd_stdin = FD_NONE;
+	process->fd_stdout = FD_NONE;
 }
 
 t_lmt_process	*lmt_process_new(int type, t_lmt_token_sublist *token_sublist)

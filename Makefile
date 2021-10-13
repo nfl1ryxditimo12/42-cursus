@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/12 17:24:15 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/13 12:10:31 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ SRCS		:= \
 			   jeonpark/lmt_token_sublist/t_lmt_token_sublist.c \
 			   jeonpark/lmt_helper/check_type.c \
 			   jeonpark/lmt_helper/lmt_get_exit_code_from_stat_loc.c \
+			   jeonpark/lmt_helper/lmt_open_perror.c \
 			   jeonpark/signal/signal.c \
 			   main.c
 

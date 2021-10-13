@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 14:40:51 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 21:37:58 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/13 12:08:11 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@ static void	lmt_process_apply_pipe(t_lmt_process *process)
 {
 	if (process->pipe_fd_in != FD_NONE)
 	{
-		process->backuped_fd_in = dup(FD_IN);
+		process->fd_stdin = dup(FD_IN);
 		if (dup2(process->pipe_fd_in, FD_IN) == -1)
 		{
-			close(process->backuped_fd_in);
+			close(process->fd_stdin);
 			exit (1);	// 여기서 perror 를 띄우자, 그런데 숫자를 문자로 바꿔야 하기 때문에 lmt_perror_in() 등을 만들어서 사용하자
 		}
 		close(process->pipe_fd_in);
 	}
 	else if (process->pipe_fd_out != FD_NONE)
 	{
-		process->backuped_fd_out = dup(FD_OUT);
+		process->fd_stdout = dup(FD_OUT);
 		if (dup2(process->pipe_fd_out, FD_OUT) == -1)
 		{
-			close(process->backuped_fd_out);
+			close(process->fd_stdout);
 			exit(1);
 		}
 		close(process->pipe_fd_out);
@@ -60,28 +60,34 @@ int	lmt_process_attach_io(t_lmt_process *process)
 	{
 		if (element->type == TYPE_REDIRECTION_IN)
 		{
-			if (process->backuped_fd_in == -1)
+			if (process->fd_stdin == -1)
 			{
-				process->backuped_fd_in = lmt_apply_redirection(element, TRUE);
-				if (process->backuped_fd_in == -1)
+				process->fd_stdin = lmt_apply_redirection(element, TRUE);
+				if (process->fd_stdin == FD_NONE)
 					return (ERROR);
 			}
 			else
-				lmt_apply_redirection(element, FALSE);
+				if (lmt_apply_redirection(element, FALSE) == FD_NONE)
+					return (ERROR);
+
 		}
 		else if (element->type == TYPE_REDIRECTION_WORD)
-			lmt_apply_redirection(element, FALSE);
+		{
+			if (lmt_apply_redirection(element, FALSE) == FD_NONE)
+				return (ERROR);
+		}
 		else if (element->type == TYPE_REDIRECTION_OUT
 				|| element->type == TYPE_REDIRECTION_APPEND)
 		{
-			if (process->backuped_fd_out == -1)
+			if (process->fd_stdout == -1)
 			{
-				process->backuped_fd_out = lmt_apply_redirection(element, TRUE);
-				if (process->backuped_fd_in == -1)
+				process->fd_stdout = lmt_apply_redirection(element, TRUE);
+				if (process->fd_stdin == FD_NONE)
 					return (ERROR);
 			}
 			else
-				lmt_apply_redirection(element, FALSE);
+				if (lmt_apply_redirection(element, FALSE) == FD_NONE)
+					return (ERROR);
 		}
 		element = element->next;
 	}
@@ -90,14 +96,14 @@ int	lmt_process_attach_io(t_lmt_process *process)
 
 void	lmt_process_restore_redirection(t_lmt_process *process)
 {
-	if (process->backuped_fd_in != -1)
+	if (process->fd_stdin != -1)
 	{
-		dup2(process->backuped_fd_in, FD_IN);
-		close(process->backuped_fd_in);
+		dup2(process->fd_stdin, FD_IN);
+		close(process->fd_stdin);
 	}
-	if (process->backuped_fd_out != -1)
+	if (process->fd_stdout != -1)
 	{
-		dup2(process->backuped_fd_out, FD_OUT);
-		close(process->backuped_fd_out);
+		dup2(process->fd_stdout, FD_OUT);
+		close(process->fd_stdout);
 	}
 }

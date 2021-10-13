@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:43 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 21:15:37 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/13 11:52:27 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_lmt_process
 	pid_t					pid;
 	int						pipe_fd_in;
 	int						pipe_fd_out;
-	int						backuped_fd_in;
-	int						backuped_fd_out;
+	int						fd_stdin;
+	int						fd_stdout;
 	struct s_lmt_process	*prev;
 	struct s_lmt_process	*next;
 }	t_lmt_process;
