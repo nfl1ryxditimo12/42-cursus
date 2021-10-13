@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_lmt_redirection.h                                :+:      :+:    :+:   */
+/*   lmt_close.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/04 14:36:57 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 21:00:33 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/09 15:33:30 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/13 15:27:28 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_LMT_REDIRECTION_H
-# define T_LMT_REDIRECTION_H
+#include <unistd.h>	// lmt_close()
+#include <stdlib.h>	// exit()
+#include "lmt_io.h"
 
-#include "t_lmt_process_manager.h"
-#include "minishell.h"	// t_token
-#include "lmt_c_library.h"
-#include "constant.h"
-
-int		lmt_apply_redirection(t_token *token, int should_backup);
-
-#endif
+void	lmt_close(int fd)
+{
+	if (close(fd) == -1)
+		exit(1);
+}

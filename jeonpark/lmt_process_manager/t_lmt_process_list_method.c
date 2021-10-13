@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 21:38:14 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/13 15:05:05 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "t_lmt_process_manager.h"
 
 //	push 가 top 에 새로운 node 를 추가한다면, append 는 bottom 에 새로운 노드를 추가한다
-void	lmt_process_list_append(t_lmt_process_list *list, t_lmt_process *element)
+static void	lmt_process_list_append(t_lmt_process_list *list, t_lmt_process *element)
 {
 	element->prev = list->last;
 	element->next = NULL;
@@ -41,7 +41,7 @@ static int	lmt_process_list_wait(t_lmt_process_list *list)
 }
 
 static t_token	*append_new_parenthesis_process_by_token(
-		t_lmt_process_list *list, t_token *element, int pipe_in_fd)
+		t_lmt_process_list *list, t_token *element)
 {
 	int					parenthesis_count;
 	t_token				*new_process_first_token;
@@ -61,13 +61,12 @@ static t_token	*append_new_parenthesis_process_by_token(
 	}
 	new_token_sublist = lmt_token_sublist_new(new_process_first_token, element);
 	new_process = lmt_process_new(TYPE_PROCESS_PARENTHESIS, new_token_sublist);
-	new_process->pipe_fd_in = pipe_in_fd;
 	lmt_process_list_append(list, new_process);
 	return (element);
 }
 
 static t_token	*append_new_process_by_token(
-		t_lmt_process_list *list, t_token *element, int pipe_in_fd)
+		t_lmt_process_list *list, t_token *element)
 {
 	t_token				*new_process_first_token;
 	t_lmt_token_sublist	*new_token_sublist;
@@ -78,7 +77,6 @@ static t_token	*append_new_process_by_token(
 		element = element->next;
 	new_token_sublist = lmt_token_sublist_new(new_process_first_token, element);
 	new_process = lmt_process_new(TYPE_PROCESS_NORMAL, new_token_sublist);
-	new_process->pipe_fd_in = pipe_in_fd;
 	lmt_process_list_append(list, new_process);
 	return (element);
 }
@@ -92,7 +90,7 @@ static t_token	*append_new_process_by_token(
 //	lmt_process_list_execute() 를 호출하기 전에
 //	이 함수를 호출한다
 void	lmt_process_list_set_by_token_sublist(
-		t_lmt_process_list *list, t_lmt_token_sublist *token_sublist, int pipe_in_fd)
+		t_lmt_process_list *list, t_lmt_token_sublist *token_sublist)
 {
 	t_token	*element;
 
@@ -100,9 +98,9 @@ void	lmt_process_list_set_by_token_sublist(
 	while (element != token_sublist->terminator)
 	{
 		if (lmt_is_token_type_open_parenthesis(element))
-			element = append_new_parenthesis_process_by_token(list, element, pipe_in_fd);
+			element = append_new_parenthesis_process_by_token(list, element);
 		else
-			element = append_new_process_by_token(list, element, pipe_in_fd);
+			element = append_new_process_by_token(list, element);
 		if (lmt_is_token_type_control_operator(element))
 			element = element->next;
 	}
@@ -119,7 +117,7 @@ void	lmt_process_list_set_by_token_sublist(
 //
 //	- 반환값:
 //	프로세스가 실행되고 난 후 반환된 값
-int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *handler)
+int	lmt_process_list_execute(t_lmt_process_list *list, t_lmt_process_manager *manager)
 {
 	t_lmt_process	*element;
 	int				stat_loc;
@@ -130,19 +128,19 @@ int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *handler)
 	{
 		if (element->next_control_op == TYPE_CONTROL_OPERATOR_PIPE)
 		{
-			if (lmt_process_set_pipe_redirection(element) == ERROR)
+			if (lmt_process_manager_prepare_pipe(manager) == ERROR)
 				return (ERROR);
-			exit_code = lmt_process_execute_child(element, handler);
+			exit_code = lmt_process_execute_child(element, manager);
 		}
-		else if (element->pipe_fd_in != FD_NONE)
-			lmt_process_execute_child(element, handler);
+		else if (manager->fd_pipe[PIPE_SAVE] != FD_NONE)
+			lmt_process_execute_child(element, manager);
 		else
 		{
-			if (builtin_cmd(handler))
-				exit_code = lmt_process_execute_in_parent(element, handler);
+			if (builtin_cmd(manager->handler))
+				exit_code = lmt_process_execute_in_parent(element, manager);
 			else
 			{
-				lmt_process_execute_child(element, handler);
+				lmt_process_execute_child(element, manager);
 				waitpid(element->pid, &stat_loc, 0);
 				exit_code = lmt_get_exit_code_from_stat_loc(stat_loc);
 			}

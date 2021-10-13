@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 21:39:03 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/13 13:46:04 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@
 # define FD_OUT		1
 # define FD_ERR		2
 
-//	t_lmt_command_list_execute()/fd_pipe[]/index
+//	t_lmt_process_manager/fd_pipe[]/index
 # define PIPE_READ	0
 # define PIPE_WRITE	1
+# define PIPE_SAVE	2
 
 //	lmt_apply_redirection()
 # define DEFAULT_MODE	0644

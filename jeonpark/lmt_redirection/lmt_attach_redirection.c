@@ -6,25 +6,24 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 12:09:33 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/13 15:22:16 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>	// exit(), NULL, close()
+#include <stdlib.h>	// exit(), NULL
 #include <stdio.h>	// perror()
 #include <fcntl.h>	// open()
 #include <unistd.h>	// dup(), dup2()
-#include "lmt_apply_redirection.h"
-#include "lmt_helper.h"	// lmt_open_perror()
+#include "lmt_redirection.h"
+#include "lmt_helper.h"	// lmt_open_perror(), lmt_dup2_perror()
 
 ///	인자로 들어온 token 을 적용시킨다
 ///	- return value:
 ///		- -2: normal && not important value
 ///		- FD_NONE: error
-int	lmt_apply_redirection(t_token *token, int should_backup)
+int	lmt_attach_redirection(t_token *token)
 {
 	int	old_fd;
-	int	duplicated_fd;
 	int	new_fd;
 
 	new_fd = -2;
@@ -35,7 +34,7 @@ int	lmt_apply_redirection(t_token *token, int should_backup)
 	}
 	else if (token->type == TYPE_REDIRECTION_WORD)
 	{
-		// 따로 작동 구현
+		// 따로 작동 구현 아직은 그냥 return (NORMAL) 을 해버린다
 		old_fd = FD_IN;
 		new_fd = -2;
 	}
@@ -51,21 +50,11 @@ int	lmt_apply_redirection(t_token *token, int should_backup)
 	}
 	if (new_fd == FD_NONE)
 		return (FD_NONE);
-	if (should_backup)
-		duplicated_fd = dup(old_fd);
 	if (!(token->type == TYPE_REDIRECTION_WORD))
 	{
-		if (dup2(new_fd, old_fd) == -1)
-		{
-			if (should_backup)
-				close(duplicated_fd);
-			perror("dup2");
-			return (FD_NONE);
-		}
-		close(new_fd);
+		if (lmt_dup2_perror(new_fd, old_fd) == FD_NONE)
+			return (ERROR);
+		lmt_close(new_fd);
 	}
-	if (should_backup)
-		return (duplicated_fd);
-	else
-		return (-2);
+	return (NORMAL);
 }

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 12:09:59 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/13 14:15:50 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int	is_type_redirection(int type);
 int	is_type_open_parenthesis(int type);
 int	is_type_close_parenthesis(int type);
 int	is_type_command(int type);
+
+int	lmt_dup_perror(int old_fd);
+int	lmt_dup2_perror(int new_fd, int old_fd);
 
 int	lmt_get_exit_code_from_stat_loc(int stat_loc);
 

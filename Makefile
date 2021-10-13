@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/13 12:10:31 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/13 15:42:27 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS		:= \
 			   builtin_cmd/unset.c \
 			   jeonpark/lmt_c_library/lmt_alloc/lmt_alloc.c \
 			   jeonpark/lmt_c_library/lmt_io/lmt_put_ch.c \
+			   jeonpark/lmt_c_library/lmt_io/lmt_close.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_atoi.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_digit.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_space.c \
@@ -55,13 +56,17 @@ SRCS		:= \
 			   jeonpark/lmt_extension/lmt_extension_token_set_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_type.c \
+			   jeonpark/lmt_process_manager/t_lmt_process_manager_fd.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_manager_method.c \
+			   jeonpark/lmt_process_manager/t_lmt_process_manager_type.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_redirection.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_type.c \
-			   jeonpark/lmt_redirection/lmt_apply_redirection.c \
+			   jeonpark/lmt_redirection/lmt_attach_redirection.c \
 			   jeonpark/lmt_token_sublist/t_lmt_token_sublist.c \
 			   jeonpark/lmt_helper/check_type.c \
+			   jeonpark/lmt_helper/lmt_dup_perror.c \
+			   jeonpark/lmt_helper/lmt_dup2_perror.c \
 			   jeonpark/lmt_helper/lmt_get_exit_code_from_stat_loc.c \
 			   jeonpark/lmt_helper/lmt_open_perror.c \
 			   jeonpark/signal/signal.c \
