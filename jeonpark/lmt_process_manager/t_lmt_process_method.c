@@ -6,11 +6,15 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 15:09:11 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/14 11:34:35 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_lmt_process_manager.h"
+
+//	int	lmt_process_execute_parenthesis()
+//	{
+//	}
 
 //	(가명) seonkim_builtin_function(t_handler) 를 호출하는 함수이다
 //	parent 가 command 를 실행하는 함수를 호출하여
@@ -46,9 +50,10 @@ int	lmt_process_execute_child(t_lmt_process *process, t_lmt_process_manager *man
 		return (lmt_process_manager_execute_token_sublist(manager, process->token_sublist));
 	process->pid = fork();
 	if (process->pid == -1)
-		exit(1);
+		lmt_critical_exit();
 	if (process->pid > 0)	// 부모
 	{
+		lmt_process_manager_save_fd_pipe(manager);
 		lmt_process_manager_restore_std(manager);
 		return (NORMAL);
 	}

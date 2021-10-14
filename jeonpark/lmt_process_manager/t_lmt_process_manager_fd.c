@@ -6,11 +6,10 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 13:51:13 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 16:26:58 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/14 11:53:00 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>	// exit()
 #include <stdio.h>	// perror()
 #include <unistd.h>	// pipe()
 #include "t_lmt_process_manager.h"
@@ -24,6 +23,17 @@ int	lmt_process_manager_prepare_pipe(t_lmt_process_manager *manager)
 		return(ERROR);
 	}
 	return (NORMAL);
+}
+
+void	lmt_process_manager_save_fd_pipe(t_lmt_process_manager *manager)
+{
+	if (manager->fd_pipe[PIPE_WRITE] != FD_NONE)
+		lmt_close(manager->fd_pipe[PIPE_WRITE]);
+	manager->fd_pipe[PIPE_WRITE] = FD_NONE;
+	if (manager->fd_pipe[PIPE_SAVE] != FD_NONE)
+		lmt_close(manager->fd_pipe[PIPE_SAVE]);
+	manager->fd_pipe[PIPE_SAVE] = manager->fd_pipe[PIPE_READ];
+	manager->fd_pipe[PIPE_READ] = FD_NONE;
 }
 
 ///	- assume: std_fd must bd FD_IN or FD_OUT
@@ -82,7 +92,7 @@ static int	lmt_process_manager_restore_std_fd(t_lmt_process_manager *manager, in
 void	lmt_process_manager_restore_std(t_lmt_process_manager *manager)
 {
 	if (lmt_process_manager_restore_std_fd(manager, FD_IN) == ERROR)
-		exit(ERROR);
+		lmt_critical_exit(ERROR);
 	if (lmt_process_manager_restore_std_fd(manager, FD_OUT) == ERROR)
-		exit(ERROR);
+		lmt_critical_exit(ERROR);
 }

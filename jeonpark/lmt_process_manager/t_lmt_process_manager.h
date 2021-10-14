@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:20 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 15:06:33 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/14 11:33:28 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include "constant.h"
 #include "lmt_check_syntax_error.h"
 #include "lmt_extension_token.h"
+#include "lmt_helper.h"
 
 //	앞과 뒤 커맨드와 관련된 현재 커맨드의 상태값을 저장한다
 //	handler 도 저장한다
@@ -46,6 +47,7 @@ int	lmt_process_manager_execute(t_handler *handler);
 
 //	fd function
 int		lmt_process_manager_prepare_pipe(t_lmt_process_manager *manager);
+void	lmt_process_manager_save_fd_pipe(t_lmt_process_manager *manager);
 int		lmt_process_manager_dup_std_fd(t_lmt_process_manager *manager, int std_fd);
 int		lmt_process_manager_attach_pipe(t_lmt_process_manager *manager);
 void	lmt_process_manager_restore_std(t_lmt_process_manager *manager);
