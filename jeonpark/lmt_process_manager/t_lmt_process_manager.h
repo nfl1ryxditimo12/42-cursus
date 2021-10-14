@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:20 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/14 11:33:28 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:26:43 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ int		lmt_process_manager_prepare_pipe(t_lmt_process_manager *manager);
 void	lmt_process_manager_save_fd_pipe(t_lmt_process_manager *manager);
 int		lmt_process_manager_dup_std_fd(t_lmt_process_manager *manager, int std_fd);
 int		lmt_process_manager_attach_pipe(t_lmt_process_manager *manager);
-void	lmt_process_manager_restore_std(t_lmt_process_manager *manager);
+void	lmt_process_manager_restore_fd_std(t_lmt_process_manager *manager);
 
 #endif

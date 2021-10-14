@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/14 11:34:35 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:26:43 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	lmt_process_execute_in_parent(t_lmt_process *process, t_lmt_process_manager 
 	exit_code = 0;
 	if (lmt_process_attach_io(process, manager) == ERROR)
 	{
-		lmt_process_manager_restore_std(manager);
+		lmt_process_manager_restore_fd_std(manager);
 		return (ERROR);
 	}
 	//exit_code = process_builtin_cmd(handler);	// 이렇게 하고 싶었는데 반환값이 int 가 아니다.
 	process_builtin_cmd(manager->handler);
-	lmt_process_manager_restore_std(manager);
+	lmt_process_manager_restore_fd_std(manager);
 	return (exit_code);
 }
 
@@ -48,16 +48,9 @@ int	lmt_process_execute_child(t_lmt_process *process, t_lmt_process_manager *man
 	int	exit_code;
 	if (process->type == TYPE_PROCESS_PARENTHESIS)
 		return (lmt_process_manager_execute_token_sublist(manager, process->token_sublist));
-	process->pid = fork();
-	if (process->pid == -1)
-		lmt_critical_exit();
-	if (process->pid > 0)	// 부모
-	{
-		lmt_process_manager_save_fd_pipe(manager);
-		lmt_process_manager_restore_std(manager);
+	process->pid = lmt_fork_exit();
+	if (process->pid > 0)
 		return (NORMAL);
-	}
-	// 자식
 	if (lmt_process_attach_io(process, manager) == ERROR)
 		exit(ERROR);
 	manager->handler->line = process->token_sublist->first;

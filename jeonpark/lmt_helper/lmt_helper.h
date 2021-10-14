@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/14 11:12:44 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:08:26 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LMT_HELPER_H
 
 # include <fcntl.h>	// mode_t
+# include <unistd.h>	// pid_t
 
 int		lmt_count_of_null_terminated_array(void **array);
 
@@ -27,6 +28,8 @@ int		is_type_command(int type);
 
 int		lmt_dup_perror(int old_fd);
 int		lmt_dup2_perror(int new_fd, int old_fd);
+
+pid_t	lmt_fork_exit();
 
 int		lmt_get_exit_code_from_stat_loc(int stat_loc);
 

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/14 11:34:42 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:26:43 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,8 @@ int	lmt_process_list_execute(t_lmt_process_list *list, t_lmt_process_manager *ma
 				return (exit_code);
 			}
 		}
+		lmt_process_manager_save_fd_pipe(manager);
+		lmt_process_manager_restore_fd_std(manager);
 		element = element->next;
 	}
 	exit_code = lmt_process_list_wait(list);

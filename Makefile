@@ -6,7 +6,7 @@
 #    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/14 11:00:54 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/14 12:08:42 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ SRCS		:= \
 			   jeonpark/lmt_helper/lmt_critical_exit.c \
 			   jeonpark/lmt_helper/lmt_dup_perror.c \
 			   jeonpark/lmt_helper/lmt_dup2_perror.c \
+			   jeonpark/lmt_helper/lmt_fork_exit.c \
 			   jeonpark/lmt_helper/lmt_get_exit_code_from_stat_loc.c \
 			   jeonpark/lmt_helper/lmt_open_perror.c \
 			   jeonpark/signal/signal.c \

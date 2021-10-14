@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 13:51:13 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/14 11:53:00 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:26:43 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	lmt_process_manager_attach_pipe(t_lmt_process_manager *manager)
 }
 
 ///	- assume: std_fd must bd FD_IN or FD_OUT
-static int	lmt_process_manager_restore_std_fd(t_lmt_process_manager *manager, int std_fd)
+static int	lmt_process_manager_restore_fd_std_fd(t_lmt_process_manager *manager, int std_fd)
 {
 	if (manager->fd_std[std_fd] != std_fd)
 	{
@@ -89,10 +89,10 @@ static int	lmt_process_manager_restore_std_fd(t_lmt_process_manager *manager, in
 	return (NORMAL);
 }
 
-void	lmt_process_manager_restore_std(t_lmt_process_manager *manager)
+void	lmt_process_manager_restore_fd_std(t_lmt_process_manager *manager)
 {
-	if (lmt_process_manager_restore_std_fd(manager, FD_IN) == ERROR)
+	if (lmt_process_manager_restore_fd_std_fd(manager, FD_IN) == ERROR)
 		lmt_critical_exit(ERROR);
-	if (lmt_process_manager_restore_std_fd(manager, FD_OUT) == ERROR)
+	if (lmt_process_manager_restore_fd_std_fd(manager, FD_OUT) == ERROR)
 		lmt_critical_exit(ERROR);
 }
