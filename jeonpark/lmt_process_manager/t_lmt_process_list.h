@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 11:59:38 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 15:03:10 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/25 12:33:13 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,19 @@
 
 # include "lmt_process_manager_typedef.h"
 
-//	lmt_process 들을 list 로 담아 놓는 구조체
-typedef struct s_lmt_process_list
-{
-	t_lmt_process	*p_dummy;
-	t_lmt_process	*last;
-}	t_lmt_process_list;
-
 //	type function
-t_lmt_process_list	*lmt_process_list_new();
-void	lmt_process_list_free(t_lmt_process_list *list);
+t_lmt_process	*lmt_process_list_new();
+void	lmt_process_list_free(t_lmt_process *list);
+t_lmt_process	*lmt_process_list_new_by_token_sublist(t_lmt_token_sublist *token_sublist);
 
 //	method function
-void	lmt_process_list_set_by_token_sublist(
-		t_lmt_process_list *list, t_lmt_token_sublist *token_sublist);
-int		lmt_process_list_execute(t_lmt_process_list *list, t_lmt_process_manager *manager);
+void	lmt_process_list_append(t_lmt_process *list, t_lmt_process *element);
+t_lmt_process	*lmt_process_dummy(t_lmt_process *process);
+t_lmt_process	*lmt_process_prev(t_lmt_process *process);
+t_lmt_process	*lmt_process_next(t_lmt_process *process);
+void			lmt_process_list_wait(t_lmt_process *dummy);
+void			lmt_process_list_set_by_token_sublist(
+					t_lmt_process *list, t_lmt_token_sublist *token_sublist);
+void	lmt_process_list_execute(t_lmt_process *dummy, t_lmt_process_manager *manager);
 
 #endif

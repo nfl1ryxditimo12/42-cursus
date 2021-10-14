@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 14:07:35 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 14:08:28 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/24 18:36:33 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	lmt_open_perror(const char *path, int oflag, mode_t mode)
 	else
 		fd = open(path, oflag, mode);
 	if (fd == -1)
-		perror("open");
+		lmt_perror(path);
 	return (fd);
 }

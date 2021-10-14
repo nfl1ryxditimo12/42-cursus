@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:02:53 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/09/20 17:02:57 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/25 13:14:05 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_lmt_string	*lmt_string_split_last(t_lmt_string *string, size_t count)
 	return (head_string);
 }
 
-void			lmt_string_append_string(t_lmt_string *string, char *word)
+void			lmt_string_append_string(t_lmt_string *string, const char *word)
 {
 	char	*old_value;
 	char	*new_value;
@@ -83,6 +83,7 @@ void			lmt_string_append_string(t_lmt_string *string, char *word)
 	check_point = lmt_unsafe_strcpy(check_point, word);
 	*check_point = '\0';
 	string->value = new_value;
+	string->count += word_count;
 	free(old_value);
 }
 
@@ -100,5 +101,6 @@ void			lmt_string_append_lmt_string(t_lmt_string *string, t_lmt_string *word)
 	check_point = lmt_unsafe_strcpy(check_point, word->value);
 	*check_point = '\0';
 	string->value = new_value;
+	string->count += word->count;
 	free(old_value);
 }

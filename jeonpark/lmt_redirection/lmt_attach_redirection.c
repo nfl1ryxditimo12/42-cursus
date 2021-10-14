@@ -6,12 +6,11 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 15:22:16 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/24 21:48:40 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>	// exit(), NULL
-#include <stdio.h>	// perror()
 #include <fcntl.h>	// open()
 #include <unistd.h>	// dup(), dup2()
 #include "lmt_redirection.h"
@@ -48,12 +47,11 @@ int	lmt_attach_redirection(t_token *token)
 		old_fd = FD_OUT;
 		new_fd = lmt_open_perror(token->token[1], O_WRONLY | O_CREAT | O_APPEND, DEFAULT_MODE);
 	}
-	if (new_fd == FD_NONE)
-		return (FD_NONE);
+	if (new_fd == FD_ERROR)
+		return (ERROR);
 	if (!(token->type == TYPE_REDIRECTION_WORD))
 	{
-		if (lmt_dup2_perror(new_fd, old_fd) == FD_NONE)
-			return (ERROR);
+		lmt_dup2_perror(new_fd, old_fd);
 		lmt_close(new_fd);
 	}
 	return (NORMAL);
