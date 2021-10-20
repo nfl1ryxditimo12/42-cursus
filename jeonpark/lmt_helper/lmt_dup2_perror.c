@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   lmt_dup2_perror.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 15:27:20 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/13 14:12:21 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/13 15:41:43 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_IO_H
-# define LMT_IO_H
+#include <unistd.h>	// dup2()
+#include <stdio.h>	// perror()
+#include "lmt_helper.h"
+#include "constant.h"
 
-# include <stddef.h>
-# include <sys/types.h>
+int	lmt_dup2_perror(int new_fd, int old_fd)
+{
+	int	result;
 
-void	lmt_close(int fd);
-ssize_t	lmt_read(int fd, void *buffer, size_t size);
-void	lmt_put_ch(const char ch);
-ssize_t	lmt_write(const char *string);
-
-#endif
+	result = dup2(new_fd, old_fd);
+	if (result == FD_NONE)
+		perror("dup");
+	return (result);
+}

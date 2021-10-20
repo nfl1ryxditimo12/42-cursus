@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   lmt_open_perror.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 15:27:20 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/13 14:07:35 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/13 14:08:28 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_IO_H
-# define LMT_IO_H
+#include <fcntl.h>	// open(), mode_t
+#include <stdio.h>	// perror()
+#include "lmt_helper.h"
 
-# include <stddef.h>
-# include <sys/types.h>
+int	lmt_open_perror(const char *path, int oflag, mode_t mode)
+{
+	int	fd;
 
-void	lmt_close(int fd);
-ssize_t	lmt_read(int fd, void *buffer, size_t size);
-void	lmt_put_ch(const char ch);
-ssize_t	lmt_write(const char *string);
-
-#endif
+	if (mode == 0)
+		fd = open(path, oflag);
+	else
+		fd = open(path, oflag, mode);
+	if (fd == -1)
+		perror("open");
+	return (fd);
+}

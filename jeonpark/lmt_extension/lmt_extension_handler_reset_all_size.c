@@ -1,20 +1,5 @@
 #include "lmt_extension_token.h"
 
-static void	lmt_reset_token_size(t_token *token)
-{
-	int		count;
-	char	**element;
-
-	count = 0;
-	element = token->token;
-	while (*element != NULL)
-	{
-		++count;
-		++element;
-	}
-	token->size = count;
-}
-
 void	lmt_reset_handler_all_size(t_handler *handler)
 {
 	int		count;
@@ -24,7 +9,7 @@ void	lmt_reset_handler_all_size(t_handler *handler)
 	element = handler->top;
 	while (element != NULL)
 	{
-		lmt_reset_token_size(element);
+		element->size = lmt_count_of_null_terminated_array((void **)element->token);
 		++count;
 		element = element->next;
 	}

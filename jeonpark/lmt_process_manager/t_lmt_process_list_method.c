@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/12 10:40:58 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:26:43 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "t_lmt_process_manager.h"
 
 //	push 가 top 에 새로운 node 를 추가한다면, append 는 bottom 에 새로운 노드를 추가한다
-void	lmt_process_list_append(t_lmt_process_list *list, t_lmt_process *element)
+static void	lmt_process_list_append(t_lmt_process_list *list, t_lmt_process *element)
 {
 	element->prev = list->last;
 	element->next = NULL;
@@ -117,7 +117,7 @@ void	lmt_process_list_set_by_token_sublist(
 //
 //	- 반환값:
 //	프로세스가 실행되고 난 후 반환된 값
-int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *handler)
+int	lmt_process_list_execute(t_lmt_process_list *list, t_lmt_process_manager *manager)
 {
 	t_lmt_process	*element;
 	int				stat_loc;
@@ -128,18 +128,19 @@ int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *handler)
 	{
 		if (element->next_control_op == TYPE_CONTROL_OPERATOR_PIPE)
 		{
-			lmt_process_set_pipe_redirection(element);
-			lmt_process_execute_child(element, handler);
+			if (lmt_process_manager_prepare_pipe(manager) == ERROR)
+				return (ERROR);
+			exit_code = lmt_process_execute_child(element, manager);
 		}
-		else if (element->prev->next_control_op == TYPE_CONTROL_OPERATOR_PIPE)
-			lmt_process_execute_child(element, handler);
+		else if (manager->fd_pipe[PIPE_SAVE] != FD_NONE)
+			lmt_process_execute_child(element, manager);
 		else
 		{
-			if (builtin_cmd(handler))
-				exit_code = lmt_process_execute_in_parent(element, handler);
+			if (builtin_cmd(manager->handler))
+				exit_code = lmt_process_execute_in_parent(element, manager);
 			else
 			{
-				lmt_process_execute_child(element, handler);
+				lmt_process_execute_child(element, manager);
 				waitpid(element->pid, &stat_loc, 0);
 				exit_code = lmt_get_exit_code_from_stat_loc(stat_loc);
 			}
@@ -150,6 +151,8 @@ int	lmt_process_list_execute(t_lmt_process_list *list, t_handler *handler)
 				return (exit_code);
 			}
 		}
+		lmt_process_manager_save_fd_pipe(manager);
+		lmt_process_manager_restore_fd_std(manager);
 		element = element->next;
 	}
 	exit_code = lmt_process_list_wait(list);
