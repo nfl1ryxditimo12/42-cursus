@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:04:21 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/05 13:40:31 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/20 18:07:28 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int  cmd_len(char *str)
     int i;
 
     i = 0;
-    if (!str && !*str)
+    if (!str || !*str)
         return (0);
     while (str[i])
         i++;
