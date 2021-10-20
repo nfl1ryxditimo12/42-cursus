@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/20 19:07:57 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/20 20:59:02 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,17 +145,17 @@ char    **split_line(char *line, int size, int quotes)
 
 char    *line_to_environ(char *key, char **env)
 {
-	key++;
-    while (*env)
+	int i;
+
+	i = 0;
+    while (env[i])
     {
-		if (ft_strcmp(key, *env))
+		if (ft_strcmp(key + 1, env[i]))
         {
-            *env += cmd_len(key) + 1;
-			key--;
 			free(key);
-            return (ft_strdup(*env));
+            return (ft_strdup(env[i] + cmd_len(key)));
         }
-        env++;
+        i++;
     }
     return (ft_strdup(""));
 }
