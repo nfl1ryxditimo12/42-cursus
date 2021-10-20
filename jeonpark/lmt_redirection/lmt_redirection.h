@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   lmt_redirection.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/13 12:58:18 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 15:27:20 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/13 12:43:58 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/13 15:17:17 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LMT_IO_H
-# define LMT_IO_H
+#ifndef LMT_REDIRECTION_H
+# define LMT_REDIRECTION_H
 
-# include <stddef.h>
-# include <sys/types.h>
+# include "t_lmt_process_manager.h"
+# include "minishell.h"	// t_token
+# include "lmt_c_library.h"
+# include "constant.h"
 
-void	lmt_close(int fd);
-ssize_t	lmt_read(int fd, void *buffer, size_t size);
-void	lmt_put_ch(const char ch);
-ssize_t	lmt_write(const char *string);
+int	lmt_attach_redirection(t_token *token);
 
 #endif
