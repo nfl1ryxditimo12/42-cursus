@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/11 18:17:00 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/20 20:59:02 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int     check_dollar(char *line, int size)
     return (0);
 }
 
-int     get_arr_size(char *line, int size)
+int     get_arr_size(char *line, int size, int quotes)
 {
     int i;
     int token;
@@ -77,13 +77,14 @@ int     get_arr_size(char *line, int size)
     {
         if (line[i] == '$')
         {
-            while (line[i] != 32)
+			i++;
+            while (line[i] && line[i] != quotes && line[i] != 32 && line[i] != '$')
                 i++;
             token++;
         }
         else
         {
-            while (line[i] != '$')
+            while (line[i] && line[i] != '$')
                 i++;
             token++;
         }
@@ -104,7 +105,7 @@ char    *get_line(char *line, int size)
     return (ret);
 }
 
-char    **split_line(char *line, int size)
+char    **split_line(char *line, int size, int quotes)
 {
     char **arr;
     int i;
@@ -113,39 +114,48 @@ char    **split_line(char *line, int size)
 
     i = 0;
     j = 0;
-    arr = (char **)malloc(sizeof(char *) * get_arr_size(line, size) + 1);
+    arr = (char **)malloc(sizeof(char *) * get_arr_size(line, size, quotes) + 1);
     while (i < size)
     {
         token = 0;
         if (line[i] == '$')
         {
-            while (line[token] != 32)
+			token++;
+			i++;
+            while (line[i] && line[i] != quotes && line[i] != 32 && line[i] != '$')
+			{
+				i++;
                 token++;
-            arr[j++] = get_line(line, token);
-            i += token;
+			}
+            arr[j++] = get_line(&line[i - token], token);
         }
         else
         {
-            while (line[token] != '$')
+            while (line[i] && line[i] != '$')
+			{
+				i++;
                 token++;
-            arr[j++] = get_line(line, token);
-            i += token;
+			}
+            arr[j++] = get_line(&line[i - token], token);
         }
     }
-    arr[j] = 0;
+    arr[j] = NULL;
     return (arr);
 }
 
 char    *line_to_environ(char *key, char **env)
 {
-    while (*env)
+	int i;
+
+	i = 0;
+    while (env[i])
     {
-        if (ft_strcmp(key, *env))
+		if (ft_strcmp(key + 1, env[i]))
         {
-            *env += cmd_len(key) + 1;
-            return (ft_strdup(*env));
+			free(key);
+            return (ft_strdup(env[i] + cmd_len(key)));
         }
-        env++;    
+        i++;
     }
     return (ft_strdup(""));
 }
@@ -157,19 +167,20 @@ char    *ft_strjoin(char *s1, char *s2)
 	char	*ret;
 	char	*p;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (0);
 	s1_len = cmd_len(s1);
 	s2_len = cmd_len(s2);
 	if (!(ret = (char *)malloc(s1_len + s2_len + 1)))
 		return (0);
 	p = ret;
-	while (*s1)
+	while (s1 && *s1)
 		*(p++) = *(s1++);
 	while (*s2)
 		*(p++) = *(s2++);
 	*p = 0;
-    free(s1);
+	if (s1)
+    	free(s1 - s1_len);
 	return (ret);
 }
 
@@ -179,6 +190,7 @@ char    *split_to_join(char **split)
     int len;
 
     len = 0;
+	ptr = NULL;
     while (*split)
     {
         ptr = ft_strjoin(ptr, *split);
@@ -188,17 +200,17 @@ char    *split_to_join(char **split)
     return (ptr);
 }
 
-char    *switch_line_to_environ(char *line, int size, char **env)
+char    *switch_line_to_environ(char *line, int size, char **env, int quotes)
 {
     char **split;
     char **arr;
     char *ret;
 
-    split = split_line(line, size);
+    split = split_line(line, size, quotes);
     arr = split;
     while (*arr)
     {
-        if (**arr == '$')
+        if (**arr == '$' && !ft_strcmp(*arr, "$?"))
             *arr = line_to_environ(*arr, env);
         arr++;
     }
@@ -213,7 +225,7 @@ char    *dup_line(char *line, int size, int quotes, char **env)
     int i;
 
     if (check_dollar(line, size) && quotes != '\'')
-        return (switch_line_to_environ(line, size, env));
+        return (switch_line_to_environ(line, size, env, quotes));
     ret = malloc(size + 1);
     i = -1;
     while (++i < size)
