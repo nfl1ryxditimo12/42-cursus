@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/20 13:23:26 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 16:01:08 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int main(int ac, char **av, char **env)
     (void)ac;
     (void)av;
     hand.env = env_control(env);
-    hand.status = 1;
+    hand.status = 0;
     hand.path->home_dir = getenv("HOME");
     shell_init(&hand);
     process_init(&hand);

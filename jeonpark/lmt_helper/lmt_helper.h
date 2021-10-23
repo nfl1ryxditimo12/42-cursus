@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_util.h                                         :+:      :+:    :+:   */
+/*   lmt_helper.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/14 12:08:26 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/23 17:48:38 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <fcntl.h>	// mode_t
 # include <unistd.h>	// pid_t
+# include "minishell.h"
+
+void    lmt_convert_question(t_handler *handler);
 
 int		lmt_count_of_null_terminated_array(void **array);
 

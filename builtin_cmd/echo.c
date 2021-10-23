@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:05:45 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/11 15:13:25 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 15:51:40 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ char    *echo_connect(char *s1, char *s2, int size, int option)
         ret[i++] = *s1++;
     while (s2 && *s2)
         ret[i++] = *s2++;
-    if (size)
-        ret[i] = ' ';
-    else if (!size && !option)
+    if (!size && !option)
         ret[i] = '\n';
     else if (!size && option)
         ret[i] = 0;

@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 16:12:54 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 13:30:45 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 15:44:56 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ t_token	*node_init(void)
 	if (!(node = malloc(sizeof(t_token))))
 		print_err(MEM_ERR, 0);
 	while (++i < 100)
+	{
 		node->token[i] = NULL;
+		node->space[i] = 0;
+	}
 	node->cmd_dir = 0;
 	node->size = 0;
 	node->pre = NULL;

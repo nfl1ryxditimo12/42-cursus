@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_lmt_process_manager_method.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:19 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 15:07:28 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/23 17:47:36 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>	// NULL
 #include "t_lmt_process_manager.h"
+#include "lmt_helper.h"
 
 //	token_sublist 의 범위 안에 있는 token 들로
 //	process 를 구성하고 실행한다
@@ -47,6 +48,7 @@ static int	refine_token(t_handler *handler)
 	}
 	lmt_arrange_token(handler);
 	lmt_reset_handler_all_size(handler);
+	lmt_convert_question(handler);
 	return (PARSE_SUCCESS);
 }
 

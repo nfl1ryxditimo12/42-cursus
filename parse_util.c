@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/20 20:59:02 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/23 15:43:46 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,8 @@ int    line_cpy(t_token *ptr, char *line, char **env)
     if (*line == '\'' || *line == '\"')
         quotes = *line;
     size = token_len(line, quotes);
+    if (line[size] == 32)
+        ptr->space[i] = 1;
     ptr->token[i] = dup_line(line, size, quotes, env);
     ptr->size++;
     ptr->token[++i] = 0;
