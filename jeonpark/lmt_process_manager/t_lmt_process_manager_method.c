@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:19 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/23 17:47:36 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 19:34:42 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static int	refine_token(t_handler *handler)
 		printf("parse error. \n");
 		return (PARSE_FAILURE);
 	}
+	lmt_convert_list(handler);
 	lmt_arrange_token(handler);
 	lmt_reset_handler_all_size(handler);
-	lmt_convert_question(handler);
 	return (PARSE_SUCCESS);
 }
 

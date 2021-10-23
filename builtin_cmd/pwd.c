@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/06 18:35:06 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 20:47:28 by seonkim          ###   ########seoul.kr  */
+/*   Created: 2021/10/23 20:21:19 by seonkim           #+#    #+#             */
+/*   Updated: 2021/10/23 20:49:50 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-void    process_exit(t_handler *hand)
+void process_pwd(t_handler *hand)
 {
     int i;
 
     i = 0;
-    printf("exit\n");
-    if (hand->line->size > 1)
+    if (hand->line->size > 1 && *hand->line->token[1] == '-')
     {
-        while(++i < hand->line->size)
-            printf("exit: %s: numeric argument required\n", hand->line->token[i]);
-        hand->status = 255;
+        hand->status = 1;
+        while (++i < hand->line->size)
+            printf("pwd: %s: invalid option\n", hand->line->token[i]);
     }
-    hand->exit = 1;
+    else
+    {
+        hand->status = 0;
+        printf("%s\n", hand->path->dir);
+    }
 }

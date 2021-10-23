@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 15:43:46 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:08:24 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char    *get_line(char *line, int size)
     char *ret;
 
     i = -1;
-    ret = malloc(size + 1);
+    ret = lmt_alloc(size + 1);
     while (++i < size)
         ret[i] = line[i];
     ret[i] = 0;
@@ -114,7 +114,7 @@ char    **split_line(char *line, int size, int quotes)
 
     i = 0;
     j = 0;
-    arr = (char **)malloc(sizeof(char *) * get_arr_size(line, size, quotes) + 1);
+    arr = (char **)lmt_alloc(sizeof(char *) * get_arr_size(line, size, quotes) + 1);
     while (i < size)
     {
         token = 0;
@@ -171,7 +171,7 @@ char    *ft_strjoin(char *s1, char *s2)
 		return (0);
 	s1_len = cmd_len(s1);
 	s2_len = cmd_len(s2);
-	if (!(ret = (char *)malloc(s1_len + s2_len + 1)))
+	if (!(ret = (char *)lmt_alloc(s1_len + s2_len + 1)))
 		return (0);
 	p = ret;
 	while (s1 && *s1)
@@ -226,7 +226,7 @@ char    *dup_line(char *line, int size, int quotes, char **env)
 
     if (check_dollar(line, size) && quotes != '\'')
         return (switch_line_to_environ(line, size, env, quotes));
-    ret = malloc(size + 1);
+    ret = lmt_alloc(size + 1);
     i = -1;
     while (++i < size)
         ret[i] = line[i];
@@ -244,6 +244,8 @@ int    line_cpy(t_token *ptr, char *line, char **env)
     quotes = 0;
     while (ptr->token[i])
         i++;
+    if (i == 100)
+        return (-1);
     if (*line == '\'' || *line == '\"')
         quotes = *line;
     size = token_len(line, quotes);

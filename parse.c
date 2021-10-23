@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 15:41:25 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/20 13:53:57 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:04:49 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ void    process_split(t_token *ptr, char *line, char **env)
             line += line_cpy(ptr, line, env);
             flag = 1;
         }
+        if (ptr->size == 100)
+            return ;
     }
 }
 

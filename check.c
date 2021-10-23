@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:31:26 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 16:19:41 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:09:39 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char    *connect_dir(char *path, char *token)
     
     if (*token == '~')
         token++;
-    connect = malloc(cmd_len(path) + cmd_len(token) + 2);
+    connect = lmt_alloc(cmd_len(path) + cmd_len(token) + 2);
     i = 0;
     while (path && *path)
         connect[i++] = *path++;
