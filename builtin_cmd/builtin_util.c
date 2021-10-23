@@ -6,18 +6,18 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:04:21 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 17:31:34 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:10:15 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int  cmd_len(char *str)
 {
     int i;
 
     i = 0;
-    if (!str && !*str)
+    if (!str || !*str)
         return (0);
     while (str[i])
         i++;
@@ -30,7 +30,7 @@ char    *ft_strdup(char *str)
     char    *ret;
 
     i = 0;
-    ret = malloc(cmd_len(str) + 1);
+    ret = lmt_alloc(cmd_len(str) + 1);
     while (*str)
         ret[i++] = *str++;
     ret[i] = 0;
@@ -52,7 +52,7 @@ char    *pre_dir(char *dir)
         return (ft_strdup("/"));
     end = start;
     start = -1;
-    ret_dir = malloc(end);
+    ret_dir = lmt_alloc(end);
     while (++start < end)
         ret_dir[start] = dir[start];
     ret_dir[start] = 0;
@@ -77,7 +77,7 @@ char    *pree_dir(char *dir)
     }
     end = start;
     start = -1;
-    ret_dir = malloc(end);
+    ret_dir = lmt_alloc(end);
     while (++start < end)
          ret_dir[start] = dir[start];
     ret_dir[start] = 0;
@@ -90,7 +90,7 @@ char    *dir_cpy(char *str)
     char    *ret_dir;
     int     i;
 
-    ret_dir = malloc(cmd_len(str) + 1);
+    ret_dir = lmt_alloc(cmd_len(str) + 1);
     i = -1;
     while (++i < cmd_len(str))
         ret_dir[i] = str[i];

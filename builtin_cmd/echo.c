@@ -6,53 +6,48 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:05:45 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 13:55:30 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 18:57:20 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-char    *echo_connect(char *s1, char *s2, int size, int option)
+int is_echo_option(char *str)
 {
-    char    *ret;
-    int     i;
+    if (*str++ != '-')
+        return (0);
+    while (*str)
+        if (*str++ != 'n')
+            return (0);
+    return (1);
+}
 
-    i = 0;
-    ret = malloc(cmd_len(s1) + cmd_len(s2) + 2);
-    while (s1 && *s1)
-        ret[i++] = *s1++;
-    while (s2 && *s2)
-        ret[i++] = *s2++;
-    if (size)
-        ret[i] = ' ';
-    else if (!size && !option)
-        ret[i] = '\n';
-    else if (!size && option)
-        ret[i] = 0;
-    ret[i + 1] = 0;
-    return (ret);
+void    print_echo(t_token *line, int i, int option)
+{
+    while (line->token[++i])
+    {
+        printf("%s", line->token[i]);
+        if (line->token[i + 1] && line->space[i])
+            printf(" ");
+    }
+    if (!option)
+        printf("\n");
 }
 
 void    process_echo(t_handler *hand)
 {
     int     option;
     int     i;
-    char    *echo;
-	char	*tmp;
 
     option = 0;
-    if (hand->line->token[1][0] == '-' && hand->line->token[1][1] == 'n')
-        option = 1;
-    i = 1 + option;
-    while (i < hand->line->size)
+    i = 0;
+    while (hand->line->token[++i])
     {
-		tmp = echo_connect(echo, hand->line->token[i],
-                            hand->line->size - (i + 1), option);
-		if (*echo)
-			free(echo);
-		echo = tmp;
-		i++;
+        if (is_echo_option(hand->line->token[i]))
+            option = 1;
+        else
+            break ;
     }
-    printf("%s", echo);
-    free(echo);
+    print_echo(hand->line, i - 1, option);
+    hand->status = 0;
 }

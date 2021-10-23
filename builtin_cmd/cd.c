@@ -6,11 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:02:11 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 17:32:50 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:34:38 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char    *process_slash(t_handler *hand)
 {
@@ -70,7 +70,6 @@ char    *process_comma(t_handler *hand)
 void    process_cd(t_handler *hand)
 {
     char    *dir;
-    int     comma;
 
     if (hand->line->token[2])
         perror(hand->line->token[2]);
@@ -85,8 +84,12 @@ void    process_cd(t_handler *hand)
     else
         dir = connect_dir(hand->path->dir, hand->line->token[1]);
     if (chdir(dir))
+    {
         perror(dir);
+        hand->status = 1;
+    }
     else
         getcwd(hand->path->dir, 1024);
+    hand->status = 0;
     free(dir);
 }

@@ -6,11 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:19:02 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/07 19:14:37 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:09:48 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static char *get_env_value(char *env)
 {
@@ -22,7 +22,7 @@ static char *get_env_value(char *env)
     while (env[size])
         size++;
     size++;
-    ret = malloc(size + 1);
+    ret = lmt_alloc(size + 1);
     i = -1;
     while (++i < size)
         ret[i] = env[i];
@@ -35,13 +35,12 @@ char    **sub_env(t_handler *hand)
 {
     int     size;
     int     i;
-    int     j;
     char    **ret;
     char    *arg;
     
     size = env_len(hand->env);
     arg = get_env_value(hand->line->token[1]);
-    ret = (char **)malloc(sizeof(char *) * 50 + 1);
+    ret = (char **)lmt_alloc(sizeof(char *) * 50 + 1);
     i = -1;
     while (hand->env[++i])
         if (!ft_strcmp(hand->env[i], arg))

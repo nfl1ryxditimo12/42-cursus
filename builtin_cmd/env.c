@@ -6,11 +6,11 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:16:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 13:09:54 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:39:40 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int     env_len(char **env)
 {
@@ -45,7 +45,7 @@ char    **env_control(char **env)
     char **ret;
 
     size = env_len(env);
-    ret = (char **)malloc(sizeof(char *) * 50 + 1);
+    ret = (char **)lmt_alloc(sizeof(char *) * 50 + 1);
     i = -1;
     while (++i < size)
     {
@@ -64,6 +64,16 @@ void    process_env(t_handler *hand)
 
     i = -1;
     size = env_len(hand->env);
-    while (++i < size)
-        printf("%s\n", hand->env[i]);
+    if (hand->line->size > 1)
+    {
+        hand->status = 127;
+        while (++i < hand->line->size)
+            printf("env: %s: No such file or directory\n", hand->line->token[i + 1]);
+    }
+    else
+    {
+        hand->status = 0;
+        while (++i < size)
+            printf("%s\n", hand->env[i]);
+    }
 }

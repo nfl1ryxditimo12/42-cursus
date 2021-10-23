@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 15:41:25 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 16:07:53 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:04:49 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,48 @@
 
 int     chk_symbol(char *line)
 {
+    int cnt;
+
+    cnt = 0;
     if (*line == '|')
-        if (*(line + 1) == '|')
-            return (2);
-    if (*line == '&')
-        if (*(line + 1) == '&')
-            return (2);
-    if (*line == '|')
+        while (*line == '|')
+        {
+            line++;
+            cnt++;
+        }
+    else if (*line == '&')
+        while (*line == '&')
+        {
+            line++;
+            cnt++;
+        }
+    else if (*line == '(')
         return (1);
-    return (0);
+    else if (*line == ')')
+        return (1);
+    return (cnt);
 }
+
+// 문자, |, &, > >> < <<, ( ), '', ""
 
 int     chk_redirect(char *line)
 {
     int cnt;
 
     cnt = 0;
-    if (*line == '<' && *(line + 1) == '<')
-        return (2);
-    if (*line == '>' && *(line + 1) == '>')
-        return (2);
-    if (*line == '<' || *line == '>')
-        return (1);
-    return (0);
+    if (*line == '<')
+        while (*line == '<')
+        {
+            line++;
+            cnt++;
+        }
+    else if (*line == '>')
+        while (*line == '>')
+        {
+            line++;
+            cnt++;
+        }
+    return (cnt);
 }
 
 int     count_fd(char *line)
@@ -67,7 +86,7 @@ int     get_token_cnt(char *line)
             line++;
         if (chk_symbol(line) || chk_redirect(line) || count_fd(line))
         {
-            line += token_len(line);
+            line += token_len(line, 0);
             flag = 0;
             cnt++;
         }
@@ -76,14 +95,16 @@ int     get_token_cnt(char *line)
         {
             if (!flag)
                 cnt++;
-            line += token_len(line);
+            if (*line == '\'' || *line == '\"')
+                flag = *line;
+            line += token_len(line, flag);
             flag = 1;
         }
     }
     return (cnt);
 }
 
-void    process_split(t_token *ptr, char *line)
+void    process_split(t_token *ptr, char *line, char **env)
 {
     int flag;
 
@@ -96,16 +117,31 @@ void    process_split(t_token *ptr, char *line)
         {
             if (flag == 1 || flag == 2)
                 ptr = ptr->next;
-            line += line_cpy(ptr, line);
+            line += line_cpy(ptr, line, env);
             flag = 2;
         }
         if (*line && !(*line == 32 || *line == 9) && !chk_symbol(line) && !chk_redirect(line) && !count_fd(line))
         {
             if (flag == 2)
                 ptr = ptr->next;
-            line += line_cpy(ptr, line);
+            line += line_cpy(ptr, line, env);
             flag = 1;
         }
+        if (ptr->size == 100)
+            return ;
+    }
+}
+
+void    print_parse(t_handler *hand)
+{
+    int i;
+    while (hand->line)
+    {
+        i = 0;
+        while (hand->line->token[i])
+            printf("\x1b[35m|\x1b[0m %s \x1b[35m|\x1b[0m", hand->line->token[i++]);
+        printf("\n");
+        hand->line = hand->line->next;
     }
 }
 
@@ -120,5 +156,8 @@ void    line_split(t_handler *hand, char *line)
     while (++i < size)
         node_push(hand);
 	hand->line = hand->top;
-    process_split(hand->line, line);
+    process_split(hand->line, line, hand->env);
+    hand->line = hand->top;
+    print_parse(hand);
+    hand->line = hand->top;
 }
