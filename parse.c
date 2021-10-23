@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 15:41:25 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/11 15:32:20 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/20 13:53:57 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int     chk_symbol(char *line)
     else if (*line == '(')
         return (1);
     else if (*line == ')')
-        return (1);    
+        return (1);
     return (cnt);
 }
 

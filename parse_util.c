@@ -122,7 +122,7 @@ char    **split_line(char *line, int size, int quotes)
         {
 			token++;
 			i++;
-            while (line[i] && line[i] != quotes && line[i] != 32 && line[i] != '$')
+            while (i < size && line[i] && line[i] != quotes && line[i] != 32 && line[i] != '$')
 			{
 				i++;
                 token++;
@@ -131,7 +131,7 @@ char    **split_line(char *line, int size, int quotes)
         }
         else
         {
-            while (line[i] && line[i] != '$')
+            while (i < size && line[i] && line[i] != '$')
 			{
 				i++;
                 token++;
