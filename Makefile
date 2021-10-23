@@ -12,7 +12,7 @@
 
 NAME		:= minishell
 
-READLINE_DIR	:= /Users/$(value USER)/.brew/opt/readline
+READLINE_DIR	:= /usr/local/Cellar/readline/8.1.1
 
 
 
