@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:02:11 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/11 16:30:22 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:34:38 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,12 @@ void    process_cd(t_handler *hand)
     else
         dir = connect_dir(hand->path->dir, hand->line->token[1]);
     if (chdir(dir))
+    {
         perror(dir);
+        hand->status = 1;
+    }
     else
         getcwd(hand->path->dir, 1024);
+    hand->status = 0;
     free(dir);
 }

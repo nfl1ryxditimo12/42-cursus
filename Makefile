@@ -6,7 +6,7 @@
 #    By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/23 17:52:02 by seonkim          ###   ########seoul.kr   #
+#    Updated: 2021/10/23 20:26:43 by seonkim          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS		:= \
 			   builtin_cmd/builtin.c \
 			   builtin_cmd/builtin_util.c \
 			   builtin_cmd/cd.c \
+			   builtin_cmd/pwd.c \
 			   builtin_cmd/echo.c \
 			   builtin_cmd/env.c \
 			   builtin_cmd/exit.c \
@@ -73,7 +74,7 @@ SRCS		:= \
 			   jeonpark/lmt_helper/lmt_fork_exit.c \
 			   jeonpark/lmt_helper/lmt_get_exit_code_from_stat_loc.c \
 			   jeonpark/lmt_helper/lmt_open_perror.c \
-			   jeonpark/lmt_helper/lmt_parse_question.c \
+			   jeonpark/lmt_helper/lmt_convert_list.c \
 			   jeonpark/signal/signal.c \
 			   main.c
 

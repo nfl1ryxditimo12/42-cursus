@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 17:46:44 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:26:28 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/stat.h>
+# include "lmt_c_library.h"
 
 # define BUFFER_SIZE 10000
 # define MEM_ERR "Memory Allocation Error"
@@ -69,6 +70,7 @@ int     chk_symbol(char *line);
 int     chk_redirect(char *line);
 int     count_fd(char *line);
 void    line_split(t_handler *hand, char *line);
+int     get_token_cnt(char *line);
 
 // parse util
 int     ft_strlen(char  *str);
@@ -92,6 +94,7 @@ void    process_symbol(t_handler *hand);
 // builtin_cmd
 void    process_echo(t_handler *hand);
 void    process_cd(t_handler *hand);
+void    process_pwd(t_handler *hand);
 void    process_export(t_handler *hand);
 void    process_unset(t_handler *hand);
 void    process_exit(t_handler *hand);

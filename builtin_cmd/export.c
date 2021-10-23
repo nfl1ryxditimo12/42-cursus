@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:36:19 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 15:36:17 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:09:51 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char    *get_env_value2(char *env)
     while (env[i] != '=')
         i++;
     i++;
-    ret = malloc(size - i + 1);
+    ret = lmt_alloc(size - i + 1);
     j = 0;
     while (i < size)
         ret[j++] = env[i++];
@@ -44,7 +44,7 @@ static char    *get_env_value(char *env)
     if (!env[size])
         perror(env);
     size++;
-    ret = malloc(size + 1);
+    ret = lmt_alloc(size + 1);
     i = -1;
     while (++i < size)
         ret[i] = env[i];

@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 17:23:08 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 16:10:49 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:04:30 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void    hand_init(t_handler *hand)
     hand->clear = 0;
     getcwd(hand->path->dir, 1024);
     hand->exit = 0;
-    hand->status = 0;
     hand->pid = 0;
     hand->cmd_flag = 0;
     hand->token_size = 0;

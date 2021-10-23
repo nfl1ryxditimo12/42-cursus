@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 16:12:54 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 15:44:56 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/23 20:09:33 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*node_init(void)
 	int		i;
 
 	i = -1;
-	if (!(node = malloc(sizeof(t_token))))
+	if (!(node = lmt_alloc(sizeof(t_token))))
 		print_err(MEM_ERR, 0);
 	while (++i < 100)
 	{
