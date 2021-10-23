@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+         #
+#    By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/14 12:08:42 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/23 17:52:02 by seonkim          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= minishell
 
-READLINE_DIR	:= /usr/local/Cellar/readline/8.1.1
+READLINE_DIR	:= ~/.brew/opt/readline
 
 
 
@@ -35,6 +35,7 @@ SRCS		:= \
 			   jeonpark/lmt_c_library/lmt_io/lmt_put_ch.c \
 			   jeonpark/lmt_c_library/lmt_io/lmt_close.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_atoi.c \
+			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_itoa.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_digit.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_is_space.c \
 			   jeonpark/lmt_c_library/lmt_primitive_type/lmt_str_equals.c \
@@ -72,6 +73,7 @@ SRCS		:= \
 			   jeonpark/lmt_helper/lmt_fork_exit.c \
 			   jeonpark/lmt_helper/lmt_get_exit_code_from_stat_loc.c \
 			   jeonpark/lmt_helper/lmt_open_perror.c \
+			   jeonpark/lmt_helper/lmt_parse_question.c \
 			   jeonpark/signal/signal.c \
 			   main.c
 

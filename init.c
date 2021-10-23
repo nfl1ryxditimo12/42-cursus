@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 17:23:08 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/09 20:17:56 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/23 16:10:49 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    hand_init(t_handler *hand)
     hand->clear = 0;
     getcwd(hand->path->dir, 1024);
     hand->exit = 0;
-    hand->status = 1;
+    hand->status = 0;
     hand->pid = 0;
     hand->cmd_flag = 0;
     hand->token_size = 0;
@@ -47,7 +47,7 @@ void    shell_init(t_handler *hand)
 
 char    *prompt(t_handler *hand)
 {
-    if (!hand->status)
+    if (hand->status == 127)
         return ("😎 \033[0;32m\033[1mminishell \033[0;31m\033[1m▸ \033[0m");
     return ("😎 \033[0;32m\033[1mminishell ▸ \033[0m");
 }
@@ -144,6 +144,7 @@ int     chk_token_valid(t_handler *hand)
     r_parentheses = 0;
     while (hand->line)
     {
+        // convert_dollar_to_status(hand->line);
         token = hand->line->token[0][0];
         if (token == '(')
             l_parentheses++;
@@ -169,7 +170,7 @@ void    process_init(t_handler *hand)
     {
         line = readline(prompt(hand));
         if (!line || !*line)
-            hand->status = 0;
+            hand->status = 127;
         else
         {
             hand_init(hand);
