@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:05:45 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 18:57:20 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/24 14:33:19 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void    print_echo(t_token *line, int i, int option)
     while (line->token[++i])
     {
         printf("%s", line->token[i]);
-        if (line->token[i + 1] && line->space[i])
+        if (line->token[i + 1])
             printf(" ");
     }
     if (!option)

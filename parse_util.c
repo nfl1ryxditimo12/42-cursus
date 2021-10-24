@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 20:08:24 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/24 16:01:50 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int     get_arr_size(char *line, int size, int quotes)
         if (line[i] == '$')
         {
 			i++;
-            while (line[i] && line[i] != quotes && line[i] != 32 && line[i] != '$')
+            while (line[i] && line[i] != quotes && line[i] != 32 && line[i] != 9 && line[i] != '$')
                 i++;
             token++;
         }
@@ -122,7 +122,7 @@ char    **split_line(char *line, int size, int quotes)
         {
 			token++;
 			i++;
-            while (i < size && line[i] && line[i] != quotes && line[i] != 32 && line[i] != '$')
+            while (i < size && line[i] && line[i] != quotes && line[i] != 32 && line[i] != 9 && line[i] != '$')
 			{
 				i++;
                 token++;
@@ -249,7 +249,7 @@ int    line_cpy(t_token *ptr, char *line, char **env)
     if (*line == '\'' || *line == '\"')
         quotes = *line;
     size = token_len(line, quotes);
-    if (line[size] == 32)
+    if (line[size] == 32 || line[size] == 9)
         ptr->space[i] = 1;
     ptr->token[i] = dup_line(line, size, quotes, env);
     ptr->size++;
@@ -275,6 +275,8 @@ int     ft_strcmp(char *s1, char *s2)
 
 int     ft_strcmp2(char *s1, char *s2)
 {
+    if (!s1)
+        return (0);
     while (*s1 || *s2)
         if (*s1++ != *s2++)
             return (0);

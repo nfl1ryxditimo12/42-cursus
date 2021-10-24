@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 20:44:51 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/24 15:13:09 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ void    hand_reset(t_handler *hand)
     {
         i = -1;
         while (hand->line->token[++i])
-            if (hand->line->token[i])
-            {
-                free(hand->line->token[i]);
-                hand->line->token[i] = NULL;
-            }
+        {
+            free(hand->line->token[i]);
+            hand->line->token[i] = NULL;
+        }
         if (hand->line->cmd_dir)
             free(hand->line->cmd_dir);
         ptr = hand->line;
@@ -62,6 +61,7 @@ int main(int ac, char **av, char **env)
     hand.status = 0;
     hand.path->home_dir = getenv("HOME");
     shell_init(&hand);
+    signal_set_status(STATUS_INIT);
     process_init(&hand);
     if (hand.exit == 1)
         return (hand.status);

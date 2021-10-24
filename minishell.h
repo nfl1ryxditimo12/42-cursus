@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 20:26:28 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/24 14:28:40 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,19 @@
 # include <readline/history.h>
 # include <sys/stat.h>
 # include "lmt_c_library.h"
+# include "signal.h"
 
 # define BUFFER_SIZE 10000
 # define MEM_ERR "Memory Allocation Error"
 
+# define STATUS_INIT		1
+# define STATUS_READING		2
+# define STATUS_PARSING		3
+# define STATUS_CHILD		4
+
 typedef struct  s_token
 {
-    char            *token[100];
+    char            *token[101];
     int             space[100];
     char            *cmd_dir;
     int             type;
@@ -71,6 +77,9 @@ int     chk_redirect(char *line);
 int     count_fd(char *line);
 void    line_split(t_handler *hand, char *line);
 int     get_token_cnt(char *line);
+
+// 삭제 필요
+void    print_parse(t_handler *hand);
 
 // parse util
 int     ft_strlen(char  *str);

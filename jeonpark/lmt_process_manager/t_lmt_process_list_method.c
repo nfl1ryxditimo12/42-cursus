@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_lmt_process_list_method.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/14 12:26:43 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/24 12:42:50 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
