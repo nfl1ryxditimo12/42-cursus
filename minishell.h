@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/24 14:28:40 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/24 17:21:00 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,9 @@ char    *connect_dir(char *path, char *token);
 char    *dir_cpy(char *str);
 char    *pree_dir(char *dir);
 char    *pre_dir(char *dir);
+int     is_right_environ(t_token *element);
+char    *get_env_key(char *env);
+char    *get_env_value(char *env);
 
 // env
 int     env_len(char **env);

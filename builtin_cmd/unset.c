@@ -6,70 +6,52 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:19:02 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 20:09:48 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/24 17:39:42 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char *get_env_value(char *env)
+void    sub_env(t_handler *hand)
 {
-    int i;
-    int size;
-    char    *ret;
-
-    size = 0;
-    while (env[size])
-        size++;
-    size++;
-    ret = lmt_alloc(size + 1);
-    i = -1;
-    while (++i < size)
-        ret[i] = env[i];
-    ret[i] = '=';
-    ret[i + 1] = 0;
-    return (ret);
-}
-
-char    **sub_env(t_handler *hand)
-{
-    int     size;
     int     i;
+    int     j;
+    char    **ptr;
     char    **ret;
-    char    *arg;
+    char    *key;
     
-    size = env_len(hand->env);
-    arg = get_env_value(hand->line->token[1]);
-    ret = (char **)lmt_alloc(sizeof(char *) * 50 + 1);
-    i = -1;
-    while (hand->env[++i])
-        if (!ft_strcmp(hand->env[i], arg))
-            ret[i] = ft_strdup(hand->env[i]);
-    while (i < 50)
-        ret[i++] = 0;
-    free(arg);
-    return (ret);
+    ptr = hand->line->token + 1;
+    while (*ptr)
+    {
+        j = 0;
+        ret = (char **)lmt_alloc(sizeof(char *) * 50 + 1);
+        i = -1;
+        while (hand->env[++i])
+        {
+            key = get_env_key(hand->env[i]);
+            if (!ft_strcmp2(key, *ptr))
+                ret[j++] = ft_strdup(hand->env[i]);
+            free(key);
+        }
+        while (i < 50)
+            ret[i++] = 0;
+        free_env(hand->env);
+        hand->env = ret;
+        ret = NULL;
+        ptr++;
+    }
 }
 
 void    process_unset(t_handler *hand)
 {
-    int i;
-    int flag;
-    char    **tmp;
-
-    if (hand->line->token[2])
-        perror(hand->line->token[2]);
-    else if (!hand->line->token[1])
-        return ;
-    i = -1;
-    flag = 0;
-    while (hand->env[++i])
-        if (ft_strcmp(hand->env[i], hand->line->token[1]))
-            flag = 1;
-    if (flag == 1)
+    if (!is_right_environ(hand->line) && !hand->line->token[1])
     {
-        tmp = sub_env(hand);
-        free_env(hand->env);
-        hand->env = tmp;
+        hand->status = 1;
+        printf("Unset Error!!\n");
+    }
+    else
+    {
+        hand->status = 0;
+        sub_env(hand);
     }
 }

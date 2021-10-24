@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:16:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 20:39:40 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/24 17:37:50 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void    free_env(char **env)
     int i;
 
     i = -1;
-    while (++i < 50)
+    while (env[++i])
     {
         free(env[i]);
         env[i] = NULL;
@@ -53,7 +53,7 @@ char    **env_control(char **env)
         ret[i][cmd_len(env[i])] = 0;
     }
     while (i < 50)
-        ret[i++] = 0;
+        ret[i++] = NULL;
     return (ret);
 }
 
