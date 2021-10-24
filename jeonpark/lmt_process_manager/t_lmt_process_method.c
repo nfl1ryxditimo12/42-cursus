@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_lmt_process_method.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/14 12:26:43 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/24 16:11:03 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ int	lmt_process_execute_child(t_lmt_process *process, t_lmt_process_manager *man
 	process->pid = lmt_fork_exit();
 	if (process->pid > 0)
 		return (NORMAL);
+	signal_set_status(STATUS_CHILD);
 	if (lmt_process_attach_io(process, manager) == ERROR)
 		exit(ERROR);
 	manager->handler->line = process->token_sublist->first;
+	if (process->token_sublist->first->token[0] == NULL)
+		process->token_sublist->first->token[0] = ft_strdup("more");
 	if (builtin_cmd(manager->handler))
 	{
 		// 이렇게 하고 싶었는데 아직 인자를 2 개를 받지 않는다.

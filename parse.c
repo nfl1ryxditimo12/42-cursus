@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 15:41:25 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/23 20:04:49 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/24 14:53:29 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ void    process_split(t_token *ptr, char *line, char **env)
 void    print_parse(t_handler *hand)
 {
     int i;
+    
+    hand->line = hand->top;
     while (hand->line)
     {
         i = 0;
@@ -143,6 +145,7 @@ void    print_parse(t_handler *hand)
         printf("\n");
         hand->line = hand->line->next;
     }
+    hand->line = hand->top;
 }
 
 void    line_split(t_handler *hand, char *line)
@@ -157,7 +160,5 @@ void    line_split(t_handler *hand, char *line)
         node_push(hand);
 	hand->line = hand->top;
     process_split(hand->line, line, hand->env);
-    hand->line = hand->top;
     print_parse(hand);
-    hand->line = hand->top;
 }
