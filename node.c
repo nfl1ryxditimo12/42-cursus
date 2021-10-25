@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 16:12:54 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/24 13:44:14 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/24 17:56:52 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_token	*node_init(void)
 	int		i;
 
 	i = -1;
-	if (!(node = lmt_alloc(sizeof(t_token))))
+	node = lmt_alloc(sizeof(t_token));
+	if (!node)
 		print_err(MEM_ERR, 0);
 	while (++i < 101)
 	{
@@ -35,7 +36,7 @@ t_token	*node_init(void)
 
 void	node_push(t_handler *hand)
 {
-    t_token *new;
+	t_token	*new;
 	t_token	*old;
 
 	new = node_init();
@@ -51,6 +52,6 @@ void	node_push(t_handler *hand)
 		new->pre = old;
 		hand->line = new;
 	}
-    hand->line->type = -1;
+	hand->line->type = -1;
 	hand->token_size++;
 }
