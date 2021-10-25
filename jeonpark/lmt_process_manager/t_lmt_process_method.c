@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/25 15:36:08 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/25 17:28:36 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	process_execute(t_lmt_process *process, t_lmt_process_manager *manag
 	}
 	else
 	{
-		printf("minishell: %s: command not found\n", process->token_sublist->first->token[0]);
+		lmt_perror(process->token_sublist->first->token[0]);
 		process->exit_code = 127;
 	}
 	if (process->pid == 0)
