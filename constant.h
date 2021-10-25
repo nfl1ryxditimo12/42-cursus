@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/13 13:46:04 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/24 17:06:52 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define TYPE_PROCESS_NORMAL		1
 # define TYPE_PROCESS_PARENTHESIS	2
 
+# define FD_ERROR	-1
 # define FD_NONE	-1
 # define FD_IN		0
 # define FD_OUT		1
@@ -57,7 +58,13 @@
 //	lmt_apply_redirection()
 # define DEFAULT_MODE	0644
 
+# define ERROR	-1
 # define NORMAL	0
-# define ERROR	1
+
+# define EXIT_CODE_TRUE		0
+# define EXIT_CODE_FALSE	1
+
+//	t_lmt_process
+# define PID_NONE		-1
 
 #endif
