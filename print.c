@@ -6,14 +6,14 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 17:24:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/07/09 17:33:50 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/25 14:39:09 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    print_err(char *err, char *arr)
+void	print_err(char *err, char *arr)
 {
-    (void)err;
-    (void)arr;
+	(void)err;
+	(void)arr;
 }
