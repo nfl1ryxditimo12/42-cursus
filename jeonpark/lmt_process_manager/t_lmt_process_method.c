@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/25 12:45:31 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/25 15:36:08 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	lmt_process_execute(t_lmt_process *process, t_lmt_process_manager *manager)
 		if (process->pid > 0)
 			return (NORMAL);
 	}
+	signal_set_status(STATUS_CHILD);
 	process_execute(process, manager);
 	return (NORMAL);
 }
