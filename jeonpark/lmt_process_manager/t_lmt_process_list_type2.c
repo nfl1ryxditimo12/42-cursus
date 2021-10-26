@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:57:37 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/25 13:47:16 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 09:55:39 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static t_token	*append_new_parenthesis_process_by_token(
 	new_token_sublist = lmt_token_sublist_new(new_process_first_token, element);
 	new_process = lmt_process_new(TYPE_PROCESS_PARENTHESIS, new_token_sublist);
 	lmt_process_list_append(list, new_process);
-	new_process->list = lmt_process_list_new_by_token_sublist(new_process->token_sublist);
+	new_process->list
+		= lmt_process_list_new_by_token_sublist(new_process->token_sublist);
 	new_process->list->list = new_process;
 	return (element);
 }
@@ -64,7 +65,8 @@ static t_token	*append_new_process_by_token(
 	return (element);
 }
 
-t_lmt_process	*lmt_process_list_new_by_token_sublist(t_lmt_token_sublist *token_sublist)
+t_lmt_process	*lmt_process_list_new_by_token_sublist(
+		t_lmt_token_sublist *token_sublist)
 {
 	t_lmt_process	*new_process_list;
 	t_token			*element;
@@ -74,7 +76,8 @@ t_lmt_process	*lmt_process_list_new_by_token_sublist(t_lmt_token_sublist *token_
 	while (!(element == token_sublist->terminator || element == NULL))
 	{
 		if (lmt_is_token_type_open_parenthesis(element))
-			element = append_new_parenthesis_process_by_token(new_process_list, element);
+			element = append_new_parenthesis_process_by_token(
+					new_process_list, element);
 		else if (lmt_is_token_type_command(element))
 			element = append_new_process_by_token(new_process_list, element);
 		else

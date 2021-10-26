@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 13:51:13 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/26 16:13:31 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 09:59:55 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	lmt_process_manager_set_pipe(t_lmt_process_manager *manager)
 }
 
 ///	- assume: std_fd must bd FD_IN or FD_OUT
-void	lmt_process_manager_dup_std_fd(t_lmt_process_manager *manager, int std_fd)
+void	lmt_process_manager_dup_std_fd(
+		t_lmt_process_manager *manager, int std_fd)
 {
 	if (manager->fd_std[std_fd] == std_fd)
 		manager->fd_std[std_fd] = lmt_dup_perror(std_fd);
@@ -55,22 +56,18 @@ void	lmt_process_manager_consume_fd_pipe(t_lmt_process_manager *manager)
 	manager->fd_pipe[PIPE_READ] = FD_NONE;
 }
 
-///	- assume: std_fd must bd FD_IN or FD_OUT
-static int	lmt_process_manager_restore_fd_std_fd(t_lmt_process_manager *manager, int std_fd)
-{
-	if (manager->fd_std[std_fd] != std_fd)
-	{
-		lmt_dup2_perror(manager->fd_std[std_fd], std_fd);
-		close(manager->fd_std[std_fd]);
-		manager->fd_std[std_fd] = std_fd;
-	}
-	return (NORMAL);
-}
-
 void	lmt_process_manager_restore_fd_std(t_lmt_process_manager *manager)
 {
-	if (lmt_process_manager_restore_fd_std_fd(manager, FD_IN) == ERROR)
-		lmt_critical_exit(ERROR);
-	if (lmt_process_manager_restore_fd_std_fd(manager, FD_OUT) == ERROR)
-		lmt_critical_exit(ERROR);
+	if (manager->fd_std[FD_IN] != FD_IN)
+	{
+		lmt_dup2_perror(manager->fd_std[FD_IN], FD_IN);
+		close(manager->fd_std[FD_IN]);
+		manager->fd_std[FD_IN] = FD_IN;
+	}
+	if (manager->fd_std[FD_OUT] != FD_OUT)
+	{
+		lmt_dup2_perror(manager->fd_std[FD_OUT], FD_OUT);
+		close(manager->fd_std[FD_OUT]);
+		manager->fd_std[FD_OUT] = FD_OUT;
+	}
 }

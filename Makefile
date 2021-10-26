@@ -6,7 +6,7 @@
 #    By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/26 17:41:32 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/27 09:45:25 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRCS		:= \
 			   jeonpark/lmt_helper/lmt_close_fd.c \
 			   jeonpark/lmt_helper/lmt_count_of_null_terminated_array.c \
 			   jeonpark/lmt_helper/lmt_convert_list.c \
+			   jeonpark/lmt_helper/lmt_convert_token.c \
 			   jeonpark/lmt_helper/lmt_critical_exit.c \
 			   jeonpark/lmt_helper/lmt_dup_perror.c \
 			   jeonpark/lmt_helper/lmt_dup2_perror.c \

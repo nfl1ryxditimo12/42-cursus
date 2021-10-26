@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 17:08:33 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/25 12:53:42 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 09:54:53 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ static int	lmt_process_list_get_exit_code(t_lmt_process *dummy)
 			if (element->exit_code == -1)
 			{
 				if (element->type == TYPE_PROCESS_PARENTHESIS)
-				{
 					element->exit_code
 						= lmt_process_list_get_exit_code(element->list);
-				}
 				else
 					return (exit_code);
 			}
@@ -89,7 +87,8 @@ t_lmt_process	*lmt_process_next_to_execute(t_lmt_process *process)
 //
 //	- 반환값:
 //	프로세스가 실행되고 난 후 반환된 값
-void	lmt_process_list_execute(t_lmt_process *dummy, t_lmt_process_manager *manager)
+void	lmt_process_list_execute(
+		t_lmt_process *dummy, t_lmt_process_manager *manager)
 {
 	t_lmt_process	*element;
 	int				return_value;

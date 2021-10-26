@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/26 17:42:06 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:02:53 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	lmt_process_wait(t_lmt_process *process)
 		process->exit_code = 255;
 	else
 	{
-		process->exit_code = lmt_get_number_of_signal_that_caused_termination(stat_loc);
+		process->exit_code
+			= lmt_get_number_of_signal_that_caused_termination(stat_loc);
 		if (process->exit_code != 0)
 			process->exit_code += 128;
 		else
@@ -48,7 +49,8 @@ static int	should_execute_on_child(t_lmt_process *process, t_handler *handler)
 	return (return_value);
 }
 
-static void	process_execute(t_lmt_process *process, t_lmt_process_manager *manager)
+static void	process_execute(
+		t_lmt_process *process, t_lmt_process_manager *manager)
 {
 	manager->handler->line = process->token_sublist->first;
 	if (builtin_cmd(manager->handler))
@@ -59,7 +61,8 @@ static void	process_execute(t_lmt_process *process, t_lmt_process_manager *manag
 	else if (not_builtin_cmd(manager->handler))
 	{
 		lmt_refine_token_argv_0(process->token_sublist->first);
-		execve(manager->handler->line->cmd_dir, process->token_sublist->first->token, manager->handler->env);
+		execve(manager->handler->line->cmd_dir,
+			process->token_sublist->first->token, manager->handler->env);
 	}
 	else
 	{
