@@ -6,11 +6,10 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 14:40:51 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/26 17:01:45 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/26 20:08:19 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>	// errno
 #include "t_lmt_process_manager.h"
 
 static int	attach_io(t_token *redirection_token, t_lmt_process_manager *manager, t_lmt_redirection_word_line **word_line)
