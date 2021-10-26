@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/24 21:48:40 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/26 11:03:55 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ int	lmt_attach_redirection(t_token *token)
 	}
 	else if (token->type == TYPE_REDIRECTION_WORD)
 	{
-		// 따로 작동 구현 아직은 그냥 return (NORMAL) 을 해버린다
-		old_fd = FD_IN;
-		new_fd = -2;
+		printf("<< 가 들어옴\n");
+		return (NORMAL);
 	}
 	else if (token->type == TYPE_REDIRECTION_OUT)
 	{

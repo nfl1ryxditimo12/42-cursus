@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 14:40:51 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/24 21:50:44 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/26 11:04:25 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	attach_io(t_token *redirection_token, t_lmt_process_manager *manager)
 {
 	int	return_value;
 
-	if (redirection_token->type == TYPE_REDIRECTION_IN)
+	if (redirection_token->type == TYPE_REDIRECTION_IN
+			|| redirection_token->type == TYPE_REDIRECTION_WORD)
 	{
 		lmt_process_manager_dup_std_fd(manager, FD_IN);
 		return_value = lmt_attach_redirection(redirection_token);
