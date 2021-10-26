@@ -6,7 +6,7 @@
 #    By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/24 21:12:31 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/26 16:33:53 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,8 @@ SRCS		:= \
 			   jeonpark/lmt_process_manager/t_lmt_process_redirection.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_type.c \
 			   jeonpark/lmt_redirection/lmt_attach_redirection.c \
+			   jeonpark/lmt_redirection/t_lmt_redirection_word_line_method.c \
+			   jeonpark/lmt_redirection/t_lmt_redirection_word_line_type.c \
 			   jeonpark/lmt_token_sublist/t_lmt_token_sublist_method.c \
 			   jeonpark/lmt_token_sublist/t_lmt_token_sublist_type.c \
 			   jeonpark/lmt_helper/check_type.c \

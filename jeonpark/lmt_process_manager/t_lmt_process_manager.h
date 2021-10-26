@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:20 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/24 21:36:38 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:33:21 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "lmt_check_syntax_error.h"
 # include "lmt_extension_token.h"
 # include "lmt_helper.h"
+# include "t_lmt_redirection_word_line.h"
 
 //	앞과 뒤 커맨드와 관련된 현재 커맨드의 상태값을 저장한다
 //	handler 도 저장한다

@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 13:51:13 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/24 20:40:46 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:13:31 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	lmt_process_manager_set_pipe(t_lmt_process_manager *manager)
 {
 	manager->fd_pipe[PIPE_SAVE] = manager->fd_pipe[PIPE_READ];
-	if (pipe(manager->fd_pipe) == FD_NONE)
+	if (pipe(manager->fd_pipe) == FD_ERROR)
 	{
 		lmt_perror("pipe");
 		exit(EXIT_CODE_FALSE);
