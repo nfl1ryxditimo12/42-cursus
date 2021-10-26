@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/26 11:09:45 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:42:06 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ void	lmt_process_wait(t_lmt_process *process)
 	if (return_value == -1)
 		process->exit_code = 255;
 	else
-		process->exit_code = lmt_get_exit_code_from_stat_loc(stat_loc);
+	{
+		process->exit_code = lmt_get_number_of_signal_that_caused_termination(stat_loc);
+		if (process->exit_code != 0)
+			process->exit_code += 128;
+		else
+			process->exit_code = lmt_get_exit_code_from_stat_loc(stat_loc);
+	}
 }
 
 static int	should_execute_on_child(t_lmt_process *process, t_handler *handler)
