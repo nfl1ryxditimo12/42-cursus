@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/24 21:48:40 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:01:32 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ///	- return value:
 ///		- -2: normal && not important value
 ///		- FD_NONE: error
-int	lmt_attach_redirection(t_token *token)
+int	lmt_attach_redirection(t_token *token, t_lmt_redirection_word_line **word_line, int std_in, int std_out)
 {
 	int	old_fd;
 	int	new_fd;
@@ -33,9 +33,9 @@ int	lmt_attach_redirection(t_token *token)
 	}
 	else if (token->type == TYPE_REDIRECTION_WORD)
 	{
-		// 따로 작동 구현 아직은 그냥 return (NORMAL) 을 해버린다
-		old_fd = FD_IN;
-		new_fd = -2;
+		lmt_redirection_word_line_free(*word_line);
+		*word_line = lmt_redirection_word_line_new_from_stdin(std_in, std_out, token->token[1]);
+		return (NORMAL);
 	}
 	else if (token->type == TYPE_REDIRECTION_OUT)
 	{
@@ -49,10 +49,7 @@ int	lmt_attach_redirection(t_token *token)
 	}
 	if (new_fd == FD_ERROR)
 		return (ERROR);
-	if (!(token->type == TYPE_REDIRECTION_WORD))
-	{
-		lmt_dup2_perror(new_fd, old_fd);
-		lmt_close(new_fd);
-	}
+	lmt_dup2_perror(new_fd, old_fd);
+	lmt_close(new_fd);
 	return (NORMAL);
 }

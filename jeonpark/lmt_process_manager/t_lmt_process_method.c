@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/25 12:45:31 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/26 11:09:45 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	lmt_process_wait(t_lmt_process *process)
 
 	if (process->pid == PID_NONE)
 		return ;
-	return_value = waitpid(process->pid, &stat_loc, 0);
+	return_value = waitpid(process->pid, &stat_loc, SA_RESTART);
 	process->pid = PID_NONE;
 	if (return_value == -1)
 		process->exit_code = 255;
@@ -42,10 +42,6 @@ static int	should_execute_on_child(t_lmt_process *process, t_handler *handler)
 	return (return_value);
 }
 
-//	process_line(handler) 를 호출하는 함수이다
-//	lmt_process_list_set_by_token_sublist() 에서 설정한
-//	lmt_process 의 type 에 따라 바로 명령을 실행하기도 하고
-//	재귀적으로 다시 lmt_process_manager_execute() 를 호출하기도 한다
 static void	process_execute(t_lmt_process *process, t_lmt_process_manager *manager)
 {
 	manager->handler->line = process->token_sublist->first;
@@ -61,7 +57,7 @@ static void	process_execute(t_lmt_process *process, t_lmt_process_manager *manag
 	}
 	else
 	{
-		printf("minishell: %s: command not found\n", process->token_sublist->first->token[0]);
+		lmt_perror(process->token_sublist->first->token[0]);
 		process->exit_code = 127;
 	}
 	if (process->pid == 0)
@@ -82,6 +78,7 @@ int	lmt_process_execute(t_lmt_process *process, t_lmt_process_manager *manager)
 		process->pid = lmt_fork_exit();
 		if (process->pid > 0)
 			return (NORMAL);
+		signal_set_status(STATUS_CHILD);
 	}
 	process_execute(process, manager);
 	return (NORMAL);
