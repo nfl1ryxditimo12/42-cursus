@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 17:08:33 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/27 09:54:53 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:12:26 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,6 @@ t_lmt_process	*lmt_process_next_to_execute(t_lmt_process *process)
 	return (lmt_process_next_to_execute(dummy->list));
 }
 
-//	list 안에 만들어 놓은 lmt_process 들을 순차적으로 돌면서
-//	lmt_process 의 op 에 따라 필요한 처리를 하고
-//	lmt_process_execute() 를 호출한다
-//
-//	- 쓰임:
-//	lmt_process_manager_execute_token_sublist() 안에서
-//	lmt_process_list 의 생성 및 값 설정을 마친 후
-//	이 함수를 호출한다
-//
-//	- 반환값:
-//	프로세스가 실행되고 난 후 반환된 값
 void	lmt_process_list_execute(
 		t_lmt_process *dummy, t_lmt_process_manager *manager)
 {

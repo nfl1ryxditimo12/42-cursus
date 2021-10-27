@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:19 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/27 10:00:53 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:13:41 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@ static int	refine_token(t_handler *handler)
 	return (PARSE_SUCCESS);
 }
 
-//	파싱이 끝난 handler 를 읽어 자식 프로세스 생성, 리다이렉션 적용,
-//	'|', '&&', '||', '()' 에 따라 적절히 자식 프로세스를 생성하고
-//	command 를 실행하는 함수를 호출한다
-//
-//	- 쓰임:
-//	파싱이 끝난 후 이 함수를 호출하면 된다
-//
-//	- 반환값:
-//	프로세스가 실행된 후 반환된 값
 void	lmt_process_manager_execute(t_handler *handler)
 {
 	t_lmt_token_sublist		*token_sublist;

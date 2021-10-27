@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/27 10:23:39 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:14:10 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	set_output(t_token *token, int *old_fd, int *new_fd)
 				O_WRONLY | O_CREAT | O_APPEND, DEFAULT_MODE);
 }
 
-///	인자로 들어온 token 을 적용시킨다
 ///	- return value:
 ///		- -2: normal && not important value
 ///		- FD_NONE: error
