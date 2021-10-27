@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:59:38 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/26 17:01:13 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:51:28 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	read_and_should_end(char **line, const char *delimiter)
 
 static void	append_line(t_lmt_redirection_word_line *dummy, char *line)
 {
-	t_lmt_redirection_word_line *word_line;
+	t_lmt_redirection_word_line	*word_line;
 
 	word_line = lmt_redirection_word_line_new(line);
 	word_line->prev = dummy->prev;
@@ -34,28 +34,33 @@ static void	append_line(t_lmt_redirection_word_line *dummy, char *line)
 	word_line->next->prev = word_line;
 }
 
-t_lmt_redirection_word_line	*lmt_redirection_word_line_new_from_stdin(int std_in, int std_out, const char *delimiter)
+static void	dup_dup2_to_std_fd(int std_in, int std_out,
+		int *old_fd_in, int *old_fd_out)
+{
+	if (std_in != FD_IN)
+	{
+		*old_fd_in = lmt_dup_perror(FD_IN);
+		lmt_dup2_perror(std_in, FD_IN);
+	}
+	if (std_out != FD_OUT)
+	{
+		*old_fd_out = lmt_dup_perror(FD_OUT);
+		lmt_dup2_perror(std_out, FD_OUT);
+	}
+}
+
+t_lmt_redirection_word_line	*lmt_redirection_word_line_new_from_stdin(
+		int std_in, int std_out, const char *delimiter)
 {
 	t_lmt_redirection_word_line	*dummy;
 	int							old_fd_in;
 	int							old_fd_out;
 	char						*line;
 
-	dummy = lmt_redirection_word_line_new(NULL);
-	dummy->prev = dummy;
-	dummy->next = dummy;
+	dummy = lmt_redirection_word_line_new_dummy();
 	old_fd_in = FD_NONE;
 	old_fd_out = FD_NONE;
-	if (std_in != FD_IN)
-	{
-		old_fd_in = lmt_dup_perror(FD_IN);
-		lmt_dup2_perror(std_in, FD_IN);
-	}
-	if (std_out != FD_OUT)
-	{
-		old_fd_out = lmt_dup_perror(FD_OUT);
-		lmt_dup2_perror(std_out, FD_OUT);
-	}
+	dup_dup2_to_std_fd(std_in, std_out, &old_fd_in, &old_fd_out);
 	while (!read_and_should_end(&line, delimiter))
 		append_line(dummy, line);
 	free(line);
@@ -87,8 +92,11 @@ void	lmt_redirection_word_line_attach(t_lmt_redirection_word_line *dummy)
 	element = dummy->next;
 	while (element != dummy)
 	{
-		write(fd_pipe[PIPE_WRITE], element->value, lmt_unsafe_strlen(element->value));
-		write(fd_pipe[PIPE_WRITE], "\n", 1);
+		if (write(fd_pipe[PIPE_WRITE], element->value,
+				lmt_unsafe_strlen(element->value)) == -1)
+			lmt_critical_exit();
+		if (write(fd_pipe[PIPE_WRITE], "\n", 1) == -1)
+			lmt_critical_exit();
 		element = element->next;
 	}
 	lmt_close(fd_pipe[PIPE_WRITE]);

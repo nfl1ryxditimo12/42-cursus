@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:39 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/25 12:02:44 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:04:10 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ static t_lmt_process	*lmt_process_alloc(void)
 	return (lmt_alloc(sizeof(t_lmt_process)));
 }
 
-static void	lmt_process_init(t_lmt_process *process, int type, t_lmt_token_sublist *token_sublist)
+static void	lmt_process_init(t_lmt_process *process,
+		int type, t_lmt_token_sublist *token_sublist)
 {
 	process->type = type;
 	process->token_sublist = token_sublist;
-	process->next_control_op = lmt_token_sublist_get_next_control_op(token_sublist);
+	process->next_control_op
+		= lmt_token_sublist_get_next_control_op(token_sublist);
 	process->pid = PID_NONE;
 	process->exit_code = -1;
 	process->list = NULL;

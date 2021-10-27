@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:19 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/24 21:18:24 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:00:53 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static int	refine_token(t_handler *handler)
 	lmt_arrange_token(handler);
 	lmt_reset_handler_all_size(handler);
 	printf("\n\x1b[34m=======\x1b[0m Convert \x1b[34m===================================\x1b[0m\n\n");
-    print_parse(handler);
-    printf("\n\x1b[34m===================================================\x1b[0m\n\n");
-    printf("\n\x1b[31m=======\x1b[0m Process \x1b[31m===================================\x1b[0m\n\n");
+	print_parse(handler);
+	printf("\n\x1b[34m===================================================\x1b[0m\n\n");
+	printf("\n\x1b[31m=======\x1b[0m Process \x1b[31m===================================\x1b[0m\n\n");
 	return (PARSE_SUCCESS);
 }
 

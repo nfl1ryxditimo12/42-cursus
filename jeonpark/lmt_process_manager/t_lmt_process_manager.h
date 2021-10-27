@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:20 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/26 16:33:21 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 09:57:20 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,27 @@ typedef struct s_lmt_process_manager
 }	t_lmt_process_manager;
 
 //	type function
-t_lmt_process_manager	*lmt_process_manager_new(t_handler *handler, t_lmt_token_sublist *sublist);
-void					lmt_process_manager_free(t_lmt_process_manager	*manager);
+t_lmt_process_manager	*lmt_process_manager_new(
+							t_handler *handler, t_lmt_token_sublist *sublist);
+void					lmt_process_manager_free(
+							t_lmt_process_manager *manager);
 
 //	method function
-int	lmt_process_manager_execute_token_sublist(t_lmt_process_manager *manager, t_lmt_token_sublist *token_sublist);
-void	lmt_process_manager_execute(t_handler *handler);
+int						lmt_process_manager_execute_token_sublist(
+							t_lmt_process_manager *manager,
+							t_lmt_token_sublist *token_sublist);
+void					lmt_process_manager_execute(t_handler *handler);
 
 //	fd function
-void	lmt_process_manager_set_pipe(t_lmt_process_manager *manager);
-void	lmt_process_manager_dup_std_fd(t_lmt_process_manager *manager, int std_fd);
-void	lmt_process_manager_consume_fd_pipe(t_lmt_process_manager *manager);
-void	lmt_process_manager_attach_pipe(t_lmt_process_manager *manager);
-void	lmt_process_manager_restore_fd_std(t_lmt_process_manager *manager);
+void					lmt_process_manager_set_pipe(
+							t_lmt_process_manager *manager);
+void					lmt_process_manager_dup_std_fd(
+							t_lmt_process_manager *manager, int std_fd);
+void					lmt_process_manager_consume_fd_pipe(
+							t_lmt_process_manager *manager);
+void					lmt_process_manager_attach_pipe(
+							t_lmt_process_manager *manager);
+void					lmt_process_manager_restore_fd_std(
+							t_lmt_process_manager *manager);
 
 #endif

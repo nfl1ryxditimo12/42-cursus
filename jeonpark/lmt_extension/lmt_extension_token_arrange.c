@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 17:15:10 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/24 20:09:33 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 09:28:02 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,14 @@ static void	remove_all_empty_token(t_token *first_token)
 	while (element != NULL)
 	{
 		if (element->token[0] == NULL
-				&& !(element->pre == NULL || lmt_is_token_type_control_operator(element->pre)))
+			&& !(element->pre == NULL
+				|| lmt_is_token_type_control_operator(element->pre)))
 		{
 			element_to_free = element;
 			element = element->next;
 			lmt_remove_token(element_to_free);
-			free(element_to_free); 
-			continue;
+			free(element_to_free);
+			continue ;
 		}
 		element = element->next;
 	}

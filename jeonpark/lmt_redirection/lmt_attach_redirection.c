@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:50 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/26 17:01:32 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:23:39 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,26 @@
 #include "lmt_redirection.h"
 #include "lmt_helper.h"	// lmt_open_perror(), lmt_dup2_perror()
 
+static void	set_output(t_token *token, int *old_fd, int *new_fd)
+{
+	if (!(token->type == TYPE_REDIRECTION_OUT
+			|| token->type == TYPE_REDIRECTION_APPEND))
+		return ;
+	*old_fd = FD_OUT;
+	if (token->type == TYPE_REDIRECTION_OUT)
+		*new_fd = lmt_open_perror(token->token[1],
+				O_WRONLY | O_CREAT | O_TRUNC, DEFAULT_MODE);
+	else
+		*new_fd = lmt_open_perror(token->token[1],
+				O_WRONLY | O_CREAT | O_APPEND, DEFAULT_MODE);
+}
+
 ///	인자로 들어온 token 을 적용시킨다
 ///	- return value:
 ///		- -2: normal && not important value
 ///		- FD_NONE: error
-int	lmt_attach_redirection(t_token *token, t_lmt_redirection_word_line **word_line, int std_in, int std_out)
+int	lmt_attach_redirection(t_token *token,
+		t_lmt_redirection_word_line **word_line, int std_in, int std_out)
 {
 	int	old_fd;
 	int	new_fd;
@@ -34,19 +49,11 @@ int	lmt_attach_redirection(t_token *token, t_lmt_redirection_word_line **word_li
 	else if (token->type == TYPE_REDIRECTION_WORD)
 	{
 		lmt_redirection_word_line_free(*word_line);
-		*word_line = lmt_redirection_word_line_new_from_stdin(std_in, std_out, token->token[1]);
+		*word_line = lmt_redirection_word_line_new_from_stdin(std_in,
+				std_out, token->token[1]);
 		return (NORMAL);
 	}
-	else if (token->type == TYPE_REDIRECTION_OUT)
-	{
-		old_fd = FD_OUT;
-		new_fd = lmt_open_perror(token->token[1], O_WRONLY | O_CREAT | O_TRUNC, DEFAULT_MODE);
-	}
-	else if (token->type == TYPE_REDIRECTION_APPEND)
-	{
-		old_fd = FD_OUT;
-		new_fd = lmt_open_perror(token->token[1], O_WRONLY | O_CREAT | O_APPEND, DEFAULT_MODE);
-	}
+	set_output(token, &old_fd, &new_fd);
 	if (new_fd == FD_ERROR)
 		return (ERROR);
 	lmt_dup2_perror(new_fd, old_fd);
