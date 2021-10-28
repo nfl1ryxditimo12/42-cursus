@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/26 16:13:00 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/10/28 20:53:23 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ char	*line_to_environ(char *key, char **env)
 		}
 		i++;
 	}
+	free(key);
 	return (ft_strdup(""));
 }
 
