@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_write.c                                        :+:      :+:    :+:   */
+/*   lmt_close_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/01 14:38:40 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 13:50:23 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/23 14:24:32 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/23 14:26:21 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <sys/types.h>
-#include <stdlib.h>
-#include "lmt_io.h"
-#include "lmt_unsafe.h"
+#include "lmt_helper.h"
+#include "lmt_c_library.h"
+#include "constant.h"
 
-ssize_t	lmt_write(const char *string)
+void	lmt_close_fd(int *fd)
 {
-	ssize_t	number_of_bytes_write;
-
-	if (string == NULL)
-		return (0);
-	number_of_bytes_write = write(1, string, lmt_unsafe_strlen(string));
-	if (number_of_bytes_write == -1)
-		exit(1);
-	return (number_of_bytes_write);
+	if (*fd != FD_NONE)
+		lmt_close(*fd);
+	*fd = FD_NONE;
 }

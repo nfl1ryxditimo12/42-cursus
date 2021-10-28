@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:03:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/06 06:01:20 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:52:31 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static t_lmt_token_sublist	*lmt_token_sublist_alloc(void)
 	return (lmt_alloc(sizeof(t_lmt_token_sublist)));
 }
 
-static void	lmt_token_sublist_init(t_lmt_token_sublist *sublist, t_token *first, t_token *terminator)
+static void	lmt_token_sublist_init(
+		t_lmt_token_sublist *sublist, t_token *first, t_token *terminator)
 {
 	sublist->first = first;
 	sublist->terminator = terminator;
