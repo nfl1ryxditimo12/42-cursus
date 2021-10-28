@@ -6,13 +6,13 @@
 #    By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/23 20:26:43 by seonkim          ###   ########seoul.kr   #
+#    Updated: 2021/10/28 16:38:05 by seonkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= minishell
 
-READLINE_DIR	:= ~/.brew/opt/readline
+READLINE_DIR	:= /usr/local/Cellar/readline/8.1.1
 
 
 

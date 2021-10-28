@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/24 17:55:34 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/28 17:30:51 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_token
 typedef struct s_path
 {
 	struct stat	buf;
-	char		*cmd[5];
+	char		**cmd;
 	char		dir[1024];
 	char		*home_dir;
 }	t_path;
@@ -67,6 +67,7 @@ typedef struct s_handler
 // init
 void	process_init(t_handler *hand);
 void	shell_init(t_handler *hand);
+int		path_len(char *str);
 
 // node
 void	node_push(t_handler *hand);
