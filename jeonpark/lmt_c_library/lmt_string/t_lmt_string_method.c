@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:02:53 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/09/20 17:02:57 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/26 21:38:13 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_lmt_string	*lmt_string_split_last(t_lmt_string *string, size_t count)
 	return (head_string);
 }
 
-void			lmt_string_append_string(t_lmt_string *string, char *word)
+void	lmt_string_append_string(t_lmt_string *string, const char *word)
 {
 	char	*old_value;
 	char	*new_value;
@@ -75,7 +75,7 @@ void			lmt_string_append_string(t_lmt_string *string, char *word)
 	char	*check_point;
 
 	if (word == NULL)
-		return;
+		return ;
 	old_value = string->value;
 	word_count = lmt_unsafe_strlen(word);
 	new_value = lmt_alloc(string->count + word_count + 1);
@@ -83,22 +83,24 @@ void			lmt_string_append_string(t_lmt_string *string, char *word)
 	check_point = lmt_unsafe_strcpy(check_point, word);
 	*check_point = '\0';
 	string->value = new_value;
+	string->count += word_count;
 	free(old_value);
 }
 
-void			lmt_string_append_lmt_string(t_lmt_string *string, t_lmt_string *word)
+void	lmt_string_append_lmt_string(t_lmt_string *string, t_lmt_string *word)
 {
 	char	*old_value;
 	char	*new_value;
 	char	*check_point;
 
 	if (word == NULL)
-		return;
+		return ;
 	old_value = string->value;
 	new_value = lmt_alloc(string->count + word->count + 1);
 	check_point = lmt_unsafe_strcpy(new_value, string->value);
 	check_point = lmt_unsafe_strcpy(check_point, word->value);
 	*check_point = '\0';
 	string->value = new_value;
+	string->count += word->count;
 	free(old_value);
 }

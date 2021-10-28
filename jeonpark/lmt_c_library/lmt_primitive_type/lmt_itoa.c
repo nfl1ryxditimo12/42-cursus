@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 23:19:28 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/05 13:56:52 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/26 21:41:13 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static unsigned int	lmt_itoa_devide_10(unsigned int *p_number)
 	return (*p_number);
 }
 
-char				*lmt_itoa(int number)
+char	*lmt_itoa(int number)
 {
 	unsigned int	positive_number;
 	char			buffer[MAX_INT_LENGTH];

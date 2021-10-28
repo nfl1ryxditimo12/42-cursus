@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:49 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/24 12:11:59 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/27 10:53:45 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,10 @@ static void	signal_handler_sigint(int signal)
 	rl_redisplay();
 }
 
-static void	signal_set_init(void)
-{
-	rl_catch_signals = 0;
-}
-
 static void	signal_set_reading(void)
 {
 	signal_set(SIGINT, signal_handler_sigint);
 	signal_set(SIGQUIT, SIG_IGN);
-}
-
-static void	signal_set_parsing(void)
-{
-	signal_set(SIGINT, SIG_IGN);
 }
 
 static void	signal_set_child(void)
@@ -59,11 +49,11 @@ static void	signal_set_child(void)
 void	signal_set_status(int status)
 {
 	if (status == STATUS_INIT)
-		signal_set_init();
+		rl_catch_signals = 0;
 	else if (status == STATUS_READING)
 		signal_set_reading();
 	else if (status == STATUS_PARSING)
-		signal_set_parsing();
+		signal_set(SIGINT, SIG_IGN);
 	else if (status == STATUS_CHILD)
 		signal_set_child();
 }
