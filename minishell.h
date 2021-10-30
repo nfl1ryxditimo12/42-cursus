@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/30 19:15:08 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/30 20:28:50 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,19 @@ typedef struct s_handler
 void	process_init(t_handler *hand);
 void	shell_init(t_handler *hand);
 int		path_len(char *str);
+int		cmd_path_len(char *str);
+char	*ft_strldup(char *str, int size);
+char	**ft_split(char *str);
+char	*getpath(t_handler *hand);
+void	hand_init(t_handler *hand);
+void	shell_init(t_handler *hand);
+char	*prompt(t_handler *hand);
+void	process_line(t_handler *hand);
+int		chk_operator(t_token *ptr);
+int		chk_quotes_cnt(t_token *ptr);
+int		chk_redirect_cnt(t_token *ptr);
+int		chk_token_valid(t_handler *hand);
+int		is_space(char *line);
 
 // node
 void	node_push(t_handler *hand);
@@ -80,15 +93,26 @@ int		count_fd(char *line);
 void	line_split(t_handler *hand, char *line);
 int		get_token_cnt(char *line);
 
-// 삭제 필요
 void	print_parse(t_handler *hand);
 
 // parse util
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strcmp2(char *s1, char *s2);
+int		ft_strcmp3(char *s1, char *s2, int size);
 int		line_cpy(t_token *ptr, char *line, char **env);
 int		token_len(char *str, char quotes);
+char	*split_to_join(char **split);
+char	*switch_line_to_environ(char *line, int size, char **env, int quotes);
+char	*dup_line(char *line, int size, int quotes, char **env);
+int		chk_quotes(char *str, char quotes);
+int		check_dollar(char *line, int size);
+int		get_arr_size(char *line, int size, int quotes);
+char	*get_line(char *line, int size);
+char	**split_line(char *line, int size, int quotes);
+char	*get_token_key(char *str);
+char	*line_to_environ(char *key, char **env);
+char	*ft_strjoin(char *s1, char *s2);
 
 // cd
 
@@ -119,6 +143,7 @@ char	*dir_cpy(char *str);
 int		is_right_environ(t_token *element);
 char	*get_env_key(char *env);
 char	*get_env_value(char *env);
+char	*ft_envdup(char *str, int flag);
 
 // env
 int		env_len(char **env);
