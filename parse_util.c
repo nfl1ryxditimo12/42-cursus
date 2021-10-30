@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:26:51 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/28 20:53:23 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/10/30 19:34:16 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ char	**split_line(char *line, int size, int quotes)
 		{
 			token++;
 			i++;
-			while (i < size && line[i] && line[i] != quotes && \
+			while (i < size && line[i] && line[i] != '\'' && line[i] != '\"' && \
 				line[i] != 32 && line[i] != 9 && line[i] != '$')
 			{
 				i++;
@@ -146,19 +146,47 @@ char	**split_line(char *line, int size, int quotes)
 	return (arr);
 }
 
+char	*get_token_key(char *str)
+{
+	char *ret;
+	int i;
+	int j;
+
+	i = -1;
+	j = -1;
+	str++;
+	while (str[++i])
+		if (str[i] == '\'' || str[i] == '\"' || str[i] == 32 || str[i] == 9)
+			break ;
+	ret = malloc(i + 1);
+	while (++j < i)
+		ret[j] = str[j];
+	ret[j] = 0;
+	return (ret);
+}
+
 char	*line_to_environ(char *key, char **env)
 {
 	int	i;
+	int size;
+	char *env_key;
+	char *ptr;
 
 	i = 0;
+	ptr = get_token_key(key);
+	size = cmd_len(ptr);
 	while (env[i])
 	{
-		if (ft_strcmp(key + 1, env[i]))
+		env_key = get_env_key(env[i]);
+		if (ft_strcmp(ptr, env_key))
 		{
+			free(ptr);
 			free(key);
-			return (ft_strdup(env[i] + cmd_len(key)));
+			free(env_key);
+			return (ft_strdup(env[i] + size + 1));
 		}
 		i++;
+		free(env_key);
 	}
 	free(key);
 	return (ft_strdup(""));

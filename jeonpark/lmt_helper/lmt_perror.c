@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 18:00:00 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/28 19:28:09 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/30 13:53:55 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	lmt_perror(const char *str)
 	lmt_string_append_string(string, "\n");
 	if (write(2, string->value, string->count) == -1)
 		exit(1);
+	errno = 0;
 	lmt_string_free(string);
 }

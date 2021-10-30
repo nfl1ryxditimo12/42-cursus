@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/28 21:16:04 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/10/30 19:15:08 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ int		cmd_len(char *str);
 char	*ft_strdup(char *str);
 char	*connect_dir(char *path, char *token);
 char	*dir_cpy(char *str);
-char	*pree_dir(char *dir);
-char	*pre_dir(char *dir);
 int		is_right_environ(t_token *element);
 char	*get_env_key(char *env);
 char	*get_env_value(char *env);

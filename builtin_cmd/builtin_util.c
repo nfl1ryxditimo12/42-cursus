@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:04:21 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/25 14:49:50 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/30 19:14:38 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,54 +35,6 @@ char	*ft_strdup(char *str)
 		ret[i++] = *str++;
 	ret[i] = 0;
 	return (ret);
-}
-
-char	*pre_dir(char *dir)
-{
-	int	end;
-	int	start;
-	char	*ret_dir;
-
-	start = 0;
-	while (dir[start])
-		start++;
-	while (dir[start] != '/')
-		start--;
-	if (!start)
-		return (ft_strdup("/"));
-	end = start;
-	start = -1;
-	ret_dir = lmt_alloc(end);
-	while (++start < end)
-		ret_dir[start] = dir[start];
-	ret_dir[start] = 0;
-	return (ret_dir);
-}
-
-char	*pree_dir(char *dir)
-{
-	int		end;
-	int		start;
-	char	*ret_dir;
-
-	start = 0;
-	while (dir[start])
-		start++;
-	while (dir[start] != '/')
-		start--;
-	if (!start)
-	{
-		free(dir);
-		return (ft_strdup("/"));
-	}
-	end = start;
-	start = -1;
-	ret_dir = lmt_alloc(end);
-	while (++start < end)
-		 ret_dir[start] = dir[start];
-	ret_dir[start] = 0;
-	free(dir);
-	return (ret_dir);
 }
 
 char	*dir_cpy(char *str)
