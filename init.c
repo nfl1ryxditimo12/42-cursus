@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 17:23:08 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/28 18:08:35 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/10/28 21:38:31 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void    process_line(t_handler *hand)
 			process_non_builtin_cmd(hand);
 		else if (check == 0)
 		{
-			perror(hand->line->token[0]);
+			lmt_perror(hand->line->token[0]);
 			break ;
 		}
 		hand->line = hand->line->next;

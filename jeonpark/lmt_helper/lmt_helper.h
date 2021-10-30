@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:14:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/28 17:23:25 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/10/28 21:16:18 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <fcntl.h>	// mode_t
 # include <unistd.h>	// pid_t
 # include "minishell.h"
+
+typedef struct s_handler    t_handler;
+typedef struct s_token      t_token;
 
 int		is_type_control_operator(int type);
 int		is_type_redirection(int type);
