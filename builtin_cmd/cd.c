@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:02:11 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/25 14:48:54 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/28 21:03:54 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	process_cd(t_handler *hand)
 	char	*dir;
 
 	if (hand->line->token[2])
-		perror(hand->line->token[2]);
+		lmt_perror(hand->line->token[2]);
 	if (!hand->line->token[1] || ft_strcmp2(hand->line->token[1], "~"))
 		dir = ft_strdup(hand->path->home_dir);
 	else if (ft_strcmp(hand->line->token[1], "~/"))
@@ -85,7 +85,7 @@ void	process_cd(t_handler *hand)
 		dir = connect_dir(hand->path->dir, hand->line->token[1]);
 	if (chdir(dir))
 	{
-		perror(dir);
+		lmt_perror(dir);
 		hand->status = 1;
 	}
 	else

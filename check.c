@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:31:26 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/28 18:11:42 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/10/28 21:36:12 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int    not_builtin_cmd(t_handler *hand)
 			free(cmd[i]);
 	}
 	if (!hand->line->cmd_dir && !stat(hand->line->token[0], &hand->path->buf))
-		hand->line->cmd_dir = hand->line->token[0];
+		hand->line->cmd_dir = ft_strdup(hand->line->token[0]);
 	if (hand->line->cmd_dir)
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/28 17:30:51 by seonkim          ###   ########.fr       */
+/*   Updated: 2021/10/28 21:16:04 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/history.h>
 # include <sys/stat.h>
 # include "lmt_c_library.h"
+# include "lmt_helper.h"
 # include "signal.h"
 
 # define BUFFER_SIZE 10000
