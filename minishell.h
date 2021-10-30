@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:59 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/24 17:55:34 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/30 19:15:08 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/history.h>
 # include <sys/stat.h>
 # include "lmt_c_library.h"
+# include "lmt_helper.h"
 # include "signal.h"
 
 # define BUFFER_SIZE 10000
@@ -45,7 +46,7 @@ typedef struct s_token
 typedef struct s_path
 {
 	struct stat	buf;
-	char		*cmd[5];
+	char		**cmd;
 	char		dir[1024];
 	char		*home_dir;
 }	t_path;
@@ -67,6 +68,7 @@ typedef struct s_handler
 // init
 void	process_init(t_handler *hand);
 void	shell_init(t_handler *hand);
+int		path_len(char *str);
 
 // node
 void	node_push(t_handler *hand);
@@ -114,8 +116,6 @@ int		cmd_len(char *str);
 char	*ft_strdup(char *str);
 char	*connect_dir(char *path, char *token);
 char	*dir_cpy(char *str);
-char	*pree_dir(char *dir);
-char	*pre_dir(char *dir);
 int		is_right_environ(t_token *element);
 char	*get_env_key(char *env);
 char	*get_env_value(char *env);

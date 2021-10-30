@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:01:43 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/24 17:55:18 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/10/28 21:55:59 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,28 @@ void	process_non_builtin_cmd(t_handler *hand)
 		execve(hand->line->cmd_dir, &hand->line->token[0], hand->env);
 	else
 		waitpid(pid, &status, 0);
+}
+
+void	path_reset(t_path *path)
+{
+	char	*ptr;
+	char	**cmd_ptr;
+
+	if (path->cmd)
+	{
+		cmd_ptr = path->cmd;
+		while (*path->cmd)
+		{
+			ptr = *path->cmd;
+			path->cmd++;
+			free(ptr);
+			ptr = NULL;
+		}
+		free(cmd_ptr);
+	}
+	path->home_dir = NULL;
+	free(path);
+	path = NULL;
 }
 
 void	hand_reset(t_handler *hand)
@@ -49,6 +71,7 @@ void	hand_reset(t_handler *hand)
 		ptr = NULL;
 	}
 	hand->line = NULL;
+	path_reset(hand->path);
 }
 
 int	main(int ac, char **av, char **env)
@@ -59,7 +82,6 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	hand.env = env_control(env);
 	hand.status = 0;
-	hand.path->home_dir = getenv("HOME");
 	shell_init(&hand);
 	signal_set_status(STATUS_INIT);
 	process_init(&hand);

@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lmt_extension_handler_reset_all_size.c             :+:      :+:    :+:   */
+/*   t_lmt_token_sublist_method.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/27 09:26:45 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/27 09:27:03 by jeonpark         ###   ########.fr       */
+/*   Created: 2021/10/24 21:12:46 by jeonpark          #+#    #+#             */
+/*   Updated: 2021/10/25 13:26:46 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "t_lmt_token_sublist.h"
 #include "lmt_extension_token.h"
+#include "constant.h"
 
-void	lmt_reset_handler_all_size(t_handler *handler)
+int	lmt_token_sublist_get_next_control_op(t_lmt_token_sublist *sublist)
 {
-	int		count;
-	t_token	*element;
+	t_token	*next_control_op;
 
-	count = 0;
-	element = handler->top;
-	while (element != NULL)
-	{
-		element->size
-			= lmt_count_of_null_terminated_array((void **)element->token);
-		++count;
-		element = element->next;
-	}
-	handler->token_size = count;
+	if (sublist == NULL)
+		return (TYPE_UNDEFINED);
+	next_control_op = sublist->terminator;
+	while (lmt_is_token_type_close_parenthesis(next_control_op))
+		next_control_op = next_control_op->next;
+	if (next_control_op == NULL)
+		return (TYPE_TERMINATOR);
+	return (next_control_op->type);
 }

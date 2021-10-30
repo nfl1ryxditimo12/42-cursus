@@ -6,7 +6,7 @@
 #    By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/23 20:26:43 by seonkim          ###   ########seoul.kr   #
+#    Updated: 2021/10/28 19:29:07 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,8 +56,10 @@ SRCS		:= \
 			   jeonpark/lmt_extension/lmt_extension_token_refine_argv_0.c \
 			   jeonpark/lmt_extension/lmt_extension_token_method.c \
 			   jeonpark/lmt_extension/lmt_extension_token_set_type.c \
+			   jeonpark/lmt_process_manager/t_lmt_process_list_execute.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_list_type.c \
+			   jeonpark/lmt_process_manager/t_lmt_process_list_type2.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_manager_fd.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_manager_method.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_manager_type.c \
@@ -65,16 +67,23 @@ SRCS		:= \
 			   jeonpark/lmt_process_manager/t_lmt_process_redirection.c \
 			   jeonpark/lmt_process_manager/t_lmt_process_type.c \
 			   jeonpark/lmt_redirection/lmt_attach_redirection.c \
-			   jeonpark/lmt_token_sublist/t_lmt_token_sublist.c \
+			   jeonpark/lmt_redirection/t_lmt_redirection_word_line_method.c \
+			   jeonpark/lmt_redirection/t_lmt_redirection_word_line_type.c \
+			   jeonpark/lmt_token_sublist/t_lmt_token_sublist_method.c \
+			   jeonpark/lmt_token_sublist/t_lmt_token_sublist_type.c \
 			   jeonpark/lmt_helper/check_type.c \
+			   jeonpark/lmt_helper/lmt_close_fd.c \
 			   jeonpark/lmt_helper/lmt_count_of_null_terminated_array.c \
+			   jeonpark/lmt_helper/lmt_convert_list.c \
+			   jeonpark/lmt_helper/lmt_convert_token.c \
 			   jeonpark/lmt_helper/lmt_critical_exit.c \
 			   jeonpark/lmt_helper/lmt_dup_perror.c \
 			   jeonpark/lmt_helper/lmt_dup2_perror.c \
 			   jeonpark/lmt_helper/lmt_fork_exit.c \
 			   jeonpark/lmt_helper/lmt_get_exit_code_from_stat_loc.c \
+			   jeonpark/lmt_helper/lmt_get_number_of_signal_that_caused_termination.c \
 			   jeonpark/lmt_helper/lmt_open_perror.c \
-			   jeonpark/lmt_helper/lmt_convert_list.c \
+			   jeonpark/lmt_helper/lmt_perror.c \
 			   jeonpark/signal/signal.c \
 			   main.c
 
