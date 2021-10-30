@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 14:40:51 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/27 16:11:48 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/30 19:50:14 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ int	lmt_process_attach_io(t_lmt_process *process,
 			last_redirection_type = element->type;
 			return_value = attach_io(element, manager, &word_line);
 			if (return_value != NORMAL)
+			{
+				lmt_redirection_word_line_free(word_line);
 				return (return_value);
+			}
 		}
 		element = element->next;
 	}

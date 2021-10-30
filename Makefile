@@ -6,7 +6,7 @@
 #    By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/30 20:37:57 by seonkim          ###   ########seoul.kr   #
+#    Updated: 2021/10/30 19:59:08 by jeonpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,10 +129,10 @@ RM			:= rm -f
 
 
 
-.PHONY:	all debug setdebug clean fclean re
-all:$(NAME)
+.PHONY:	all debug setdebug clean fclean re bonus
+all:		$(NAME)
 
-debug:		clean setdebug $(NAME)
+debug:		setdebug $(NAME)
 setdebug:
 			$(eval DEBUG_OPTION = -g)
 
@@ -141,6 +141,7 @@ clean:
 fclean:		clean
 			$(RM) $(NAME)
 re:			fclean all
+bonus:		$(NAME)
 
 
 
