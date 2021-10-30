@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 14:36:03 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/24 17:06:52 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:18:30 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
 # define TYPE_OPEN_PARENTHESIS		0x00000400
 # define TYPE_CLOSE_PARENTHESIS		0x00000800
 
-//	- 쓰임:
+//	- usage:
 //	if (token->type & TYPE_REDIRECTION != 0)
 //	{
-//		type 이 4 종류의 redirection 중 하나라는 뜻
+//		type is one of redirection
 //	}
 # define TYPE_COMMAND				0X00000006
 # define TYPE_REDIRECTION			0x00000078

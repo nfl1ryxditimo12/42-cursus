@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:18:20 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/27 09:57:20 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:13:21 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@
 # include "lmt_helper.h"
 # include "t_lmt_redirection_word_line.h"
 
-//	앞과 뒤 커맨드와 관련된 현재 커맨드의 상태값을 저장한다
-//	handler 도 저장한다
-//	fd_pipe 는 적용 후 값을 FD_NONE 으로 초기화 한다
-//	fd_std 는 stdin 과 stdout 의 fd 를 필요할 때마다 저장해둔다.
 typedef struct s_lmt_process_manager
 {
 	t_handler		*handler;

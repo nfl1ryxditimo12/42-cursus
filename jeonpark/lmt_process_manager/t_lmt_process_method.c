@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:02:41 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/27 10:02:53 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/28 19:50:26 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,18 @@ static int	should_execute_on_child(t_lmt_process *process, t_handler *handler)
 	return (return_value);
 }
 
+static void	print_command_not_found(char *str)
+{
+	t_lmt_string	*string;
+
+	string = lmt_string_new("minishell: ");
+	lmt_string_append_string(string, str);
+	lmt_string_append_string(string, ": command not found\n");
+	if (write(2, string->value, string->count) == -1)
+		exit(1);
+	lmt_string_free(string);
+}
+
 static void	process_execute(
 		t_lmt_process *process, t_lmt_process_manager *manager)
 {
@@ -66,7 +78,7 @@ static void	process_execute(
 	}
 	else
 	{
-		lmt_perror(process->token_sublist->first->token[0]);
+		print_command_not_found(process->token_sublist->first->token[0]);
 		process->exit_code = 127;
 	}
 	if (process->pid == 0)

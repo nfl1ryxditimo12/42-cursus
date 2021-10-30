@@ -6,13 +6,12 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:04 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/25 12:47:34 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:12:08 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_lmt_process_manager.h"
 
-//	push 가 top 에 새로운 node 를 추가한다면, append 는 bottom 에 새로운 노드를 추가한다
 void	lmt_process_list_append(t_lmt_process *dummy, t_lmt_process *element)
 {
 	element->prev = dummy->prev;
@@ -71,7 +70,6 @@ t_lmt_process	*lmt_process_next(t_lmt_process *process)
 		return (NULL);
 }
 
-//	정상적으로 fork 된 자식 프로세스를 기다리는 함수
 void	lmt_process_list_wait(t_lmt_process *dummy)
 {
 	t_lmt_process	*element;

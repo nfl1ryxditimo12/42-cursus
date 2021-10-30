@@ -6,7 +6,7 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 14:40:51 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/27 10:03:51 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:11:48 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	attach_io(t_token *redirection_token,
 	return (return_value);
 }
 
-//	여기서는 exit 하지는 않는다. builtin 일 수도 있기 때문이다.
 int	lmt_process_attach_io(t_lmt_process *process,
 		t_lmt_process_manager *manager)
 {
