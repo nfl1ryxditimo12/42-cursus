@@ -6,12 +6,12 @@
 /*   By: jeonpark <jeonpark@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 18:00:00 by jeonpark          #+#    #+#             */
-/*   Updated: 2021/10/26 16:44:08 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/28 19:28:09 by jeonpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>	// write()
-#include <stdio.h>	// strerror(), printf()
+#include <string.h>	// strerror()
 #include <errno.h>	// errno
 #include <stdlib.h>	// exit()
 #include "lmt_c_library.h"
