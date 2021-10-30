@@ -6,29 +6,29 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:31:26 by seonkim           #+#    #+#             */
-/*   Updated: 2021/10/30 18:41:23 by jeonpark         ###   ########.fr       */
+/*   Updated: 2021/10/30 19:55:30 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int    builtin_cmd(t_handler *hand)
+int	builtin_cmd(t_handler *hand)
 {
-	if (ft_strcmp2(hand->line->token[0], "echo") ||
-	ft_strcmp2(hand->line->token[0], "cd") ||
-	ft_strcmp2(hand->line->token[0], "pwd") ||
-	ft_strcmp2(hand->line->token[0], "export") ||
-	ft_strcmp2(hand->line->token[0], "unset") ||
-	ft_strcmp2(hand->line->token[0], "env") ||
+	if (ft_strcmp2(hand->line->token[0], "echo") || \
+	ft_strcmp2(hand->line->token[0], "cd") || \
+	ft_strcmp2(hand->line->token[0], "pwd") || \
+	ft_strcmp2(hand->line->token[0], "export") || \
+	ft_strcmp2(hand->line->token[0], "unset") || \
+	ft_strcmp2(hand->line->token[0], "env") || \
 	ft_strcmp2(hand->line->token[0], "exit"))
 		return (1);
 	return (0);
 }
 
-char    *connect_dir(char *path, char *token)
+char	*connect_dir(char *path, char *token)
 {
-	char    *connect;
-	int     i;
+	char	*connect;
+	int		i;
 
 	if (*token == '~')
 		token++;
@@ -43,7 +43,7 @@ char    *connect_dir(char *path, char *token)
 	return (connect);
 }
 
-int    not_builtin_cmd(t_handler *hand)
+int	not_builtin_cmd(t_handler *hand)
 {
 	int		i;
 	int		size;
@@ -72,7 +72,7 @@ int    not_builtin_cmd(t_handler *hand)
 	return (0);
 }
 
-int    check_type(t_handler *hand)
+int	check_type(t_handler *hand)
 {
 	if (builtin_cmd(hand) && !hand->cmd_flag)
 	{

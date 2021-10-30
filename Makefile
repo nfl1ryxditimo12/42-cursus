@@ -6,7 +6,7 @@
 #    By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 22:28:02 by jeonpark          #+#    #+#              #
-#    Updated: 2021/10/28 19:29:07 by jeonpark         ###   ########.fr        #
+#    Updated: 2021/10/30 20:37:57 by seonkim          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,16 @@ READLINE_DIR	:= ~/.brew/opt/readline
 SRCS		:= \
 			   check.c \
 			   init.c \
+			   init_util1.c \
+			   init_util2.c \
+			   init_util3.c \
 			   node.c \
 			   parse.c \
-			   parse_util.c \
+			   parse_util1.c \
+			   parse_util2.c \
+			   parse_util3.c \
+			   parse_util4.c \
+			   parse_util5.c \
 			   print.c \
 			   builtin_cmd/builtin.c \
 			   builtin_cmd/builtin_util.c \
@@ -32,6 +39,7 @@ SRCS		:= \
 			   builtin_cmd/exit.c \
 			   builtin_cmd/export.c \
 			   builtin_cmd/unset.c \
+			   builtin_cmd/env_util.c \
 			   jeonpark/lmt_c_library/lmt_alloc/lmt_alloc.c \
 			   jeonpark/lmt_c_library/lmt_io/lmt_put_ch.c \
 			   jeonpark/lmt_c_library/lmt_io/lmt_close.c \
