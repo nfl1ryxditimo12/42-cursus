@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:16:45 by seonkim           #+#    #+#             */
-/*   Updated: 2021/11/16 19:47:59 by seonkim          ###   ########seoul.kr  */
+/*   Updated: 2021/11/17 19:16:26 by seonkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_atoi(char *str)
 	return (num);
 }
 
-int	set_philo_state(t_state *state, int ac, char **av)
+int	init_state(t_state *state, int ac, char **av)
 {
 	av++;
 	state->people = ft_atoi(av[0]);
@@ -44,13 +44,22 @@ int	set_philo_state(t_state *state, int ac, char **av)
 	state->count = ft_atoi(av[4]);
 	if ((ac != 5 && ac != 6) || \
 		state->people == -1 || state->die == -1 || \
-		state->eat == -1 || state->sleep == -1)
+		state->eat == -1 || state->sleep == -1 || \
+		(ac == 6 && state->count == -1))
 		return (0);
 	return (1);
 }
 
 void	dining_philosophers(t_state *state)
 {
+	pthread_mutex_t	*forks;
+
+	forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t *) * 3);
+	for (int i = 0; i < 3; i++)
+	{
+		pthread_mutex_init(&(forks[i]), NULL);
+		printf("%d\n", j);
+	}
 	return ;
 }
 
@@ -58,8 +67,10 @@ int	main(int ac, char **av)
 {
 	t_state	state;
 
-	if (!set_philo_state(&state, ac, av))
+	if (!init_state(&state, ac, av))
 		return (philo_error("Argument Error"));
+	// if (pthread_mutex_init(&(state.), NULL))
+	// 	return (philo_error("Mutex Init Error"));
 	dining_philosophers(&state);
 	return (0);
 }
