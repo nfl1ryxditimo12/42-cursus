@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:17:02 by seonkim           #+#    #+#             */
-/*   Updated: 2022/03/16 21:50:56 by seonkim          ###   ########.fr       */
+/*   Updated: 2022/03/20 21:13:20 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int			check_state(t_state *state, int ac);
 
 /** philo.c */
 void		eating_time(t_state *state, t_philo *philo);
-void		end_philosophers(t_state *state);
 void		*dining_philosophers(void *philo_void);
+int			end_philosophers(t_state *state, int count);
 int			eating_philosophers(t_state *state, t_philo *philo);
 int			philosophers(t_state *state);
 

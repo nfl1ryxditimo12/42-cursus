@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 21:45:44 by seonkim           #+#    #+#             */
-/*   Updated: 2022/03/16 21:47:54 by seonkim          ###   ########.fr       */
+/*   Updated: 2022/03/20 22:02:19 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,16 @@ void	*dining_philosophers(void *philo_void)
 	return (0);
 }
 
-void	end_philosophers(t_state *state)
+int	end_philosophers(t_state *state, int count)
 {
 	int	i;
+	int	error_check;
 
+	error_check = state->philo_cnt == count;
+	if (!error_check)
+		state->die = 1;
 	i = -1;
-	while (++i < state->philo_cnt)
+	while (++i < count)
 		pthread_join(state->philo[i].tid, NULL);
 	i = -1;
 	while (++i < state->philo_cnt)
@@ -70,6 +74,7 @@ void	end_philosophers(t_state *state)
 	free(state->philo);
 	pthread_mutex_destroy(&state->eating);
 	pthread_mutex_destroy(&state->writing);
+	return (error_check);
 }
 
 int	philosophers(t_state *state)
@@ -84,9 +89,8 @@ int	philosophers(t_state *state)
 		state->philo[i].check_last_meal = now_time();
 		if (pthread_create(&state->philo[i].tid, NULL, \
 			dining_philosophers, philo_void))
-			return (0);
+			return (end_philosophers(state, i));
 	}
 	check_death_philosophers(state);
-	end_philosophers(state);
-	return (1);
+	return (end_philosophers(state, state->philo_cnt));
 }
