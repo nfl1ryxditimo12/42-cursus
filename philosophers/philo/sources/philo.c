@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 21:45:44 by seonkim           #+#    #+#             */
-/*   Updated: 2022/03/20 22:02:19 by seonkim          ###   ########.fr       */
+/*   Updated: 2022/03/21 21:49:02 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int	eating_philosophers(t_state *state, t_philo *philo)
 {
 	pthread_mutex_lock(&state->forks[philo->left_fork]);
 	print_philo(state, philo->id, "has taken a left fork");
+	if (state->philo_cnt == 1)
+	{
+		pthread_mutex_unlock(&state->forks[philo->left_fork]);
+		return (0);
+	}
 	pthread_mutex_lock(&state->forks[philo->right_fork]);
 	print_philo(state, philo->id, "has taken a right fork");
 	eating_time(state, philo);
