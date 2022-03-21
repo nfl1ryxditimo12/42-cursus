@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:17:02 by seonkim           #+#    #+#             */
-/*   Updated: 2022/03/20 21:13:20 by seonkim          ###   ########.fr       */
+/*   Updated: 2022/03/21 14:18:03 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PHILO_H
 
 # include <sys/time.h>
-# include <memory.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>

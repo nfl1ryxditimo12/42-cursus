@@ -6,32 +6,46 @@
 #    By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 17:37:40 by seonkim           #+#    #+#              #
-#    Updated: 2022/03/16 21:51:35 by seonkim          ###   ########.fr        #
+#    Updated: 2022/03/21 13:14:25 by seonkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+NAME		=	philo
+CC			=	gcc
+CFLAGS		=	-Wall -Wextra -Werror
 
-CFLAGS = -Wall -Wextra -Werror
+INC_DIR		=	includes/
+OBJ_DIR		=	objects/
+SRC_DIR		=	sources/
 
-NAME = philo
+SOURCES		=	main.c\
+				init.c\
+				check.c\
+				util.c\
+				philo.c\
+				time.c
 
-SRC = main.c init.c check.c util.c philo.c time.c
+OBJ_FILES	=	$(SOURCES:.c=.o)
+OBJECTS		=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
-OBJ = $(SRC:.c=.o)
+MKDIR		=	$(shell mkdir $(OBJ_DIR) 2> /dev/null)
 
-all : $(NAME)
+all		:	$(MKDIR) $(NAME)
 
-$(NAME) :
-		$(CC) -c $(CFLAGS) $(SRC)
-		$(CC) -o $(NAME) $(CFLAGS) $(OBJ)
+$(OBJ_DIR)%.o	:	$(SRC_DIR)%.c
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
-clean:
-		rm -f $(OBJ)
+$(NAME)	:	$(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 
-fclean: clean
-		rm -f $(NAME)
+clean	:
+	rm -rf $(OBJ_DIR)
 
-re: fclean $(NAME)
+fclean	:	clean
+	rm -rf $(NAME)
+
+re		:	fclean
+	make all
+
 
 .PHONY: all clean fclean re
