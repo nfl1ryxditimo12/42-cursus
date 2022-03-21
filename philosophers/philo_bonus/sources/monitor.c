@@ -6,7 +6,7 @@
 /*   By: seonkim <seonkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:38:00 by seonkim           #+#    #+#             */
-/*   Updated: 2022/03/21 18:49:21 by seonkim          ###   ########.fr       */
+/*   Updated: 2022/03/21 18:52:32 by seonkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,3 @@ void	end_philosophers(t_state *state)
 	sem_unlink("check_all_ate");
 	free(state->philo);
 }
-
