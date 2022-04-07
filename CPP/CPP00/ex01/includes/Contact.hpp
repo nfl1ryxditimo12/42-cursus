@@ -17,6 +17,7 @@ class Contact
         ~Contact(void);
 
         void set_contact(int& idx);
+        void set_field(std::string field, std::string& member);
         std::string get_first_name(void);
         std::string get_last_name(void);
         std::string get_nickname(void);

@@ -1,4 +1,5 @@
 #include "PhoneBook.hpp"
+#include <limits>
 
 int main()
 {
@@ -8,7 +9,11 @@ int main()
     while (1)
     {
         std::cout << "Command: ";
-        std::getline(std::cin, command);
+        if (!std::getline(std::cin, command))
+        {
+            std::cout << "\nGood bye" << std::endl;
+            return (1);
+        }
         
         if (command.compare("ADD") == 0)
             book.add_contact();

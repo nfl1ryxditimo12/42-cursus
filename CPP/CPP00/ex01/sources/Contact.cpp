@@ -8,19 +8,31 @@ Contact::~Contact(void)
 {
 }
 
+void Contact::set_field(std::string field, std::string& member)
+{
+    while (1)
+    {
+        std::cout << field;
+        if (!std::getline(std::cin, member))
+        {
+            std::cout << "\nGood bye" << std::endl;
+            exit(1);
+        }
+        
+        if (member.length() > 0)
+            break ;
+    }
+}
+
 void Contact::set_contact(int& index)
 {
     this->idx = index;
-    std::cout << "First name: ";
-    std::getline(std::cin, this->first_name);
-    std::cout << "Last name: ";
-    std::getline(std::cin, this->last_name);
-    std::cout << "Nickname: ";
-    std::getline(std::cin, this->nickname);
-    std::cout << "Phone number: ";
-    std::getline(std::cin, this->phone_number);
-    std::cout << "Darkest secret: ";
-    std::getline(std::cin, this->darkest_secret);
+
+    set_field("First name: ", this->first_name);
+    set_field("Last name: ", this->last_name);
+    set_field("Nickname: ", this->nickname);
+    set_field("Phone number: ", this->phone_number);
+    set_field("Darkest secret: ", this->darkest_secret);
 }
 
 std::string Contact::get_first_name(void)

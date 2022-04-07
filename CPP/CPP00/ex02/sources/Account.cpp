@@ -2,15 +2,15 @@
 #include <iostream>
 #include <time.h>
 
-int Account::_nbAccounts;
-int Account::_totalAmount;
-int Account::_totalNbDeposits;
-int Account::_totalNbWithdrawals;
+int Account::_nbAccounts = 0;
+int Account::_totalAmount = 0;
+int Account::_totalNbDeposits = 0;
+int Account::_totalNbWithdrawals = 0;
 
 Account::Account(int initial_deposit): _accountIndex(getNbAccounts()), _amount(initial_deposit)
 {
-	this->_nbDeposits = 0;
-	this->_nbWithdrawals = 0;
+    this->_nbDeposits = 0;
+    this->_nbWithdrawals = 0;
     _nbAccounts++;
     _totalAmount += initial_deposit;
     _displayTimestamp();
