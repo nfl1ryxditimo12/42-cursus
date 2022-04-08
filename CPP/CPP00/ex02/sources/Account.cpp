@@ -54,14 +54,19 @@ bool    Account::makeWithdrawal(int withdrawal )
 
 void	Account::_displayTimestamp(void)
 {
-    std::cout << "[19920104_091532] ";
-    /**
+    // std::cout << "[19920104_091532] ";
+
+    char        buffer[20];
     time_t      temp;
     struct tm*  timeinfo;
 
     temp = time(NULL);
     timeinfo = localtime(&temp);
 
+    std::strftime(buffer, sizeof(buffer), "[%Y%m%d_%H%M%S] ", timeinfo);
+    std::cout << buffer;
+
+    /*
     std::cout << "[";
     std::cout << 1900 + timeinfo->tm_year;
     if (timeinfo->tm_mon < 9)
