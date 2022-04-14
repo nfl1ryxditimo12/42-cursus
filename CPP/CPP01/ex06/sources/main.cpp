@@ -4,7 +4,15 @@ int main(int ac, char **av)
 {
     Harl harl = Harl();
 
-    harl.complain((ac == 2) ? av[1] : av[0]);
+    switch (ac)
+    {
+        case 2:
+            harl.complain(av[1]);
+            break ;
+        default:
+            harl.complain("NOTHING");
+            break ;
+    }
 
     return (0);
 }

@@ -18,7 +18,7 @@ void File::replaceLine(std::string &line, std::string origin, std::string replac
 {
     std::string::size_type start;
 
-    while ((start = line.find(origin)) != std::string::npos) {
+    while ((start = line.find(origin)) != -1) {
         line.erase(start, origin.length());
         line.insert(start, replace);
     }
