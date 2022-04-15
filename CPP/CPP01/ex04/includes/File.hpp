@@ -11,7 +11,8 @@ class File
         std::ofstream writeFile;
 
         void replaceLine(std::string &line, std::string origin, std::string replace);
-
+        void openFileClose();
+        void writeFileClose();
     public:
         File(std::string filename);
         ~File();

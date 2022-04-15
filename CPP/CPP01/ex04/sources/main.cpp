@@ -3,7 +3,7 @@
 int main(int ac, char **av)
 {
     try {
-        if (ac != 4) 
+        if (ac != 4 || !std::string(av[2]).length()) 
             throw std::runtime_error("Wrong Input!!");
 
         File file(av[1]);
