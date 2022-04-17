@@ -24,7 +24,7 @@ Fixed Point::getY(void) const
 
 bool Point::compareCoord(const Point &c1, const Point &c2, const Point &point)
 {
-    if ((c1.getY() > point.getY()) != (c2.getY() > point.getY()))
+    if ((c1.getY() >= point.getY()) != (c2.getY() >= point.getY()))
         return true;
     return false;
 }
