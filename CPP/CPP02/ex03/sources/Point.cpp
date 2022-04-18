@@ -8,7 +8,7 @@ Point::Point(const Point &cls): x(cls.x), y(cls.y) {}
 
 Point &Point::operator=(const Point &cls)
 {
-    *this = cls;
+    (void)cls;
     return *this;
 }
 
