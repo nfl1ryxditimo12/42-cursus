@@ -66,7 +66,7 @@ void ClapTrap::attack(const std::string& target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if (this->point <= 0 || this->point - amount < 0)
+    if (this->point <= 0 || amount - this->point < amount)
         this->point = 0;
     else
         this->point -= amount;
