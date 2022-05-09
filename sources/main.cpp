@@ -281,12 +281,17 @@ void test()
 
     std::vector<int>::reverse_iterator std_riter = a3.rend();
     ft::vector<int>::reverse_iterator ft_riter = a4.rend();
+    std::vector<int>::reverse_iterator std_riterb = a3.rbegin();
+    ft::vector<int>::reverse_iterator ft_riterb = a4.rbegin();
 
-    std::vector<int>::iterator std_iter = a3.begin();
-    // ft::vector<int>::iterator ft_iter = a4.begin();
-
-    std::cout << *(std_riter - 2) << ", " << *(std_iter + 1) << ", " << *ft_riter << std::endl;
-    std::cout << (std_iter + 1 == (std_riter - 2).base()) << std::endl;
+    std::cout << "[std::reverse] :";
+    for (; std_riter != std_riterb; --std_riter)
+        std::cout << " " << *(std_riter.base());
+    std::cout << std::endl;
+    std::cout << "[ft::reverse]  :";
+    for (; ft_riter != ft_riterb; --ft_riter)
+        std::cout << " " << *(ft_riter.base());
+    std::cout << std::endl;
 }
 
 int main()
