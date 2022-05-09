@@ -240,7 +240,7 @@ void test()
         std::cout << " " << *it;
     std::cout << "\n" << std::endl;
 
-    a1.insert(a1.begin() + 5, 10, 100);
+    a1.insert(a1.begin() + 5, a1.begin(), a1.begin() + 5);
 
     std::cout << "size: " << a1.size() << ", " << a1.capacity() << std::endl;
     std::cout << "a1:";
@@ -255,21 +255,38 @@ void test()
     for (int i = 1; i <= 10; i++)
         a2.push_back(i);
 
-    std::cout << "size: " << a2.size() << ", " << a2.capacity() << std::endl;
-    std::cout << "a2:";
-    for (ft::vector<int>::iterator it = a2.begin(); it < a2.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
+    ft_print(a2);
 
-    a2.insert(a2.begin() + 5, 10, 100);
+    a2.insert(a2.begin() + 5, a2.begin(), a2.begin() + 5);
 
-    std::cout << "size: " << a2.size() << ", " << a2.capacity() << std::endl;
-    std::cout << "a2:";
-    for (ft::vector<int>::iterator it = a2.begin(); it < a2.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
+    ft_print(a2);
 
-    std::cout << *a2.end() << "\n" << std::endl;
+    std::cout << "\n===================================================\n" << std::endl;
+
+    a1.clear();
+    a2.clear();
+
+    std_print(a1);
+    ft_print(a2);
+
+    std::vector<int>a3;
+    ft::vector<int>a4;
+
+    for (int i = 1; i <= 10; i++) {
+        a3.push_back(i);
+        a4.push_back(i);
+    }
+    std_print(a3);
+    ft_print(a4);
+
+    std::vector<int>::reverse_iterator std_riter = a3.rend();
+    ft::vector<int>::reverse_iterator ft_riter = a4.rend();
+
+    std::vector<int>::iterator std_iter = a3.begin();
+    // ft::vector<int>::iterator ft_iter = a4.begin();
+
+    std::cout << *(std_riter - 2) << ", " << *(std_iter + 1) << ", " << *ft_riter << std::endl;
+    std::cout << (std_iter + 1 == (std_riter - 2).base()) << std::endl;
 }
 
 int main()

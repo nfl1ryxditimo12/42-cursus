@@ -2,8 +2,7 @@
 # define CONTAINER_HPP
 
 # include <iostream>
-# include "vector_iterator.hpp"
-# include "vector_reverse_iterator.hpp"
+# include "reverse_iterator.hpp"
 # include "utils.hpp"
 
 namespace ft
@@ -28,9 +27,11 @@ namespace ft
 			typedef const value_type&       const_reference;
 
 			/* Ieterator define */
-			typedef value_type*             iterator;
-			// typedef typename ft::vector_iterator<value_type>             iterator;
-			// typedef typename ft::vector_reverse_iterator<T>     reverse_iterator;
+			typedef pointer             	iterator;
+			typedef const_pointer			const_iterator;
+			// typedef typename ft::vector_iterator<value_type>    iterator;
+			typedef typename ft::reverse_iterator<iterator>     	reverse_iterator;
+			typedef typename ft::reverse_iterator<const_iterator>   const_reverse_iterator;
 
 		/*************************************/
 		/*         Member Variables          */
@@ -111,9 +112,13 @@ namespace ft
 
 			iterator end() const { return this->_end; };
 
-			iterator rbegin();
+			reverse_iterator rbegin() { return reverse_iterator(this->end() - 1); }
 
-			iterator rend();
+			const_reverse_iterator rbegin() const { return reverse_iterator(this->end() - 1); }
+
+			reverse_iterator rend() { return reverse_iterator(this->begin() - 1); }
+
+			const_reverse_iterator rend() const { return reverse_iterator(this->begin() - 1); }
 
 			/*************************************/
 			/*              Capacity             */
@@ -208,16 +213,15 @@ namespace ft
 			}
 
 			/* pop_back */
-			void pop_back() { this->erase(this->_end - 1); }
+			void pop_back() { this->_alloc.destroy(--(this->_end)); }
 
 			/* insert */
 			iterator insert(iterator position, const_reference val)
 			{
 				size_type pos = static_cast<size_type>(position - this->begin());
 				this->move(1, position, this->end());
-				position = this->begin() + pos;
-				this->_alloc.construct(position, val);
-				return position;
+				this->_alloc.construct(this->begin() + pos, val);
+				return this->begin() + pos;
 			}
 
 			void insert(iterator position, size_type n, const_reference val)
@@ -230,7 +234,14 @@ namespace ft
 
 			template <class InputIterator>
 			void insert(iterator position, InputIterator first, InputIterator last,
-					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = NULL);
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = NULL)
+			{
+				size_type pos = static_cast<size_type>(position - this->begin());
+				size_type n = static_cast<size_type>(last - first);
+				this->move(n, position, this->end());
+				for (size_type i = 0; i < n; i++, first++)
+					this->_alloc.construct(this->begin() + pos + i, *first);
+			}
 
 			/* erase */
 			iterator erase(iterator position)
@@ -270,7 +281,11 @@ namespace ft
 			}
 
 			/* clear */
-			void clear();
+			void clear()
+			{
+				for (; this->_begin != this->_end; )
+					pop_back();
+			}
 
 		/*************************************/
 		/*         Private Function          */
@@ -352,10 +367,6 @@ namespace ft
 					this->_alloc.destroy(this->begin() + pos + i);
 				}
 				this->_end += n;
-				std::cout << "new:";
-				for (iterator it = begin(); it < end(); it++)
-					std::cout << " " << *it;
-				std::cout << std::endl;
 				this->_alloc.deallocate(tmp, move_size);
 			}
 
@@ -367,6 +378,33 @@ namespace ft
 				return new_cap;
 			}
 	};
+}
+
+#include <iostream>
+#include <vector>
+
+template <class T>
+void ft_print(ft::vector<T> &vec) // 참조자 빼고 호출하면 복사 생성자가 호출되는데 메모리 이중 해제 이슈 있음
+{
+	std::cout << "size: " << vec.size() << ", capacity: " << vec.capacity() << ", *end: " << *vec.end() << ", pointer: " << (vec.begin() == vec.end()) << std::endl;
+    std::cout << "[ft::vector]  :";
+    for (typename ft::vector<T>::iterator it = vec.begin(); it < vec.end(); it++)
+        std::cout << " " << *it;
+    std::cout << std::endl;
+
+	std::cout << "\n===================================================\n" << std::endl;
+}
+
+template <class T>
+void std_print(std::vector<T> &vec)
+{
+	std::cout << "\n===================================================\n" << std::endl;
+
+	std::cout << "size: " << vec.size() << ", capacity: " << vec.capacity() << ", *end: " << *vec.end() << ", pointer: " << (vec.begin() == vec.end()) << std::endl;
+    std::cout << "[std::vector] :";
+    for (typename std::vector<T>::iterator it = vec.begin(); it < vec.end(); it++)
+        std::cout << " " << *it;
+    std::cout << "\n" << std::endl;
 }
 
 #endif

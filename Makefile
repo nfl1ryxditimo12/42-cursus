@@ -27,6 +27,7 @@ $(NAME)	:	$(OBJECTS)
 
 clean	:
 	rm -rf $(OBJ_DIR)
+	rm -rf .vscode
 
 fclean	:	clean
 	rm -rf $(NAME)
