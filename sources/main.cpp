@@ -1,303 +1,83 @@
 #include "vector.hpp"
 #include <iostream>
 #include <vector>
+#include <list>
 #include <utility>
 #include "utils.hpp"
 
-void test()
+void	is_empty(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct)
 {
-    ft::vector<int> v1;
+	std::cout << "is_empty: " << vct.empty() << std::endl;
+}
 
-    std::cout << v1.size() << ", " << v1.capacity() << std::endl;
-    v1.push_back(1);
-    v1.push_back(2);
-    v1.push_back(3);
-    v1.push_back(4);
-    v1.push_back(5);
+template <typename T>
+void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true)
+{
+	const T_SIZE_TYPE size = vct.size();
+	const T_SIZE_TYPE capacity = vct.capacity();
+	const std::string isCapacityOk = (capacity >= size) ? "OK" : "KO";
+	// Cannot limit capacity's max value because it's implementation dependent
 
-    std::cout << v1.size() << ", " << v1.capacity() << std::endl;
-    std::cout << "v1:";
-    for (ft::vector<int>::iterator it = v1.begin(); it < v1.end(); it++)
+	std::cout << "size: " << size << std::endl;
+	std::cout << "capacity: " << isCapacityOk << std::endl;
+	std::cout << "max_size: " << vct.max_size() << std::endl;
+	if (print_content)
+	{
+		typename TESTED_NAMESPACE::vector<T>::const_iterator it = vct.begin();
+		typename TESTED_NAMESPACE::vector<T>::const_iterator ite = vct.end();
+		std::cout << std::endl << "Content is:" << std::endl;
+		for (; it != ite; ++it)
+			std::cout << "- " << *it << std::endl;
+	}
+	std::cout << "###############################################" << std::endl;
+}
+
+template <class T>
+void ft_print(ft::vector<T> vec) // 참조자 빼고 호출하면 복사 생성자가 호출되는데 메모리 이중 해제 이슈 있음
+{
+	std::cout << "size: " << vec.size() << ", capacity: " << vec.capacity() << ", *end: " << *vec.end() << ", pointer: " << (vec.begin() == vec.end()) << std::endl;
+    std::cout << "[ft::vector]  :";
+    for (typename ft::vector<T>::iterator it = vec.begin(); it < vec.end(); it++)
         std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    ft::vector<int> v2;
-
-    v2 = v1;
-
-    std::cout << v2.size() << ", " << v2.capacity() << std::endl;
-    std::cout << "v2:";
-    for (ft::vector<int>::iterator it = v2.begin(); it < v2.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::vector<int> v3;
-    std::vector<int> v4;
-
-    v3.push_back(1);
-    v3.push_back(2);
-    v3.push_back(3);
-    v3.push_back(4);
-    v3.push_back(5);
-
-    v4 = v3;
-
-    std::cout << v4.size() << ", " << v4.capacity() << std::endl;
-    std::cout << "v4:";
-    for (std::vector<int>::iterator it = v4.begin(); it < v4.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::vector<std::string> v5(10);
-    std::vector<std::string> v6;
-
-    std::cout << v5[0] << v5.empty() << std::endl;
-    std::cout << v6.empty() << std::endl;
-
     std::cout << std::endl;
 
-    std::vector<int> v7(5, 100);
-    ft::vector<int> v8(5, 100);
+	std::cout << "\n===================================================\n" << std::endl;
+}
 
-    std::cout << v7.size() << ", " << v7.capacity() << std::endl;
-    std::cout << "v7:";
-    for (std::vector<int>::iterator it = v7.begin(); it < v7.end(); it++)
+template <class T>
+void std_print(std::vector<T> vec)
+{
+	std::cout << "\n===================================================\n" << std::endl;
+
+	std::cout << "size: " << vec.size() << ", capacity: " << vec.capacity() << ", *end: " << *vec.end() << ", pointer: " << (vec.begin() == vec.end()) << std::endl;
+    std::cout << "[std::vector] :";
+    for (typename std::vector<T>::iterator it = vec.begin(); it < vec.end(); it++)
         std::cout << " " << *it;
     std::cout << "\n" << std::endl;
+}
 
-    std::cout << v8.size() << ", " << v8.capacity() << std::endl;
-    std::cout << "v8:";
-    for (ft::vector<int>::iterator it = v8.begin(); it < v8.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
+void vector_test()
+{
+    std::vector<int> vec;
+	ft::vector<int> vec2;
+	ft::vector<int> vec3(vec2);
+	std::vector<int> vec4(vec);
 
-    v7.resize(10);
-    v8.resize(10);
+	for (int i = 0; i < 10; i++) {
+		vec.push_back(i + 1);
+		vec2.push_back(i + 1);
+	}
 
-    std::cout << v7.size() << ", " << v7.capacity() << std::endl;
-    std::cout << "v7:";
-    for (std::vector<int>::iterator it = v7.begin(); it < v7.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::cout << v8.size() << ", " << v8.capacity() << std::endl;
-    std::cout << "v8:";
-    for (ft::vector<int>::iterator it = v8.begin(); it < v8.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::cout << "=================================" << std::endl;
-    std::cout << v7[-1] << std::endl;
-    std::cout << v7[0] << std::endl;
-    std::cout << v7[1] << std::endl;
-    std::cout << v7[2] << std::endl;
-    std::cout << v7[3] << std::endl;
-    std::cout << v7[10] << std::endl;
-    std::cout << "=================================" << std::endl;
-    std::cout << v8[-1] << std::endl;
-    std::cout << v8[0] << std::endl;
-    std::cout << v8[1] << std::endl;
-    std::cout << v8[2] << std::endl;
-    std::cout << v8[3] << std::endl;
-    std::cout << v8[10] << std::endl;
-    std::cout << "=================================\n" << std::endl;
-
-    std::vector<int> t1;
-    ft::vector<int> t3;
-
-    for (int i = 1; i <= 10; i++)
-        t1.push_back(i);
-    std::cout << "size: " << t1.size() << ", " << t1.capacity() << std::endl;
-    std::cout << "t1:";
-    for (std::vector<int>::iterator it = t1.begin(); it < t1.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    t1.erase(t1.begin() + 3, t1.begin() + 7);
-    std::cout << "size: " << t1.size() << ", " << t1.capacity() << std::endl;
-    std::cout << "t1:";
-    for (std::vector<int>::iterator it = t1.begin(); it < t1.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    for (int i = 1; i <= 10; i++)
-        t3.push_back(i);
-    std::cout << "size: " << t3.size() << ", " << t3.capacity() << std::endl;
-    std::cout << "t3:";
-    for (ft::vector<int>::iterator it = t3.begin(); it < t3.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    t3.erase(t3.begin() + 3, t3.begin() + 7);
-
-    std::cout << "size: " << t3.size() << ", " << t3.capacity() << std::endl;
-    std::cout << "t3:";
-    for (ft::vector<int>::iterator it = t3.begin(); it < t3.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-    std::cout << *(t3.end()) << ", " << *(t1.end()) << std::endl;
-
-    t1.erase(t1.begin() + 1, t1.end());
-    t3.erase(t3.begin() + 1, t3.end());
-
-
-    std::cout << "size: " << t1.size() << ", " << t1.capacity() << std::endl;
-    std::cout << "t1:";
-    for (std::vector<int>::iterator it = t1.begin(); it < t1.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::cout << "size: " << t3.size() << ", " << t3.capacity() << std::endl;
-    std::cout << "t3:";
-    for (ft::vector<int>::iterator it = t3.begin(); it < t3.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::cout << *(t3.end()) << ", " << *(t1.end()) << std::endl;
-
-    std::cout << "\n===================================================\n" << std::endl;
-
-    for (int i = 1; i <= 10; i++)
-        t1.push_back(i);
-    for (int i = 1; i <= 10; i++)
-        t3.push_back(i);
-
-    t1.erase(t1.end() - 1);
-    t3.erase(t3.end() - 1);
-
-
-    std::cout << "size: " << t1.size() << ", " << t1.capacity() << std::endl;
-    std::cout << "t1:";
-    for (std::vector<int>::iterator it = t1.begin(); it < t1.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::cout << "size: " << t3.size() << ", " << t3.capacity() << std::endl;
-    std::cout << "t3:";
-    for (ft::vector<int>::iterator it = t3.begin(); it < t3.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::cout << *(t3.end()) << ", " << *(t1.end()) << std::endl;
-
-    std::cout << "\n===================================================\n" << std::endl;
-
-    std::vector<int> res1;
-    ft::vector<int> res2;
-
-    for (int i = 1; i <= 10; i++)
-        res1.push_back(i);
-    for (int i = 1; i <= 10; i++)
-        res2.push_back(i);
-
-    res1.resize(5);
-    res2.resize(5);
-
-    std::cout << "size: " << res1.size() << ", " << res1.capacity() << std::endl;
-    std::cout << "res1:";
-    for (std::vector<int>::iterator it = res1.begin(); it < res1.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::cout << "size: " << res2.size() << ", " << res2.capacity() << std::endl;
-    std::cout << "res2:";
-    for (ft::vector<int>::iterator it = res2.begin(); it < res2.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::cout << *(res1.end() + 4) << ", " << *(res2.end() + 4) << std::endl;
-
-    std::cout << "\n===================================================\n" << std::endl;
-
-    std::vector<int> g1(10);
-    ft::vector<int> g2(10);
-
-    g1.reserve(16);
-    g2.reserve(16);
-
-    std::cout << "size: " << g1.size() << ", " << g1.capacity() << std::endl;
-    std::cout << "g1:";
-    for (std::vector<int>::iterator it = g1.begin(); it < g1.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::cout << "size: " << g2.size() << ", " << g2.capacity() << std::endl;
-    std::cout << "g2:";
-    for (ft::vector<int>::iterator it = g2.begin(); it < g2.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::cout << "\n===================================================\n" << std::endl;
-
-    std::vector<int> a1;
-
-    for (int i = 1; i <= 10; i++)
-        a1.push_back(i);
-
-    std::cout << "size: " << a1.size() << ", " << a1.capacity() << std::endl;
-    std::cout << "a1:";
-    for (std::vector<int>::iterator it = a1.begin(); it < a1.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    a1.insert(a1.begin() + 5, a1.begin(), a1.begin() + 5);
-
-    std::cout << "size: " << a1.size() << ", " << a1.capacity() << std::endl;
-    std::cout << "a1:";
-    for (std::vector<int>::iterator it = a1.begin(); it < a1.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
-
-    std::cout << *a1.end() << "\n" << std::endl;
-
-    ft::vector<int> a2;
-
-    for (int i = 1; i <= 10; i++)
-        a2.push_back(i);
-
-    ft_print(a2);
-
-    a2.insert(a2.begin() + 5, a2.begin(), a2.begin() + 5);
-
-    ft_print(a2);
-
-    std::cout << "\n===================================================\n" << std::endl;
-
-    a1.clear();
-    a2.clear();
-
-    std_print(a1);
-    ft_print(a2);
-
-    std::vector<int>a3;
-    ft::vector<int>a4;
-
-    for (int i = 1; i <= 10; i++) {
-        a3.push_back(i);
-        a4.push_back(i);
-    }
-    std_print(a3);
-    ft_print(a4);
-
-    std::vector<int>::reverse_iterator std_riter = a3.rend();
-    ft::vector<int>::reverse_iterator ft_riter = a4.rend();
-    std::vector<int>::reverse_iterator std_riterb = a3.rbegin();
-    ft::vector<int>::reverse_iterator ft_riterb = a4.rbegin();
-
-    std::cout << "[std::reverse] :";
-    for (; std_riter != std_riterb; --std_riter)
-        std::cout << " " << *(std_riter.base());
-    std::cout << std::endl;
-    std::cout << "[ft::reverse]  :";
-    for (; ft_riter != ft_riterb; --ft_riter)
-        std::cout << " " << *(ft_riter.base());
-    std::cout << std::endl;
+	std_print(vec);
+	// std_print(vec4);
+	ft_print(vec2);
+	// ft_print(vec3);
 }
 
 int main()
 {
     try {
-        test();
+        vector_test();
     } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
     }

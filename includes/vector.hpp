@@ -65,22 +65,28 @@ namespace ft
 
 			template <class InputIterator>
 			vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type(),
-					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = NULL)
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type * = u_nullptr)
 			: _alloc(alloc)
 			{
-				difference_type n = std::distance(first, last);
+				size_type n = static_cast<size_type>(std::distance(first, last));
 
 				this->vallocate(n);
-				this->vconstruct(this->_end + n, first);
+				for (size_type i = 0; i < n; i++)
+					this->_alloc.construct(this->_end++, *(first++));
+				// this->vconstruct(this->_end + n, first);
 			}
 
+			// 참조자 빼고 호출하면 복사 생성자가 호출되는데 메모리 이중 해제 이슈 있음
 			vector(const vector &cls)
+			: _alloc(cls._alloc), _begin(NULL), _end(NULL), _end_cap(NULL)
 			{
 				size_type n = cls.size();
 
 				if (n > 0) {
 					this->vallocate(n);
-					this->vconstruct(this->_end + n, cls.begin());
+					for (const_iterator it = cls.begin(); it < cls.end(); it++)
+						this->_alloc.construct(this->_end++, *it);
+					// this->vconstruct(this->_end + n, cls.begin());
 				}
 			}
 
@@ -108,9 +114,13 @@ namespace ft
 			/*             Iterators             */
 			/*************************************/
 
-			iterator begin() const { return this->_begin; }; 
+			iterator begin() { return this->_begin; }
 
-			iterator end() const { return this->_end; };
+			const_iterator begin() const {return this->_begin; }
+
+			iterator end() { return this->_end; }
+
+			const_iterator end() const { return this->_end; }
 
 			reverse_iterator rbegin() { return reverse_iterator(this->end()); }
 
@@ -130,7 +140,7 @@ namespace ft
 
 			size_type   capacity() const { return this->_end_cap - this->_begin; }
 
-			bool	empty() { return this->_begin == NULL; };
+			bool	empty() const { return this->size() == 0; };
 			
 			void	resize(size_type n, value_type val = value_type())
 			{
@@ -175,9 +185,9 @@ namespace ft
 
 			const_reference front() const { return *(this->begin()); }
 
-			reference back() { return *(this->end()); }
+			reference back() { return *(this->end() - 1); }
 
-			const_reference back() const { return *(this->end()); }
+			const_reference back() const { return *(this->end() - 1); }
 
 			/*************************************/
 			/*             Modifiers             */
@@ -186,13 +196,13 @@ namespace ft
 			/* assign */
 			template <class InputIterator>
 			void assign(InputIterator first, InputIterator last,
-					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = NULL)
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = u_nullptr)
 			{
-				size_type new_size = static_cast<size_type>(last - first);
+				size_type new_size = static_cast<size_type>(std::distance(first, last));
 				if (new_size > this->size())
 					this->realloc(new_size);
-				this->erase(this->_begin, this->_end);
-				for (; first < last; first++, this->_end++)
+				this->clear();
+				for (; &(*first) < &(*last); first++, this->_end++)
 					this->_alloc.construct(this->_end, *first);
 			};
 
@@ -200,7 +210,7 @@ namespace ft
 			{
 				if (n > this->capacity())
 					this->realloc(n);
-				this->erase(this->_begin, this->_end);
+				this->clear();
 				this->vconstruct(this->_end + n, val);
 			}
 
@@ -218,7 +228,7 @@ namespace ft
 			/* insert */
 			iterator insert(iterator position, const_reference val)
 			{
-				size_type pos = static_cast<size_type>(position - this->begin());
+				size_type pos = static_cast<size_type>(&(*position) - &(*this->begin()));
 				this->move(1, position, this->end());
 				this->_alloc.construct(this->begin() + pos, val);
 				return this->begin() + pos;
@@ -234,10 +244,10 @@ namespace ft
 
 			template <class InputIterator>
 			void insert(iterator position, InputIterator first, InputIterator last,
-					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type = NULL)
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type * = u_nullptr)
 			{
 				size_type pos = static_cast<size_type>(position - this->begin());
-				size_type n = static_cast<size_type>(last - first);
+				size_type n = static_cast<size_type>(std::distance(first, last));
 				this->move(n, position, this->end());
 				for (size_type i = 0; i < n; i++, first++)
 					this->_alloc.construct(this->begin() + pos + i, *first);
@@ -284,7 +294,7 @@ namespace ft
 			void clear()
 			{
 				for (; this->_begin != this->_end; )
-					pop_back();
+					this->pop_back();
 			}
 
 			allocator_type get_allocator() const { return this->_alloc; }
@@ -349,19 +359,19 @@ namespace ft
 			{
 				size_type additional = static_cast<size_type>(this->_end_cap - this->_end);
 				if (additional < n)
-					this->realloc(n + this->size());
+					this->realloc(recommand_cap(n + this->size()));
 				this->vconstruct(this->end() + n, val);
 			}
 
 			template <class InputIterator>
 			void move(size_type n, InputIterator first, InputIterator last)
 			{
-				size_type pos = static_cast<size_type>(first - this->begin());
-				size_type move_size = static_cast<size_type>(last - first);
+				size_type pos = static_cast<size_type>(&(*first) - this->begin());
+				size_type move_size = static_cast<size_type>(&(*last) - &(*first));
 				pointer tmp = _alloc.allocate(move_size);
 
 				if (this->size() + n > this->capacity())
-					this->realloc(new_capacity(n));
+					this->realloc(recommand_cap(n + this->size()));
 				for (size_type i = 0; i < move_size; i++)
 					tmp[i] = first[i];
 				for (size_type i = 0; i < move_size; i++) {
@@ -372,12 +382,23 @@ namespace ft
 				this->_alloc.deallocate(tmp, move_size);
 			}
 
-			size_type new_capacity(size_type n)
+			// size_type new_capacity(size_type n)
+			// {
+			// 	size_type new_cap = this->capacity() == 0 ? 1 : this->capacity();
+			// 	while (new_cap < (this->size() + n))
+			// 		new_cap *= 2;
+			// 	return new_cap;
+			// }
+
+			size_type recommand_cap(size_type n)
 			{
-				size_type new_cap = this->capacity() == 0 ? 1 : this->capacity();
-				while (new_cap < (this->size() + n))
-					new_cap *= 2;
-				return new_cap;
+				const size_type ms = this->max_size();
+				if (n > ms)
+					throw std::out_of_range("Out of range");
+				const size_type cap = this->capacity();
+				if (cap >= ms / 2)
+					return ms;
+				return std::max(2 * cap, n);
 			}
 	};
 
@@ -412,28 +433,46 @@ namespace ft
 
 #include <vector>
 
-template <class T>
-void ft_print(ft::vector<T> &vec) // 참조자 빼고 호출하면 복사 생성자가 호출되는데 메모리 이중 해제 이슈 있음
-{
-	std::cout << "size: " << vec.size() << ", capacity: " << vec.capacity() << ", *end: " << *vec.end() << ", pointer: " << (vec.begin() == vec.end()) << std::endl;
-    std::cout << "[ft::vector]  :";
-    for (typename ft::vector<T>::iterator it = vec.begin(); it < vec.end(); it++)
-        std::cout << " " << *it;
-    std::cout << std::endl;
-
-	std::cout << "\n===================================================\n" << std::endl;
-}
+#define TESTED_TYPE int
+#define TESTED_NAMESPACE ft
+#define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
+#define NC "\e[0m"
+#define RED "\e[0;31m"
+#define GRN "\e[0;32m"
+#define CYN "\e[0;36m"
 
 template <class T>
-void std_print(std::vector<T> &vec)
+void print(std::vector<T> const &vec, ft::vector<T> const &vct)
 {
-	std::cout << "\n===================================================\n" << std::endl;
-
-	std::cout << "size: " << vec.size() << ", capacity: " << vec.capacity() << ", *end: " << *vec.end() << ", pointer: " << (vec.begin() == vec.end()) << std::endl;
-    std::cout << "[std::vector] :";
-    for (typename std::vector<T>::iterator it = vec.begin(); it < vec.end(); it++)
-        std::cout << " " << *it;
-    std::cout << "\n" << std::endl;
+	std::cout << CYN << "max_size" << NC << " [" << (vct.max_size() == vec.max_size() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << vct.max_size() << ", std: " << vec.max_size() << std::endl;
+	std::cout << CYN << "size" << NC << "     [" << (vct.size() == vec.size() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << vct.size() << ", std: " << vec.size() << std::endl;
+	std::cout << CYN << "capacity" << NC << " [" << (vct.capacity() == vec.capacity() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << vct.capacity() << ", std: " << vec.capacity() << std::endl;
+	std::cout << CYN << "Internal values" << NC << " [";
+	size_t size = std::max(vec.size(), vct.size());
+	for (size_t i = 0; i < size; i++) {
+		if (vec[i] != vct[i]) {
+			std::cout << "\e[0;31mFALSE\e[0m]" << std::endl;
+			break;
+		}
+		if (i == size - 1)
+			std::cout << "\e[0;32mOK\e[0m]" << std::endl;
+	}
+	std::cout << "[ft::vector]  :";
+	for (typename ft::vector<T>::const_iterator it = vct.begin(); it < vct.end(); it++) {
+		if (it == vct.begin())
+			std::cout << " " << *it;
+		else
+        	std::cout << ", " << *it;
+	}
+	std::cout << std::endl;
+	std::cout << "[std::vector] :";
+	for (typename std::vector<T>::const_iterator it = vec.begin(); it < vec.end(); it++) {
+		if (it == vec.begin())
+			std::cout << " " << *it;
+		else
+        	std::cout << ", " << *it;
+	}
+	std::cout << "\n" << std::endl;
 }
 
 #endif
