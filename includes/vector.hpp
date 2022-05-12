@@ -431,48 +431,4 @@ namespace ft
 	{ x.swap(y); }
 }
 
-#include <vector>
-
-#define TESTED_TYPE int
-#define TESTED_NAMESPACE ft
-#define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
-#define NC "\e[0m"
-#define RED "\e[0;31m"
-#define GRN "\e[0;32m"
-#define CYN "\e[0;36m"
-
-template <class T>
-void print(std::vector<T> const &vec, ft::vector<T> const &vct)
-{
-	std::cout << CYN << "max_size" << NC << " [" << (vct.max_size() == vec.max_size() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << vct.max_size() << ", std: " << vec.max_size() << std::endl;
-	std::cout << CYN << "size" << NC << "     [" << (vct.size() == vec.size() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << vct.size() << ", std: " << vec.size() << std::endl;
-	std::cout << CYN << "capacity" << NC << " [" << (vct.capacity() == vec.capacity() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << vct.capacity() << ", std: " << vec.capacity() << std::endl;
-	std::cout << CYN << "Internal values" << NC << " [";
-	size_t size = std::max(vec.size(), vct.size());
-	for (size_t i = 0; i < size; i++) {
-		if (vec[i] != vct[i]) {
-			std::cout << "\e[0;31mFALSE\e[0m]" << std::endl;
-			break;
-		}
-		if (i == size - 1)
-			std::cout << "\e[0;32mOK\e[0m]" << std::endl;
-	}
-	std::cout << "[ft::vector]  :";
-	for (typename ft::vector<T>::const_iterator it = vct.begin(); it < vct.end(); it++) {
-		if (it == vct.begin())
-			std::cout << " " << *it;
-		else
-        	std::cout << ", " << *it;
-	}
-	std::cout << std::endl;
-	std::cout << "[std::vector] :";
-	for (typename std::vector<T>::const_iterator it = vec.begin(); it < vec.end(); it++) {
-		if (it == vec.begin())
-			std::cout << " " << *it;
-		else
-        	std::cout << ", " << *it;
-	}
-	std::cout << "\n" << std::endl;
-}
-
 #endif
