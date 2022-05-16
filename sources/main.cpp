@@ -8,6 +8,7 @@
 #include <stack>
 #include <utility>
 #include "utils.hpp"
+#include "RB_TREE.hpp"
 
 #define TESTED_NAMESPACE ft
 #define TESTED_TYPE int
@@ -48,13 +49,26 @@ void vector_test()
 		std::cout << "hello" << std::endl;
 	if (class_name.find("vector"))
 		std::cout << "world" << std::endl;
+	ft::map<std::string, int> map;
 	
+}
+
+void map_test()
+{
+	// ft::rb_tree tree(0);
+	std::map<int, int> test;
+	ft::map<int, int> test1;
+
+	test.insert(std::pair<int, int>(1, 10));
+	test1.insert(ft::pair<int, int>(1, 10));
+	std::cout << test[2] << std::endl;
 }
 
 int main()
 {
     try {
-        vector_test();
+        // vector_test();
+		map_test();
     } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
     }

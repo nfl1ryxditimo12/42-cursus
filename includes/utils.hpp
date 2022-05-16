@@ -148,6 +148,49 @@ namespace ft
     void operator&() const;
 
     } u_nullptr;
+
+/*************************************/
+/*          binary_function          */
+/*************************************/
+
+    template <class Arg1, class Arg2, class Result>
+    struct binary_function {
+        typedef Arg1 first_argument_type;
+        typedef Arg2 second_argument_type;
+        typedef Result result_type;
+    };
+
+/*************************************/
+/*              rb_node              */
+/*************************************/
+
+    enum Color
+    {
+        RED,
+        BLACK
+    };
+
+    template <class T, class Alloc = std::allocator<T> > class rb_node {
+        public:
+            typedef T value_type;
+            typedef rb_node *node_pointer;
+
+            value_type data;
+            node_pointer left, right, parent;
+            Color color;
+
+        public:
+            explicit rb_node() {
+                this->color = BLACK;
+                this->left = this->right = this->parent = u_nullptr;
+            }
+
+            explicit rb_node(value_type data) {
+                this->data = data;
+                this->color = RED;
+                this->left = this->right = this->parent = u_nullptr;
+            }
+    };
 };
 
 #endif
