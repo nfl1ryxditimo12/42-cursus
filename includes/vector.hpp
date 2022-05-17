@@ -297,12 +297,17 @@ namespace ft
 					this->pop_back();
 			}
 
+
+			/*************************************/
+			/*             Allocator             */
+			/*************************************/
+
 			allocator_type get_allocator() const { return this->_alloc; }
+		
 
 		/*************************************/
 		/*         Private Function          */
 		/*************************************/
-
 		private:
 
 			void vconstruct(pointer p, const_reference val)

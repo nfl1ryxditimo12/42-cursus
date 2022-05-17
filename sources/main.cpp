@@ -9,6 +9,7 @@
 #include <utility>
 #include "utils.hpp"
 #include "RB_TREE.hpp"
+#include "test.hpp"
 
 #define TESTED_NAMESPACE ft
 #define TESTED_TYPE int
@@ -58,10 +59,30 @@ void map_test()
 	// ft::rb_tree tree(0);
 	std::map<int, int> test;
 	ft::map<int, int> test1;
+	ft::pair<int, int>pair(1, 10);
 
+	// std::cout << "pair: " << pair.first << ", " << pair.second << std::endl;
+
+
+	test.insert(std::pair<int, int>(3, 5));
+	test.insert(std::pair<int, int>(4, 20));
+	test.insert(std::pair<int, int>(2, 30));
 	test.insert(std::pair<int, int>(1, 10));
+	test.insert(std::pair<int, int>(100, 100));
+	test.insert(std::pair<int, int>(50, 100));
+	test1.insert(ft::pair<int, int>(3, 5));
+	test1.insert(ft::pair<int, int>(4, 20));
+	test1.insert(ft::pair<int, int>(2, 30));
 	test1.insert(ft::pair<int, int>(1, 10));
-	std::cout << test[2] << std::endl;
+	test1.insert(ft::pair<int, int>(100, 100));
+	test1.insert(ft::pair<int, int>(50, 100));
+	// std::cout << test[1] << std::endl;
+	// std::cout << test1[1] << std::endl;
+	// std::cout << test[2] << std::endl;
+	// std::cout << test1[2] << std::endl;
+	// std::cout << std::endl;
+
+	print(test1, test);
 }
 
 int main()
