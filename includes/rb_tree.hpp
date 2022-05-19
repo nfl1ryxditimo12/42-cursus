@@ -61,6 +61,7 @@ namespace ft
 			compare_type _comp;
 			node_pointer _root;
 			node_pointer _end;
+			node_pointer _leaf;
 			size_type _size;
 
 			/**
@@ -80,17 +81,27 @@ namespace ft
 			: _alloc(allocator_type()), _comp(comp), _size(0)
 			{
 				_end = _alloc.allocate(1);
+				_leaf = _alloc.allocate(1);
 				_alloc.construct(_end, node_type());
+				_alloc.construct(_leaf, node_type());
+				_leaf->type = LEAF;
+				_end->left = _leaf;
+				_end->right = _leaf;
 				_root = _end;
 			}
 
 			rb_tree(const rb_tree &cls)
-			: _size(0), _alloc(cls._alloc), _comp(cls.comp)
+			: _alloc(cls._alloc), _comp(cls._comp), _size(0)
 			{
 				_end = _alloc.allocate(1);
+				_leaf = _alloc.allocate(1);
 				_alloc.construct(_end, node_type());
+				_alloc.construct(_leaf, node_type());
+				_leaf->type = LEAF;
+				_end->left = _leaf;
+				_end->right = _leaf;
 				_root = _end;
-				*this = cls;
+				this->insert(cls.begin(), cls.end());
 			}
 
 			/*************************************/
@@ -101,7 +112,9 @@ namespace ft
 			{
 				this->clear();
 				this->_alloc.destroy(this->_end);
+				this->_alloc.destroy(this->_leaf);
 				this->_alloc.deallocate(this->_end, 1);
+				this->_alloc.deallocate(this->_leaf, 1);
 			}
 
 			/*************************************/
@@ -110,8 +123,13 @@ namespace ft
 
 			rb_tree &operator=(const rb_tree &cls)
 			{
-				(void)cls;
-				return NULL;
+				if (this != &cls) {
+					this->clear();
+					this->_alloc = cls._alloc;
+					this->_comp = cls._comp;
+					this->insert(cls.begin(), cls.end());
+				}
+				return *this;
 			}
 
 		public:
@@ -120,15 +138,29 @@ namespace ft
 			/*             Iterators             */
 			/*************************************/
 
-			iterator begin() { return this->_root; }
+			iterator begin()
+			{ 
+				node_pointer begin = this->root();
+				while (begin->left != this->_leaf)
+					begin = begin->left;
+				return iterator(begin);
+			}
 
-			const_iterator begin() const { return this->_root; }
+			const_iterator begin() const
+			{
+				node_pointer begin = this->root();
+				while (begin->left != this->_leaf)
+					begin = begin->left;
+				return const_iterator(begin);
+			}
 
 			iterator end() { return this->_end; }
 			
 			const_iterator end() const { return this->_end; }
 
 			node_pointer root() { return this->_end->left; }
+
+			node_pointer root() const { return this->_end->left; }
 
 			/*************************************/
 			/*             Capacity              */
@@ -146,6 +178,41 @@ namespace ft
 
 			/* Insert */
 
+			bool is_right_node(node_pointer node)
+			{
+				if (node == this->root())
+					return false;
+				return node == node->parent->right;
+			}
+
+			bool is_left_node(node_pointer node)
+			{
+				if (node == this->root())
+					return false;
+				return node == node->parent->left;
+			}
+
+			#define NC "\e[0m"
+			#define R "\e[0;31m"
+			#define GRN "\e[0;32m"
+			#define CYN "\e[0;36m"
+
+			void print_tree(node_pointer node)
+			{
+				if (node == this->_leaf)
+					return ;
+				
+				if (node == this->root())
+					std::cout << (node->color == RED ? R : NC) << "root" << NC << " - ";
+				else if (is_left_node(node))
+					std::cout << (node->color == RED ? R : NC) << "left" << NC << " - ";
+				else if (is_right_node(node))
+					std::cout << (node->color == RED ? R : NC) << "right" << NC << " - ";
+				std::cout << "[" << node->data.first << ", " << node->data.second << "]" << std::endl;
+				print_tree(node->left);
+				print_tree(node->right);
+			}
+
 			pair<iterator, bool> insert (const_reference val)
 			{
 				node_pointer parent;
@@ -153,6 +220,8 @@ namespace ft
 				node_pointer &dest = find_pos(parent, val);
 				node_pointer result = insert_node(parent, dest, new_node);
 				rebuild_tree(dest);
+				this->_root = this->root();
+
 				return pair<iterator, bool>(iterator(result), dest == u_nullptr ? true : false);
 			}
 
@@ -188,8 +257,13 @@ namespace ft
 
 			/* Swap */
 
-			void swap (rb_tree& x)
-			{ this->_tree.swap(x); }
+			void swap (rb_tree& cls)
+			{
+				rb_tree tmp(*this);
+
+				*this = cls;
+				cls = tmp;
+			}
 
 			/* Clear */
 
@@ -198,7 +272,7 @@ namespace ft
 				clear_tree(this->root());
 				this->_root = this->_end;
 				this->_size = 0;
-				this->_end->left = u_nullptr;
+				this->_end->left = this->_leaf;
 			}
 
 			/*************************************/
@@ -208,7 +282,11 @@ namespace ft
 			/* Find */
 
 			template <class key_type>
-			iterator find (const key_type& k);
+			iterator find (const key_type &k)
+			{
+				node_pointer result = this->find_pos(this->root(), k);
+				return iterator(result);
+			}
 
 			template <class key_type>
 			const_iterator find (const key_type& k) const;
@@ -221,18 +299,74 @@ namespace ft
 			/* Lower_bound */
 
 			template <class key_type>
-			iterator lower_bound (const key_type& k);
+			iterator lower_bound (const key_type& k)
+			{
+				node_pointer root = this->root();
+
+				while (root != this->_leaf)
+				{
+					if (root->data.first == k)
+						break;
+					if (!this->_comp(root->data, k))
+						root = root->left;
+					else
+						root = root->right;
+				}
+				return iterator(root);
+			}
 
 			template <class key_type>
-			const_iterator lower_bound (const key_type& k) const;
+			const_iterator lower_bound (const key_type& k) const
+			{
+				node_pointer root = this->root();
+
+				while (root != this->_leaf)
+				{
+					if (root->data.first == k)
+						break;
+					if (!this->_comp(root->data, k))
+						root = root->left;
+					else
+						root = root->right;
+				}
+				return const_iterator(root);
+			}
 
 			/* Upper_bound */
 
 			template <class key_type>
-			iterator upper_bound (const key_type& k);
+			iterator upper_bound (const key_type& k)
+			{
+				node_pointer root = this->root();
+
+				while (root != this->_leaf)
+				{
+					if (root->data.first == k)
+						break;
+					if (!this->_comp(k, root->data))
+						root = root->left;
+					else
+						root = root->right;
+				}
+				return iterator(root);
+			}
 
 			template <class key_type>
-			const_iterator upper_bound (const key_type& k) const;
+			const_iterator upper_bound (const key_type& k) const
+			{
+				node_pointer root = this->root();
+
+				while (root != this->_leaf)
+				{
+					if (root->data.first == k)
+						break;
+					if (!this->_comp(k, root->data))
+						root = root->left;
+					else
+						root = root->right;
+				}
+				return const_iterator(root);
+			}
 
 			/*************************************/
 			/*             Allocator             */
@@ -247,49 +381,44 @@ namespace ft
 			{
 				node_pointer node = _alloc.allocate(1);
 				_alloc.construct(node, node_type(val));
+				node->left = _leaf;
+				node->right = _leaf;
 				return node;
 			}
 
-			node_pointer grand_parent_node(node_pointer node)
+			template <class key_type>
+			void find_pos(const key_type &val)
 			{
-				if (node != u_nullptr && node->parent != u_nullptr)
-					return node->parent->parent;
-				return u_nullptr;
-			}
-		
-			node_pointer uncle_node(node_pointer node)
-			{
-				node_pointer grandNode = grand_parent_node(node);
+				(void)val;
+				// if (node == this->_leaf)
+				// 	return u_nullptr;
+				
+				// if (node->data.first == val)
+				// 	return node;
 
-				if (grandNode != u_nullptr) {
-					if (node->parent == grandNode->left)
-						return grandNode->right;
-					else
-						return grandNode->left;
-				}
-				return u_nullptr;
-			}
+				// if ((node = find_pos(node->left, val))->data.first == val)
+				// 	return node;
+				// if ((node = find_pos(node->right, val))->data.first == val)
+				// 	return node;
 
-			// node_pointer find_data_pos(const_reference val)
-			// {
-			// 	// node_pointer
-			// }
+				// return node;
+			}
 
 			node_pointer &find_pos(node_pointer &parent, const_reference val)
 			{
 				node_pointer node = this->root();
 				parent = this->_end;
 
-				while (node != u_nullptr) {
+				while (node != this->_leaf) {
 					parent = node;
 					if (this->_comp(val, node->data)) {
-						if (node->left != u_nullptr)
+						if (node->left != this->_leaf)
 							node = node->left;
 						else
 							return parent->left;
 					}
 					else if (this->_comp(node->data, val))
-						if (node->right != u_nullptr)
+						if (node->right != this->_leaf)
 							node = node->right;
 						else
 							return parent->right;
@@ -304,7 +433,7 @@ namespace ft
 				if (position == this->end() || this->_comp(val, *position)) {
 					iterator prev = position;
 					if (prev == this->begin() || this->_comp(*(--prev), val)) {
-						if (position.base()->left == u_nullptr) {
+						if (position.base()->left == this->_leaf) {
 							parent = position.base();
 							return parent->left;
 						} else {
@@ -317,7 +446,7 @@ namespace ft
 					iterator next = position;
 					++next;
 					if (next == this->end() || this->_comp(val, *next)) {
-						if (position.base()->right == u_nullptr) {
+						if (position.base()->right == this->_leaf) {
 							parent = position.base();
 							return parent->right;
 						} else {
@@ -371,64 +500,58 @@ namespace ft
 
 			node_pointer insert_node(node_pointer parent, node_pointer &dest, node_pointer new_node)
 			{
-				if (dest == u_nullptr) {
+				if (dest == this->_leaf) {
 					dest = new_node;
 					dest->parent = parent;
-					if (this->_root->left != u_nullptr)
-						this->_root = this->_root->left;
+					if (dest == this->root()) {
+						dest->type = NODE;
+						this->_root = dest;
+					}
 					this->_size++;
 				}
 				return dest;
 			}
 
-			void rotate_right(node_pointer parent)
+			void rotate_right(node_pointer node)
 			{
-				node_pointer left = parent->left;
-				parent->left = left->right;
-				if (left->right != u_nullptr)
-					left->right->parent = parent;
-				left->parent = parent->parent;
-				if (parent->parent == this->_end)
-					this->_root = left;
-				else {
-					if (parent == parent->parent->left)
-						parent->parent->left = left;
-					else
-						parent->parent->right = left;
-				}
-				left->right = parent;
-				parent->parent = left; 
+				node_pointer left_child = node->left;
+				node->left = left_child->right;
+				if (node->left != u_nullptr)
+					node->left->parent = node;
+				left_child->parent = node->parent;
+				if (node == node->parent->left)
+					node->parent->left = left_child;
+				else
+					node->parent->right = left_child;
+				left_child->right = node;
+				node->parent = left_child;
 			}
 
-			void rotate_left(node_pointer parent)
+			void rotate_left(node_pointer node)
 			{
-				node_pointer right = parent->right;
-				parent->right = right->left;
-				if (right->left != u_nullptr)
-					right->left->parent = parent;
-				right->parent = parent->parent;
-				if (parent->parent == this->_end)
-					this->_root = right;
-				else {
-					if (parent == parent->parent->left)
-						parent->parent->left = right;
-					else
-						parent->parent->right = right;
-				}
-				right->left = parent;
-				parent->parent = right;
+				node_pointer right_child = node->right;
+				node->right = right_child->left;
+				if (node->right != u_nullptr)
+					node->right->parent = node;
+				right_child->parent = node->parent;
+				if (node == node->parent->left)
+					node->parent->left = right_child;
+				else
+					node->parent->right = right_child;
+				right_child->left = node;
+				node->parent = right_child;
 			}
 
 			void rebuild_tree(node_pointer pos)
 			{
-				while (pos != this->_root && pos->parent->color == RED) {
+				while (pos != this->root() && pos->parent->color == RED) {
 					if (pos->parent == pos->parent->parent->left) {
-						node_pointer uncle = uncle_node(pos->parent);
-						if (uncle->color == RED) {
+						node_pointer uncle = pos->parent->parent->right;
+						if (uncle != this->_leaf && uncle->color == RED) {
 							pos->parent->color = BLACK;
 							uncle->color = BLACK;
 							pos->parent->parent->color = RED;
-							pos = grand_parent_node(pos);
+							pos = pos->parent->parent;
 						} else {
 							if (pos == pos->parent->right) {
 								pos = pos->parent;
@@ -437,14 +560,15 @@ namespace ft
 							pos->parent->color = BLACK;
 							pos->parent->parent->color = RED;
 							rotate_right(pos->parent->parent);
+							break;
 						}
 					} else {
-						node_pointer uncle = uncle_node(pos->parent);
-						if (uncle->color == RED) {
+						node_pointer uncle = pos->parent->parent->left;
+						if (uncle != this->_leaf &&  uncle->color == RED) {
 							pos->parent->color = BLACK;
 							uncle->color = BLACK;
 							pos->parent->parent->color = RED;
-							pos = grand_parent_node(pos);
+							pos = pos->parent->parent;
 						} else {
 							if (pos == pos->parent->left) {
 								pos = pos->parent;
@@ -453,32 +577,16 @@ namespace ft
 							pos->parent->color = BLACK;
 							pos->parent->parent->color = RED;
 							rotate_left(pos->parent->parent);
+							break;
 						}
 					}
 				}
-				this->_root->color = BLACK;
+				this->root()->color = BLACK;
 			}
-
-			// void rebuild_tree(node_pointer pos)
-			// {
-			// 	ERROR_CASE		error_case;
-			// 	node_pointer	node;
-
-			// 	while ((error_case = check_tree(error_case)).flag == NONE)
-			// 	{
-			// 		node = error_case.node;
-			// 		if (error_case.flag == ROOT_IS_NOT_BLACK)
-			// 			this->_root->color = BLACK;
-			// 		if (error_case.flag == DOUBLE_RED) {
-
-			// 		}
-			// 		if (error_case.flag == BLACK_COUNT_NOT_VALID)
-			// 	}
-			// }
 			
 			void clear_tree(node_pointer node)
 			{
-				if (node != u_nullptr) {
+				if (node != this->_leaf) {
 					clear_tree(node->left);
 					clear_tree(node->right);
 					this->_alloc.destroy(node);

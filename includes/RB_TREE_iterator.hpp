@@ -55,13 +55,13 @@ namespace ft
 
 			rb_tree_iterator operator++()
 			{
-				if (this->_node->right != u_nullptr) {
+				if (this->_node->right->type != LEAF) {
 					tree_min(this->_node->right);
-					return (*this);
+					return *this;
 				}
-				while (!is_left_child_node(this->_node))
-					_node = _node->parent;
-				_node = _node->parent;
+				while (!is_left_child_node())
+					this->_node = this->_node->parent;
+				this->_node = this->_node->parent;
 				return *this;
 			}
 
@@ -97,20 +97,22 @@ namespace ft
 
 			void tree_min(node_pointer node)
 			{
-				while (node->left != u_nullptr)
+				while (node->left->type != LEAF)
 					node = node->left;
 				this->_node = node;
 			}
 
 			void tree_max(node_pointer node)
 			{
-				while (node->right != u_nullptr)
+				while (node->right->type != LEAF)
 					node = node->right;
 				this->_node = node;
 			}
 
-			bool is_left_child_node(node_pointer node)
-			{ return node == node->parent->left; }
+			bool is_left_child_node()
+			{
+				return this->node == this->node->parent->left;
+			}
 
 			bool is_right_child_node(node_pointer node)
 			{ return node == node->parent->right; }
@@ -171,7 +173,7 @@ namespace ft
 
 			rb_tree_const_iterator operator++()
 			{
-				if (this->_node->right != u_nullptr) {
+				if (this->_node->right->type != LEAF) {
 					tree_min(this->_node->right);
 					return (*this);
 				}
@@ -213,14 +215,14 @@ namespace ft
 
 			void tree_min(node_pointer node)
 			{
-				while (node->left != u_nullptr)
+				while (node->left->type != LEAF)
 					node = node->left;
 				this->_node = node;
 			}
 
 			void tree_max(node_pointer node)
 			{
-				while (node->right != u_nullptr)
+				while (node->right->type != LEAF)
 					node = node->right;
 				this->_node = node;
 			}

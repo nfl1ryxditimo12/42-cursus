@@ -14,6 +14,7 @@
 #define NC "\e[0m"
 #define RED "\e[0;31m"
 #define GRN "\e[0;32m"
+#define YLW "\e[0;33m"
 #define CYN "\e[0;36m"
 
 
@@ -64,29 +65,48 @@ void print(ft::vector<T> const &ft_vec, std::vector<T> const &std_vec)
 template <class Key, class Value>
 void print(ft::map<Key, Value> const &ft_map, std::map<Key, Value> const &std_map)
 {
+	typename ft::map<Key, Value>::const_iterator ft_it = ft_map.begin();
+	typename std::map<Key, Value>::const_iterator std_it = std_map.begin();
+	int flag = 0;
+
 	std::cout << CYN << "max_size" << NC << " [" << (ft_map.max_size() == std_map.max_size() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << ft_map.max_size() << ", std: " << std_map.max_size() << std::endl;
 	std::cout << CYN << "size" << NC << "     [" << (ft_map.size() == std_map.size() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << ft_map.size() << ", std: " << std_map.size() << std::endl;
-	// std::cout << CYN << "capacity" << NC << " [" << (ft_map.capacity() == std_map.capacity() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << ft_vec.capacity() << ", std: " << std_vec.capacity() << std::endl;
 	std::cout << CYN << "Internal values" << NC << " [";
-	size_t size = std::max(std_map.size(), ft_map.size());
-	typename ft::map<Key, Value>::const_iterator iter1 = ft_map.begin();
-	typename std::map<Key, Value>::const_iterator iter2 = std_map.begin();
-	for (size_t i = 0; i < size; i++, iter1++, iter2++) {
-		if ((*iter1).first != (*iter2).first || (*iter1).second != (*iter2).second) {
+
+	// while (std_it != std_map.end() || ft_it != ft_map.end()) {
+	// 	if ((*std_it).first != (*ft_it).first || (*std_it).second != (*ft_it).second) {
+	// 		std::cout << "\e[0;31mFALSE\e[0m]" << std::endl;
+	// 		flag = 1;
+	// 		break;
+	// 	}
+	// 	++std_it;
+	// 	++ft_it;
+	// }
+
+	for (; std_it != std_map.end() || ft_it != ft_map.end(); std_it++, ft_it++) {
+		if ((*std_it).first != (*ft_it).first || (*std_it).second != (*ft_it).second) {
 			std::cout << "\e[0;31mFALSE\e[0m]" << std::endl;
+			flag = 1;
 			break;
 		}
-		if (i == size - 1)
+	}
+
+	if (!flag) {
+		if (ft_map.size() == 0 && std_map.size() == ft_map.size())
+			std::cout << "\e[0;32mOK\e[0m]" << std::endl;
+		else if (std_it != std_map.end() || ft_it != ft_map.end())
+			std::cout << "\e[0;31mFALSE\e[0m]" << std::endl;
+		else
 			std::cout << "\e[0;32mOK\e[0m]" << std::endl;
 	}
-	if (ft_map.size() == 0 && std_map.size() == ft_map.size())
-		std::cout << "\e[0;32mOK\e[0m]" << std::endl;
-	std::cout << "[ft::map]  :";
+
+	std::cout << YLW << "[ft::map]  -" << NC;
 	for (typename ft::map<Key, Value>::const_iterator it = ft_map.begin(); it != ft_map.end(); it++) {
 		std::cout << " [" << (*it).first << ", " << (*it).second << "]";
 	}
 	std::cout << std::endl;
-	std::cout << "[std::map] :";
+	
+	std::cout << YLW << "[std::map] -" << NC;
 	for (typename std::map<Key, Value>::const_iterator it = std_map.begin(); it != std_map.end(); it++) {
 		std::cout << " [" << (*it).first << ", " << (*it).second << "]";
 	}

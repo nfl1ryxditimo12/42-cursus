@@ -30,59 +30,133 @@ void	cmp(const T_STACK &lhs, const T_STACK &rhs)
 
 void vector_test()
 {
-	std::map<std::string, int> test;
-	
-	test.insert(std::pair<std::string, int>("hello", 1));
-	test["second"] = 100;
+	ft::vector<int> v;
 
-	for (std::map<std::string, int>::iterator it = test.begin(); it != test.end(); it++)
-		std::cout << "[" << it->first << ", " << it->second << "]" << std::endl;
+	for (int i = 0; i < 10; i++)
+		v.push_back(i + 1);
+	ft::vector<int>::iterator it = v.begin();
+	ft::vector<int>::const_iterator cit = v.begin();
+	ft::vector<int>::reverse_iterator rit = v.rbegin();
+	ft::vector<int>::const_reverse_iterator crit = v.rbegin();
 
-	ft::vector<int> t1(7);
-	std::vector<int> t2(7);
-	ft::stack<int> t3(7);
-	std::cout << typeid(t1).name() << std::endl;
-	std::cout << typeid(t2).name() << std::endl;
-	std::cout << typeid(test).name() << std::endl;
-	std::cout << typeid(t3).name() << std::endl;
-	std::string class_name = typeid(t3).name();
-	if (class_name.find("stack"))
-		std::cout << "hello" << std::endl;
-	if (class_name.find("vector"))
-		std::cout << "world" << std::endl;
-	ft::map<std::string, int> map;
+	std::cout << (it == cit) << std::endl;
+	std::cout << (rit == crit) << std::endl;
+
 	
 }
-
+#include <ctime>
 void map_test()
 {
 	// ft::rb_tree tree(0);
-	std::map<int, int> test;
-	ft::map<int, int> test1;
 	ft::pair<int, int>pair(1, 10);
 
 	// std::cout << "pair: " << pair.first << ", " << pair.second << std::endl;
 
+	clock_t start1, end1;
+
+	start1 = clock();
+	std::map<int, int> test;
 
 	test.insert(std::pair<int, int>(3, 5));
-	test.insert(std::pair<int, int>(4, 20));
-	test.insert(std::pair<int, int>(2, 30));
-	test.insert(std::pair<int, int>(1, 10));
-	test.insert(std::pair<int, int>(100, 100));
-	test.insert(std::pair<int, int>(50, 100));
+	test.insert(std::pair<int, int>(1, 20));
+	test.insert(std::pair<int, int>(5, 30));
+	test.insert(std::pair<int, int>(7, 10));
+	test.insert(std::pair<int, int>(10, 100));
+	test.insert(std::pair<int, int>(15, 100));
+	test.insert(std::pair<int, int>(17, 100));
+	test.insert(std::pair<int, int>(20, 100));
+	// test.insert(std::pair<int, int>(2, 100));
+	// test.insert(std::pair<int, int>(4, 100));
+	// test.insert(std::pair<int, int>(6, 100));
+	// test.insert(std::pair<int, int>(21, 100));
+	// test.insert(std::pair<int, int>(22, 100));
+	// test.insert(std::pair<int, int>(23, 100));
+	// test.insert(std::pair<int, int>(24, 100));
+	// test.insert(std::pair<int, int>(25, 100));
+	// test.insert(std::pair<int, int>(26, 100));
+	// test.insert(std::pair<int, int>(27, 100));
+	// test.insert(std::pair<int, int>(28, 100));
+	// test.insert(std::pair<int, int>(39, 100));
+	// test.insert(std::pair<int, int>(102, 100));
+	end1 = clock();
+
+	// double duration1 = (double)(end1 - start1) / CLOCKS_PER_SEC;
+    std::cout << (end1 - start1) << "초" << std::endl;
+
+	clock_t start2, end2;
+
+	start2 = clock();
+
+	ft::map<int, int> test1;
 	test1.insert(ft::pair<int, int>(3, 5));
-	test1.insert(ft::pair<int, int>(4, 20));
-	test1.insert(ft::pair<int, int>(2, 30));
-	test1.insert(ft::pair<int, int>(1, 10));
-	test1.insert(ft::pair<int, int>(100, 100));
-	test1.insert(ft::pair<int, int>(50, 100));
+	test1.insert(ft::pair<int, int>(1, 20));
+	test1.insert(ft::pair<int, int>(5, 30));
+	test1.insert(ft::pair<int, int>(7, 10));
+	test1.insert(ft::pair<int, int>(10, 100));
+	test1.insert(ft::pair<int, int>(15, 100));
+	test1.insert(ft::pair<int, int>(17, 100));
+	test1.insert(ft::pair<int, int>(20, 100));
+	// test1.insert(ft::pair<int, int>(2, 100));
+	// test1.insert(ft::pair<int, int>(4, 100));
+	// test1.insert(ft::pair<int, int>(6, 100));
+	// test1.insert(ft::pair<int, int>(21, 100));
+	// test1.insert(ft::pair<int, int>(22, 100));
+	// test1.insert(ft::pair<int, int>(23, 100));
+	// test1.insert(ft::pair<int, int>(24, 100));
+	// test1.insert(ft::pair<int, int>(25, 100));
+	// test1.insert(ft::pair<int, int>(26, 100));
+	// test1.insert(ft::pair<int, int>(27, 100));
+	// test1.insert(ft::pair<int, int>(28, 100));
+	// test1.insert(ft::pair<int, int>(39, 100));
+
+
+	end2 = clock();
+
+	// double duration2 = (double)(end2 - start2) / CLOCKS_PER_SEC;
+    std::cout << (end2 - start2) << "초" << std::endl;
+
+	ft::map<int, int> test2;
+
+	test2.insert(ft::pair<int, int>(6, 100));
+	test2.insert(ft::pair<int, int>(21, 100));
+	test2.insert(ft::pair<int, int>(22, 100));
+	test2.insert(ft::pair<int, int>(23, 100));
+	test2.insert(ft::pair<int, int>(24, 100));
+	test2.insert(ft::pair<int, int>(25, 100));
+	test2.insert(ft::pair<int, int>(26, 100));
+	test2.insert(ft::pair<int, int>(27, 100));
+	test2.insert(ft::pair<int, int>(28, 100));
+
+	test1.swap(test2);
+
+
+	// std::map<int, int>::iterator it = test.find(1223);
+	ft::map<int, int>::iterator it = test2.lower_bound(7);
+	std::cout << (*it).first << ", " << (*it).second << std::endl;
+
+	std::map<int, int>::iterator it1 = test.lower_bound(7);
+	std::cout << (*it1).first << ", " << (*it1).second << std::endl;
+
+	std::cout << "\n=====================================\n" << std::endl;
+	
+	test1.print_tree();
+	std::cout << "\n=====================================\n" << std::endl;
 	// std::cout << test[1] << std::endl;
 	// std::cout << test1[1] << std::endl;
 	// std::cout << test[2] << std::endl;
 	// std::cout << test1[2] << std::endl;
 	// std::cout << std::endl;
+	// ft::map<int, int>::iterator ft_it = test1.begin();
+	// std::map<int, int>::iterator std_it = test.begin();
 
-	print(test1, test);
+
+	// for (; std_it != test.end();) {
+	// 	std::cout << "[" << (*std_it).first << ", " << (*ft_it).first << "] [" << (*std_it).second << ", " << (*ft_it).second << "]" << std::endl;
+	// 	ft_it++;
+	// 	std_it++;
+	// }
+
+	print(test2, test);
 }
 
 int main()

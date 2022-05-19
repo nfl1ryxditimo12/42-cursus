@@ -203,6 +203,13 @@ namespace ft
         BLACK
     };
 
+    enum Type
+    {
+        END,
+        LEAF,
+        NODE
+    };
+
     template <class T, class Alloc = std::allocator<T> > class rb_node {
         public:
             typedef T value_type;
@@ -211,16 +218,20 @@ namespace ft
             value_type data;
             node_pointer left, right, parent;
             Color color;
+            Type type;
 
         public:
             explicit rb_node() {
+                this->data = value_type();
                 this->color = BLACK;
+                this->type = END;
                 this->left = this->right = this->parent = u_nullptr;
             }
 
             explicit rb_node(value_type data) {
                 this->data = data;
                 this->color = RED;
+                this->type = NODE;
                 this->left = this->right = this->parent = u_nullptr;
             }
     };

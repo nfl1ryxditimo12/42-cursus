@@ -111,6 +111,8 @@ namespace ft
 			/*             Iterators             */
 			/*************************************/
 
+			void print_tree() { this->_tree.print_tree(this->_tree.root()); }
+
 			iterator begin() { return this->_tree.begin(); }
 
 			const_iterator begin() const { return this->_tree.begin(); }
@@ -199,9 +201,9 @@ namespace ft
 
 			/* Find */
 
-			iterator find (const key_type& k);
+			iterator find (const key_type& k) { return this->_tree.find(k); }
 
-			const_iterator find (const key_type& k) const;
+			const_iterator find (const key_type& k) const { return this->_tree.find(k); }
 
 			/* Count */
 
@@ -209,15 +211,15 @@ namespace ft
 
 			/* Lower_bound */
 
-			iterator lower_bound (const key_type& k);
+			iterator lower_bound (const key_type& k) { return this->_tree.lower_bound(k); }
 
-			const_iterator lower_bound (const key_type& k) const;
+			const_iterator lower_bound (const key_type& k) const { return this->_tree.lower_bound(k); }
 
 			/* Upper_bound */
 
-			iterator upper_bound (const key_type& k);
+			iterator upper_bound (const key_type& k) { return this->_tree.upper_bound(k); }
 
-			const_iterator upper_bound (const key_type& k) const;
+			const_iterator upper_bound (const key_type& k) const { return this->_tree.upper_bound(k); }
 
 			/* Equal_range */
 
