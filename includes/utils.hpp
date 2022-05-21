@@ -141,6 +141,17 @@ namespace ft
     struct is_integral<unsigned long> { static const bool value = true; };
 
 /*************************************/
+/*            is_iterator            */
+/*************************************/
+
+    // template <class T>
+    // struct is_iterator { static const bool value = false; };
+
+    // template <>
+    // struct is_iterator<iterator_traits> { static const bool value = true; };
+
+
+/*************************************/
 /*               equal               */
 /*************************************/
 

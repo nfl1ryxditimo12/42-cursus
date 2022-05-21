@@ -7,7 +7,7 @@ INC_DIR			=	includes/
 OBJ_DIR			=	objects/
 SRC_DIR			=	sources/
 
-SOURCES			=	main.cpp\
+SOURCES			=	set.cpp\
 
 OBJ_FILES		=	$(SOURCES:.cpp=.o)
 OBJECTS			=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))

@@ -6,6 +6,8 @@
 
 namespace ft
 {
+	template <class T, class NodePtr> class rb_tree_const_iterator;
+
 	template <class T, class NodePtr>
 	class rb_tree_iterator
 	{
@@ -19,7 +21,7 @@ namespace ft
 			typedef long int	difference_type;
 
 			typedef std::bidirectional_iterator_tag	iterator_category;
-			typedef ft::rb_tree_iterator<T, NodePtr> non_const_iterator;
+			typedef ft::rb_tree_const_iterator<T, NodePtr> const_iterator;
 
 		private:
 
@@ -29,11 +31,11 @@ namespace ft
 
 			rb_tree_iterator() {}
 
-			rb_tree_iterator(const node_pointer &node): _node(node) {}
+			rb_tree_iterator(const node_pointer node): _node(node) {}
 
-			rb_tree_iterator(const rb_tree_iterator &cls): _node(cls._node) {}
+			rb_tree_iterator(const rb_tree_iterator &cls): _node(cls.base()) {}
 
-			// rb_tree_iterator(const const_iterator &cls): _node(cls.base()) {}
+			rb_tree_iterator(const const_iterator &cls): _node(cls.base()) {}
 
 			~rb_tree_iterator() {}
 
@@ -74,11 +76,11 @@ namespace ft
 
 			rb_tree_iterator operator--()
 			{
-				if (this->_node->left != u_nullptr) {
+				if (this->_node->left->type != LEAF) {
 					tree_max(this->_node->left);
 					return (*this);
 				}
-				while (is_left_child_node(this->_node))
+				while (is_left_child_node())
 					_node = _node->parent;
 				_node = _node->parent;
 				return *this;
@@ -91,7 +93,7 @@ namespace ft
 				return temp;
 			}
 
-			node_pointer base() { return _node; }
+			node_pointer base() const { return _node; }
 
 		private:
 
@@ -110,12 +112,10 @@ namespace ft
 			}
 
 			bool is_left_child_node()
-			{
-				return this->node == this->node->parent->left;
-			}
+			{ return this->_node == this->_node->parent->left; }
 
-			bool is_right_child_node(node_pointer node)
-			{ return node == node->parent->right; }
+			bool is_right_child_node()
+			{ return this->_node == this->_node->parent->right; }
 
 			bool has_brother(node_pointer node)
 			{
@@ -147,11 +147,11 @@ namespace ft
 
 			rb_tree_const_iterator() {}
 
-			rb_tree_const_iterator(const node_pointer &node): _node(node) {}
+			rb_tree_const_iterator(const node_pointer node): _node(node) {}
 
-			rb_tree_const_iterator(const rb_tree_const_iterator &cls): _node(cls._node) {}
+			rb_tree_const_iterator(const rb_tree_const_iterator &cls): _node(cls.base()) {}
 
-			// rb_tree_iterator(const const_iterator &cls): _node(cls.base()) {}
+			rb_tree_const_iterator(non_const_iterator cls): _node(cls.base()) {}
 
 			~rb_tree_const_iterator() {}
 
@@ -177,7 +177,7 @@ namespace ft
 					tree_min(this->_node->right);
 					return (*this);
 				}
-				while (!is_left_child_node(this->_node))
+				while (!is_left_child_node())
 					_node = _node->parent;
 				_node = _node->parent;
 				return *this;
@@ -192,11 +192,11 @@ namespace ft
 
 			rb_tree_const_iterator operator--()
 			{
-				if (this->_node->left != u_nullptr) {
+				if (this->_node->left->type != LEAF) {
 					tree_max(this->_node->left);
 					return (*this);
 				}
-				while (is_left_child_node(this->_node))
+				while (is_left_child_node())
 					_node = _node->parent;
 				_node = _node->parent;
 				return *this;
@@ -209,7 +209,7 @@ namespace ft
 				return temp;
 			}
 
-			node_pointer base() { return _node; }
+			node_pointer base() const { return _node; }
 
 		private:
 
@@ -227,11 +227,11 @@ namespace ft
 				this->_node = node;
 			}
 
-			bool is_left_child_node(node_pointer node)
-			{ return node == node->parent->left; }
+			bool is_left_child_node()
+			{ return this->_node == this->_node->parent->left; }
 
-			bool is_right_child_node(node_pointer node)
-			{ return node == node->parent->right; }
+			bool is_right_child_node()
+			{ return this->_node == this->_node->parent->right; }
 
 			bool has_brother(node_pointer node)
 			{

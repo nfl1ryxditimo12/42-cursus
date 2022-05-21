@@ -127,11 +127,11 @@ void map_test()
 	test2.insert(ft::pair<int, int>(27, 100));
 	test2.insert(ft::pair<int, int>(28, 100));
 
-	test1.swap(test2);
+	// test1.swap(test2);
 
 
 	// std::map<int, int>::iterator it = test.find(1223);
-	ft::map<int, int>::iterator it = test2.lower_bound(7);
+	ft::map<int, int>::iterator it = test1.lower_bound(7);
 	std::cout << (*it).first << ", " << (*it).second << std::endl;
 
 	std::map<int, int>::iterator it1 = test.lower_bound(7);
@@ -139,8 +139,16 @@ void map_test()
 
 	std::cout << "\n=====================================\n" << std::endl;
 	
-	test1.print_tree();
+	// test1.print_tree();
+	print(test1, test);
+
+	test.erase(it1);
+	test1.erase(it);
+
+
 	std::cout << "\n=====================================\n" << std::endl;
+
+
 	// std::cout << test[1] << std::endl;
 	// std::cout << test1[1] << std::endl;
 	// std::cout << test[2] << std::endl;
@@ -156,7 +164,7 @@ void map_test()
 	// 	std_it++;
 	// }
 
-	print(test2, test);
+	print(test1, test);
 }
 
 int main()

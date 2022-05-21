@@ -91,7 +91,7 @@ namespace ft
 
 			map_const_iterator(const Iterator iter): _iter(iter) {}
 
-			map_const_iterator(const map_const_iterator &cls): _iter(cls._iter) {}
+			map_const_iterator(non_const_iterator cls): _iter(cls.base()) {}
 
 			~map_const_iterator() {}
 

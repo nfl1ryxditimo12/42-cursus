@@ -40,7 +40,10 @@ namespace ft
             reverse_iterator& operator--() { ++this->iter; return *this; }
             reverse_iterator  operator--(int) { reverse_iterator tmp(*this); --(*this); return tmp; }
             
-            reference operator*() const { return *(this->iter - 1); }
+            reference operator*() const {
+                Iterator temp = iter;
+                return *--temp;
+            }
             pointer operator->() const { return &(this->operator*()); }
             reference operator[] (difference_type n) const { return *(*this + n); }
 
