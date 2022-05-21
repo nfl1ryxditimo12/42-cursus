@@ -3,11 +3,14 @@ CXX				=	c++
 CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98 -g
 CXXDEBUGFLAGS	=	-fsanitize=address -pedantic-errors
 
-INC_DIR			=	includes/
+INC_DIR			=	includes
+CONTAINER_INC	=	$(INC_DIR)/containers/
+ITERATOR_INC	=	$(INC_DIR)/iterators/
+UTIL_INC		=	$(INC_DIR)/utils/
 OBJ_DIR			=	objects/
 SRC_DIR			=	sources/
 
-SOURCES			=	set.cpp\
+SOURCES			=	main.cpp\
 
 OBJ_FILES		=	$(SOURCES:.cpp=.o)
 OBJECTS			=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
@@ -20,7 +23,7 @@ debug	:	CXXFLAGS += $(CXXDEBUGFLAGS)
 debug	:	re
 
 $(OBJ_DIR)%.o	:	$(SRC_DIR)%.cpp
-	$(CXX) $(CXXFLAGS) -I $(INC_DIR) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -I $(CONTAINER_INC) -I $(ITERATOR_INC) -I $(UTIL_INC) -c $< -o $@
 
 $(NAME)	:	$(OBJECTS)
 	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $(NAME)

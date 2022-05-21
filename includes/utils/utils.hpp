@@ -5,9 +5,47 @@
 
 namespace ft
 {
-/*************************************/
-/*               pair                */
-/*************************************/
+
+    /*************************************/
+    /*          Iterator traits          */
+    /*************************************/
+
+    template <class Iterator>
+    class iterator_traits
+    {
+        public:
+            typedef typename Iterator::difference_type      difference_type;
+            typedef typename Iterator::value_type           value_type;
+            typedef typename Iterator::pointer              pointer;
+            typedef typename Iterator::reference            reference;
+            typedef typename Iterator::iterator_category    iterator_category;
+    };
+
+    template <class T>
+    class iterator_traits<T *>
+    {
+        public:
+            typedef ptrdiff_t                       difference_type;
+            typedef T                               value_type;
+            typedef T*                              pointer;
+            typedef T&                              reference;
+            typedef std::random_access_iterator_tag iterator_category;
+    };
+
+    template <class T>
+    class iterator_traits<const T *>
+    {
+        public:
+            typedef ptrdiff_t                       difference_type;
+            typedef T                               value_type;
+            typedef const T*                        pointer;
+            typedef const T&                        reference;
+            typedef std::random_access_iterator_tag iterator_category;
+    };
+
+    /*************************************/
+    /*               pair                */
+    /*************************************/
 
     template <class T1, class T2>
     class pair
@@ -96,9 +134,9 @@ namespace ft
     ft::pair<T1, T2> make_pair(T1 first, T2 second)
     { return ft::pair<T1, T2>(first, second); }
 
-/*************************************/
-/*             enable_if             */
-/*************************************/
+    /*************************************/
+    /*             enable_if             */
+    /*************************************/
 
     template<bool B, class T = void>
     struct enable_if {};
@@ -106,9 +144,9 @@ namespace ft
     template<class T>
     struct enable_if<true, T> { typedef T type; };
 
-/*************************************/
-/*            is_integral            */
-/*************************************/
+    /*************************************/
+    /*            is_integral            */
+    /*************************************/
 
     template <class T>
     struct is_integral { static const bool value = false; };
@@ -140,20 +178,9 @@ namespace ft
     template <>
     struct is_integral<unsigned long> { static const bool value = true; };
 
-/*************************************/
-/*            is_iterator            */
-/*************************************/
-
-    // template <class T>
-    // struct is_iterator { static const bool value = false; };
-
-    // template <>
-    // struct is_iterator<iterator_traits> { static const bool value = true; };
-
-
-/*************************************/
-/*               equal               */
-/*************************************/
+    /*************************************/
+    /*               equal               */
+    /*************************************/
 
     template <class InputIterator1, class InputIterator2>
     bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
@@ -166,9 +193,9 @@ namespace ft
         return true;
     }
 
-/*************************************/
-/*      lexicographical_compare      */
-/*************************************/
+    /*************************************/
+    /*      lexicographical_compare      */
+    /*************************************/
 
     template <class InputIterator1, class InputIterator2>
     bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
@@ -193,9 +220,9 @@ namespace ft
 
     } u_nullptr;
 
-/*************************************/
-/*          binary_function          */
-/*************************************/
+    /*************************************/
+    /*          binary_function          */
+    /*************************************/
 
     template <class Arg1, class Arg2, class Result>
     struct binary_function {
@@ -204,9 +231,9 @@ namespace ft
         typedef Result result_type;
     };
 
-/*************************************/
-/*              rb_node              */
-/*************************************/
+    /*************************************/
+    /*              rb_node              */
+    /*************************************/
 
     enum Color
     {

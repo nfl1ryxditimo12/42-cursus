@@ -31,8 +31,7 @@ namespace ft
 			typedef ft::rb_tree_iterator<value_type, node_pointer>	iterator;
 			typedef ft::rb_tree_const_iterator<value_type, node_pointer> const_iterator;
 
-		// 평가받을 때 private로 수정
-		protected:
+		private:
 
 			/*************************************/
 			/*         Member Variables          */
