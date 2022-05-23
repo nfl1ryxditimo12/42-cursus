@@ -1,10 +1,10 @@
 NAME			=	ft_container
 CXX				=	c++
-CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98 -g
+CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 CXXDEBUGFLAGS	=	-fsanitize=address -pedantic-errors
 
 INC_DIR			=	includes
-CONTAINER_INC	=	$(INC_DIR)/containers/
+CONTAINER_INC	=	$(INC_DIR)/
 ITERATOR_INC	=	$(INC_DIR)/iterators/
 UTIL_INC		=	$(INC_DIR)/utils/
 OBJ_DIR			=	objects/

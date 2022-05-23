@@ -2,8 +2,9 @@
 # define CONTAINER_HPP
 
 # include <iostream>
-# include "reverse_iterator.hpp"
-# include "utils.hpp"
+# include "iterators/vector_iterator.hpp"
+# include "iterators/reverse_iterator.hpp"
+# include "utils/utils.hpp"
 
 namespace ft
 {
@@ -29,7 +30,8 @@ namespace ft
 			/* Ieterator define */
 			typedef pointer             	iterator;
 			typedef const_pointer			const_iterator;
-			// typedef typename ft::vector_iterator<value_type>    iterator;
+			typedef typename ft::vector_iterator<pointer>			iterator;
+			typedef typename ft::vector_iterator<const_pointer>		const_iterator;
 			typedef typename ft::reverse_iterator<iterator>     	reverse_iterator;
 			typedef typename ft::reverse_iterator<const_iterator>   const_reverse_iterator;
 
@@ -54,7 +56,7 @@ namespace ft
 			/*************************************/
 
 			vector(const allocator_type &alloc = allocator_type())
-			: _alloc(alloc), _begin(NULL), _end(NULL), _end_cap(NULL) {}
+			: _alloc(alloc), _begin(u_nullptr), _end(u_nullptr), _end_cap(u_nullptr) {}
 
 			vector(size_type n, const_reference val = value_type(), const allocator_type &alloc = allocator_type())
 			: _alloc(alloc)
@@ -116,7 +118,7 @@ namespace ft
 
 			iterator begin() { return this->_begin; }
 
-			const_iterator begin() const {return this->_begin; }
+			const_iterator begin() const { return this->_begin; }
 
 			iterator end() { return this->_end; }
 
@@ -124,11 +126,11 @@ namespace ft
 
 			reverse_iterator rbegin() { return reverse_iterator(this->end()); }
 
-			const_reverse_iterator rbegin() const { return reverse_iterator(this->end()); }
+			const_reverse_iterator rbegin() const { return const_reverse_iterator(this->end()); }
 
 			reverse_iterator rend() { return reverse_iterator(this->begin()); }
 
-			const_reverse_iterator rend() const { return reverse_iterator(this->begin()); }
+			const_reverse_iterator rend() const { return const_reverse_iterator(this->begin()); }
 
 			/*************************************/
 			/*              Capacity             */
@@ -163,7 +165,12 @@ namespace ft
 			/*           Element access          */
 			/*************************************/
 
-			reference operator[](size_type n) { return *(this->_begin + n); }
+			reference operator[](size_type n)
+			{
+				if (n < 0 || n > this->max_size())
+					throw std::out_of_range("Out of range!!");
+				return this->begin()[n];
+			}
 
 			const_reference operator[](size_type n) const { return *(this->_begin + n); }
 
@@ -375,8 +382,10 @@ namespace ft
 				size_type move_size = static_cast<size_type>(&(*last) - &(*first));
 				pointer tmp = _alloc.allocate(move_size);
 
-				if (this->size() + n > this->capacity())
+				if (this->size() + n > this->capacity()) {
 					this->realloc(recommand_cap(n + this->size()));
+					first = this->begin() + pos;
+				}
 				for (size_type i = 0; i < move_size; i++)
 					tmp[i] = first[i];
 				for (size_type i = 0; i < move_size; i++) {

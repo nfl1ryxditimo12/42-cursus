@@ -126,9 +126,9 @@ namespace ft
     bool operator>=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
     { !(lhs < rhs); }
 
-/*************************************/
-/*             make_pair             */
-/*************************************/
+    /*************************************/
+    /*             make_pair             */
+    /*************************************/
 
     template <class T1, class T2>
     ft::pair<T1, T2> make_pair(T1 first, T2 second)
