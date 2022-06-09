@@ -28,17 +28,18 @@ void print(ft::vector<T> const &ft_vec, std::vector<T> const &std_vec)
 	std::cout << CYN << "max_size" << NC << " [" << (ft_vec.max_size() == std_vec.max_size() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << ft_vec.max_size() << ", std: " << std_vec.max_size() << std::endl;
 	std::cout << CYN << "size" << NC << "     [" << (ft_vec.size() == std_vec.size() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << ft_vec.size() << ", std: " << std_vec.size() << std::endl;
 	std::cout << CYN << "capacity" << NC << " [" << (ft_vec.capacity() == std_vec.capacity() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << ft_vec.capacity() << ", std: " << std_vec.capacity() << std::endl;
+	typename ft::vector<T>::const_iterator f_it = ft_vec.begin();
+	typename std::vector<T>::const_iterator s_it = std_vec.begin();
+	int	flag = 1;
 	std::cout << CYN << "Internal values" << NC << " [";
-	size_t size = std::max(std_vec.size(), ft_vec.size());
-	for (size_t i = 0; i < size; i++) {
-		if (std_vec[i] != ft_vec[i]) {
+	for (; (f_it < ft_vec.end() || s_it < std_vec.end()); f_it++, s_it++) {
+		if (*f_it != *s_it) {
 			std::cout << "\e[0;31mFALSE\e[0m]" << std::endl;
+			flag = 0;
 			break;
 		}
-		if (i == size - 1)
-			std::cout << "\e[0;32mOK\e[0m]" << std::endl;
 	}
-	if (ft_vec.size() == 0 && std_vec.size() == ft_vec.size())
+	if (flag && (f_it == ft_vec.end() && s_it == std_vec.end()))
 		std::cout << "\e[0;32mOK\e[0m]" << std::endl;
 	std::cout << "[ft::vector]  :";
 	for (typename ft::vector<T>::const_iterator it = ft_vec.begin(); it < ft_vec.end(); it++) {

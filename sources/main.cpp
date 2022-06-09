@@ -5,67 +5,76 @@
 #include "common.hpp"
 #include "test.hpp"
 
-/*
-single element (1)
-	iterator insert (iterator position, const value_type& val);
-
-fill (2)
-    void insert (iterator position, size_type n, const value_type& val);
-
-range (3)
-	template <class InputIterator>
-		void insert (iterator position, InputIterator first, InputIterator last);
-*/
+#include <list>
 
 #define TESTED_TYPE int
 
-void vector_test()
+void	is_empty(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct, std::vector<int> const &s_vct)
 {
-	std::vector<TESTED_TYPE> vec(10);
-	std::vector<TESTED_TYPE> vec2;
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(10);
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
-
-	for (unsigned long int i = 0; i < vct.size(); ++i) {
-		vct[i] = (vct.size() - i) * 3;
-		vec[i] = (vec.size() - i) * 3;
-	}
-	print(vct, vec);
-
-	vct2.insert(vct2.end(), 42);
-	vec2.insert(vec2.end(), 42);
-	vct2.insert(vct2.begin(), 2, 21);
-	vec2.insert(vec2.begin(), 2, 21);
-	print(vct2, vec2);
-
-	vct2.insert(vct2.end() - 2, 42);
-	vec2.insert(vec2.end() - 2, 42);
-	print(vct2, vec2);
-
-	vct2.insert(vct2.end(), 2, 84);
-	vec2.insert(vec2.end(), 2, 84);
-	print(vct2, vec2);
-
-	vct2.resize(4);
-	vec2.resize(4);  
-	print(vct2, vec2);
-
-	vct2.insert(vct2.begin() + 2, vct.begin(), vct.end());
-	vec2.insert(vec2.begin() + 2, vec.begin(), vec.end());
-	vct.clear();
-	vec.clear();
-	print(vct2, vec2);
-
-	print(vct, vec);
+	std::cout << "is_empty: " << vct.empty() << ", " << s_vct.empty() << std::endl;
 }
 
-int main()
+void erase()
 {
-	try {
-		vector_test();
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
+	const int start_size = 7;
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(start_size, 20);
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
 
-	// system("leaks ft_container");
+	std::vector<TESTED_TYPE> s_vct(start_size, 20);
+	std::vector<TESTED_TYPE> s_vct2;
+	std::vector<TESTED_TYPE>::iterator s_it = s_vct.begin();
+
+	for (int i = 2; i < start_size; ++i) {
+		it[i] = (start_size - i) * 3;
+		s_it[i] = (start_size - i) * 3;
+	}
+	print(vct, s_vct);
+
+	vct.resize(10, 42);
+	s_vct.resize(10, 42);
+	print(vct, s_vct);
+
+	vct.resize(18, 43);
+	s_vct.resize(18, 43);
+	print(vct, s_vct);
+	vct.resize(10);
+	s_vct.resize(10);
+	print(vct, s_vct);
+	vct.resize(23, 44);
+	s_vct.resize(23, 44);
+	print(vct, s_vct);
+	vct.resize(5);
+	s_vct.resize(5);
+	print(vct, s_vct);
+	vct.reserve(5);
+	s_vct.reserve(5);
+	vct.reserve(3);
+	s_vct.reserve(3);
+	print(vct, s_vct);
+	vct.resize(87);
+	s_vct.resize(87);
+	vct.resize(5);
+	s_vct.resize(5);
+	print(vct, s_vct);
+
+	is_empty(vct2, s_vct2);
+	vct2 = vct;
+	s_vct2 = s_vct;
+	is_empty(vct2, s_vct2);
+	vct.reserve(vct.capacity() + 1);
+	s_vct.reserve(s_vct.capacity() + 1);
+	print(vct, s_vct);
+	print(vct2, s_vct2);
+
+	vct2.resize(0);
+	s_vct2.resize(0);
+	is_empty(vct2, s_vct2);
+	print(vct2, s_vct2);
+}
+
+int main(void)
+{
+	erase();
+	return (0);
 }

@@ -28,8 +28,8 @@ namespace ft
 			typedef const value_type&       const_reference;
 
 			/* Ieterator define */
-			typedef pointer             	iterator;
-			typedef const_pointer			const_iterator;
+			// typedef pointer             	iterator;
+			// typedef const_pointer			const_iterator;
 			typedef typename ft::vector_iterator<pointer>			iterator;
 			typedef typename ft::vector_iterator<const_pointer>		const_iterator;
 			typedef typename ft::reverse_iterator<iterator>     	reverse_iterator;
@@ -70,17 +70,17 @@ namespace ft
 					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type * = u_nullptr)
 			: _alloc(alloc)
 			{
-				size_type n = static_cast<size_type>(std::distance(first, last));
-
+				size_type n = 0;
+				for (InputIterator it = first; it != last; it++)
+					n++;
 				this->vallocate(n);
 				for (size_type i = 0; i < n; i++)
 					this->_alloc.construct(this->_end++, *(first++));
-				// this->vconstruct(this->_end + n, first);
 			}
 
 			// 참조자 빼고 호출하면 복사 생성자가 호출되는데 메모리 이중 해제 이슈 있음
 			vector(const vector &cls)
-			: _alloc(cls._alloc), _begin(NULL), _end(NULL), _end_cap(NULL)
+			: _alloc(cls._alloc), _begin(u_nullptr), _end(u_nullptr), _end_cap(u_nullptr)
 			{
 				size_type n = cls.size();
 
@@ -105,8 +105,10 @@ namespace ft
 			vector &operator=(const vector<value_type> &cls)
 			{
 				if (this != &cls) {
-					vector tmp(cls);
-					this->swap(tmp);
+					if (this->capacity() < cls.size())
+						this->realloc(cls.size());
+					this->clear();
+					this->insert(this->begin(), cls.begin(), cls.end());
 				}
 
 				return *this;
@@ -155,10 +157,18 @@ namespace ft
 
 			void	reserve(size_type n)
 			{
-				if (n > this->max_size())
-					throw std::out_of_range("Out of range!!");
-				if (n > this->capacity())
-					this->realloc(n);
+				if (n > this->capacity()) {
+					pointer p_begin = this->_begin;
+					size_type p_size = this->size();
+					size_type p_cap = this->capacity();
+					this->vallocate(n);
+					vconstruct(_begin + p_size, p_begin);
+					this->_alloc.deallocate(p_begin, p_cap);
+				}
+				// if (n > this->max_size())
+				// 	throw std::out_of_range("Out of range!!");
+				// if (n > this->capacity())
+				// 	this->realloc(n);
 			}
 
 			/*************************************/
@@ -201,16 +211,12 @@ namespace ft
 			/*************************************/
 
 			/* assign */
-			template <class InputIterator>
+			template <class InputIterator> 
 			void assign(InputIterator first, InputIterator last,
 					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = u_nullptr)
 			{
-				size_type new_size = static_cast<size_type>(std::distance(first, last));
-				if (new_size > this->size())
-					this->realloc(new_size);
 				this->clear();
-				for (; &(*first) < &(*last); first++, this->_end++)
-					this->_alloc.construct(this->_end, *first);
+				this->insert(this->begin(), first, last);
 			};
 
 			void assign(size_type n, const_reference val)
@@ -224,8 +230,9 @@ namespace ft
 			/* push_back */
 			void push_back(const_reference val)
 			{
+
 				if (this->size() == this->capacity())
-					this->realloc(this->capacity() == 0 ? 1 : this->capacity() * 2);
+					this->realloc(recommand_cap(this->size() + 1));
 				this->vconstruct(this->_end + 1, val);
 			}
 
@@ -237,52 +244,48 @@ namespace ft
 			{
 				size_type pos = static_cast<size_type>(&(*position) - &(*this->begin()));
 				this->move(1, position, this->end());
-				this->_alloc.construct(this->begin() + pos, val);
+				this->_alloc.construct((this->begin() + pos).base(), val);
 				return this->begin() + pos;
 			}
 
 			void insert(iterator position, size_type n, const_reference val)
 			{
-				size_type pos = static_cast<size_type>(position - this->begin());
+				size_type pos = static_cast<size_type>(&(*position) - &(*this->begin()));
 				this->move(n, position, this->end());
 				for (size_type i = 0; i < n; i++)
-					this->_alloc.construct(this->begin() + pos + i, val);
+					this->_alloc.construct(&(*(this->begin() + pos + i)), val);
 			}
 
 			template <class InputIterator>
 			void insert(iterator position, InputIterator first, InputIterator last,
 					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type * = u_nullptr)
 			{
-				size_type pos = static_cast<size_type>(position - this->begin());
-				size_type n = static_cast<size_type>(std::distance(first, last));
+				size_type pos = static_cast<size_type>(&(*position) - &(*this->begin()));
+				size_type n = 0;
+				for (InputIterator it = first; it != last; it++)
+					n++;
 				this->move(n, position, this->end());
 				for (size_type i = 0; i < n; i++, first++)
-					this->_alloc.construct(this->begin() + pos + i, *first);
+					this->_alloc.construct(&(*(this->begin() + pos + i)), *first);
 			}
 
 			/* erase */
 			iterator erase(iterator position)
 			{
 				iterator last = position + 1;
-				this->_alloc.destroy(position);
-				for (int i = 0; i < _end - last; i++) {
-					_alloc.construct(position + i, *(last + i));
-					_alloc.destroy(last + i);
-				}
-				this->_end -= 1;
-				return position;
+				return erase(position, last);
 			}
 
 			iterator erase(iterator first, iterator last)
 			{
 				iterator p = first;
 				for (; p < last; p++)
-					this->_alloc.destroy(p);
-				for (int i = 0; i < _end - last; i++) {
-					_alloc.construct(first + i, *(last + i));
-					_alloc.destroy(last + i);
+					this->_alloc.destroy(&(*p));
+				for (int i = 0; i < _end - &(*last); i++) {
+					_alloc.construct(&(*(first + i)), *(last + i));
+					_alloc.destroy(&(*(last + i)));
 				}
-				this->_end -= (last - first);
+				this->_end -= (&(*last) - &(*first));
 				return first;
 			}
 
@@ -326,7 +329,7 @@ namespace ft
 			// template <class Iterator>
 			void vconstruct(iterator p, iterator val)
 			{
-				for (; _end < p; _end++, val++) {
+				for (; _end != &(*p); _end++, val++) {
 					this->_alloc.construct(_end, *val);
 				}
 			}
@@ -372,13 +375,13 @@ namespace ft
 				size_type additional = static_cast<size_type>(this->_end_cap - this->_end);
 				if (additional < n)
 					this->realloc(recommand_cap(n + this->size()));
-				this->vconstruct(this->end() + n, val);
+				this->vconstruct(&(*(this->end() + n)), val);
 			}
 
 			template <class InputIterator>
 			void move(size_type n, InputIterator first, InputIterator last)
 			{
-				size_type pos = static_cast<size_type>(&(*first) - this->begin());
+				size_type pos = static_cast<size_type>(&(*first) - &(*this->begin()));
 				size_type move_size = static_cast<size_type>(&(*last) - &(*first));
 				pointer tmp = _alloc.allocate(move_size);
 
@@ -390,7 +393,7 @@ namespace ft
 					tmp[i] = first[i];
 				for (size_type i = 0; i < move_size; i++) {
 					*(this->begin() + pos + n + i) = tmp[i];
-					this->_alloc.destroy(this->begin() + pos + i);
+					this->_alloc.destroy(&(*(this->begin() + pos + i)));
 				}
 				this->_end += n;
 				this->_alloc.deallocate(tmp, move_size);
