@@ -5,6 +5,7 @@
 # include <vector>
 # include <stack>
 # include <map>
+# include <time.h>
 
 # include "vector.hpp"
 # include "stack.hpp"
@@ -17,14 +18,41 @@
 #define YLW "\e[0;33m"
 #define CYN "\e[0;36m"
 
+#define LINE "====================================================================\n"
+
+void	vector_test(void);
+void	map_test(void);
+
+/*************************************/
+/*       Time Compare Function       */
+/*************************************/
+
+template <class T>
+void compare_time(T f_time, T s_time)
+{
+	std::cout << CYN << "compare_time" << NC << " [" << \
+		((f_time <= s_time * 20)
+			? "\e[0;32mOK\e[0m"
+			: "\e[0;31mFALSE\e[0m") << "] - ft: " \
+		<< YLW << f_time << "ms" << NC << ", std: " \
+		<< YLW << s_time << "ms" << NC << \
+	std::endl;
+}
+
+template <class T>
+T	sub_time(T t1, T t2)
+{
+	return (t2 - t1);
+}
 
 /*************************************/
 /*      Vector Compare Function      */
 /*************************************/
 
 template <class T>
-void print(ft::vector<T> const &ft_vec, std::vector<T> const &std_vec)
+void print(ft::vector<T> const &ft_vec, std::vector<T> const &std_vec, bool time = false, clock_t f_time = 0, clock_t s_time = 0)
 {
+	std::cout << LINE << std::endl;
 	std::cout << CYN << "max_size" << NC << " [" << (ft_vec.max_size() == std_vec.max_size() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << ft_vec.max_size() << ", std: " << std_vec.max_size() << std::endl;
 	std::cout << CYN << "size" << NC << "     [" << (ft_vec.size() == std_vec.size() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << ft_vec.size() << ", std: " << std_vec.size() << std::endl;
 	std::cout << CYN << "capacity" << NC << " [" << (ft_vec.capacity() == std_vec.capacity() ? "\e[0;32mOK\e[0m" : "\e[0;31mFALSE\e[0m") << "] - ft: " << ft_vec.capacity() << ", std: " << std_vec.capacity() << std::endl;
@@ -56,7 +84,10 @@ void print(ft::vector<T> const &ft_vec, std::vector<T> const &std_vec)
 		else
         	std::cout << ", " << *it;
 	}
-	std::cout << "\n" << std::endl;
+	std::cout << std::endl;
+	if (time != false)
+		compare_time(f_time, s_time);
+	std::cout << std::endl;
 }
 
 /*************************************/
@@ -64,8 +95,9 @@ void print(ft::vector<T> const &ft_vec, std::vector<T> const &std_vec)
 /*************************************/
 
 template <class Key, class Value>
-void print(ft::map<Key, Value> const &ft_map, std::map<Key, Value> const &std_map)
+void print(ft::map<Key, Value> const &ft_map, std::map<Key, Value> const &std_map, bool time = false, clock_t f_time = 0, clock_t s_time = 0)
 {
+	std::cout << LINE << std::endl;
 	typename ft::map<Key, Value>::const_iterator ft_it = ft_map.begin();
 	typename std::map<Key, Value>::const_iterator std_it = std_map.begin();
 	int flag = 0;
@@ -111,7 +143,10 @@ void print(ft::map<Key, Value> const &ft_map, std::map<Key, Value> const &std_ma
 	for (typename std::map<Key, Value>::const_iterator it = std_map.begin(); it != std_map.end(); it++) {
 		std::cout << " [" << (*it).first << ", " << (*it).second << "]";
 	}
-	std::cout << "\n" << std::endl;
+	std::cout << std::endl;
+	if (time != false)
+		compare_time(f_time, s_time);
+	std::cout << std::endl;
 }
 
 

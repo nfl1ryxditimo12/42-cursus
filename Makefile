@@ -11,6 +11,8 @@ OBJ_DIR			=	objects/
 SRC_DIR			=	sources/
 
 SOURCES			=	main.cpp\
+					vector.cpp\
+					map.cpp
 
 OBJ_FILES		=	$(SOURCES:.cpp=.o)
 OBJECTS			=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
