@@ -1,0 +1,21 @@
+.vscode
+*.o
+a.out
+webserv
+
+test*
+output
+
+*.gch
+a.out.dSYM
+.DS_Store
+
+# clion
+.idea
+
+# webserv tester
+file_should_exist_after
+post_body
+multiple_same
+session
+put_test
