@@ -1,0 +1,71 @@
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: requirements/nginx
+    volumes:
+      - wordpress-vol:/var/www/wordpress
+      - ./requirements/nginx/conf:/etc/nginx/http.d
+    ports:
+      - 443:443
+    depends_on:
+      - wordpress
+    networks:
+      - inception
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: requirements/wordpress
+    hostname: wordpress
+    volumes:
+      - wordpress-vol:/var/www/wordpress
+      - ./requirements/wordpress/conf:/etc/php8/php-fpm.d
+    ports:
+      - 9000:9000
+    environment:
+      WORDPRESS_DB_HOST: ${MYSQL_HOST}
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+    depends_on:
+      - mariadb
+    networks:
+      - inception
+
+  mariadb:
+    container_name: mariadb
+    build:
+      context: ./requirements/mariadb
+    hostname: mariadb
+    volumes:
+      - mariadb-vol:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    privileged: true 
+    networks:
+        - inception
+
+networks:
+  inception:
+    driver: bridge
+
+volumes:
+  wordpress-vol:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/seonkim/data/wordpress'
+  
+  mariadb-vol:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/seonkim/data/mariadb'
