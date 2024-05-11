@@ -2,11 +2,10 @@
 
 ### La Piscine - 4기 1차
 
-![IMG_9504](https://user-images.githubusercontent.com/74334399/112433312-66cfe700-8d85-11eb-8724-990bf9773bc1.jpg)
+<img width="664" alt="img-9504" src="https://github.com/nfl1ryxditimo12/42-cursus/assets/74334399/604dc13b-3858-4b70-abe9-9b834c8704c5">
 
 <br>
 
-### Cursus
+### Cursus - Alumni
 
-<img width="664" alt="스크린샷 2024-05-11 오후 10 18 36" src="https://github.com/nfl1ryxditimo12/productive-box/assets/74334399/b994c551-a5a8-4d12-bbc7-0956f2
-
+<img width="664" alt="img-9505" src="https://github.com/nfl1ryxditimo12/42-cursus/assets/74334399/986ae905-0767-41b9-89cb-03a0c28f17b3">
