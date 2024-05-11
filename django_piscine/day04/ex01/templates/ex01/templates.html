@@ -1,0 +1,65 @@
+{% extends 'ex01/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Ex01: Template engine.</title>
+{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'style2.css' %}"/>
+{% endblock style %}
+
+{% block content %}
+<div>
+    <h1>Template Engine</h1>
+    {% verbatim %}
+
+    <h2>Block</h2>
+
+    <p>1. 공통된 html 코드 부분을 base.html로 따로 만들어, 다른 페이지(자식)들이 상속(extends)받을 수 있게 할 수 있다.</p>
+
+    <p>알아야될 코드는 다음 참고</p>
+
+    <strong>base.html</strong>
+
+    <ul>
+        <li>{% block contents %}</li>
+        <li>다른 페이지의 html 코드가 들어갈 장소</li>
+        <li>{% endblock %}</li>
+    </ul>
+    
+    <strong>다른 html들</strong>
+
+    <ul>
+        <li>{% extends "base.html" %}</li>
+
+        <li>{% block contents %}</li>
+        <li>해당 페이지에서 사용하는 html코드</li>
+        <li>{% endblock %}</li>
+    </ul>
+
+    <h2>for</h2>
+    <p>배열의 각 원소에 대하여 루프.</p>
+
+    <ul>
+        <li>{% for student in student_list %}</li>
+        <li>{{ student.name }}</li>
+        <li>{% endfor %}</li>
+    </ul>
+    <p>student_list에 들어 있는 선수의 목록을 출력하기 위해 위의 예제처럼 사용할 수 있다.</p>
+
+    <h2>if / else</h2>
+    <p>변수가 true이면 블록의 컨텐츠를 표시. if 태그 내에 템플릿 필터 및 각종 연산자를 사용할 수 있다.</p>
+
+    <ul>
+        <li>{% if student_list %}</li>
+        <li>총 학생 수 : {{ student_list|length }}</li>
+        <li>{% else %}</li>
+        <li>학생이 없어요!</li>
+        <li>{% endif %}</li>
+    </ul>
+</div>
+{% endverbatim %}
+
+
+{% endblock %}

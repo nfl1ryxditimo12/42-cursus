@@ -1,0 +1,37 @@
+{% extends 'ex03/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Color</title>
+{% endblock title %}
+
+{% block style %}
+<style>
+    th, td {
+        width: 80px;
+        height: 40px;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+<h1>Fifty Shades</h1>
+<div>
+    <table>
+        <tr>
+            <th style="color: black">Black</th>
+            <th style="color: red;">Red</th>
+            <th style="color: green">Green</th>
+            <th style="color: blue">Blue</th>
+        </tr>
+        {% for i in range %}
+        <tr>
+            <td style="background-color: #{{i}}{{i}}{{i}};"></td>
+            <td style="background-color: #{{i}}0000;"></td>
+            <td style="background-color: #00{{i}}00;"></td>
+            <td style="background-color: #0000{{i}};"></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}

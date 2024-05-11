@@ -1,0 +1,33 @@
+{% extends 'ex02/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Submit & History</title>
+{% endblock title %}
+
+{% block style %}
+<style>
+    .text-center {
+        text-align: center;
+    }
+
+    .header {
+        margin-top: 10%;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="header">Submit</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <input type="submit" value="Submit"/>
+    </form>
+    <h1 class="header">History</h1>
+    {% for his in history reversed %}
+    <p class="text-center">{{ his }}</p>
+</div>
+{% endfor %}
+{% endblock content %}
